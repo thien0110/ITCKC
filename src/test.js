@@ -13,7 +13,6 @@ const KeyboardAvoidingComponent = () => {
           <TextInput placeholder="Username" style={styles.textInput} />
           <View style={styles.btnContainer}>
             <Button title="Submit" onPress={() => null} />
-            asdadadd
           </View>
         </View>
       </TouchableWithoutFeedback>
