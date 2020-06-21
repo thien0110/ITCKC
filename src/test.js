@@ -14,6 +14,7 @@ const KeyboardAvoidingComponent = () => {
           <View style={styles.btnContainer}>
             <Button title="Submit" onPress={() => null} />
             <Button title="Submit" onPress={() => null} />
+            <Button title="Submit" onPress={() => null} />
           </View>
         </View>
       </TouchableWithoutFeedback>
