@@ -4,8 +4,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MenuComponent from '../components/MenuComponent';
 import ProfileComponent from '../components/ProfileComponent';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import Colors from '../res/Colors';
-import { shadow } from 'react-native-paper';
 const Tab = createBottomTabNavigator();
 
 
@@ -27,11 +25,10 @@ export default function TabNavigator() {
       backBehavior='none'
       tabBarOptions={{
         showLabel:false,
-        style:{
-          backgroundColor:Colors.navigation
-        },
-        activeTintColor:Colors.lightBlue,
-        inactiveTintColor:Colors.white
+        // style:{
+        //   backgroundColor:Colors.navigation
+        // },
+        keyboardHidesTabBar: true
       }}
       >
         <Tab.Screen name="Menu" component={MenuComponent} />

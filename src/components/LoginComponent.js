@@ -29,9 +29,14 @@ export default class LoginComponent extends Component {
       messageAlert: '',
       pressEye: true,
       showPass:false,
-      loading:false,
     };
   }
+  componentDidUpdate(){
+    if(this.props.data !=null ){
+      this.props.navigation.navigate('Tab');
+    }
+  }
+
   onChangeStateAlert = (state, des) => {
     this.setState({
       showAlert: state,
@@ -50,6 +55,17 @@ export default class LoginComponent extends Component {
         showPass:true
       })
     }
+  }
+  onLogin=(username, password)=>{
+      
+      //  this.props.navigation.navigate('Tab');
+      if (username === '' || password === '') {
+        this.onChangeStateAlert(true, 'Vui lòng nhập đầy đủ thông tin');
+      }else {
+        const input = {username: username, password: password};
+        
+         this.props.loginAction(input);
+      }
   }
   showView() {
     const {username,password,pressEye,isChecked, showPass} =this.state;
@@ -80,7 +96,7 @@ export default class LoginComponent extends Component {
               value={username}
               onChangeText={(text) => {
                 this.setState({
-                  username: text,
+                  username: text.trim(),
                 });
               }}></TextInput>
           </View>
@@ -93,7 +109,7 @@ export default class LoginComponent extends Component {
 
               onChangeText={(text) => {
                 this.setState({
-                  password: text,
+                  password: text.trim(),
                 });
               }}></TextInput>
               <TouchableOpacity style={{
@@ -124,8 +140,7 @@ export default class LoginComponent extends Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              // this.onChangeStateAlert(true, 'Vui lòng nhập đầy đủ thông tin');
-              this.props.navigation.navigate('Tab');
+              this.onLogin(username, password)
             }}>
             <Text
               style={{
@@ -149,7 +164,10 @@ export default class LoginComponent extends Component {
     );
   }
   render() {
-    const {messageAlert, showAlert, loading} = this.state;
+    const {messageAlert, showAlert,} = this.state;
+    const {data, error, isFetching} = this.props;
+    console.warn(data,"data")
+    console.warn(isFetching,"isFetching")
     return (
       <View
         style={{
@@ -161,7 +179,7 @@ export default class LoginComponent extends Component {
           AlertCustom(showAlert, messageAlert, () => {
             this.onChangeStateAlert(false, '');
           })}
-          {loading&&<Loading></Loading>}
+          {isFetching&&<Loading></Loading>}
       </View>
     );
   }

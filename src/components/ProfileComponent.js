@@ -7,12 +7,11 @@ export default class ProfileComponent extends Component {
     return (
       <View style={{flex: 1, alignItems: 'center'}}>
         <HeaderNavigation
-          title={'Schedule'}
           iconRight="bell"
           iconRightColor={Colors.white}
           haveSearch={true}
           color={Colors.navigation}></HeaderNavigation>
-        <Text>ProfileComponent!</Text>
+        <Text>ProfileComponent</Text>
       </View>
     );
   }

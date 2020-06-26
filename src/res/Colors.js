@@ -3,6 +3,16 @@ export default Colors ={
     white:'#fff',
     lightBlue:'#00b4d8',
     gray:'#F5F5F5',
+    grayStrong:'#e1e1e1',
     black:'#000',
-    navigation:'#a0c4ff'
+    navigation:'#039FFB',
+    background:'#EAF4F6',
+    blockRed:'#FFADAD',
+    blockOrange:'#FFD6A5',
+    blockYellow:'#FDFFB6',
+    blockPurple:'#BDB2FF',
+    blockCyan:'#9BF6FF',
+    blockGreen:'#CAFFBF',
+    blockPink:'#FFC6FF',
+    blockBlue:'#A0C4FF',
 }

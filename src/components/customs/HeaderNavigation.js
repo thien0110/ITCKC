@@ -6,15 +6,16 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 export default class HeaderNavigation extends React.Component {
   render() {
     const {
+      color,
       title,
+      titleColor,
       iconLeft,
       iconRight,
       onClickLeft,
       onClickRight,
       iconLeftColor,
       iconRightColor,
-      color,
-      haveSearch,
+      haveSearch,//  nếu có thanh tìm kiếm =true
     } = this.props;
     return (
       <View
@@ -40,7 +41,7 @@ export default class HeaderNavigation extends React.Component {
           <View style={{flex: 1}}>
             <TextInput
               style={{
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.grayStrong,
                 paddingHorizontal: 10,
                 paddingVertical:0,
                 borderRadius: 8,
@@ -55,6 +56,7 @@ export default class HeaderNavigation extends React.Component {
               textAlign: 'center',
               fontSize: 20,
               fontWeight: 'bold',
+              color:titleColor
             }}>
             {title}
           </Text>
@@ -74,10 +76,12 @@ export default class HeaderNavigation extends React.Component {
 }
 HeaderNavigation.defaultProps = {
   title: '',
+  titleColor:Colors.white,
   iconLeft: null,
   iconRight: null,
   color: Colors.white,
   haveSearch: false,
+
   onClickLeft: () => {},
   onClickRight: () => {},
 };
