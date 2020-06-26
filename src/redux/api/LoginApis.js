@@ -1,3 +1,4 @@
+//Gọi API đăng nhập
 const messageError = 'Không thể kết nối tới server.';
 const fakeApi = true;
 export function loginApi(input) {
