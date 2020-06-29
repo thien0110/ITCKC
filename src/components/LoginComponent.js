@@ -92,6 +92,7 @@ export default class LoginComponent extends Component {
         
           <View style={styles.input}>
             <TextInput
+            style={{ flex:1}}
               placeholder="Mã số sinh viên"
               value={username}
               onChangeText={(text) => {
@@ -102,7 +103,7 @@ export default class LoginComponent extends Component {
           </View>
           <View style={styles.input}>
             <TextInput
-            style={{paddingRight:30}}
+            style={{paddingRight:30, flex:1}}
               secureTextEntry={showPass}
               placeholder="Mật khẩu"
               value={password}
@@ -166,8 +167,6 @@ export default class LoginComponent extends Component {
   render() {
     const {messageAlert, showAlert,} = this.state;
     const {data, error, isFetching} = this.props;
-    console.warn(data,"data")
-    console.warn(isFetching,"isFetching")
     return (
       <View
         style={{
