@@ -1,48 +1,55 @@
-import React, { Component } from 'react';
-import { View, KeyboardAvoidingView, TextInput, StyleSheet, Text, Platform, TouchableWithoutFeedback, Button, Keyboard  } from 'react-native';
+import React, {Component} from 'react';
+import Colors from '../src/res/Colors';
+import {AppRegistry, StyleSheet, Text, View,Dimensions} from 'react-native';
 
-const KeyboardAvoidingComponent = () => {
-  return (
-    <KeyboardAvoidingView
-      behavior={ "height"}
-      style={styles.container}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.inner}>
-          <Text style={styles.header}>Header</Text>
-          <TextInput placeholder="Username" style={styles.textInput} />
-          <View style={styles.btnContainer}>
-            <Button title="Submit" onPress={() => null} />
-          </View>
-        </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
-  );
-};
+import Swiper from 'react-native-swiper';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
+  wrapper: {
+    padding: 15,
+    
   },
-  inner: {
-    padding: 24,
-    flex: 1,
-    justifyContent: "space-around"
+
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
   },
-  header: {
-    fontSize: 36,
-    marginBottom: 48
-  },
-  textInput: {
-    height: 40,
-    borderColor: "#000000",
-    borderBottomWidth: 1,
-    marginBottom: 36
-  },
-  btnContainer: {
-    backgroundColor: "white",
-    marginTop: 12
-  }
 });
 
-export default KeyboardAvoidingComponent;
+export default class SwiperComponent extends Component {
+  block(color) {const windowWidth = Dimensions.get('window').width;
+    return (
+      <View
+        style={{
+          borderRadius: 30,
+          shadowColor: Colors.black,
+          shadowOpacity: 0.3,
+          shadowRadius: 3,
+          elevation: 5,
+          backgroundColor: color,
+          width: windowWidth-30,
+          height: 107,
+        }}></View>
+    );
+  }
+  render() {
+    return (
+      <View style={{flex: 1, flexDirection: 'column', }}>
+        <Swiper
+          style={styles.wrapper}
+          autoplay={true}
+          showsPagination={false}>
+          {this.block(Colors.blockYellow)}
+          {this.block(Colors.blockRed)}
+          {this.block(Colors.blockPurple)}
+         
+        </Swiper>
+        <View style={{marginVertical: 15,
+            flex: 1,backgroundColor:'#000'}}></View>
+      </View>
+    );
+  }
+}
+
+AppRegistry.registerComponent('myproject', () => SwiperComponent);
