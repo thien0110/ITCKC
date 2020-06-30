@@ -3,7 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MenuComponent from '../components/MenuComponent';
 import ProfileComponent from '../components/ProfileComponent';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Images from '../res/String';
+import {
+  Image,
+} from 'react-native';
 const Tab = createBottomTabNavigator();
 
 
@@ -12,14 +15,24 @@ export default function TabNavigator() {
   return (
       <Tab.Navigator 
       screenOptions={({route})=>({
-        tabBarIcon:({color, size})=>{
+        tabBarIcon:({color, size, focused })=>{
           let iconName
           if(route.name== 'Menu'){
-            iconName ='th'
+            focused
+            ?iconName =Images.iconMenuActive
+            :iconName =Images.iconMenuInactive
           }else if(route.name== 'Profile'){
-            iconName ='user-circle'
+            focused
+            ?iconName =Images.iconPersonActive
+            :iconName =Images.iconPersonInactive
           }
-          return <Icon name={iconName} size={size} color={color}></Icon>
+          return <Image
+            source={iconName}
+            style={{
+              width: 30,
+              height: 30,
+              resizeMode:"contain"
+            }}></Image>
         }
       })}
       backBehavior='none'
@@ -28,7 +41,7 @@ export default function TabNavigator() {
         // style:{
         //   backgroundColor:Colors.navigation
         // },
-        keyboardHidesTabBar: true
+        keyboardHidesTabBar: true,
       }}
       >
         <Tab.Screen name="Menu" component={MenuComponent} />

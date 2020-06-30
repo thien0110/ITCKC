@@ -57,8 +57,6 @@ export default class LoginComponent extends Component {
     }
   }
   onLogin=(username, password)=>{
-      
-      //  this.props.navigation.navigate('Tab');
       if (username === '' || password === '') {
         this.onChangeStateAlert(true, 'Vui lòng nhập đầy đủ thông tin');
       }else {
@@ -66,6 +64,7 @@ export default class LoginComponent extends Component {
         
          this.props.loginAction(input);
       }
+     
   }
   showView() {
     const {username,password,pressEye,isChecked, showPass} =this.state;
@@ -178,7 +177,7 @@ export default class LoginComponent extends Component {
           AlertCustom(showAlert, messageAlert, () => {
             this.onChangeStateAlert(false, '');
           })}
-          {isFetching&&<Loading></Loading>}
+          {/* {isFetching&&<Loading></Loading>} */}
       </View>
     );
   }

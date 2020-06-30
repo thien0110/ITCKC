@@ -117,7 +117,7 @@ export default class MenuComponent extends Component {
             () => {
               this.props.navigation.navigate('TabSchool');
             },
-            'Việc làm',
+            'Thông tin việc làm',
             Images.iconProject,
             0,
             15,
