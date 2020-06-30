@@ -9,6 +9,10 @@ const images = {
   iconMenuInactive: require('../res/image/open-menu.png'),
   iconPersonInactive: require('../res/image/person-1.png'),
   iconPersonActive: require('../res/image/person.png'),
+  iconPersonProfile: require('../res/image/person-profile.png'),
+  iconSetting: require('../res/image/maintenance.png'),
+  iconInfo: require('../res/image/information.png'),
+  iconLogout: require('../res/image/logout.png'),
 
 };
 export default images;
