@@ -33,7 +33,7 @@ export default class LoginComponent extends Component {
   }
   componentDidUpdate(){
     if(this.props.data !=null ){
-      this.props.navigation.navigate('Tab');
+      this.props.navigation.replace('Tab');
     }
   }
 

@@ -143,8 +143,7 @@ export default class MenuComponent extends Component {
           flex: 1,
         }}>
         <HeaderNavigation
-          iconRight="bell"
-          iconRightColor={Colors.navigation}
+          iconRight={Images.iconBell}
           haveSearch={true}
           color={Colors.white}></HeaderNavigation>
         {this.showBody()}

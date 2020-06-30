@@ -13,6 +13,7 @@ const images = {
   iconSetting: require('../res/image/maintenance.png'),
   iconInfo: require('../res/image/information.png'),
   iconLogout: require('../res/image/logout.png'),
+  iconBell: require('../res/image/bell.png'),
 
 };
 export default images;
