@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TouchableOpacity, View, TextInput} from 'react-native';
+import {Text, TouchableOpacity, View, TextInput, Image} from 'react-native';
 import Colors from '../../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -67,7 +67,14 @@ export default class HeaderNavigation extends React.Component {
             onPress={() => {
               onClickRight();
             }}>
-            <Icon name={iconRight} size={35} color={iconRightColor} />
+            {/* <Icon name={iconRight} size={35} color={iconRightColor} /> */}
+            <Image
+            source={iconRight}
+            style={{
+              width: 35,
+              height: 35,
+              resizeMode:"contain"
+            }}></Image>
           </TouchableOpacity>
         )}
       </View>

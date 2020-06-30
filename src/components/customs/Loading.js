@@ -1,10 +1,21 @@
 import React from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import Colors from '../../res/Colors'
+import {
+  BallIndicator,
+  BarIndicator,
+  DotIndicator,
+  MaterialIndicator,
+  PacmanIndicator,
+  PulseIndicator,
+  SkypeIndicator,
+  UIActivityIndicator,
+  WaveIndicator,
+} from 'react-native-indicators';
 
 const Loading = () => (
   <View style={styles.container}>
-    <ActivityIndicator size="large" color={Colors.blue} />
+   <UIActivityIndicator color={Colors.blue} />
   </View>
 );
 

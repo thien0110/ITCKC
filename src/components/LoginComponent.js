@@ -33,7 +33,7 @@ export default class LoginComponent extends Component {
   }
   componentDidUpdate(){
     if(this.props.data !=null ){
-      this.props.navigation.navigate('Tab');
+      this.props.navigation.replace('Tab');
     }
   }
 
@@ -57,8 +57,6 @@ export default class LoginComponent extends Component {
     }
   }
   onLogin=(username, password)=>{
-      
-      //  this.props.navigation.navigate('Tab');
       if (username === '' || password === '') {
         this.onChangeStateAlert(true, 'Vui lòng nhập đầy đủ thông tin');
       }else {
@@ -66,6 +64,7 @@ export default class LoginComponent extends Component {
         
          this.props.loginAction(input);
       }
+     
   }
   showView() {
     const {username,password,pressEye,isChecked, showPass} =this.state;
@@ -92,6 +91,7 @@ export default class LoginComponent extends Component {
         
           <View style={styles.input}>
             <TextInput
+            style={{ flex:1}}
               placeholder="Mã số sinh viên"
               value={username}
               onChangeText={(text) => {
@@ -102,7 +102,7 @@ export default class LoginComponent extends Component {
           </View>
           <View style={styles.input}>
             <TextInput
-            style={{paddingRight:30}}
+            style={{paddingRight:30, flex:1}}
               secureTextEntry={showPass}
               placeholder="Mật khẩu"
               value={password}
@@ -166,8 +166,6 @@ export default class LoginComponent extends Component {
   render() {
     const {messageAlert, showAlert,} = this.state;
     const {data, error, isFetching} = this.props;
-    console.warn(data,"data")
-    console.warn(isFetching,"isFetching")
     return (
       <View
         style={{
@@ -179,7 +177,7 @@ export default class LoginComponent extends Component {
           AlertCustom(showAlert, messageAlert, () => {
             this.onChangeStateAlert(false, '');
           })}
-          {isFetching&&<Loading></Loading>}
+          {/* {isFetching&&<Loading></Loading>} */}
       </View>
     );
   }
