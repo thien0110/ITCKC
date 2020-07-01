@@ -34,7 +34,13 @@ export default class HeaderNavigation extends React.Component {
             onPress={() => {
               onClickLeft();
             }}>
-            <Icon name={iconLeft} size={40} color={iconLeftColor} />
+              <Image
+            source={iconLeft}
+            style={{
+              width: 35,
+              height: 35,
+              resizeMode:"contain"
+            }}></Image>
           </TouchableOpacity>
         )}
         {haveSearch ? (
@@ -52,7 +58,7 @@ export default class HeaderNavigation extends React.Component {
         ) : (
           <Text
             style={{
-              flex: 1,
+                flex: 1,
               textAlign: 'center',
               fontSize: 20,
               fontWeight: 'bold',
@@ -83,7 +89,7 @@ export default class HeaderNavigation extends React.Component {
 }
 HeaderNavigation.defaultProps = {
   title: '',
-  titleColor:Colors.white,
+  titleColor:Colors.black,
   iconLeft: null,
   iconRight: null,
   color: Colors.white,

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Text, View, Image} from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import Colors from '../../res/Colors';
+import Images from '../../res/Images';
 export default class ProfileComponent extends Component {
   render() {
     return (
@@ -10,7 +11,7 @@ export default class ProfileComponent extends Component {
           title={'THÔNG TIN NHÀ TRƯỜNG'}
           titleColor={Colors.black}
           color={Colors.white}
-          iconLeft="angle-left"
+          iconLeft={Images.iconBack}
           iconLeftColor={Colors.black}
           onClickLeft={()=>{this.props.navigation.goBack()}}
           ></HeaderNavigation>

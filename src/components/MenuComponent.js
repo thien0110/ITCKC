@@ -11,7 +11,7 @@ import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Swiper from 'react-native-swiper';
-import Images from '../res/String';
+import Images from '../res/Images';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default class MenuComponent extends Component {
@@ -101,7 +101,7 @@ export default class MenuComponent extends Component {
           )}
           {this.showBlock(
             () => {
-              this.props.navigation.navigate('TabSchool');
+              this.props.navigation.navigate('LearningInfo');
             },
             'Thông tin học tập',
             Images.iconBooks,
@@ -145,7 +145,8 @@ export default class MenuComponent extends Component {
         <HeaderNavigation
           iconRight={Images.iconBell}
           haveSearch={true}
-          color={Colors.white}></HeaderNavigation>
+          color={Colors.white}
+         ></HeaderNavigation>
         {this.showBody()}
       </View>
     );
