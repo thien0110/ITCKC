@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text, View, Image, Dimensions, TouchableOpacity} from 'react-native';
 import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
-import Images from '../res/String';
+import Images from '../res/Images';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const widthBlock = (windowWidth - 45) / 2;

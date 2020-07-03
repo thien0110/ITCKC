@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MenuComponent from '../components/MenuComponent';
 import ProfileComponent from '../components/ProfileComponent';
-import Images from '../res/String';
+import Images from '../res/Images';
 import {
   Image,
 } from 'react-native';
