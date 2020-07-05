@@ -10,26 +10,40 @@ import {
 import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import Swiper from 'react-native-swiper';
 import Images from '../res/Images';
+import SlideShow from './customs/SlideShow';
+import FlatListHorizontal from './customs/FlatListHorizontal';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+const dummyData = [
+  {
+    heading:'Sài gòn, hôm nay ăn gì?',
+    title: 'Anise Aroma Art Bazar',
+    url: 'https://i.ibb.co/hYjK44F/anise-aroma-art-bazaar-277253.jpg',
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    id: 1,
+  },
+  {
+    heading:'Thông tin nhà trường?',
+    title: 'Food inside a Bowl, Food inside a Bowl',
+    url: 'https://i.ibb.co/JtS24qP/food-inside-bowl-1854037.jpg',
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    id: 2,
+  },
+  {
+    heading:'Trùm cuối khao 60k?',
+    title: 'Vegatable Salad',
+    url:
+      'https://i.ibb.co/JxykVBt/flat-lay-photography-of-vegetable-salad-on-plate-1640777.jpg',
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    id: 3,
+  },
+];
 export default class MenuComponent extends Component {
-  showSlider(backgroundColor) {
-    return (
-      <View
-        style={{
-          borderRadius: 15,
-          shadowColor: Colors.black,
-          shadowOpacity: 0.3,
-          shadowRadius: 3,
-          elevation: 5,
-          backgroundColor: backgroundColor,
-          width: windowWidth - 30,
-          height: 120,
-        }}></View>
-    );
-  }
+  componentDidMount() {}
   showBlock(onPress, title, iconName, marginBottom, marginLeft, marginRight) {
     return (
       <TouchableOpacity onPress={onPress}>
@@ -40,7 +54,7 @@ export default class MenuComponent extends Component {
             borderRadius: 15,
             backgroundColor: Colors.white,
             alignItems: 'center',
-            justifyContent: "space-around",
+            justifyContent: 'space-around',
             marginBottom: marginBottom,
             marginLeft: marginLeft,
             marginRight: marginRight,
@@ -55,32 +69,36 @@ export default class MenuComponent extends Component {
             style={{
               width: 40,
               height: 40,
-              
-              resizeMode:"contain"
+
+              resizeMode: 'contain',
             }}></Image>
-          <Text style={{textAlign: 'center', fontWeight:'bold'}}>{title}</Text>
+          <Text style={{textAlign: 'center', fontWeight: 'bold'}}>{title}</Text>
         </View>
       </TouchableOpacity>
     );
   }
+  showNews(heading, data){
+    return(
+      <View>
+      <Text style={{fontWeight:'bold', marginLeft:15}}>{heading}</Text>
+      <FlatListHorizontal data={data}></FlatListHorizontal>
+      </View>
+    )
+    
+  }
   showBody() {
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
-        <Swiper
-          style={{padding: 15, height: 150}}
-          autoplay={true}
-          showsPagination={false}>
-          {this.showSlider(Colors.blockYellow)}
-          {this.showSlider(Colors.blockRed)}
-          {this.showSlider(Colors.blockPurple)}
-        </Swiper>
+      <ScrollView>
+       
+        <SlideShow data={dummyData}></SlideShow>
 
         <View
           style={{
-            margin: 15,
-            flex: 3,
             flexWrap: 'wrap',
             flexDirection: 'row',
+            paddingHorizontal:15,
+            marginBottom:7.5,
           }}>
           {this.showBlock(
             () => {
@@ -131,10 +149,16 @@ export default class MenuComponent extends Component {
             Images.iconTeam,
           )}
         </View>
+        {this.showNews("Thông tin từ khoa",dummyData )}
+        {this.showNews("Hôm nay bạn ăn gì?",dummyData )}
+        {this.showNews("Hôm nay bạn ăn gì?",dummyData )}
+        </ScrollView>
       </View>
     );
   }
   render() {
+    // const {itemId} = this.props.route.params;
+    // console.warn(itemId, 'menu');
     return (
       <View
         style={{
@@ -145,8 +169,7 @@ export default class MenuComponent extends Component {
         <HeaderNavigation
           iconRight={Images.iconBell}
           haveSearch={true}
-          color={Colors.white}
-         ></HeaderNavigation>
+          color={Colors.white}></HeaderNavigation>
         {this.showBody()}
       </View>
     );

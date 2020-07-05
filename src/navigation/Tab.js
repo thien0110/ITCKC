@@ -11,7 +11,9 @@ const Tab = createBottomTabNavigator();
 
 
 
-export default function TabNavigator() {
+export default function TabNavigator({route}) {
+  // const { itemId } = route.params;
+  //   console.warn(itemId, "tab")
   return (
       <Tab.Navigator 
       screenOptions={({route})=>({

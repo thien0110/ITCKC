@@ -5,7 +5,6 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  CheckBox,
   Image,
   SafeAreaView,
   KeyboardAvoidingView,
@@ -16,6 +15,7 @@ import Colors from '../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import AlertCustom from './customs/AlertComponent';
 import Loading from './customs/Loading';
+import CheckBox from '@react-native-community/checkbox';
 
 export default class LoginComponent extends Component {
   constructor(props) {
@@ -27,15 +27,11 @@ export default class LoginComponent extends Component {
       isChecked: false,
       showAlert: false,
       messageAlert: '',
-      pressEye: true,
-      showPass:false,
+      pressEye: false,
+      showPass: true,
     };
   }
-  componentDidUpdate(){
-    if(this.props.data !=null ){
-      this.props.navigation.replace('Tab');
-    }
-  }
+  componentDidUpdate() {}
 
   onChangeStateAlert = (state, des) => {
     this.setState({
@@ -43,55 +39,63 @@ export default class LoginComponent extends Component {
       messageAlert: des,
     });
   };
-  showPass =()=>{
-    if(this.state.pressEye ===false){
-        this.setState({
-          pressEye: true,
-          showPass:false
-        })
-    }else{
+  showPass = () => {
+    if (this.state.pressEye === false) {
+      this.setState({
+        pressEye: true,
+        showPass: false,
+      });
+    } else {
       this.setState({
         pressEye: false,
-        showPass:true
-      })
+        showPass: true,
+      });
     }
-  }
-  onLogin=(username, password)=>{
-      if (username === '' || password === '') {
-        this.onChangeStateAlert(true, 'Vui lòng nhập đầy đủ thông tin');
-      }else {
-        const input = {username: username, password: password};
-        
-         this.props.loginAction(input);
-      }
-     
-  }
+  };
+  onLogin = (username, password) => {
+    if (username === '' || password === '') {
+      this.onChangeStateAlert(true, 'Vui lòng nhập đầy đủ thông tin');
+    } else {
+      const input = {username: username, password: password};
+
+      this.props.loginAction(input);
+      this.props.navigation.replace('Tab', {
+        screen: 'Menu',
+        params: {
+          itemId: 86,
+        },
+      });
+    }
+  };
   showView() {
-    const {username,password,pressEye,isChecked, showPass} =this.state;
+    const {username, password, pressEye, isChecked, showPass} = this.state;
     return (
-      <KeyboardAvoidingView style={{flex: 1,
-      justifyContent:'flex-start'}}>
-      <View
+      <KeyboardAvoidingView style={{flex: 1, justifyContent: 'flex-start'}}>
+        <View
           style={{
             width: '70%',
-            height:windowHeight,
+            height: windowHeight,
             alignItems: 'center',
             alignSelf: 'center',
           }}>
-        <View style={{ justifyContent: 'center', alignItems: 'center',
-         height:windowHeight/2.3,
-         backgroundColor:'#fff'}}>
-          <Image
-            source={require('../res/image/LogoKhoaCNTT.png')}
+          <View
             style={{
-              width: 250,
-              height: 250,
-            }}></Image>
-        </View>
-        
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: windowHeight / 2.3,
+              backgroundColor: '#fff',
+            }}>
+            <Image
+              source={require('../res/image/LogoKhoaCNTT.png')}
+              style={{
+                width: 250,
+                height: 250,
+              }}></Image>
+          </View>
+
           <View style={styles.input}>
             <TextInput
-            style={{ flex:1}}
+              style={{flex: 1}}
               placeholder="Mã số sinh viên"
               value={username}
               onChangeText={(text) => {
@@ -102,30 +106,31 @@ export default class LoginComponent extends Component {
           </View>
           <View style={styles.input}>
             <TextInput
-            style={{paddingRight:30, flex:1}}
+              style={{paddingRight: 30, flex: 1}}
               secureTextEntry={showPass}
               placeholder="Mật khẩu"
               value={password}
-
               onChangeText={(text) => {
                 this.setState({
                   password: text.trim(),
                 });
               }}></TextInput>
-              <TouchableOpacity style={{
+            <TouchableOpacity
+              style={{
                 position: 'absolute',
                 right: 15,
               }}
-              onPress={this.showPass.bind(this)}
-              >
-            <Icon
-              name={pressEye==false?'eye-slash':'eye'}
-              size={18}
-              color='gray'
-              ></Icon></TouchableOpacity>
+              onPress={this.showPass.bind(this)}>
+              <Icon
+                name={pressEye == false ? 'eye-slash' : 'eye'}
+                size={18}
+                color="gray"></Icon>
+            </TouchableOpacity>
           </View>
 
-          <View style={{flexDirection: 'row', width: '100%', }}>
+          <View style={{
+            flexDirection: 'row',
+             width: '100%', }}>
             <CheckBox
               style={{color: Colors.lightBlue}}
               value={isChecked}
@@ -137,10 +142,12 @@ export default class LoginComponent extends Component {
               Ghi nhớ tài khoản
             </Text>
           </View>
+          
+
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              this.onLogin(username, password)
+              this.onLogin(username, password);
             }}>
             <Text
               style={{
@@ -164,8 +171,9 @@ export default class LoginComponent extends Component {
     );
   }
   render() {
-    const {messageAlert, showAlert,} = this.state;
+    const {messageAlert, showAlert} = this.state;
     const {data, error, isFetching} = this.props;
+    // console.warn("data", data)
     return (
       <View
         style={{
@@ -177,7 +185,7 @@ export default class LoginComponent extends Component {
           AlertCustom(showAlert, messageAlert, () => {
             this.onChangeStateAlert(false, '');
           })}
-          {/* {isFetching&&<Loading></Loading>} */}
+        {/* {isFetching&&<Loading></Loading>} */}
       </View>
     );
   }
@@ -187,7 +195,7 @@ const windowHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   container: {},
   input: {
-    marginBottom:15,
+    marginBottom: 15,
     alignItems: 'center',
     width: '100%',
     height: 45,

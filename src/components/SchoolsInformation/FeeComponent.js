@@ -8,7 +8,7 @@ export default class ProfileComponent extends Component {
   showBody(){
     return(
       <View style={{flex:1,padding:10,}}>
-      <ScrollView>
+          <ScrollView>
           <Article></Article>
           <Article></Article>
           <Article></Article>
@@ -17,6 +17,7 @@ export default class ProfileComponent extends Component {
     )
   }
   render() {
+    
     return (
       <View style={{flex: 1, alignItems: 'center'}}>
         <HeaderNavigation

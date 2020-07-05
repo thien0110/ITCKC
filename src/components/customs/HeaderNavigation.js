@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text, TouchableOpacity, View, TextInput, Image} from 'react-native';
+import {Text, TouchableOpacity, View, TextInput, Image,Dimensions} from 'react-native';
 import Colors from '../../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-
+const windowWidth = Dimensions.get('window').width;
 export default class HeaderNavigation extends React.Component {
   render() {
     const {
@@ -51,7 +51,7 @@ export default class HeaderNavigation extends React.Component {
                 paddingHorizontal: 10,
                 paddingVertical:0,
                 borderRadius: 8,
-                width: 300,
+                width: windowWidth * 2/3,
               }}
               placeholder="Tìm kiếm"></TextInput>
           </View>
