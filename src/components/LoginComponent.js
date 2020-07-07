@@ -181,7 +181,7 @@ export default class LoginComponent extends Component {
           backgroundColor: '#fff',
         }}>
         {this.showView()}
-        {this.state.showAlert &&
+        {showAlert &&
           AlertCustom(showAlert, messageAlert, () => {
             this.onChangeStateAlert(false, '');
           })}

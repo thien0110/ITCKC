@@ -40,9 +40,9 @@ export default function TabNavigator({route}) {
       backBehavior='none'
       tabBarOptions={{
         showLabel:false,
-        // style:{
-        //   backgroundColor:Colors.navigation
-        // },
+        style:{
+          backgroundColor:Colors.navigation
+        },
         keyboardHidesTabBar: true,
       }}
       >

@@ -5,10 +5,15 @@ import createSagaMiddleware from 'redux-saga';
 import allReducers from './redux/reducers';
 import allSagas from './redux/sagas';
 import MainNavigator from './navigation';
+import SplashScreen from 'react-native-splash-screen'
 const sagaMiddleware = createSagaMiddleware();
 let store = createStore(allReducers, applyMiddleware(sagaMiddleware));
 
+
 export default class App extends React.Component {
+  componentDidMount(){
+    SplashScreen.hide();
+  }
   render() {
     return (
       <Provider store={store}>

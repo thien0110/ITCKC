@@ -22,8 +22,8 @@ export default class ProfileComponent extends Component {
       <View style={{flex: 1, alignItems: 'center'}}>
         <HeaderNavigation
           title={'Thông tin nhà trường'}
-          titleColor={Colors.black}
-          color={Colors.white}
+          titleColor={Colors.white}
+          color={Colors.navigation}
           iconLeft={Images.iconBack}
           iconLeftColor={Colors.black}
           onClickLeft={()=>{this.props.navigation.goBack()}}

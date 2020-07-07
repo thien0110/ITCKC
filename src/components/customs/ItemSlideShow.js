@@ -7,7 +7,7 @@ const SlideShowItem = ({item}) => {
   return (
     <View style={styles.cardView}>
       <View style={styles.textView}>
-        <Text style={styles.itemTitle}> {item.title}</Text>
+        <Text style={styles.itemTitle}>{item.title}</Text>
         <Text style={styles.itemDescription}
         numberOfLines={4}>{item.description}</Text>
       </View>
