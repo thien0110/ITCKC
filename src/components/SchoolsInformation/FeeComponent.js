@@ -8,7 +8,7 @@ export default class ProfileComponent extends Component {
   showBody(){
     return(
       <View style={{flex:1,padding:10,}}>
-      <ScrollView>
+          <ScrollView>
           <Article></Article>
           <Article></Article>
           <Article></Article>
@@ -17,12 +17,13 @@ export default class ProfileComponent extends Component {
     )
   }
   render() {
+    
     return (
       <View style={{flex: 1, alignItems: 'center'}}>
         <HeaderNavigation
           title={'Thông tin nhà trường'}
-          titleColor={Colors.black}
-          color={Colors.white}
+          titleColor={Colors.white}
+          color={Colors.navigation}
           iconLeft={Images.iconBack}
           iconLeftColor={Colors.black}
           onClickLeft={()=>{this.props.navigation.goBack()}}

@@ -11,7 +11,9 @@ const Tab = createBottomTabNavigator();
 
 
 
-export default function TabNavigator() {
+export default function TabNavigator({route}) {
+  // const { itemId } = route.params;
+  //   console.warn(itemId, "tab")
   return (
       <Tab.Navigator 
       screenOptions={({route})=>({
@@ -38,9 +40,9 @@ export default function TabNavigator() {
       backBehavior='none'
       tabBarOptions={{
         showLabel:false,
-        // style:{
-        //   backgroundColor:Colors.navigation
-        // },
+        style:{
+          backgroundColor:Colors.navigation
+        },
         keyboardHidesTabBar: true,
       }}
       >

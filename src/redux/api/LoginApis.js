@@ -20,7 +20,7 @@ export function loginApi(input) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        console.warn('responseJson', responseJson);
+        // console.warn('responseJson', responseJson);
         return responseJson;
       })
       .catch((error) => {

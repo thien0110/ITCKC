@@ -6,7 +6,7 @@ function* loginFlow(action) {
   try {
     const responses = yield loginApi(action.input);
     const response=responses.APILogin
-      console.warn("responsesgaa",response)
+      // console.warn("responsesgaa",response)
     if (response.resultCode === 1) {
       yield put({type: LOGIN_SUCCESS, data: response.data});
     } else {

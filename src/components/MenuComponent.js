@@ -10,131 +10,116 @@ import {
 import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import Swiper from 'react-native-swiper';
 import Images from '../res/Images';
+import SlideShow from './customs/SlideShow';
+import FlatListHorizontal from './customs/FlatListHorizontal';
+import Block from './customs/Block';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+const dummyData = [
+  {
+    heading: 'Sài gòn, hôm nay ăn gì?',
+    title: 'Anise Aroma Art Bazar',
+    url: 'https://i.ibb.co/hYjK44F/anise-aroma-art-bazaar-277253.jpg',
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    id: 1,
+  },
+  {
+    heading: 'Thông tin nhà trường?',
+    title: 'Food inside a Bowl, Food inside a Bowl',
+    url: 'https://i.ibb.co/JtS24qP/food-inside-bowl-1854037.jpg',
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    id: 2,
+  },
+  {
+    heading: 'Trùm cuối khao 60k?',
+    title: 'Vegatable Salad',
+    url:
+      'https://i.ibb.co/JxykVBt/flat-lay-photography-of-vegetable-salad-on-plate-1640777.jpg',
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    id: 3,
+  },
+];
 export default class MenuComponent extends Component {
-  showSlider(backgroundColor) {
+  componentDidMount() {}
+
+  showNews(heading, data) {
     return (
-      <View
-        style={{
-          borderRadius: 15,
-          shadowColor: Colors.black,
-          shadowOpacity: 0.3,
-          shadowRadius: 3,
-          elevation: 5,
-          backgroundColor: backgroundColor,
-          width: windowWidth - 30,
-          height: 120,
-        }}></View>
-    );
-  }
-  showBlock(onPress, title, iconName, marginBottom, marginLeft, marginRight) {
-    return (
-      <TouchableOpacity onPress={onPress}>
-        <View
-          style={{
-            width: (windowWidth - 60) / 3,
-            height: (windowWidth - 60) / 3,
-            borderRadius: 15,
-            backgroundColor: Colors.white,
-            alignItems: 'center',
-            justifyContent: "space-around",
-            marginBottom: marginBottom,
-            marginLeft: marginLeft,
-            marginRight: marginRight,
-            padding: 15,
-            shadowColor: Colors.black,
-            shadowOpacity: 0.3,
-            shadowRadius: 5,
-            elevation: 5,
-          }}>
-          <Image
-            source={iconName}
-            style={{
-              width: 40,
-              height: 40,
-              
-              resizeMode:"contain"
-            }}></Image>
-          <Text style={{textAlign: 'center', fontWeight:'bold'}}>{title}</Text>
-        </View>
-      </TouchableOpacity>
+      <View>
+        <Text style={{fontWeight: 'bold', marginLeft: 15}}>{heading}</Text>
+        <FlatListHorizontal data={data}></FlatListHorizontal>
+      </View>
     );
   }
   showBody() {
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
-        <Swiper
-          style={{padding: 15, height: 150}}
-          autoplay={true}
-          showsPagination={false}>
-          {this.showSlider(Colors.blockYellow)}
-          {this.showSlider(Colors.blockRed)}
-          {this.showSlider(Colors.blockPurple)}
-        </Swiper>
+        <ScrollView>
+          <SlideShow data={dummyData}></SlideShow>
+          <View
+            style={{
+              flexWrap: 'wrap',
+              flexDirection: 'row',
+              paddingHorizontal: 15,
+              marginBottom: 7.5,
+            }}>
+            <Block
+              onPress={() => {
+                this.props.navigation.navigate('TabSchool');
+              }}
+              title={'Thông tin nhà trường'}
+              iconName={Images.iconSchool}></Block>
+            <Block
+              onPress={() => {
+                this.props.navigation.navigate('TabSchool');
+              }}
+              title={'Hoạt động ngoại khóa'}
+              iconName={Images.iconExercise}
+              marginBottom={15}
+              marginLeft={15}
+              marginRight={15}></Block>
 
-        <View
-          style={{
-            margin: 15,
-            flex: 3,
-            flexWrap: 'wrap',
-            flexDirection: 'row',
-          }}>
-          {this.showBlock(
-            () => {
-              this.props.navigation.navigate('TabSchool');
-            },
-            'Thông tin nhà trường',
-            Images.iconSchool,
-          )}
-          {this.showBlock(
-            () => {
-              this.props.navigation.navigate('TabSchool');
-            },
-            'Hoạt động ngoại khóa',
-            Images.iconExercise,
-            15,
-            15,
-            15,
-          )}
-          {this.showBlock(
-            () => {
-              this.props.navigation.navigate('LearningInfo');
-            },
-            'Thông tin học tập',
-            Images.iconBooks,
-          )}
-          {this.showBlock(
-            () => {
-              this.props.navigation.navigate('TabSchool');
-            },
-            'Thông tin khoa',
-            Images.iconIt,
-          )}
-          {this.showBlock(
-            () => {
-              this.props.navigation.navigate('TabSchool');
-            },
-            'Thông tin việc làm',
-            Images.iconProject,
-            0,
-            15,
-            15,
-          )}
-          {this.showBlock(
-            () => {
-              this.props.navigation.navigate('TabSchool');
-            },
-            'Cựu sinh viên',
-            Images.iconTeam,
-          )}
-        </View>
+            <Block
+              onPress={() => {
+                this.props.navigation.navigate('LearningInfo');
+              }}
+              title={'Thông tin học tập'}
+              iconName={Images.iconBooks}></Block>
+            <Block
+              onPress={() => {
+                this.props.navigation.navigate('TabSchool');
+              }}
+              title={'Thông tin khoa'}
+              iconName={Images.iconIt}></Block>
+            <Block
+              onPress={() => {
+                this.props.navigation.navigate('TabSchool');
+              }}
+              title={'Thông tin việc làm'}
+              iconName={Images.iconProject}
+              marginLeft={15}
+              marginRight={15}></Block>
+            <Block
+              onPress={() => {
+                this.props.navigation.navigate('TabSchool');
+              }}
+              title={'Cựu sinh viên'}
+              iconName={Images.iconTeam}></Block>
+          </View>
+          {this.showNews('Thông tin từ khoa', dummyData)}
+          {this.showNews('Hôm nay bạn ăn gì?', dummyData)}
+          {this.showNews('Hôm nay bạn ăn gì?', dummyData)}
+        </ScrollView>
       </View>
     );
   }
   render() {
+    // const {itemId} = this.props.route.params;
+    // console.warn(itemId, 'menu');
     return (
       <View
         style={{
@@ -145,8 +130,8 @@ export default class MenuComponent extends Component {
         <HeaderNavigation
           iconRight={Images.iconBell}
           haveSearch={true}
-          color={Colors.white}
-         ></HeaderNavigation>
+          color={Colors.navigation}
+          onClickRight={()=>{this.props.navigation.navigate('Noti');}}></HeaderNavigation>
         {this.showBody()}
       </View>
     );

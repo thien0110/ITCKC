@@ -13,9 +13,9 @@ export default function TabSchoolInformationNavigator() {
     <Tab.Navigator
       backBehavior="none"
       tabBarOptions={{
-        // style:{
-        //   backgroundColor:Colors.navigation
-        // },
+        style:{
+          backgroundColor:Colors.navigation
+        },
         keyboardHidesTabBar: true,
         tabStyle: {
           justifyContent: 'center',
