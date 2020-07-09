@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  ImageBackground,
   SafeAreaView,
   KeyboardAvoidingView,
   Dimensions,
@@ -16,7 +17,9 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import AlertCustom from './customs/AlertComponent';
 import Loading from './customs/Loading';
 import CheckBox from '@react-native-community/checkbox';
-
+import Images from '../res/Images';
+import {arrayIsEmpty} from '../res/Functions';
+import images from '../res/Images';
 export default class LoginComponent extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +34,12 @@ export default class LoginComponent extends Component {
       showPass: true,
     };
   }
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    if (!arrayIsEmpty(this.props.data)) {
+      this.props.navigation.replace('Tab');
+      this.props.formatData({});
+    }
+  }
 
   onChangeStateAlert = (state, des) => {
     this.setState({
@@ -57,136 +65,167 @@ export default class LoginComponent extends Component {
       this.onChangeStateAlert(true, 'Vui lòng nhập đầy đủ thông tin');
     } else {
       const input = {username: username, password: password};
-
       this.props.loginAction(input);
-      this.props.navigation.replace('Tab', {
-        screen: 'Menu',
-        params: {
-          itemId: 86,
-        },
-      });
     }
   };
   showView() {
     const {username, password, pressEye, isChecked, showPass} = this.state;
     return (
-      <KeyboardAvoidingView style={{flex: 1, justifyContent: 'flex-start'}}>
+      <KeyboardAvoidingView style={{flex: 1, justifyContent: 'center'}}>
         <View
           style={{
-            width: '70%',
-            height: windowHeight,
+            width: '80%',
+            height: 400,
+            marginTop: windowHeight/9,
             alignItems: 'center',
             alignSelf: 'center',
           }}>
-          <View
+          <ImageBackground
+            source={images.card}
             style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: windowHeight / 2.3,
-              backgroundColor: '#fff',
-            }}>
-            <Image
-              source={require('../res/image/LogoKhoaCNTT.png')}
+              flex: 1,
+              width: '100%',
+              height: '100%',
+              shadowColor: Colors.black,
+              shadowOpacity: 0.3,
+              shadowRadius: 5,
+              elevation: 5,
+            }}
+            resizeMode={'stretch'}>
+            <View
               style={{
-                width: 250,
-                height: 250,
-              }}></Image>
-          </View>
-
-          <View style={styles.input}>
-            <TextInput
-              style={{flex: 1}}
-              placeholder="Mã số sinh viên"
-              value={username}
-              onChangeText={(text) => {
-                this.setState({
-                  username: text.trim(),
-                });
-              }}></TextInput>
-          </View>
-          <View style={styles.input}>
-            <TextInput
-              style={{paddingRight: 30, flex: 1}}
-              secureTextEntry={showPass}
-              placeholder="Mật khẩu"
-              value={password}
-              onChangeText={(text) => {
-                this.setState({
-                  password: text.trim(),
-                });
-              }}></TextInput>
-            <TouchableOpacity
-              style={{
-                position: 'absolute',
-                right: 15,
-              }}
-              onPress={this.showPass.bind(this)}>
-              <Icon
-                name={pressEye == false ? 'eye-slash' : 'eye'}
-                size={18}
-                color="gray"></Icon>
-            </TouchableOpacity>
-          </View>
-
-          <View style={{
-            flexDirection: 'row',
-             width: '100%', }}>
-            <CheckBox
-              style={{color: Colors.lightBlue}}
-              value={isChecked}
-              onValueChange={() => {
-                this.setState({isChecked: !isChecked});
-              }}
-            />
-            <Text style={{alignSelf: 'center', color: Colors.lightBlue}}>
-              Ghi nhớ tài khoản
-            </Text>
-          </View>
-          
-
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              this.onLogin(username, password);
-            }}>
-            <Text
-              style={{
-                color: Colors.white,
-                textAlign: 'center',
-                fontSize: 20,
+                flex: 1,
+                alignItems: 'center',
+                padding: 20,
               }}>
-              Đăng nhập
-            </Text>
-            {/* <Icon
-              name="arrow-right"
-              size={18}
-              color={Colors.white}
-              style={{position: 'absolute', right: 90}}></Icon> */}
-          </TouchableOpacity>
-          <TouchableOpacity style={{marginTop: 15}}>
-            <Text style={{color: Colors.lightBlue}}>Quên mật khẩu?</Text>
-          </TouchableOpacity>
+              <View
+                style={{
+                  // justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '38%',
+                  flexDirection: 'row',
+                }}>
+                <Image
+                  source={require('../res/image/LogoKhoaCNTT.png')}
+                  style={{
+                    width: 100,
+                    height: 100,
+                  }}></Image>
+                <View>
+                  <Text
+                    style={{
+                      fontWeight: 'bold',
+                      fontSize: 15,
+                      color: Colors.blue,
+                    }}>
+                    Information Technology
+                  </Text>
+                  <Text
+                    style={{
+                      fontWeight: 'bold',
+                      fontSize: 15,
+                      color: Colors.blue,
+                    }}>
+                    CKC Application
+                  </Text>
+                </View>
+              </View>
+
+              <View style={styles.input}>
+                <TextInput
+                  style={{flex: 1}}
+                  placeholder="Mã số sinh viên"
+                  value={username}
+                  onChangeText={(text) => {
+                    this.setState({
+                      username: text.trim(),
+                    });
+                  }}></TextInput>
+              </View>
+              <View style={styles.input}>
+                <TextInput
+                  style={{paddingRight: 30, flex: 1}}
+                  secureTextEntry={showPass}
+                  placeholder="Mật khẩu"
+                  value={password}
+                  onChangeText={(text) => {
+                    this.setState({
+                      password: text.trim(),
+                    });
+                  }}></TextInput>
+                <TouchableOpacity
+                  style={{
+                    position: 'absolute',
+                    right: 15,
+                  }}
+                  onPress={this.showPass.bind(this)}>
+                  <Icon
+                    name={pressEye == false ? 'eye-slash' : 'eye'}
+                    size={18}
+                    color="gray"></Icon>
+                </TouchableOpacity>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  width: '100%',
+                }}>
+                <CheckBox
+                  style={{color: Colors.grayStrong}}
+                  value={isChecked}
+                  onValueChange={() => {
+                    this.setState({isChecked: !isChecked});
+                  }}
+                />
+                <Text style={{alignSelf: 'center', color: Colors.grayStrong}}>
+                  Ghi nhớ tài khoản
+                </Text>
+              </View>
+
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  this.onLogin(username, password);
+                }}>
+                <Text
+                  style={{
+                    color: Colors.white,
+                    textAlign: 'center',
+                    fontSize: 20,
+                  }}>
+                  Đăng nhập
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{marginTop: 15}}>
+                <Text style={{color: Colors.grayStrong}}>Quên mật khẩu?</Text>
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
         </View>
       </KeyboardAvoidingView>
     );
   }
   render() {
     const {messageAlert, showAlert} = this.state;
-    const {data, error, isFetching} = this.props;
+    const {data, message, isFetching} = this.props;
     // console.warn("data", data)
     return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: '#fff',
-        }}>
+      <ImageBackground
+        source={Images.bg}
+        style={{width: windowWidth, height: windowHeight}}>
         {this.showView()}
         {showAlert &&
           AlertCustom(showAlert, messageAlert, () => {
             this.onChangeStateAlert(false, '');
           })}
-        {/* {isFetching&&<Loading></Loading>} */}
-      </View>
+        {message &&
+          AlertCustom(true, message, () => {
+            this.onChangeStateAlert(false, '');
+            this.props.formatData({});
+          })}
+        {isFetching && <Loading></Loading>}
+      </ImageBackground>
     );
   }
 }
@@ -198,20 +237,28 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     alignItems: 'center',
     width: '100%',
-    height: 45,
-    borderRadius: 15,
+    height: 40,
+    borderRadius: 5,
     backgroundColor: Colors.gray,
     paddingHorizontal: 10,
     flexDirection: 'row',
+    shadowColor: Colors.black,
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
   },
   button: {
     marginTop: 15,
     width: '100%',
-    height: 45,
+    height: 40,
     backgroundColor: Colors.blue,
-    borderRadius: 15,
+    borderRadius: 5,
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
+    shadowColor: Colors.black,
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
   },
 });
