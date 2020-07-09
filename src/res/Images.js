@@ -15,5 +15,7 @@ const images = {
   iconLogout: require('../res/image/logout.png'),
   iconBell: require('../res/image/bell.png'),
   iconBack: require('../res/image/arrow-left.png'),
+  card: require('../res/image/card.png'),
+  bg: require('../res/image/bg.png'),
 };
 export default images;

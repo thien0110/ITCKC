@@ -1,14 +1,20 @@
 //Gọi API đăng nhập
 const messageError = 'Không thể kết nối tới server.';
 const fakeApi = true;
-import {APILogin} from '../../datas/datas';
+import {API_URL} from '../../config';
 export function loginApi(input) {
   if (fakeApi) {
     return {
-      APILogin
+      resultCode: 1,
+      message: 'Đăng nhập thành công !',
+      data: {
+        username: 'Thienle',
+        password: '123',
+      },
     };
   } else {
-    return fetch('/login', {
+    return fetch(API_URL+'login', {
+      
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json',

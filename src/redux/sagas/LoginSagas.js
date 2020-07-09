@@ -4,11 +4,9 @@ import {loginApi} from '../api/LoginApis';
 const messageError = 'Không thể kết nối tới server.';
 function* loginFlow(action) {
   try {
-    const responses = yield loginApi(action.input);
-    const response=responses.APILogin
-      // console.warn("responsesgaa",response)
+    const response = yield loginApi(action.input);
     if (response.resultCode === 1) {
-      yield put({type: LOGIN_SUCCESS, data: response.data});
+      yield put({type: LOGIN_SUCCESS, data: response.data, message:response.message});
     } else {
       yield put({type: LOGIN_FAIL, error: response.message});
     }

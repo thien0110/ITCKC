@@ -38,8 +38,8 @@ export default class Block extends Component {
           <Image
             source={iconName}
             style={{
-              width: 40,
-              height: 40,
+              width: '40%',
+              height: '40%',
 
               resizeMode: 'contain',
             }}></Image>

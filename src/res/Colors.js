@@ -1,9 +1,9 @@
 export default Colors ={
-    blue:'#007aff',
+    blue:'#283891',
     white:'#fff',
     lightBlue:'#00b4d8',
     gray:'#F5F5F5',
-    grayStrong:'#e1e1e1',
+    grayStrong:'#909090',
     black:'#000',
     navigation:'#002D56',
     background:'#EAF4F6',
