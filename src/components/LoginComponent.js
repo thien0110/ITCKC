@@ -24,8 +24,8 @@ export default class LoginComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: 'thien',
+      password: '123',
 
       isChecked: false,
       showAlert: false,

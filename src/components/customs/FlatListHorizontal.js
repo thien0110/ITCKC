@@ -36,7 +36,6 @@ const FlatListHorizontal =({data})=>{
                 />
         )
     }
-    console.log('Please provide Images')
     return null
   
 }

@@ -1,5 +1,12 @@
 import React from 'react';
-import {Text, TouchableOpacity, View, TextInput, Image,Dimensions} from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  TextInput,
+  Image,
+  Dimensions,
+} from 'react-native';
 import Colors from '../../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 const windowWidth = Dimensions.get('window').width;
@@ -15,7 +22,9 @@ export default class HeaderNavigation extends React.Component {
       onClickRight,
       iconLeftColor,
       iconRightColor,
-      haveSearch,//  nếu có thanh tìm kiếm =true
+      haveSearch, //  nếu có thanh tìm kiếm =true,
+      haveSave,
+      onClickSave,
     } = this.props;
     return (
       <View
@@ -34,13 +43,13 @@ export default class HeaderNavigation extends React.Component {
             onPress={() => {
               onClickLeft();
             }}>
-              <Image
-            source={iconLeft}
-            style={{
-              width: 35,
-              height: 35,
-              resizeMode:"contain"
-            }}></Image>
+            <Image
+              source={iconLeft}
+              style={{
+                width: 35,
+                height: 35,
+                resizeMode: 'contain',
+              }}></Image>
           </TouchableOpacity>
         )}
         {haveSearch ? (
@@ -49,20 +58,20 @@ export default class HeaderNavigation extends React.Component {
               style={{
                 backgroundColor: Colors.grayStrong,
                 paddingHorizontal: 10,
-                paddingVertical:0,
+                paddingVertical: 0,
                 borderRadius: 8,
-                width: windowWidth * 2/3,
+                width: (windowWidth * 2) / 3,
               }}
               placeholder="Tìm kiếm"></TextInput>
           </View>
         ) : (
           <Text
             style={{
-                flex: 1,
+              flex: 1,
               textAlign: 'center',
               fontSize: 20,
               fontWeight: 'bold',
-              color:titleColor
+              color: titleColor,
             }}>
             {title}
           </Text>
@@ -73,14 +82,21 @@ export default class HeaderNavigation extends React.Component {
             onPress={() => {
               onClickRight();
             }}>
-            {/* <Icon name={iconRight} size={35} color={iconRightColor} /> */}
             <Image
-            source={iconRight}
-            style={{
-              width: 35,
-              height: 35,
-              resizeMode:"contain"
-            }}></Image>
+              source={iconRight}
+              style={{
+                width: 35,
+                height: 35,
+                resizeMode: 'contain',
+              }}></Image>
+          </TouchableOpacity>
+        )}
+        {haveSave === true && (
+          <TouchableOpacity
+            onPress={() => {
+              onClickSave();
+            }}>
+            <Text style={{color: Colors.white, fontWeight: 'bold'}}>Lưu</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -89,12 +105,14 @@ export default class HeaderNavigation extends React.Component {
 }
 HeaderNavigation.defaultProps = {
   title: '',
-  titleColor:Colors.black,
+  titleColor: Colors.black,
   iconLeft: null,
   iconRight: null,
   color: Colors.white,
   haveSearch: false,
+  haveSave: false,
 
   onClickLeft: () => {},
   onClickRight: () => {},
+  onClickSave: () => {},
 };

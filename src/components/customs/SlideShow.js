@@ -76,8 +76,6 @@ const SlideShow = ({ data }) => {
             </View>
         )
     }
-
-    console.log('Please provide Images')
     return (
         <View style={{
             flex: 1,

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MenuComponent from '../components/MenuComponent';
+import MenuContainer from '../containers/MenuContainer';
 import ProfileComponent from '../components/ProfileComponent';
 import Images from '../res/Images';
 import {
@@ -46,7 +46,7 @@ export default function TabNavigator({route}) {
         keyboardHidesTabBar: true,
       }}
       >
-        <Tab.Screen name="Menu" component={MenuComponent} />
+        <Tab.Screen name="Menu" component={MenuContainer} />
         <Tab.Screen name="Profile" component={ProfileComponent} />
       </Tab.Navigator>
   );
