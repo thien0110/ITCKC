@@ -39,9 +39,9 @@ export default class ProfileComponent extends Component {
   showBody() {
     return (
       <View style={{flexWrap: 'wrap', flexDirection: 'row', margin: 15}}>
-        {this.showBlock(() => {}, 'Cá nhân', Images.iconPersonProfile)}
-        {this.showBlock(() => {}, 'Cài đặt', Images.iconSetting, 15, 15)}
-        {this.showBlock(() => {}, 'Về ứng dụng', Images.iconInfo)}
+        {this.showBlock(() => {this.props.navigation.navigate('EditProfile')}, 'Cá nhân', Images.iconPersonProfile)}
+        {this.showBlock(() => {this.props.navigation.navigate('Setting')}, 'Cài đặt', Images.iconSetting, 15, 15)}
+        {this.showBlock(() => {this.props.navigation.navigate('About')}, 'Về ứng dụng', Images.iconInfo)}
         {this.showBlock(() => {}, 'Đăng xuất', Images.iconLogout, 0, 15)}
       </View>
     );

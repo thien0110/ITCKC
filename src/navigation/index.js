@@ -6,6 +6,9 @@ import TabNavigator from './Tab';
 import TabSchoolInformationNavigator from './SchoolsInformationTab';
 import LearningInfoComponent from '../components/LearningInfo';
 import NotiComponent from '../components/NotiComponent'
+import EditProfileComponent from '../components/Profile/EditProfileComponent'
+import AboutComponent from '../components/Profile/AboutComponent'
+import SettingComponent from '../components/Profile/SettingComponent'
 const Stack = createStackNavigator();
 function MainNavigator() {
   return (
@@ -18,6 +21,9 @@ function MainNavigator() {
         <Stack.Screen name="TabSchool" component={TabSchoolInformationNavigator} />
         <Stack.Screen name="LearningInfo" component={LearningInfoComponent} />
         <Stack.Screen name="Noti" component={NotiComponent} />
+        <Stack.Screen name="EditProfile" component={EditProfileComponent} />
+        <Stack.Screen name="About" component={AboutComponent} />
+        <Stack.Screen name="Setting" component={SettingComponent} />
       </Stack.Navigator>
     </NavigationContainer>
   );

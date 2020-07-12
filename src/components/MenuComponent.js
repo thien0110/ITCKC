@@ -12,41 +12,17 @@ import Colors from '../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../res/Images';
 import SlideShow from './customs/SlideShow';
+import Loading from './customs/Loading';
 import FlatListHorizontal from './customs/FlatListHorizontal';
 import Block from './customs/Block';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const dummyData = [
-  {
-    heading: 'Sài gòn, hôm nay ăn gì?',
-    title: 'Anise Aroma Art Bazar',
-    url: 'https://i.ibb.co/hYjK44F/anise-aroma-art-bazaar-277253.jpg',
-    description:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    id: 1,
-  },
-  {
-    heading: 'Thông tin nhà trường?',
-    title: 'Food inside a Bowl, Food inside a Bowl',
-    url: 'https://i.ibb.co/JtS24qP/food-inside-bowl-1854037.jpg',
-    description:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    id: 2,
-  },
-  {
-    heading: 'Trùm cuối khao 60k?',
-    title: 'Vegatable Salad',
-    url:
-      'https://i.ibb.co/JxykVBt/flat-lay-photography-of-vegetable-salad-on-plate-1640777.jpg',
-    description:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    id: 3,
-  },
-];
-export default class MenuComponent extends Component {
-  componentDidMount() {}
 
+export default class MenuComponent extends Component {
+  componentDidMount() {
+    this.props.getMenuNewsAction();
+  }
   showNews(heading, data) {
     return (
       <View>
@@ -56,10 +32,11 @@ export default class MenuComponent extends Component {
     );
   }
   showBody() {
+    const data =this.props.data;
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
         <ScrollView>
-          <SlideShow data={dummyData}></SlideShow>
+          <SlideShow data={data}></SlideShow>
           <View
             style={{
               flexWrap: 'wrap',
@@ -110,9 +87,9 @@ export default class MenuComponent extends Component {
               title={'Cựu sinh viên'}
               iconName={Images.iconTeam}></Block>
           </View>
-          {this.showNews('Thông tin từ khoa', dummyData)}
-          {this.showNews('Hôm nay bạn ăn gì?', dummyData)}
-          {this.showNews('Hôm nay bạn ăn gì?', dummyData)}
+          {this.showNews('Thông tin từ khoa', data)}
+          {this.showNews('Hôm nay bạn ăn gì?', data)}
+          {this.showNews('Hôm nay bạn ăn gì?', data)}
         </ScrollView>
       </View>
     );
@@ -120,6 +97,7 @@ export default class MenuComponent extends Component {
   render() {
     // const {itemId} = this.props.route.params;
     // console.warn(itemId, 'menu');
+    const {isFetching} =this.props;
     return (
       <View
         style={{
@@ -133,6 +111,7 @@ export default class MenuComponent extends Component {
           color={Colors.navigation}
           onClickRight={()=>{this.props.navigation.navigate('Noti');}}></HeaderNavigation>
         {this.showBody()}
+        {isFetching && <Loading></Loading>}
       </View>
     );
   }
