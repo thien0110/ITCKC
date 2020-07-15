@@ -1,5 +1,5 @@
 const images = {
-  bg: require('../res/image/bg.png'),
+  bg: require('../res/image/bg.jpg'),
   card: require('../res/image/card.png'),
   moon: require('../res/image/moon.png'),
   iconIt: require('../res/image/it.png'),

@@ -88,8 +88,8 @@ export default class MenuComponent extends Component {
               iconName={Images.iconTeam}></Block>
           </View>
           {this.showNews('Thông tin từ khoa', data)}
-          {this.showNews('Hôm nay bạn ăn gì?', data)}
-          {this.showNews('Hôm nay bạn ăn gì?', data)}
+          {this.showNews('Hôm nay ăn gì?', data)}
+          {this.showNews('Thời sự hôm nay?', data)}
         </ScrollView>
       </View>
     );
