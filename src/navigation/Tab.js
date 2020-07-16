@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MenuContainer from '../containers/MenuContainer';
-import ProfileComponent from '../components/ProfileComponent';
+import MenuProfileComponent from '../components/MenuProfileComponent';
 import Images from '../res/Images';
 import {
   Image,
@@ -23,7 +23,7 @@ export default function TabNavigator({route}) {
             focused
             ?iconName =Images.iconMenuActive
             :iconName =Images.iconMenuInactive
-          }else if(route.name== 'Profile'){
+          }else if(route.name== 'MenuProfile'){
             focused
             ?iconName =Images.iconPersonActive
             :iconName =Images.iconPersonInactive
@@ -47,7 +47,7 @@ export default function TabNavigator({route}) {
       }}
       >
         <Tab.Screen name="Menu" component={MenuContainer} />
-        <Tab.Screen name="Profile" component={ProfileComponent} />
+        <Tab.Screen name="MenuProfile" component={MenuProfileComponent} />
       </Tab.Navigator>
   );
 }

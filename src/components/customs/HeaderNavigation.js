@@ -23,7 +23,8 @@ export default class HeaderNavigation extends React.Component {
       iconLeftColor,
       iconRightColor,
       haveSearch, //  nếu có thanh tìm kiếm =true,
-      haveSave,
+      haveSave, //có nút lưu hoặc sửa
+      textSave, //là lưu hoặc sửa
       onClickSave,
     } = this.props;
     return (
@@ -93,10 +94,11 @@ export default class HeaderNavigation extends React.Component {
         )}
         {haveSave === true && (
           <TouchableOpacity
+          style={{width:50, height:'60%', borderRadius:20, backgroundColor:Colors.white, alignItems:'center', }}
             onPress={() => {
               onClickSave();
             }}>
-            <Text style={{color: Colors.white, fontWeight: 'bold'}}>Lưu</Text>
+            <Text style={{color: Colors.blue, fontWeight: 'bold'}}>{textSave}</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -111,6 +113,7 @@ HeaderNavigation.defaultProps = {
   color: Colors.white,
   haveSearch: false,
   haveSave: false,
+  textSave:'',
 
   onClickLeft: () => {},
   onClickRight: () => {},

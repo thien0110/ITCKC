@@ -23,7 +23,7 @@ export default class NotiComponent extends Component {
             height: windowHeight / 6,
             backgroundColor: Colors.lightBlue,
             borderRadius: 10,
-            marginTop: 10,
+            marginBottom: 10,
             padding: 10,
           }}>
           <View
@@ -58,7 +58,7 @@ export default class NotiComponent extends Component {
   }
   showBody() {
     return (
-      <View style={{flex: 1, paddingHorizontal: 10}}>
+      <View style={{flex: 1, paddingHorizontal: 10,paddingTop:10}}>
         <ScrollView>
           {this.showNoti(
             'THÔNG TIN NHÀ TRƯỜNG',
