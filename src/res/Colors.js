@@ -1,5 +1,6 @@
 export default Colors ={
     blue:'#283891',
+    buttonBlue:'#00539F',
     white:'#fff',
     lightBlue:'#00b4d8',
     gray:'#F5F5F5',

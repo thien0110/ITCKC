@@ -6,7 +6,7 @@ import Images from '../res/Images';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const widthBlock = (windowWidth - 45) / 2;
-export default class ProfileComponent extends Component {
+export default class MenuProfileComponent extends Component {
   showBlock(onPress, title, iconName, marginBottom, marginLeft, marginRight) {
     return (
       <TouchableOpacity onPress={onPress}>
@@ -39,9 +39,29 @@ export default class ProfileComponent extends Component {
   showBody() {
     return (
       <View style={{flexWrap: 'wrap', flexDirection: 'row', margin: 15}}>
-        {this.showBlock(() => {this.props.navigation.navigate('EditProfile')}, 'Cá nhân', Images.iconPersonProfile)}
-        {this.showBlock(() => {this.props.navigation.navigate('Setting')}, 'Cài đặt', Images.iconSetting, 15, 15)}
-        {this.showBlock(() => {this.props.navigation.navigate('About')}, 'Về ứng dụng', Images.iconInfo)}
+        {this.showBlock(
+          () => {
+            this.props.navigation.navigate('Profile');
+          },
+          'Cá nhân',
+          Images.iconPersonProfile,
+        )}
+        {this.showBlock(
+          () => {
+            this.props.navigation.navigate('Setting');
+          },
+          'Cài đặt',
+          Images.iconSetting,
+          15,
+          15,
+        )}
+        {this.showBlock(
+          () => {
+            this.props.navigation.navigate('About');
+          },
+          'Về ứng dụng',
+          Images.iconInfo,
+        )}
         {this.showBlock(() => {}, 'Đăng xuất', Images.iconLogout, 0, 15)}
       </View>
     );
