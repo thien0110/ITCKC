@@ -86,8 +86,8 @@ export default class HeaderNavigation extends React.Component {
             <Image
               source={iconRight}
               style={{
-                width: 35,
-                height: 35,
+                width: 25,
+                height: 25,
                 resizeMode: 'contain',
               }}></Image>
           </TouchableOpacity>
