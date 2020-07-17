@@ -2,18 +2,20 @@ import React, {Component} from 'react';
 import {Text, View, TextInput, ScrollView, Picker} from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 // import DateTimePicker from '@react-native-community/datetimepicker';
+import {objectIsNull} from '../../res/Functions';
 import DatePicker from 'react-native-datepicker';
 import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 
 import AlertCustom from '../customs/AlertComponent';
 export default class EditProfileComponent extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
       firstName: '', //Tên
       lastName: '', //Họ
-      sex: 'nam', //Giới tính
+      sex: 'Nam', //Giới tính
       permanentAddress: '', // địa chỉ thường trú
       temporaryAddress: '', // địa chỉ tạm trú
       phoneNumber: '',
@@ -24,6 +26,28 @@ export default class EditProfileComponent extends Component {
       fatherPhoneNumber: '',
       motherPhoneNumber: '',
     };
+  }
+  setDataEditProfile(data){
+    this.setState({
+      firstName: data.ten, 
+      lastName: data.ho, 
+      sex: data.sex,
+      permanentAddress: data.diaChiThuongTru, 
+      temporaryAddress: data.diaChiTamTru, 
+      phoneNumber: data.sdt,
+      birthDay: data.ngaySinh,
+      idCode: "12222", 
+      fatherName:data.hoTenCha,
+      motherName: data.hoTenMe,
+      fatherPhoneNumber: data.sdtCha,
+      motherPhoneNumber: data.sdtMe,
+    })
+  }
+  componentDidMount(){
+    const {data} = this.props.route.params;
+    if(!objectIsNull(data)){
+      this.setDataEditProfile(data);
+    }
   }
   onPressSave() {
     const {
@@ -196,8 +220,8 @@ export default class EditProfileComponent extends Component {
               onValueChange(itemValue);
             }}
             style={{height: 50}}>
-            <Picker.Item label={'Nam'} value={'nam'} />
-            <Picker.Item label={'Nữ'} value={'nu'} />
+            <Picker.Item label={'Nam'} value={'Nam'} />
+            <Picker.Item label={'Nữ'} value={'Nữ'} />
           </Picker>
         </View>
       </View>
@@ -218,7 +242,6 @@ export default class EditProfileComponent extends Component {
       fatherPhoneNumber,
       motherPhoneNumber,
     } = this.state;
-    console.warn(this.props.message, 'cpnent');
     return (
       <ScrollView>
         <View style={{flex: 1, padding: 10}}>
@@ -291,7 +314,7 @@ export default class EditProfileComponent extends Component {
     });
   };
   render() {
-    const{message, isFetching}= this.props;
+    const {message, isFetching} = this.props;
     return (
       <View style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
@@ -301,7 +324,7 @@ export default class EditProfileComponent extends Component {
           haveSave={true}
           textSave={'Lưu'}
           onClickLeft={() => {
-            this.props.navigation.goBack();
+            this.props.navigation.goBack()
           }}
           onClickSave={() => {
             this.onPressSave();
@@ -311,7 +334,7 @@ export default class EditProfileComponent extends Component {
           AlertCustom(true, message, () => {
             this.onChangeStateAlert(false, '');
             this.props.formatData({});
-            this.props.navigation.goBack()
+            this.props.navigation.goBack();
           })}
         {isFetching && <Loading></Loading>}
       </View>

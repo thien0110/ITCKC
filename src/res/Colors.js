@@ -8,5 +8,5 @@ export default Colors ={
     black:'#000',
     navigation:'#002D56',
     background:'#EAF4F6',
-    gray2:'#00000066',
+    gray2:'#696969',
 }
