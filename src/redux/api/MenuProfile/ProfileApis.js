@@ -58,6 +58,7 @@ export function getProfileApi(input) {
           diaChiTamTru: '12356CL',
           sdt: '03061713012',
           email: '0306171301@caothang.edu.vn',
+          cmnd:'231265553',
           hoTenCha: 'Lê Văn A',
           hoTenMe: 'Lê Văn B',
           sdtCha: '0306171302',

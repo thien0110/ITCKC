@@ -36,7 +36,7 @@ export default class EditProfileComponent extends Component {
       temporaryAddress: data.diaChiTamTru, 
       phoneNumber: data.sdt,
       birthDay: data.ngaySinh,
-      idCode: "12222", 
+      idCode: data.cmnd, 
       fatherName:data.hoTenCha,
       motherName: data.hoTenMe,
       fatherPhoneNumber: data.sdtCha,

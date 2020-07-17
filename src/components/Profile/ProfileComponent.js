@@ -53,6 +53,7 @@ export default class ProfileComponent extends Component {
         diaChiTamTru,
         sdt,
         email,
+        cmnd,
         hoTenCha,
         hoTenMe,
         sdtCha,
@@ -68,6 +69,7 @@ export default class ProfileComponent extends Component {
           {this.showInput('Địa chỉ', diaChiTamTru)}
           {this.showInput('Số điện thoại', sdt)}
           {this.showInput('Email', email)}
+          {this.showInput('Chứng minh nhân dân', cmnd)}
           {this.showInput('Họ tên cha', hoTenCha)}
           {this.showInput('Họ tên mẹ', hoTenMe)}
           {this.showInput('Số điện thoại cha', sdtCha)}
