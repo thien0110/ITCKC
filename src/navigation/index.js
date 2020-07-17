@@ -5,6 +5,7 @@ import * as React from 'react';
 import TabNavigator from './Tab';
 import TabSchoolInformationNavigator from './SchoolsInformationTab';
 import LearningInfoComponent from '../components/LearningInfo';
+import TabSubjectNavigator from './subjectInfo';
 import NotiComponent from '../components/NotiComponent'
 import EditProfileContainer from '../containers/MenuProfile/EditProfileContainer'
 import ProfileComponent from '../components/Profile/ProfileComponent'
@@ -26,6 +27,7 @@ function MainNavigator() {
         <Stack.Screen name="Profile" component={ProfileComponent} />
         <Stack.Screen name="About" component={AboutComponent} />
         <Stack.Screen name="Setting" component={SettingComponent} />
+        <Stack.Screen name="Subject" component={TabSubjectNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

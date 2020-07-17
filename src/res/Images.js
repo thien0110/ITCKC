@@ -14,11 +14,13 @@ const images = {
   iconSetting: require('../res/image/maintenance.png'),
   translation: require('../res/image/translation.png'),
   iconProject: require('../res/image/project.png'),
+  icontabmenu:require('../res/image/tabmenu.png'),
   iconExercise: require('../res/image/exercise.png'),
   iconMenuActive: require('../res/image/open-menu-1.png'),
   iconMenuInactive: require('../res/image/open-menu.png'),
   iconPersonActive: require('../res/image/person.png'),
   iconPersonProfile: require('../res/image/person-profile.png'),
   iconPersonInactive: require('../res/image/person-1.png'),
+
 };
 export default images;

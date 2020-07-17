@@ -84,7 +84,9 @@ export default class LearningInfoComponent extends Component {
         renderItem={({item}) => {
           return (
             <SubjectsBlock
-              onPress={() => {}}
+              onPress={() => {
+                this.props.navigation.navigate('Subject',item.name);
+              }}
               name={item.name}
               semester={item.semester}
               teacherName={item.teacherName}
