@@ -80,6 +80,7 @@ export default class ProfileComponent extends Component {
   }
   render() {
     const {isFetching, data} = this.props;
+    // console.warn("dataa", data)
     return (
       <View style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
