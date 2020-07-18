@@ -14,14 +14,15 @@ const initialState = {
 const profileReducers = (state = initialState, action) => {
   switch (action.type) {
     case FORMAT_DATA:
-      return initialState;
+      return {  ...state,
+        message:null,};
     case EDIT_PROFILE:
       return {...state, isFetching: true};
     case EDIT_PROFILE_SUCCESS:
       return {
         ...state,
         isFetching: false,
-        data: action.data,
+        // data: action.data,
         message: action.message,
       };
     case EDIT_PROFILE_FAIL:

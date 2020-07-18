@@ -2,7 +2,7 @@ const messageError = 'Không thể kết nối tới server.';
 const fakeApi = true;
 import {API_URL} from '../../../config';
 export function editProfileApi(input) {
-  console.warn('inputapi', input);
+  // console.warn('inputapi', input);
   if (fakeApi) {
     return {
       resultCode: 1,

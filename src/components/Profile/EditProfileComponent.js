@@ -333,7 +333,7 @@ export default class EditProfileComponent extends Component {
         {message &&
           AlertCustom(true, message, () => {
             this.onChangeStateAlert(false, '');
-            this.props.formatData({});
+            this.props.formatData();
             this.props.navigation.goBack();
           })}
         {isFetching && <Loading></Loading>}
