@@ -35,12 +35,12 @@ function MainNavigator() {
         <Stack.Screen name="About" component={AboutComponent} />
         
         <Stack.Screen name="Setting" component={SettingComponent} />
-<<<<<<< HEAD
+{/* <<<<<<< HEAD */}
         <Stack.Screen name="EditProfile" component={EditProfileContainer} />
         <Stack.Screen name="Profile" component={ProfileContainer} />
-=======
+{/* ======= */}
         <Stack.Screen name="Subject" component={TabSubjectNavigator} />
->>>>>>> 54d879b7d48e5cdf0269197eb3ab33fbcc778280
+{/* >>>>>>> 54d879b7d48e5cdf0269197eb3ab33fbcc778280 */}
       </Stack.Navigator>
     </NavigationContainer>
   );

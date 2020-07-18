@@ -8,8 +8,9 @@ import OthersSubjectComponent from '../components/LearningInfo/OthersSubjectComp
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Colors from '../res/Colors';
 import { View } from 'react-native';
+
 const Tab = createBottomTabNavigator();
-export default function TabSubjectNavigator() {
+export default function TabSubjectNavigator({route}) {
   const data = {lop:'CDTH17PMC'}
   return (
     
@@ -26,7 +27,7 @@ export default function TabSubjectNavigator() {
         showIcon: false,
       }}
       adaptive={false}>
-      <Tab.Screen name="Luồng" component={ThreadComponent} />
+      <Tab.Screen name="Luồng" component={ThreadComponent} routeSubject={route}/>
       <Tab.Screen name="Bài tập" component={WorkingComponent} />
       <Tab.Screen name="Khác" component={OthersSubjectComponent} />
     </Tab.Navigator>
