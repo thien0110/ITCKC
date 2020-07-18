@@ -1,66 +1,85 @@
 import React, {Component} from 'react';
 import {Text, View, TextInput} from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
-
+import {objectIsNull} from '../../res/Functions';
 import Colors from '../../res/Colors';
 import Images from '../../res/Images';
+import Loading from '../customs/Loading';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class ProfileComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      
-    };
+    this.state = {};
   }
-  showInput(title, value,) {
+  componentDidMount() {
+    this.props.getProfileAction();
+  }
+  showInput(title, content) {
     return (
       <View
         style={{
-          padding: 3,
           width: '100%',
-          marginBottom: 10,
-          paddingTop: 10,
+          marginBottom: 15,
+          paddingHorizontal: 15,
+          paddingVertical: 5,
+          borderRadius: 10,
+          backgroundColor: Colors.gray,
+          shadowColor: Colors.black,
+          shadowOpacity: 0.3,
+          shadowRadius: 5,
+          elevation: 5,
         }}>
-        <View
+        <Text
           style={{
-            position: 'absolute',
-            left: 30,
-            backgroundColor: Colors.background,
-            zIndex: 1,
+            color: Colors.gray2,
+            marginBottom: 2,
           }}>
-          <Text style={{
-              //color:Colors.grayStrong
-              }}> {title} </Text>
-        </View>
-        <TextInput
-          style={{
-            borderRadius: 10,
-            borderWidth: 1,
-            paddingLeft: 15,
-            width: '100%',
-            borderColor:Colors.grayStrong,
-            // backgroundColor:Colors.white
-          }}
-          editable={false}
-          value={value}
-        />
+          {title}
+        </Text>
+        <Text style={{fontSize: 18}}>{content}</Text>
       </View>
     );
   }
   showView() {
-    // const {name, birthDay, studentCode, className, schoolYear, majors} = this.state;
-    return (
-      <View style={{flex: 1, padding: 10}}>
-        {this.showInput('Họ tên',  "thien")}
-        {this.showInput('Ngày sinh', 'birthDay')}
-        {this.showInput('Mã số sinh viên', 'studentCode')}
-        {this.showInput('Lớp', 'className')}
-        {this.showInput('Khóa', 'schoolYear')}
-        {this.showInput('Ngành', 'majors')}
-      </View>
-    );
+    if (!objectIsNull(this.props.data) === true) {
+      const {
+        maSinhVien,
+        ho,
+        ten,
+        gioiTinh,
+        ngaySinh,
+        diaChiThuongTru,
+        diaChiTamTru,
+        sdt,
+        email,
+        cmnd,
+        hoTenCha,
+        hoTenMe,
+        sdtCha,
+        sdtMe,
+      } = this.props.data;
+      return (
+        <ScrollView>
+        <View style={{flex: 1, padding: 15}}>
+          {this.showInput('Mã số sinh viên', maSinhVien)}
+          {this.showInput('Họ Tên', `${ho} ${ten}`)}
+          {this.showInput('Giới tính', gioiTinh)}
+          {this.showInput('Ngày sinh', ngaySinh)}
+          {this.showInput('Địa chỉ', diaChiTamTru)}
+          {this.showInput('Số điện thoại', sdt)}
+          {this.showInput('Email', email)}
+          {this.showInput('Chứng minh nhân dân', cmnd)}
+          {this.showInput('Họ tên cha', hoTenCha)}
+          {this.showInput('Họ tên mẹ', hoTenMe)}
+          {this.showInput('Số điện thoại cha', sdtCha)}
+          {this.showInput('Số điện thoại mẹ', sdtMe)}
+        </View></ScrollView>
+      );
+    }
   }
   render() {
+    const {isFetching, data} = this.props;
     return (
       <View style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
@@ -73,9 +92,10 @@ export default class ProfileComponent extends Component {
             this.props.navigation.goBack();
           }}
           onClickSave={() => {
-            this.props.navigation.navigate('EditProfile');
+            this.props.navigation.navigate('EditProfile',{data} );
           }}></HeaderNavigation>
         {this.showView()}
+        {isFetching && <Loading></Loading>}
       </View>
     );
   }

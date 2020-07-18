@@ -1,12 +1,12 @@
 import React ,{ useState, useEffect } from 'react';
-import {View, StyleSheet, Text, Image, Dimensions, FlatList} from 'react-native';
+import {View, StyleSheet, Text, Image, Dimensions, FlatList, TouchableOpacity} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
 
 const Item = ({item}) => {
   return (
    
-   
+   <TouchableOpacity>
     <View style={styles.cardView}>
      <Image style={styles.image} source={{uri: item.url}} />
       <View style={styles.textView}>
@@ -16,6 +16,7 @@ const Item = ({item}) => {
       </View>
      
     </View>
+    </TouchableOpacity>
     
   );
 };

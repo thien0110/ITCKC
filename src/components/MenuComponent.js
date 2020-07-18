@@ -46,7 +46,7 @@ export default class MenuComponent extends Component {
             }}>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('TabSchool');
+                this.props.navigation.navigate('SchoolInfo');
               }}
               title={'Thông tin nhà trường'}
               iconName={Images.iconSchool}></Block>
@@ -87,9 +87,11 @@ export default class MenuComponent extends Component {
               title={'Cựu sinh viên'}
               iconName={Images.iconTeam}></Block>
           </View>
+          <View >
           {this.showNews('Thông tin từ khoa', data)}
           {this.showNews('Hôm nay ăn gì?', data)}
           {this.showNews('Thời sự hôm nay?', data)}
+          </View>
         </ScrollView>
       </View>
     );
