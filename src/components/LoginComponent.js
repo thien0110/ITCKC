@@ -10,7 +10,7 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
   Dimensions,
-  ScrollView,
+  Modal,
 } from 'react-native';
 import Colors from '../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -32,6 +32,10 @@ export default class LoginComponent extends Component {
       messageAlert: '',
       pressEye: false,
       showPass: true,
+
+      modalVisible: false,
+      idCard: '',
+      email: '',
     };
   }
   componentDidUpdate() {
@@ -40,7 +44,14 @@ export default class LoginComponent extends Component {
       this.props.formatData({});
     }
   }
-
+  onPressForgetPass() {
+    const {modalVisible, idCard, email} = this.state;
+    const input = {
+      idCard,
+      email,
+    };
+    this.setModalVisible(!modalVisible);
+  }
   onChangeStateAlert = (state, des) => {
     this.setState({
       showAlert: state,
@@ -68,6 +79,115 @@ export default class LoginComponent extends Component {
       this.props.loginAction(input);
     }
   };
+
+  setModalVisible = (visible) => {
+    this.setState({modalVisible: visible});
+  };
+  showPassInput(placeholder, value,keyboardType, onChangeText) {
+    return (
+      <TextInput
+        style={{
+          marginBottom: 15,
+          alignItems: 'center',
+          width: windowWidth / 1.5,
+          borderRadius: 5,
+          backgroundColor: Colors.gray,
+          paddingHorizontal: 10,
+          flexDirection: 'row',
+        }}
+        keyboardType={keyboardType}
+        placeholder={placeholder}
+        value={value}
+        onChangeText={(text) => {
+          onChangeText(text);
+        }}></TextInput>
+    );
+  }
+  showModel() {
+    const {modalVisible, idCard, email} = this.state;
+    return (
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          this.setModalVisible(!modalVisible);
+        }}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <View
+            style={{
+              margin: 20,
+              backgroundColor: 'white',
+              borderRadius: 20,
+              padding: 35,
+              alignItems: 'center',
+              shadowColor: Colors.black,
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
+            }}>
+            <View style={{width: windowWidth / 1.5, alignItems: 'flex-end'}}>
+              <TouchableOpacity
+                onPress={() => {
+                  this.setModalVisible(!modalVisible);
+                }}>
+                <Icon name={'times'} size={18} color="gray"></Icon>
+              </TouchableOpacity>
+            </View>
+
+            <Text
+              style={{
+                marginBottom: 15,
+                textAlign: 'center',
+                fontWeight: 'bold',
+                fontSize: 20,
+                color: Colors.gray2,
+              }}>
+              Quên mật khẩu
+            </Text>
+            {this.showPassInput('Email', email,'default', (text) => {
+              this.setState({email: text.trim()});
+            })}
+            {this.showPassInput('Chứng minh nhân dân', idCard,'phone-pad', (text) => {
+              this.setState({idCard: text.trim()});
+            })}
+
+            <TouchableOpacity
+              style={{
+                borderRadius: 5,
+                width: windowWidth / 1.5,
+                padding: 10,
+                marginTop: 10,
+                elevation: 2,
+                backgroundColor: Colors.buttonBlue,
+              }}
+              onPress={() => {
+                this.onPressForgetPass();
+              }}>
+              <Text
+                style={{
+                  color: Colors.white,
+                  fontWeight: 'bold',
+                  textAlign: 'center',
+                  fontSize: 20,
+                }}>
+                Lấy mật khẩu
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+    );
+  }
   showView() {
     const {username, password, pressEye, isChecked, showPass} = this.state;
     return (
@@ -76,7 +196,7 @@ export default class LoginComponent extends Component {
           style={{
             width: '80%',
             height: 400,
-            marginTop: windowHeight/9,
+            marginTop: windowHeight / 9,
             alignItems: 'center',
             alignSelf: 'center',
           }}>
@@ -197,7 +317,11 @@ export default class LoginComponent extends Component {
                   Đăng nhập
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{marginTop: 15}}>
+              <TouchableOpacity
+                style={{marginTop: 15}}
+                onPress={() => {
+                  this.setModalVisible(true);
+                }}>
                 <Text style={{color: Colors.grayStrong}}>Quên mật khẩu?</Text>
               </TouchableOpacity>
             </View>
@@ -225,6 +349,7 @@ export default class LoginComponent extends Component {
             this.props.formatData({});
           })}
         {isFetching && <Loading></Loading>}
+        {this.showModel()}
       </ImageBackground>
     );
   }
