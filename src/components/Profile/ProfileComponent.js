@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {Text, View, TextInput} from 'react-native';
+import {Text, View, TextInput, StyleSheet, Dimensions} from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import {objectIsNull} from '../../res/Functions';
 import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Loading from '../customs/Loading';
-import { ScrollView } from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 
 export default class ProfileComponent extends Component {
   constructor(props) {
@@ -20,24 +20,29 @@ export default class ProfileComponent extends Component {
       <View
         style={{
           width: '100%',
-          marginBottom: 15,
           paddingHorizontal: 15,
-          paddingVertical: 5,
-          borderRadius: 10,
-          backgroundColor: Colors.gray,
-          shadowColor: Colors.black,
-          shadowOpacity: 0.3,
-          shadowRadius: 5,
-          elevation: 5,
+          // borderRadius: 10,
+          backgroundColor: Colors.white,
+          // shadowColor: Colors.black,
+          // shadowOpacity: 0.3,
+          // shadowRadius: 5,
+          // elevation: 5,
         }}>
         <Text
           style={{
             color: Colors.gray2,
             marginBottom: 2,
+            marginTop: 15,
           }}>
           {title}
         </Text>
-        <Text style={{fontSize: 18}}>{content}</Text>
+        <Text style={{fontSize: 18, marginBottom: 10}}>{content}</Text>
+        <View
+          style={{
+            width: '100%',
+            height: 1,
+            backgroundColor: Colors.gray,
+          }}></View>
       </View>
     );
   }
@@ -61,20 +66,27 @@ export default class ProfileComponent extends Component {
       } = this.props.data;
       return (
         <ScrollView>
-        <View style={{flex: 1, padding: 15}}>
-          {this.showInput('Mã số sinh viên', maSinhVien)}
-          {this.showInput('Họ Tên', `${ho} ${ten}`)}
-          {this.showInput('Giới tính', gioiTinh)}
-          {this.showInput('Ngày sinh', ngaySinh)}
-          {this.showInput('Địa chỉ', diaChiTamTru)}
-          {this.showInput('Số điện thoại', sdt)}
-          {this.showInput('Email', email)}
-          {this.showInput('Chứng minh nhân dân', cmnd)}
-          {this.showInput('Họ tên cha', hoTenCha)}
-          {this.showInput('Họ tên mẹ', hoTenMe)}
-          {this.showInput('Số điện thoại cha', sdtCha)}
-          {this.showInput('Số điện thoại mẹ', sdtMe)}
-        </View></ScrollView>
+          <View style={{flex: 1}}>
+            <View style={styles.container}>
+              {this.showInput('Họ Tên', `${ho} ${ten}`)}
+              {this.showInput('Mã số sinh viên', maSinhVien)}
+              {this.showInput('Email', email)}
+            </View>
+            <View style={styles.container}>
+              {this.showInput('Giới tính', gioiTinh)}
+              {this.showInput('Ngày sinh', ngaySinh)}
+              {this.showInput('Số điện thoại', sdt)}
+            </View>
+            <View style={styles.container}>
+              {this.showInput('Địa chỉ', diaChiTamTru)}
+              {this.showInput('Chứng minh nhân dân', cmnd)}
+              {this.showInput('Họ tên cha', hoTenCha)}
+              {this.showInput('Họ tên mẹ', hoTenMe)}
+              {this.showInput('Số điện thoại cha', sdtCha)}
+              {this.showInput('Số điện thoại mẹ', sdtMe)}
+            </View>
+          </View>
+        </ScrollView>
       );
     }
   }
@@ -93,7 +105,7 @@ export default class ProfileComponent extends Component {
             this.props.navigation.goBack();
           }}
           onClickSave={() => {
-            this.props.navigation.navigate('EditProfile',{data} );
+            this.props.navigation.navigate('EditProfile', {data});
           }}></HeaderNavigation>
         {this.showView()}
         {isFetching && <Loading></Loading>}
@@ -101,3 +113,20 @@ export default class ProfileComponent extends Component {
     );
   }
 }
+const window = Dimensions.get('window');
+const styles = StyleSheet.create({
+  container: {
+    // backgroundColor:'#f00',
+    // padding:15,
+    marginTop: 10,
+    // shadowColor: Colors.black,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 3,
+    // },
+    // shadowOpacity: 0.27,
+    // shadowRadius: 4.65,
+
+    // elevation: 6,
+  },
+});

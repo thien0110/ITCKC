@@ -57,7 +57,7 @@ export default class HeaderNavigation extends React.Component {
           <View style={{flex: 1}}>
             <TextInput
               style={{
-                backgroundColor: Colors.grayStrong,
+                backgroundColor: Colors.gray,
                 paddingHorizontal: 10,
                 paddingVertical: 0,
                 borderRadius: 8,
@@ -86,8 +86,8 @@ export default class HeaderNavigation extends React.Component {
             <Image
               source={iconRight}
               style={{
-                width: 25,
-                height: 25,
+                width: 35,
+                height: 35,
                 resizeMode: 'contain',
               }}></Image>
           </TouchableOpacity>
