@@ -5,7 +5,8 @@ import {
   Image,
   TouchableOpacity,
   Modal,
-  Dimensions,TextInput,
+  Dimensions,
+  TextInput,
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 
@@ -21,39 +22,40 @@ export default class SettingComponent extends Component {
     newPass: '',
     confirmNewPass: '',
   };
-  onPressChangePass(){
-    const {modalVisible,oldPass,newPass,confirmNewPass} = this.state;
-    const input ={
+  onPressChangePass() {
+    const {modalVisible, oldPass, newPass, confirmNewPass} = this.state;
+    const input = {
       oldPass,
       newPass,
-      confirmNewPass
-    }
+      confirmNewPass,
+    };
     this.setModalVisible(!modalVisible);
   }
   showPassInput(placeholder, value, onChangeText) {
-    return(<TextInput
-      style={{
-        marginBottom: 15,
-        alignItems: 'center',
-        width: window.width / 1.5,
-        borderRadius: 5,
-        backgroundColor: '#f0f0f0',
-        paddingHorizontal: 10,
-        flexDirection: 'row',
-        // shadowColor: 'black',
-        // shadowOpacity: 0.3,
-        // shadowRadius: 5,
-        // elevation: 5,
-      }}
-      placeholder={placeholder}
-      value={value}
-      onChangeText={(text) => {
-        onChangeText(text);
-      }}></TextInput>
-  )
-    }
+    return (
+      <TextInput
+        style={{
+          marginBottom: 15,
+          alignItems: 'center',
+          width: window.width / 1.5,
+          borderRadius: 5,
+          backgroundColor: Colors.gray,
+          paddingHorizontal: 10,
+          flexDirection: 'row',
+          // shadowColor: 'black',
+          // shadowOpacity: 0.3,
+          // shadowRadius: 5,
+          // elevation: 5,
+        }}
+        placeholder={placeholder}
+        value={value}
+        onChangeText={(text) => {
+          onChangeText(text);
+        }}></TextInput>
+    );
+  }
   showModel() {
-    const {modalVisible,oldPass,newPass,confirmNewPass} = this.state;
+    const {modalVisible, oldPass, newPass, confirmNewPass} = this.state;
     return (
       <Modal
         animationType="slide"
@@ -75,7 +77,7 @@ export default class SettingComponent extends Component {
               borderRadius: 20,
               padding: 35,
               alignItems: 'center',
-              shadowColor: '#000',
+              shadowColor: Colors.black,
               shadowOffset: {
                 width: 0,
                 height: 2,
@@ -99,7 +101,7 @@ export default class SettingComponent extends Component {
                 textAlign: 'center',
                 fontWeight: 'bold',
                 fontSize: 20,
-                color: '#696969',
+                color: Colors.gray2,
               }}>
               Đổi mật khẩu
             </Text>
@@ -119,16 +121,15 @@ export default class SettingComponent extends Component {
 
             <TouchableOpacity
               style={{
-                backgroundColor: '#F194FF',
                 borderRadius: 5,
                 width: window.width / 1.5,
                 padding: 10,
                 marginTop: 10,
                 elevation: 2,
-                backgroundColor: '#2196F3',
+                backgroundColor: Colors.buttonBlue,
               }}
               onPress={() => {
-               this.onPressChangePass();
+                this.onPressChangePass();
               }}>
               <Text
                 style={{
