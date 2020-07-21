@@ -5,7 +5,7 @@ import MainNavigator from './navigation'
 export default class App extends Component {
   render() {
     return (
-      <MainNavigator></MainNavigator>
+      <MainNavigator>hehe</MainNavigator>
     )
   }
 }
