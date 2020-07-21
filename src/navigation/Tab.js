@@ -1,38 +1,53 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import TableScoreComponent from '../components/TableScoreComponent';
-import ScheduleComponent from '../components/ScheduleComponent';
-import ProfileComponent from '../components/ProfileComponent';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import MenuContainer from '../containers/MenuContainer';
+import MenuProfileComponent from '../components/MenuProfileComponent';
+import Images from '../res/Images';
+import {
+  Image,
+} from 'react-native';
 const Tab = createBottomTabNavigator();
 
 
 
-export default function TabNavigator() {
+export default function TabNavigator({route}) {
+  // const { itemId } = route.params;
+  //   console.warn(itemId, "tab")
   return (
       <Tab.Navigator 
       screenOptions={({route})=>({
-        tabBarIcon:({color, size})=>{
+        tabBarIcon:({color, size, focused })=>{
           let iconName
-          if(route.name== 'Schedule'){
-            iconName ='calendar-alt'
-          }else if(route.name== 'TableScore'){
-            iconName ='star'
-          }else if(route.name== 'Profile'){
-            iconName ='user'
+          if(route.name== 'Menu'){
+            focused
+            ?iconName =Images.iconMenuActive
+            :iconName =Images.iconMenuInactive
+          }else if(route.name== 'MenuProfile'){
+            focused
+            ?iconName =Images.iconPersonActive
+            :iconName =Images.iconPersonInactive
           }
-          return <Icon name={iconName} size={size} color={color}></Icon>
+          return <Image
+            source={iconName}
+            style={{
+              width: 30,
+              height: 30,
+              resizeMode:"contain"
+            }}></Image>
         }
       })}
       backBehavior='none'
       tabBarOptions={{
-        showLabel:false
+        showLabel:false,
+        style:{
+          backgroundColor:Colors.backgroundBlue
+        },
+        keyboardHidesTabBar: true,
       }}
       >
-        <Tab.Screen name="Schedule" component={ScheduleComponent} />
-        <Tab.Screen name="TableScore" component={TableScoreComponent} />
-        <Tab.Screen name="Profile" component={ProfileComponent} />
+        <Tab.Screen name="Menu" component={MenuContainer} />
+        <Tab.Screen name="MenuProfile" component={MenuProfileComponent} />
       </Tab.Navigator>
   );
 }

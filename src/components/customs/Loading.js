@@ -1,10 +1,21 @@
 import React from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import Colors from '../../res/Colors'
+import {
+  BallIndicator,
+  BarIndicator,
+  DotIndicator,
+  MaterialIndicator,
+  PacmanIndicator,
+  PulseIndicator,
+  SkypeIndicator,
+  UIActivityIndicator,
+  WaveIndicator,
+} from 'react-native-indicators';
 
 const Loading = () => (
   <View style={styles.container}>
-    <ActivityIndicator size="large" color={Colors.blue} />
+   <UIActivityIndicator color={Colors.blue} />
   </View>
 );
 
@@ -18,7 +29,7 @@ const styles = StyleSheet.create({
     bottom:0,
     left:0,
     right:0,
-    backgroundColor:'rgba(0,0,0,0.2)',
+    backgroundColor:'rgba(255,255,255,0.5)',
   },
 });
 
