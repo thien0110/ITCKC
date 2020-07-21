@@ -110,7 +110,7 @@ export default class MenuComponent extends Component {
         <HeaderNavigation
           iconRight={Images.iconBell}
           haveSearch={true}
-          color={Colors.navigation}
+          color={Colors.backgroundBlue}
           onClickRight={()=>{this.props.navigation.navigate('Noti');}}></HeaderNavigation>
         {this.showBody()}
         {isFetching && <Loading></Loading>}

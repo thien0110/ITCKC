@@ -21,7 +21,7 @@ export default class NotiComponent extends Component {
           style={{
             width: '100%',
             height: windowHeight / 6,
-            backgroundColor: Colors.lightBlue,
+            backgroundColor: Colors.grayOpacity,
             borderRadius: 10,
             marginBottom: 10,
             padding: 10,
@@ -43,7 +43,7 @@ export default class NotiComponent extends Component {
           </View>
           <Text
             style={{
-              color: Colors.gray2,
+              color: Colors.grayOpacity,
               position: 'absolute',
               right: 10,
               top: 10,
@@ -118,9 +118,9 @@ export default class NotiComponent extends Component {
     return (
       <View style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
-          title={'Thông baos'}
+          title={'Thông báo'}
           titleColor={Colors.white}
-          color={Colors.navigation}
+          color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
           iconLeftColor={Colors.black}
           onClickLeft={() => {
