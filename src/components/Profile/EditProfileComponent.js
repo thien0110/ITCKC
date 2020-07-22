@@ -82,78 +82,33 @@ export default class EditProfileComponent extends Component {
   }
   showInput(title, value, keyboardType, onChangeText) {
     return (
-      <View
+      <View style={{marginTop: 15, marginHorizontal:15}}>
+      <Text style={{marginBottom: 5, fontSize:15, color:Colors.buttonBlue}}>{title}{':'}</Text>
+      <TextInput
+        value={value}
+        onChangeText={text => {
+          onChangeText(text);
+        }}
+        keyboardType={keyboardType}
         style={{
-          padding: 3,
-          width: '100%',
-          marginBottom: 10,
-          paddingTop: 10,
-        }}>
-        <View
-          style={{
-            position: 'absolute',
-            left: 30,
-            backgroundColor: Colors.background,
-            zIndex: 1,
-          }}>
-          <Text
-            style={
-              {
-                //color:Colors.grayStrong
-              }
-            }>
-            {' '}
-            {title}{' '}
-          </Text>
-        </View>
-        <TextInput
-          style={{
-            borderRadius: 10,
-            borderWidth: 1,
-            paddingLeft: 15,
-            width: '100%',
-            borderColor: Colors.grayStrong,
-            // backgroundColor:Colors.white
-          }}
-          keyboardType={keyboardType}
-          value={value}
-          onChangeText={(text) => {
-            onChangeText(text);
-          }}
-        />
-      </View>
+          backgroundColor: Colors.white,
+          borderRadius: 5,
+          borderColor: Colors.grayOpacity,
+          borderWidth: 1,
+          height: 38,
+          paddingLeft: 15,
+        }}
+      />
+    </View>
     );
   }
   showDatePicker(title, value, onDateChange) {
     return (
       <View
-        style={{
-          padding: 3,
-          width: '100%',
-          marginBottom: 10,
-          paddingTop: 10,
-        }}>
-        <View
-          style={{
-            position: 'absolute',
-            left: 30,
-            backgroundColor: Colors.background,
-            zIndex: 1,
-          }}>
-          <Text
-            style={
-              {
-                //color:Colors.grayStrong
-              }
-            }>
-            {' '}
-            {title}{' '}
-          </Text>
-        </View>
+       style={{marginTop: 15, marginHorizontal:15}}>
+          <Text style={{marginBottom: 5, fontSize:15, color:Colors.blue}}>{title}{':'}</Text>
         <DatePicker
-          style={{
-            width: '100%',
-          }}
+         style={{width: '102.5%'}}
           date={value}
           mode="date"
           placeholder="--:--"
@@ -166,11 +121,11 @@ export default class EditProfileComponent extends Component {
               height: 0,
             },
             dateInput: {
-              height: 50,
-              borderRadius: 10,
+              backgroundColor: Colors.white,
+              borderRadius: 5,
+              borderColor: Colors.grayOpacity,
               borderWidth: 1,
-              paddingLeft: 15,
-              borderColor: Colors.grayStrong,
+              height: 38,
             },
           }}
           onDateChange={(date) => {
@@ -182,45 +137,23 @@ export default class EditProfileComponent extends Component {
   }
   showPicker(title, selectedValue, onValueChange) {
     return (
-      <View
-        style={{
-          padding: 3,
-          width: '100%',
-          marginBottom: 10,
-          paddingTop: 10,
-        }}>
+      <View style={{marginTop: 15, marginHorizontal:15}}>
+        <Text style={{marginBottom: 5}}>{title}</Text>
         <View
           style={{
-            position: 'absolute',
-            left: 30,
-            backgroundColor: Colors.background,
-            zIndex: 1,
-          }}>
-          <Text
-            style={
-              {
-                //color:Colors.grayStrong
-              }
-            }>
-            {' '}
-            {title}{' '}
-          </Text>
-        </View>
-        <View
-          style={{
-            borderRadius: 10,
+            backgroundColor: Colors.white,
+            borderRadius: 5,
+            borderColor: Colors.grayOpacity,
             borderWidth: 1,
-            paddingLeft: 15,
-            borderColor: Colors.grayStrong,
           }}>
           <Picker
             mode="dropdown"
             selectedValue={selectedValue}
-            onValueChange={(itemValue) => {
+            onValueChange={itemValue => {
               onValueChange(itemValue);
             }}
-            style={{height: 50}}>
-            <Picker.Item label={'Nam'} value={'Nam'} />
+            style={{height: 38, paddingLeft: 15}}>
+           <Picker.Item label={'Nam'} value={'Nam'} />
             <Picker.Item label={'Nữ'} value={'Nữ'} />
           </Picker>
         </View>
@@ -244,7 +177,7 @@ export default class EditProfileComponent extends Component {
     } = this.state;
     return (
       <ScrollView>
-        <View style={{flex: 1, padding: 10}}>
+        <View style={{flex: 1,paddingBottom:15}}>
           {this.showInput('Họ', lastName, 'default', (text) => {
             this.setState({lastName: text});
           })}
@@ -318,7 +251,7 @@ export default class EditProfileComponent extends Component {
     return (
       <View style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
-          color={Colors.navigation}
+          color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
           iconLeftColor={Colors.black}
           haveSave={true}

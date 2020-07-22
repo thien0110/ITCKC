@@ -105,7 +105,7 @@ export default class LearningInfoComponent extends Component {
         }}>
         <HeaderNavigation
           iconLeft={Images.iconBack}
-          color={Colors.navigation}
+          color={Colors.backgroundBlue}
           onClickLeft={() => {
             this.props.navigation.goBack();
           }}

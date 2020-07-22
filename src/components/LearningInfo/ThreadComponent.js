@@ -22,7 +22,7 @@ export default class ThreadComponent extends Component {
         renderItem={({item}) => {
           return (
             <View style={styles.viewStyle}>
-              <View style={{padding: 10}}>
+              <View style={{padding: 10, marginBottom:0}}>
                 <Text style={{fontSize: 18, marginLeft: 10}}>
                   Tài liệu mới: {item.docName}
                 </Text>
@@ -73,15 +73,15 @@ export default class ThreadComponent extends Component {
   }
   render() {
     
-    console.log(this.props);
-    const data = {nameSubject: this.props.routeSubject?this.props.routeSubject.data:''};
+    // console.log(this.props);
+    const data = {nameSubject: 'Toán rời rạc'};
     return (
       <View style={{flex: 1, alignItems: 'center'}}>
         <HeaderNavigation
           data={this.data}
           title={data.nameSubject}
           titleColor={Colors.white}
-          color={Colors.navigation}
+          color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
           iconRight={Images.icontabmenu}
           iconLeftColor={Colors.black}
@@ -101,12 +101,12 @@ const data = [
 ];
 const styles = StyleSheet.create({
   viewStyle: {
-    marginBottom: 5,
-    borderRadius: 5,
-    backgroundColor: '#ddd',
-    shadowColor: '#000',
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 5,
+    marginBottom: 10,
+    borderRadius: 10,
+    backgroundColor: '#eee',
+    // shadowColor: '#000',
+    // shadowOpacity: 0.3,
+    // shadowRadius: 5,
+    // elevation: 5,
   },
 });
