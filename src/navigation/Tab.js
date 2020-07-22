@@ -41,7 +41,7 @@ export default function TabNavigator({route}) {
       tabBarOptions={{
         showLabel:false,
         style:{
-          backgroundColor:Colors.navigation
+          backgroundColor:Colors.backgroundBlue
         },
         keyboardHidesTabBar: true,
       }}

@@ -20,7 +20,7 @@ export default class Board extends Component {
             {{
                 borderRadius:10 ,
                 padding:10,
-                backgroundColor:Colors.navigation,
+                backgroundColor:Colors.backgroundBlue,
                 marginBottom:10,
                 width:windowWidth - (windowWidth*1/15),
                 shadowColor: '#000',
@@ -30,7 +30,7 @@ export default class Board extends Component {
             }}>
                 <Text numberOfLines={1} style={{fontSize:20, fontWeight:'bold', marginVertical:5, color:'#fff'}}>{name}</Text>
                 <Text numberOfLines={2} style={{fontWeight:'bold', marginVertical:5, color:'#fff'}}>{semester}</Text>
-                <Text style={{color:'#909090', fontStyle:'italic' }}>{teacherName}</Text>
+                <Text style={{color:'#eeeeee', fontStyle:'italic' }}>{teacherName}</Text>
             </View>
             </TouchableOpacity>
         )

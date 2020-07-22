@@ -96,7 +96,7 @@ export default class ProfileComponent extends Component {
     return (
       <View style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
-          color={Colors.navigation}
+          color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
           iconLeftColor={Colors.black}
           haveSave={true}
