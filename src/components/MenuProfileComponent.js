@@ -62,7 +62,7 @@ export default class MenuProfileComponent extends Component {
           'Về ứng dụng',
           Images.iconInfo,
         )}
-        {this.showBlock(() => {}, 'Đăng xuất', Images.iconLogout, 0, 15)}
+        {this.showBlock(() => {this.props.navigation.navigate('Login');}, 'Đăng xuất', Images.iconLogout, 0, 15)}
       </View>
     );
   }
