@@ -1,5 +1,5 @@
 const images = {
-  bg: require('../res/image/bg.jpg'),
+  bg: require('../res/image/bg.png'),
   card: require('../res/image/card.png'),
   moon: require('../res/image/moon.png'),
   iconIt: require('../res/image/it.png'),
@@ -8,9 +8,9 @@ const images = {
   iconBack: require('../res/image/arrow-left.png'),
   password: require('../res/image/password.png'),
   iconTeam: require('../res/image/team.png'),
-  iconBooks: require('../res/image/books.png'),
+  iconBooks: require('../res/image/books.png'),                       
   iconLogout: require('../res/image/logout.png'),
-  iconSchool: require('../res/image/school.png'),
+  iconSchool: require('../res/image/school.png'),                                                                
   iconSetting: require('../res/image/maintenance.png'),
   translation: require('../res/image/translation.png'),
   iconProject: require('../res/image/project.png'),
