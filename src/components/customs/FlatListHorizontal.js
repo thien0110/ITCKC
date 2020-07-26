@@ -12,7 +12,7 @@ const Item = ({item}) => {
       <View style={styles.textView}>
         <Text style={styles.itemTitle}>{item.title}</Text>
         <Text style={styles.itemDescription}
-        numberOfLines={4}>{item.description}</Text>
+        numberOfLines={3}>{item.description}</Text>
       </View>
      
     </View>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius:8,
   },
   itemTitle: {
-    fontSize: 20,
+    fontSize: 15,
     marginBottom: 5,
     fontWeight: 'bold',
   },

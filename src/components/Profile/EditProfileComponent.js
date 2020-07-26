@@ -81,7 +81,7 @@ export default class EditProfileComponent extends Component {
   }
   showInput(title, value, keyboardType, onChangeText) {
     return (
-      <View style={{marginTop: 15, marginHorizontal: 15}}>
+      <View style={{marginTop: 15,marginLeft:15}}>
         <Text style={{marginBottom: 5, fontSize: 15, color: Colors.buttonBlue}}>
           {title}
           {':'}
@@ -106,13 +106,13 @@ export default class EditProfileComponent extends Component {
   }
   showDatePicker(title, value, onDateChange) {
     return (
-      <View style={{marginTop: 15, marginHorizontal: 15}}>
+      <View style={{marginTop: 15,marginLeft:15}}>
         <Text style={{marginBottom: 5, fontSize: 15, color: Colors.blue}}>
           {title}
           {':'}
         </Text>
         <DatePicker
-          style={{width: '102.5%'}}
+          style={{width: '106%'}}
           date={value}
           mode="date"
           placeholder="--:--"
@@ -141,7 +141,7 @@ export default class EditProfileComponent extends Component {
   }
   showPicker(title, selectedValue, onValueChange) {
     return (
-      <View style={{marginTop: 15, marginHorizontal: 15}}>
+      <View style={{marginTop: 15, marginLeft:15}}>
         <Text style={{marginBottom: 5, fontSize: 15, color: Colors.blue}}>
           {title}
           {':'}
@@ -184,7 +184,7 @@ export default class EditProfileComponent extends Component {
     } = this.state;
     return (
       <ScrollView>
-        <View style={{flex: 1, paddingBottom: 15}}>
+        <View style={{flex: 1, paddingBottom: 15, paddingRight:15}}>
           <View style={{flexDirection: 'row'}}>
             <View style={{flex: 1}}>
               {this.showInput('Họ', lastName, 'default', (text) => {
@@ -274,12 +274,12 @@ export default class EditProfileComponent extends Component {
           color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
           iconLeftColor={Colors.black}
-          haveSave={true}
-          textSave={'Lưu'}
+          buttonRight={true}
+          textButtonRight={'Lưu'}
           onClickLeft={() => {
             this.props.navigation.goBack();
           }}
-          onClickSave={() => {
+          onClickButtonRight={() => {
             this.onPressSave();
           }}></HeaderNavigation>
         {this.showView()}

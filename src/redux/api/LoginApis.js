@@ -10,6 +10,7 @@ export function loginApi(input) {
       data: {
         username: 'Thienle',
         password: '123',
+        token: '123456789'
       },
     };
   } else {
