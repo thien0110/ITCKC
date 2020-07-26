@@ -66,7 +66,9 @@ export default class SubjectsBlock extends Component {
   }
 }
 SubjectsBlock.defaultProps = {
-  onPress: () => {},
+  onPress: () => {
+   
+  },
   name: '',
   semester: '',
   teacherName: '',
