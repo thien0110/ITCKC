@@ -27,7 +27,8 @@ export default class MenuComponent extends Component {
     return (
       <View>
         <Text style={{fontWeight: 'bold', marginLeft: 15}}>{heading}</Text>
-        <FlatListHorizontal data={data}></FlatListHorizontal>
+        <FlatListHorizontal data={data}
+       ></FlatListHorizontal>
       </View>
     );
   }
@@ -89,8 +90,8 @@ export default class MenuComponent extends Component {
           </View>
           <View >
           {this.showNews('Thông tin từ khoa', data)}
-          {this.showNews('Hôm nay ăn gì?', data)}
-          {this.showNews('Thời sự hôm nay?', data)}
+          {this.showNews('Thông tin từ phòng ban', data)}
+          {this.showNews('Thông tin từ lớp học phần', data)}
           </View>
         </ScrollView>
       </View>
