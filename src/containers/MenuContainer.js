@@ -2,6 +2,7 @@ import React from 'react';
 import MenuComponent from '../components/MenuComponent';
 import {connect} from 'react-redux';
 import {getMenuNewsAction} from '../redux/actions/MenuAction';
+import {changeStateLoginAction} from '../redux/actions/LoginAction';
 class MenuContainer extends React.Component {
   render() {
     return <MenuComponent {...this.props} />;
@@ -10,8 +11,11 @@ class MenuContainer extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getMenuNewsAction: () => {
-      dispatch(getMenuNewsAction());
+    getMenuNewsAction: input => {
+      dispatch(getMenuNewsAction(input));
+    },
+    changeStateAction: (key, value) => {
+      dispatch(changeStateLoginAction(key, value));
     },
   };
 };

@@ -9,9 +9,25 @@ import {
   TouchableOpacity,
 } from 'react-native';
 const {width, height} = Dimensions.get('window');
-export default class FlatListHorizontal extends Component {
-  render() {
-    const {data, onPress} = this.props;
+
+const Item = ({item}) => {
+  return (
+   
+   <TouchableOpacity>
+    <View style={styles.cardView}>
+     <Image style={styles.image} source={{uri: item.url}} />
+      <View style={styles.textView}>
+        <Text style={styles.itemTitle}>{item.title}</Text>
+        <Text style={styles.itemDescription}
+        numberOfLines={3}>{item.description}</Text>
+      </View>
+     
+    </View>
+    </TouchableOpacity>
+    
+  );
+};
+const FlatListHorizontal =({data})=>{
     if (data && data.length) {
       return (
         <FlatList
@@ -75,7 +91,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 8,
   },
   itemTitle: {
-    fontSize: 20,
+    fontSize: 15,
     marginBottom: 5,
     fontWeight: 'bold',
   },
