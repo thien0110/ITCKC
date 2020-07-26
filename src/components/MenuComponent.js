@@ -53,7 +53,7 @@ export default class MenuComponent extends Component {
               iconName={Images.iconSchool}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('TabSchool');
+                this.props.navigation.navigate('SchoolInfo');
               }}
               title={'Hoạt động ngoại khóa'}
               iconName={Images.iconExercise}
@@ -69,13 +69,13 @@ export default class MenuComponent extends Component {
               iconName={Images.iconBooks}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('TabSchool');
+                this.props.navigation.navigate('SchoolInfo');
               }}
               title={'Thông tin khoa'}
               iconName={Images.iconIt}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('TabSchool');
+                this.props.navigation.navigate('SchoolInfo');
               }}
               title={'Thông tin việc làm'}
               iconName={Images.iconProject}
@@ -83,7 +83,7 @@ export default class MenuComponent extends Component {
               marginRight={15}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('TabSchool');
+                this.props.navigation.navigate('SchoolInfo');
               }}
               title={'Cựu sinh viên'}
               iconName={Images.iconTeam}></Block>

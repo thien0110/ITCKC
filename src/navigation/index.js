@@ -8,7 +8,6 @@ import SearchComponent from '../components/SearchComponent';
 
 
 import SchoolInfoComponent from '../components/SchoolsInformation/SchoolInfoComponent';
-import TabSchoolInformationNavigator from './SchoolsInformationTab';
 import LearningInfoComponent from '../components/LearningInfo';
 import TabSubjectNavigator from './subjectInfo';
 import NotiComponent from '../components/NotiComponent'
@@ -27,7 +26,6 @@ function MainNavigator() {
         headerMode="none">
         <Stack.Screen name="Login" component={LoginContainer} />
         <Stack.Screen name="Tab" component={TabNavigator} />
-        <Stack.Screen name="TabSchool" component={TabSchoolInformationNavigator} />
 
         <Stack.Screen name="SchoolInfo" component={SchoolInfoComponent}/>
         <Stack.Screen name="Search" component={SearchComponent}/>
