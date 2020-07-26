@@ -15,6 +15,7 @@ import SettingComponent from '../components/Profile/SettingComponent'
 
 import EditProfileContainer from '../containers/MenuProfile/EditProfileContainer'
 import ProfileContainer from '../containers/MenuProfile/ProfileContainer'
+import PostDetail from '../components/postDetail'
 
 const Stack = createStackNavigator();
 function MainNavigator() {
@@ -38,6 +39,7 @@ function MainNavigator() {
         <Stack.Screen name="EditProfile" component={EditProfileContainer} />
         <Stack.Screen name="Profile" component={ProfileContainer} />
         <Stack.Screen name="Subject" component={TabSubjectNavigator} />
+        <Stack.Screen name="PostDetail" component={PostDetail}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
