@@ -7,7 +7,7 @@ export default Colors ={
     grayOpacity:'#dfdfdf',
     grayStrong:'#909090',
     black:'#000',
-    navigation:'#002D56',
+    navigation:'#00539F',
     backgroundWhite:'#EAF4F6',
     gray2:'#696969',
     backgroundBlue:'#00539F'

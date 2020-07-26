@@ -1,4 +1,4 @@
-import {LOGIN, LOGIN_FAIL, LOGIN_SUCCESS, FORMAT_DATA} from './ActionTypes';
+import {LOGIN, LOGIN_FAIL, LOGIN_SUCCESS, FORMAT_DATA,CHANGE_STATE_LOGIN} from './ActionTypes';
 
 export const loginAction = (input) => {
   return {
@@ -12,3 +12,12 @@ export const formatData = (input) => {
     input: input,
   };
 };
+
+export const changeStateLoginAction = (key,state) => {
+  return {
+    type: CHANGE_STATE_LOGIN,
+    key:key,
+    state:state,
+  };
+};
+

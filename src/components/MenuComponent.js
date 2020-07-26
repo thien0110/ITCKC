@@ -32,7 +32,7 @@ export default class MenuComponent extends Component {
     );
   }
   showBody() {
-    const data =this.props.data;
+    const {data} =this.props;
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
         <ScrollView>
@@ -88,9 +88,9 @@ export default class MenuComponent extends Component {
               iconName={Images.iconTeam}></Block>
           </View>
           <View >
-          {this.showNews('Thông tin từ khoa', data)}
-          {this.showNews('Hôm nay ăn gì?', data)}
-          {this.showNews('Thời sự hôm nay?', data)}
+          {this.showNews('Thông tin trường', data)}
+          {this.showNews('Thông tin phòng', data)}
+          {this.showNews('Thông tin khoa', data)}
           </View>
         </ScrollView>
       </View>
@@ -110,6 +110,7 @@ export default class MenuComponent extends Component {
         <HeaderNavigation
           iconRight={Images.iconBell}
           haveSearch={true}
+          onClickSearch={()=>{this.props.navigation.navigate('Search')}}
           color={Colors.backgroundBlue}
           onClickRight={()=>{this.props.navigation.navigate('Noti');}}></HeaderNavigation>
         {this.showBody()}
