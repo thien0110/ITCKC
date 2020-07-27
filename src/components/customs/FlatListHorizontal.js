@@ -27,7 +27,7 @@ const Item = ({item}) => {
     
   );
 };
-const FlatListHorizontal =({data})=>{
+export const FlatListHorizontal =({data})=>{
     if (data && data.length) {
       return (
         <FlatList
@@ -41,17 +41,7 @@ const FlatListHorizontal =({data})=>{
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => {
             return (
-              <TouchableOpacity onPress={onPress(item)}>
-                <View style={styles.cardView}>
-                  <Image style={styles.image} source={{uri: item.url}} />
-                  <View style={styles.textView}>
-                    <Text style={styles.itemTitle}>{item.title}</Text>
-                    <Text style={styles.itemDescription} numberOfLines={4}>
-                      {item.description}
-                    </Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
+             <Item item={item}></Item>
             );
           }}
         />
@@ -59,12 +49,11 @@ const FlatListHorizontal =({data})=>{
     }
     return null;
   }
-}
 
-FlatListHorizontal.defaultProps = {
-  onPress: () => {},
-  data: {},
-};
+// FlatListHorizontal.defaultProps = {
+//   onPress: () => {},
+//   data: {},
+// };
 
 const styles = StyleSheet.create({
   cardView: {

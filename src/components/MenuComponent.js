@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../res/Images';
 import SlideShow from './customs/SlideShow';
 import Loading from './customs/Loading';
-import FlatListHorizontal from './customs/FlatListHorizontal';
+import {FlatListHorizontal} from './customs/FlatListHorizontal';
 import Block from './customs/Block';
 
 const windowWidth = Dimensions.get('window').width;
