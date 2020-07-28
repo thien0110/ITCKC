@@ -27,13 +27,12 @@ export default class MenuComponent extends Component {
     return (
       <View>
         <Text style={{fontWeight: 'bold', marginLeft: 15}}>{heading}</Text>
-        <FlatListHorizontal data={data}
-       ></FlatListHorizontal>
+        <FlatListHorizontal data={data}></FlatListHorizontal>
       </View>
     );
   }
   showBody() {
-    const {data} =this.props;
+    const {data} = this.props;
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
         <ScrollView>
@@ -88,11 +87,11 @@ export default class MenuComponent extends Component {
               title={'Cựu sinh viên'}
               iconName={Images.iconTeam}></Block>
           </View>
-          <View >
-          {this.showNews('Thông tin từ khoa', data)}
-          {this.showNews('Thông tin từ phòng ban', data)}
-          {this.showNews('Thông tin từ lớp học phần', data)}
-
+          <View>
+            {this.showNews('Thông tin từ khoa', data)}
+            {this.showNews('Thông tin từ phòng ban', data)}
+            {this.showNews('Thông tin từ lớp học phần', data)}
+            {this.showNews('Thông tin từ trung tâm tin học', data)}
           </View>
         </ScrollView>
       </View>
@@ -101,7 +100,7 @@ export default class MenuComponent extends Component {
   render() {
     // const {itemId} = this.props.route.params;
     // console.warn(itemId, 'menu');
-    const {isFetching} =this.props;
+    const {isFetching} = this.props;
     return (
       <View
         style={{
@@ -112,9 +111,13 @@ export default class MenuComponent extends Component {
         <HeaderNavigation
           iconRight={Images.iconBell}
           haveSearch={true}
-          onClickSearch={()=>{this.props.navigation.navigate('Search')}}
+          onClickSearch={() => {
+            this.props.navigation.navigate('Search');
+          }}
           color={Colors.backgroundBlue}
-          onClickRight={()=>{this.props.navigation.navigate('Noti');}}></HeaderNavigation>
+          onClickRight={() => {
+            this.props.navigation.navigate('Noti');
+          }}></HeaderNavigation>
         {this.showBody()}
         {isFetching && <Loading></Loading>}
       </View>

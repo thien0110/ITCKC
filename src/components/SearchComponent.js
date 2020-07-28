@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {Text, View, Image, Dimensions, TouchableOpacity} from 'react-native';
+import {Text, View, Image, Dimensions, TouchableOpacity,FlatList} from 'react-native';
 import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
 import Images from '../res/Images';
+import SlideShowItem from './customs/ItemSlideShow';
+import Loading from './customs/Loading';
 const window = Dimensions.get('window');
 
 export default class SearchComponent extends Component {
@@ -12,10 +14,34 @@ export default class SearchComponent extends Component {
       value: '',
     };
   }
+  componentWillUnmount() {
+    this.props.formatData();
+  }
+
   showBody() {
-    return <View style={{flex: 1, }}></View>;
+    const {data} =this.props;
+    if (data && data.length) {
+      return (
+        <View style={{flex:1}}>
+          <FlatList
+            data={data}
+            keyExtractor={(item, index) => 'key' + index}
+            renderItem={({item}) => {
+              return <SlideShowItem item={item} />;
+            }}
+          />
+        </View>
+      );
+    } else return null;
   }
   render() {
+    const {
+      data,
+      message,
+      isFetching,
+      searchAction,
+      navigation,
+    } = this.props;
     return (
       <View style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
@@ -25,10 +51,16 @@ export default class SearchComponent extends Component {
           textButtonRight={'Đóng'}
           valueSearch={this.state.value}
           onClickButtonRight={() => {
-            this.props.navigation.goBack();
+            navigation.goBack();
           }}
-          onChangeTextSearch={(text)=>{this.setState({ value:text})}}></HeaderNavigation>
+          onChangeTextSearch={(text) => {
+            this.setState({value: text});
+          }}
+          onSearch={() => {
+            searchAction(this.state.value);
+          }}></HeaderNavigation>
         {this.showBody()}
+        {isFetching && <Loading></Loading>}
       </View>
     );
   }

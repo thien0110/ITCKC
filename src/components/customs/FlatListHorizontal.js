@@ -13,7 +13,7 @@ const {width, height} = Dimensions.get('window');
 const Item = ({item}) => {
   return (
    
-   <TouchableOpacity>
+   <TouchableOpacity >
     <View style={styles.cardView}>
      <Image style={styles.image} source={{uri: item.url}} />
       <View style={styles.textView}>
@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
     width: (width * 2) / 3,
     height: height / 4,
     backgroundColor: 'white',
-    marginLeft: 15,
+    marginLeft: 7.5,
+    marginRight:7.5,
     marginVertical: 7.5,
     borderRadius: 8,
     shadowColor: '#000',

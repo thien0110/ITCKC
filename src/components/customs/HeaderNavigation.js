@@ -29,7 +29,8 @@ export default class HeaderNavigation extends React.Component {
       onClickSearch,
       searching,
       onChangeTextSearch,
-      valueSearch
+      valueSearch,
+      onSearch
     } = this.props;
     return (
       <View
@@ -94,11 +95,15 @@ export default class HeaderNavigation extends React.Component {
               onChangeText={(text) => {
                 onChangeTextSearch(text);
               }}
-              value={valueSearch}></TextInput>
-            <Icon
+              value={valueSearch}
+              clearButtonMode='while-editing'
+              onSubmitEditing={()=>{onSearch()}}
+              returnKeyType='search'
+              ></TextInput>
+            {/* <Icon
               name="search"
               size={15}
-              style={{position: 'absolute', right: 70, top: 5}}></Icon>
+              style={{position: 'absolute', right: 70, top: 5}}></Icon> */}
           </View>
         ) : (
           <Text
@@ -165,5 +170,6 @@ HeaderNavigation.defaultProps = {
   onClickButtonRight: () => {},
   onClickSearch: () => {},
   onChangeTextSearch: ()=>{},
+  onSearch:()=>{},
   
 };
