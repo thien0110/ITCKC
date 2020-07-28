@@ -97,7 +97,6 @@ export default class EditProfileComponent extends Component {
             borderRadius: 5,
             borderColor: Colors.grayOpacity,
             borderWidth: 1,
-            height: 38,
             paddingLeft: 15,
           }}
         />
@@ -107,12 +106,12 @@ export default class EditProfileComponent extends Component {
   showDatePicker(title, value, onDateChange) {
     return (
       <View style={{marginTop: 15,marginLeft:15}}>
-        <Text style={{marginBottom: 5, fontSize: 15, color: Colors.blue}}>
+        <Text style={{marginBottom: 10, fontSize: 15, color: Colors.blue}}>
           {title}
           {':'}
         </Text>
         <DatePicker
-          style={{width: '106%'}}
+          style={{width: '106%', }}
           date={value}
           mode="date"
           placeholder="--:--"
@@ -129,7 +128,7 @@ export default class EditProfileComponent extends Component {
               borderRadius: 5,
               borderColor: Colors.grayOpacity,
               borderWidth: 1,
-              height: 38,
+              height: 50,
             },
           }}
           onDateChange={(date) => {
@@ -159,7 +158,7 @@ export default class EditProfileComponent extends Component {
             onValueChange={(itemValue) => {
               onValueChange(itemValue);
             }}
-            style={{height: 38, paddingLeft: 15}}>
+            style={{height: 48, paddingLeft: 15}}>
             <Picker.Item label={'Nam'} value={'Nam'} />
             <Picker.Item label={'Nữ'} value={'Nữ'} />
           </Picker>

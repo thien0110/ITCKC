@@ -8,7 +8,7 @@ import SearchComponent from '../components/SearchComponent';
 
 
 import SchoolInfoComponent from '../components/SchoolsInformation/SchoolInfoComponent';
-import LearningInfoComponent from '../components/LearningInfo';
+import LearningInfoContainer from '../containers/LearningInfo/LearningInfoContainer';
 import TabSubjectNavigator from './subjectInfo';
 import NotiComponent from '../components/NotiComponent'
 import AboutComponent from '../components/Profile/AboutComponent'
@@ -31,7 +31,7 @@ function MainNavigator() {
         <Stack.Screen name="SchoolInfo" component={SchoolInfoComponent}/>
         <Stack.Screen name="Search" component={SearchComponent}/>
 
-        <Stack.Screen name="LearningInfo" component={LearningInfoComponent} />
+        <Stack.Screen name="LearningInfo" component={LearningInfoContainer} />
 
         <Stack.Screen name="Noti" component={NotiComponent} />
         <Stack.Screen name="About" component={AboutComponent} />
