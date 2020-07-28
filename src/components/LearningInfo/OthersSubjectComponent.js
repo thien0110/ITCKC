@@ -24,6 +24,7 @@ export default class OthersSubjectComponent extends Component {
               onClickLeft={() => {
                 this.props.navigation.goBack();
               }}></HeaderNavigation>
+              
           </View>
         );
       }
