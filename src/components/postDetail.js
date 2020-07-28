@@ -13,7 +13,7 @@ import SplashScreen from 'react-native-splash-screen';
 import HeaderNavigation from '../components/customs/HeaderNavigation';
 import Images from '../res/Images';
 import {arrayIsEmpty, objectIsNull, stringIsEmpty} from '../res/Functions';
-
+import { WebView } from 'react-native-webview';
 import Colors from '../res/Colors';
 
 // import { WebView } from 'react-native-webview';
@@ -256,8 +256,8 @@ export default class postDetail extends Component {
           }}></HeaderNavigation>
         {/* {this.contentPost()}; */}
         <View style={{flex: 1}}>
-          {this.bodyVideo()}
-         
+          {/* {this.bodyVideo()} */}
+          <WebView source={{ uri: 'https://reactnative.dev/' }} />
         </View>
       </View>
     );
