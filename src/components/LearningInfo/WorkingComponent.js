@@ -3,9 +3,11 @@ import {Text, View, TextInput, FlatList, StyleSheet, Dimensions} from 'react-nat
 import HeaderNavigation from '../customs/HeaderNavigation';
 import Images from '../../res/Images';
 
+import {objectIsNull, stringIsEmpty} from '../../res/Functions';
+
 
 const windowWidth = Dimensions.get('window').width;
-export default class ThreadComponent extends Component {
+export default class WorkingComponent extends Component {
   shareBlock() {
     return (
       <FlatList
@@ -35,12 +37,15 @@ export default class ThreadComponent extends Component {
     return <View>{this.shareBlock()}</View>;
   }
   render() {
-    const data = {nameSubject: 'Toán rời rạc'};
+    const {item} = this.props.route.params;
+    var titleHeader=""
+    if (!objectIsNull(item)) {
+      titleHeader=item.name
+    } 
     return (
       <View style={{flex: 1, alignItems: 'center'}}>
         <HeaderNavigation
-          data={this.data}
-          title={data.nameSubject}
+          title={titleHeader}
           titleColor={Colors.white}
           color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}

@@ -99,12 +99,12 @@ export default class ProfileComponent extends Component {
           color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
           iconLeftColor={Colors.black}
-          haveSave={true}
-          textSave={'Sửa'}
+          buttonRight={true}
+          textButtonRight={'Sửa'}
           onClickLeft={() => {
             this.props.navigation.goBack();
           }}
-          onClickSave={() => {
+          onClickButtonRight={() => {
             this.props.navigation.navigate('EditProfile', {data});
           }}></HeaderNavigation>
         {this.showView()}

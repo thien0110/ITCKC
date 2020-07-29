@@ -23,9 +23,14 @@ export default class HeaderNavigation extends React.Component {
       iconLeftColor,
       iconRightColor,
       haveSearch, //  nếu có thanh tìm kiếm =true,
-      haveSave, //có nút lưu hoặc sửa
-      textSave, //là lưu hoặc sửa
-      onClickSave,
+      buttonRight, //có nút lưu hoặc sửa
+      textButtonRight, //là lưu hoặc sửa, hoặc button nào đó
+      onClickButtonRight,
+      onClickSearch,
+      searching,
+      onChangeTextSearch,
+      valueSearch,
+      onSearch
     } = this.props;
     return (
       <View
@@ -55,6 +60,27 @@ export default class HeaderNavigation extends React.Component {
         )}
         {haveSearch ? (
           <View style={{flex: 1}}>
+            <TouchableOpacity
+              style={{
+                backgroundColor: Colors.gray,
+                paddingHorizontal: 10,
+                paddingVertical: 0,
+                borderRadius: 8,
+                width: (windowWidth * 2) / 3,
+                height: 30,
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexDirection: 'row',
+              }}
+              onPress={() => {
+                onClickSearch();
+              }}>
+              <Text style={{color: Colors.gray2}}>Tìm kiếm</Text>
+              <Icon name="search" size={15} color={Colors.gray2}></Icon>
+            </TouchableOpacity>
+          </View>
+        ) : searching ? (
+          <View style={{flex: 1}}>
             <TextInput
               style={{
                 backgroundColor: Colors.gray,
@@ -62,8 +88,22 @@ export default class HeaderNavigation extends React.Component {
                 paddingVertical: 0,
                 borderRadius: 8,
                 width: (windowWidth * 2) / 3,
+                alignItems: 'center',
               }}
-              placeholder="Tìm kiếm"></TextInput>
+              placeholder={'Tìm kiếm'}
+              autoFocus={true}
+              onChangeText={(text) => {
+                onChangeTextSearch(text);
+              }}
+              value={valueSearch}
+              clearButtonMode='while-editing'
+              onSubmitEditing={()=>{onSearch()}}
+              returnKeyType='search'
+              ></TextInput>
+            {/* <Icon
+              name="search"
+              size={15}
+              style={{position: 'absolute', right: 70, top: 5}}></Icon> */}
           </View>
         ) : (
           <Text
@@ -92,13 +132,22 @@ export default class HeaderNavigation extends React.Component {
               }}></Image>
           </TouchableOpacity>
         )}
-        {haveSave === true && (
+        {buttonRight === true && (
           <TouchableOpacity
-          style={{width:50, height:'60%', borderRadius:20, backgroundColor:Colors.white, alignItems:'center', }}
+            style={{
+              width: 50,
+              height: 25,
+              borderRadius: 20,
+              backgroundColor: Colors.white,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
             onPress={() => {
-              onClickSave();
+              onClickButtonRight();
             }}>
-            <Text style={{color: Colors.blue, fontWeight: 'bold'}}>{textSave}</Text>
+            <Text style={{color: Colors.blue, fontWeight: 'bold'}}>
+              {textButtonRight}
+            </Text>
           </TouchableOpacity>
         )}
       </View>
@@ -112,10 +161,15 @@ HeaderNavigation.defaultProps = {
   iconRight: null,
   color: Colors.white,
   haveSearch: false,
-  haveSave: false,
-  textSave:'',
-
+  buttonRight: false,
+  textButtonRight: '',
+  searching: false,
+  valueSearch:'',
   onClickLeft: () => {},
   onClickRight: () => {},
-  onClickSave: () => {},
+  onClickButtonRight: () => {},
+  onClickSearch: () => {},
+  onChangeTextSearch: ()=>{},
+  onSearch:()=>{},
+  
 };

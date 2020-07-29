@@ -8,84 +8,36 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
+import Loading from '../customs/Loading';
 import Images from '../../res/Images';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import Colors from '../../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import SubjectsBlock from '../customs/SubjectsBlock';
+import {objectIsNull, arrayIsEmpty} from '../../res/Functions';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default class LearningInfoComponent extends Component {
+  componentDidMount() {
+    this.props.getSubjectAction();
+  }
   showBody() {
-    const data = [
-      {
-        subjectCode: '0001',
-        name: 'Toán rời rạc',
-        nameAcronym: 'TTR',
-        subjectType: 'Lý thuyết',
-        semester: 'Hoc ky 2',
-        teacherName: 'Nguyễn Vũ Dzũng',
-      },
-      {
-        subjectCode: '0002',
-        name: 'Thiết kế web',
-        nameAcronym: 'THTKW',
-        subjectType: 'Thực hành',
-        semester: 'Học kỳ 2',
-        teacherName: 'Lữ Cao Tiến',
-      },
-      {
-        subjectCode: '0003',
-        name: 'Thiết kế web',
-        nameAcronym: 'LTTKW',
-        subjectType: 'Lý thuyết',
-        semester: 'Học kỳ 2',
-        teacherName: 'Vũ Đình Bảo',
-      },
-      {
-        subjectCode: '0004',
-        name: 'Đồ họa ứng dụng',
-        nameAcronym: 'DHUD',
-        subjectType: 'Lý thuyết',
-        semester: 'Học kỳ 2',
-        teacherName: 'Lữ Cao Tiến',
-      },
-      {
-        subjectCode: '0004',
-        name: 'Đồ họa ứng dụng',
-        nameAcronym: 'DHUD',
-        subjectType: 'Lý thuyết',
-        semester: 'Học kỳ 2',
-        teacherName: 'Lữ Cao Tiến',
-      },
-      {
-        subjectCode: '0004',
-        name: 'Đồ họa ứng dụng',
-        nameAcronym: 'DHUD',
-        subjectType: 'Lý thuyết',
-        semester: 'Học kỳ 2',
-        teacherName: 'Lữ Cao Tiến',
-      },
-      {
-        subjectCode: '0004',
-        name: 'Đồ họa ứng dụng',
-        nameAcronym: 'DHUD',
-        subjectType: 'Lý thuyết',
-        semester: 'Học kỳ 2',
-        teacherName: 'Lữ Cao Tiến',
-      },
-    ];
+    const data = this.props.data;
+    let dataList=[]
+    if (!arrayIsEmpty(data)) {
+      dataList = data;
+    }
     return (
       <FlatList
-        data={data}
+        data={dataList}
         style={{flex: 1, padding: 15}}
         keyExtractor={(item, index) => 'key' + index}
         renderItem={({item}) => {
           return (
             <SubjectsBlock
               onPress={() => {
-                this.props.navigation.navigate('Subject',{data:item.name});
+                this.props.navigation.navigate('Subject', {item});
               }}
               name={item.name}
               semester={item.semester}
@@ -96,6 +48,7 @@ export default class LearningInfoComponent extends Component {
     );
   }
   render() {
+    const {isFetching, data} = this.props;
     return (
       <View
         style={{
@@ -111,13 +64,10 @@ export default class LearningInfoComponent extends Component {
           }}
           title={'Thông tin học tập'}
           titleColor={Colors.white}></HeaderNavigation>
+
         {this.showBody()}
+        {isFetching && <Loading></Loading>}
       </View>
     );
   }
 }
-// const styles = StyleSheet.create({
-//   classType:{
-//     fontSize: 20,fontWeight: 'bold', marginBottom:5
-//   }
-// });

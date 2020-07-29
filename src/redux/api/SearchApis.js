@@ -2,7 +2,7 @@
 const messageError = 'Không thể kết nối tới server.';
 const fakeApi = true;
 import {API_URL} from '../../config';
-export function menuApi(input) {
+export function searchApi(input) {
   if (fakeApi) {
     return {
         resultCode: 1,
@@ -38,7 +38,7 @@ export function menuApi(input) {
           ],
     };
   } else {
-    return fetch(API_URL+'get_data_noi_bat_all', {
+    return fetch(API_URL+'search', {
      
       method: 'POST',
       headers: new Headers({

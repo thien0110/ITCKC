@@ -18,16 +18,23 @@ import AlertCustom from './customs/AlertComponent';
 import Loading from './customs/Loading';
 import CheckBox from '@react-native-community/checkbox';
 import Images from '../res/Images';
-import {arrayIsEmpty} from '../res/Functions';
+import {
+  arrayIsEmpty,
+  objectIsNull,
+  getRememberedUser,
+  rememberUser,
+  forgetUser,
+  stringIsEmpty,
+} from '../res/Functions';
 import images from '../res/Images';
 export default class LoginComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'thien',
-      password: '123',
+      username: '',
+      password: '',
 
-      isChecked: false,
+      rememberMe: false,
       showAlert: false,
       messageAlert: '',
       pressEye: false,
@@ -38,11 +45,49 @@ export default class LoginComponent extends Component {
       email: '',
     };
   }
-  componentDidUpdate() {
-    if (!arrayIsEmpty(this.props.data)) {
-      this.props.navigation.replace('Tab');
-      this.props.formatData({});
+  changeState(key, value) {
+    const {changeStateAction} = this.props;
+    changeStateAction(['state'], -1);
+    var stateNew = {...this.state};
+    for (var i = 0; i < key.length; i++) {
+      stateNew = {...stateNew, [key[i]]: value[i]};
     }
+    this.setState({
+      ...stateNew,
+    });
+  }
+  async componentDidMount() {
+    const {params} = this.props.route;
+
+    const myLogin = await getRememberedUser();
+    if (
+      !objectIsNull(myLogin) &&
+      !stringIsEmpty(myLogin.username) &&
+      !stringIsEmpty(myLogin.password)
+    ) {
+      this.changeState(
+        ['username', 'password', 'rememberMe'],
+        [myLogin.username, myLogin.password, true],
+      );
+      if (objectIsNull(params) || params.isLogout != true) {
+        this.onLogin();
+      }
+      
+    }
+  }
+  loginSuccess() {
+    const {data, changeStateAction} = this.props;
+    const myLogin = {
+      username: data.username,
+      password: data.password,
+    };
+    if (this.state.rememberMe === true) {
+      rememberUser(myLogin);
+    } else {
+      forgetUser();
+    }
+    this.props.navigation.replace('Tab');
+    changeStateAction(['state'], -1);
   }
   onPressForgetPass() {
     const {modalVisible, idCard, email} = this.state;
@@ -71,11 +116,14 @@ export default class LoginComponent extends Component {
       });
     }
   };
-  onLogin = (username, password) => {
-    if (username === '' || password === '') {
+  onLogin = () => {
+    if (this.state.username === '' || this.state.password === '') {
       this.onChangeStateAlert(true, 'Vui lòng nhập đầy đủ thông tin');
     } else {
-      const input = {username: username, password: password};
+      const input = {
+        username: this.state.username,
+        password: this.state.password,
+      };
       this.props.loginAction(input);
     }
   };
@@ -83,7 +131,7 @@ export default class LoginComponent extends Component {
   setModalVisible = (visible) => {
     this.setState({modalVisible: visible});
   };
-  showPassInput(placeholder, value,keyboardType, onChangeText) {
+  showPassInput(placeholder, value, keyboardType, onChangeText) {
     return (
       <TextInput
         style={{
@@ -154,12 +202,17 @@ export default class LoginComponent extends Component {
               }}>
               Quên mật khẩu
             </Text>
-            {this.showPassInput('Email', email,'default', (text) => {
+            {this.showPassInput('Email', email, 'default', (text) => {
               this.setState({email: text.trim()});
             })}
-            {this.showPassInput('Chứng minh nhân dân', idCard,'phone-pad', (text) => {
-              this.setState({idCard: text.trim()});
-            })}
+            {this.showPassInput(
+              'Chứng minh nhân dân',
+              idCard,
+              'phone-pad',
+              (text) => {
+                this.setState({idCard: text.trim()});
+              },
+            )}
 
             <TouchableOpacity
               style={{
@@ -189,7 +242,7 @@ export default class LoginComponent extends Component {
     );
   }
   showView() {
-    const {username, password, pressEye, isChecked, showPass} = this.state;
+    const {username, password, pressEye, rememberMe, showPass} = this.state;
     return (
       <KeyboardAvoidingView style={{flex: 1, justifyContent: 'center'}}>
         <View
@@ -293,9 +346,9 @@ export default class LoginComponent extends Component {
                 }}>
                 <CheckBox
                   style={{color: Colors.grayStrong}}
-                  value={isChecked}
+                  value={rememberMe}
                   onValueChange={() => {
-                    this.setState({isChecked: !isChecked});
+                    this.setState({rememberMe: !rememberMe});
                   }}
                 />
                 <Text style={{alignSelf: 'center', color: Colors.grayStrong}}>
@@ -306,7 +359,7 @@ export default class LoginComponent extends Component {
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-                  this.onLogin(username, password);
+                  this.onLogin();
                 }}>
                 <Text
                   style={{
@@ -331,9 +384,14 @@ export default class LoginComponent extends Component {
     );
   }
   render() {
-    const {messageAlert, showAlert} = this.state;
-    const {data, message, isFetching} = this.props;
-    // console.warn("data", data)
+    const {messageAlert, showAlert, } = this.state;
+    const {
+      data,
+      message,
+      isFetching,
+      changeStateAction,
+      loginState,
+    } = this.props;
     return (
       <ImageBackground
         source={Images.bg}
@@ -343,10 +401,11 @@ export default class LoginComponent extends Component {
           AlertCustom(showAlert, messageAlert, () => {
             this.onChangeStateAlert(false, '');
           })}
-        {message &&
+        {loginState === 1 && this.loginSuccess()}
+        {loginState === 2 &&
           AlertCustom(true, message, () => {
             this.onChangeStateAlert(false, '');
-            this.props.formatData({});
+            changeStateAction(['state'], -1);
           })}
         {isFetching && <Loading></Loading>}
         {this.showModel()}
