@@ -6,3 +6,6 @@ export const GET_MENU_NEWS = 'GET_MENU_NEWS';
 export const GET_MENU_NEWS_SUCCESS = 'GET_MENU_NEWS_SUCCESS';
 export const GET_MENU_NEWS_FAIL = 'GET_MENU_NEWS_FAIL';
 export const CHANGE_STATE_LOGIN = "CHANGE_STATE_LOGIN";
+export const SEARCH = 'SEARCH';
+export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
+export const SEARCH_FAIL = 'SEARCH_FAIL';

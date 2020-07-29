@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import LoginContainer from '../containers/LoginContainer';
 import TabNavigator from './Tab';
-import SearchComponent from '../components/SearchComponent';
+import SearchContainer from '../containers/SearchContainer';
 
 
 import SchoolInfoComponent from '../components/SchoolsInformation/SchoolInfoComponent';
@@ -29,7 +29,7 @@ function MainNavigator() {
         <Stack.Screen name="Tab" component={TabNavigator} />
 
         <Stack.Screen name="SchoolInfo" component={SchoolInfoComponent}/>
-        <Stack.Screen name="Search" component={SearchComponent}/>
+        <Stack.Screen name="Search" component={SearchContainer}/>
 
         <Stack.Screen name="LearningInfo" component={LearningInfoContainer} />
 

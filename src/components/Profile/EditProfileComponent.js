@@ -99,6 +99,7 @@ export default class EditProfileComponent extends Component {
             borderWidth: 1,
             paddingLeft: 15,
           }}
+          clearTextOnFocus={true}
         />
       </View>
     );
