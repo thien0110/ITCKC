@@ -7,7 +7,9 @@ import {
   Dimensions,
   ScrollView,
   FlatList,
+  StyleSheet,
 } from 'react-native';
+import {Picker} from '@react-native-community/picker';
 import Loading from '../customs/Loading';
 import Images from '../../res/Images';
 import HeaderNavigation from '../customs/HeaderNavigation';
@@ -19,19 +21,76 @@ import {objectIsNull, arrayIsEmpty} from '../../res/Functions';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default class LearningInfoComponent extends Component {
+  state = {
+    Semestery: '2',
+    Type: '2',
+  };
   componentDidMount() {
     this.props.getSubjectAction();
   }
+  Semester(type) {
+    return (
+      <View>
+        <Picker
+          selectedValue={this.state.Semestery}
+          style={{width: 135, fontSize:15}}
+          mode={'dialog'}
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({Semestery: itemValue})
+          }>
+          <Picker.Item label="Học kỳ 1" value="1" />
+          <Picker.Item label="Học kỳ 2" value="2" />
+          <Picker.Item label="Học kỳ 3" value="3" />
+          <Picker.Item label="Học kỳ 4" value="4" />
+          <Picker.Item label="Học kỳ 5" value="5" />
+          <Picker.Item label="Học kỳ 6" value="6" />
+        </Picker>
+      </View>
+    );
+  }
+
+  NameSort() {
+    return (
+      <View>
+        <Picker
+          selectedValue={this.state.Type}
+          style={{width: 100}}
+          mode={'dialog'}
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({Type: itemValue})
+          }>
+          <Picker.Item label="A - Z" value="1" />
+          <Picker.Item label="Z - A" value="2" />
+        </Picker>
+      </View>
+    );
+  }
+
+  ShowSort() {
+    return (
+      <View
+        style={{
+          alignItems: 'center', 
+          height:windowHeight/12,
+          paddingHorizontal:(windowWidth *(5/100)),
+          flexWrap: 'wrap', 
+          flexDirection: 'row'}}>
+        <Text>Sắp xếp theo: </Text>
+        {this.NameSort()}
+        {this.Semester()}
+      </View>
+    );
+  }
   showBody() {
     const data = this.props.data;
-    let dataList=[]
+    let dataList = [];
     if (!arrayIsEmpty(data)) {
       dataList = data;
     }
     return (
       <FlatList
         data={dataList}
-        style={{flex: 1, padding: 15}}
+        style={{padding: 15}}
         keyExtractor={(item, index) => 'key' + index}
         renderItem={({item}) => {
           return (
@@ -40,7 +99,7 @@ export default class LearningInfoComponent extends Component {
                 this.props.navigation.navigate('Subject', {item});
               }}
               name={item.name}
-              semester={item.semester}
+              numberOf={item.numberOf}
               teacherName={item.teacherName}
               marginBottom={10}></SubjectsBlock>
           );
@@ -64,7 +123,7 @@ export default class LearningInfoComponent extends Component {
           }}
           title={'Thông tin học tập'}
           titleColor={Colors.white}></HeaderNavigation>
-
+        {this.ShowSort()}
         {this.showBody()}
         {isFetching && <Loading></Loading>}
       </View>
