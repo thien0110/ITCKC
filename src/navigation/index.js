@@ -13,6 +13,8 @@ import TabSubjectNavigator from './subjectInfo';
 import NotiComponent from '../components/NotiComponent'
 import AboutComponent from '../components/Profile/AboutComponent'
 import SettingComponent from '../components/Profile/SettingComponent'
+import TimeTable from '../components/Profile/TimeTableComponent'
+import ScoreTable from '../components/Profile/ScoreTableComponent'
 
 import EditProfileContainer from '../containers/MenuProfile/EditProfileContainer'
 import ProfileContainer from '../containers/MenuProfile/ProfileContainer'
@@ -41,6 +43,8 @@ function MainNavigator() {
         <Stack.Screen name="Profile" component={ProfileContainer} />
         <Stack.Screen name="Subject" component={TabSubjectNavigator} />
         <Stack.Screen name="PostDetail" component={PostDetail}/>
+        <Stack.Screen name="TimeTable" component={TimeTable}/>
+        <Stack.Screen name="ScoreTable" component={ScoreTable}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

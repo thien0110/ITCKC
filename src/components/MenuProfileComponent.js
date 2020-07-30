@@ -58,6 +58,20 @@ export default class MenuProfileComponent extends Component {
         )}
         {this.showBlock(
           () => {
+            this.props.navigation.navigate('TimeTable');
+          },
+          'Thời khóa biểu',
+          Images.iconTimetable,
+        )}
+        {this.showBlock(
+          () => {
+            this.props.navigation.navigate('ScoreTable');
+          },
+          'Bảng điểm',
+          Images.iconScoretable,15,15
+        )}
+        {this.showBlock(
+          () => {
             this.props.navigation.navigate('About');
           },
           'Về ứng dụng',
@@ -66,6 +80,7 @@ export default class MenuProfileComponent extends Component {
         {this.showBlock(() => {
           this.props.navigation.replace("Login", { isLogout: true })
         }, 'Đăng xuất', Images.iconLogout, 0, 15)}
+        
       </View>
     );
   }

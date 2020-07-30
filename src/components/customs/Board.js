@@ -5,10 +5,10 @@ import Colors from '../../res/Colors';
 const windowWidth = Dimensions.get('window').width;
 export default class Board extends Component {
   render() {
-    const {studentName, name, semester, teacherName, onClick} = this.props;
+    const {studentName, name, numberOf, teacherName, onClick} = this.props;
     return (
       <TouchableOpacity onPress={onClick}>
-        <Text
+        {/* <Text
           style={{
             textAlign: 'center',
             fontSize: 25,
@@ -17,7 +17,7 @@ export default class Board extends Component {
             color: Colors.navigation,
           }}>
           {studentName}
-        </Text>
+        </Text> */}
         <View
           style={{
             borderRadius: 10,
@@ -43,7 +43,7 @@ export default class Board extends Component {
           <Text
             numberOfLines={2}
             style={{fontWeight: 'bold', marginVertical: 5, color: '#fff'}}>
-            {semester}
+            {numberOf}
           </Text>
           <Text style={{color: '#eeeeee', fontStyle: 'italic'}}>
             {teacherName}
@@ -56,7 +56,7 @@ export default class Board extends Component {
 Board.defaultProps = {
   studentName: '',
   name: '',
-  semester: '',
+  numberOf: '',
   teacherName: '',
   onClick: () => {},
 };

@@ -35,6 +35,16 @@ export function menuApi(input) {
               time:'2020-10-01T10:12:42.288Z',
               type:'3',
             },
+            {
+              id:"518cbb1389da79d3a25453f9",
+              title: '[THÔNG BÁO] LỊCH THI LẦN 2 – TUẦN 47 – 48 – 49',
+              description:
+                'Khoa CNTT xin thông báo thời gian và địa điểm thi lần 2 các môn diễn ra trong tuần 47 – 48 – 49 như sau:',
+              url: 'https://cntt.caothang.edu.vn/wp-content/uploads/2018/03/2-554x399.jpg',
+              time:'2020-10-01T10:12:42.288Z',
+              type:'1',
+            }
+
           ],
     };
   } else {
