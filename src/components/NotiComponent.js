@@ -21,10 +21,11 @@ export default class NotiComponent extends Component {
           style={{
             width: '100%',
             height: windowHeight / 6,
-            backgroundColor: Colors.grayOpacity,
+            backgroundColor: Colors.white,
             borderRadius: 10,
-            marginBottom: 10,
+            marginBottom: 5,
             padding: 10,
+            overflow:'hidden'
           }}>
           <View
             style={{
@@ -32,14 +33,25 @@ export default class NotiComponent extends Component {
               alignItems: 'center',
               marginBottom: 5,
             }}>
-            <Image
-              source={icon}
+            <View
               style={{
-                width: 20,
-                height: 20,
-                resizeMode: 'contain',
-              }}></Image>
-            <Text style={{color: Colors.gray2, marginLeft: 5}}>{type}</Text>
+                backgroundColor: Colors.gray,
+                alignItems: 'center',
+                borderRadius: 50,
+                width: 35,
+                height: 35,
+              }}>
+              <Image
+                source={icon}
+                style={{
+                  width: 20,
+                  height: 20,
+                  resizeMode: 'contain',
+                  position: 'absolute',
+                  top: 6,
+                }}></Image>
+            </View>
+            <Text style={{color: Colors.gray2, marginLeft: 5, fontSize: windowHeight / 45}}>{type}</Text>
           </View>
           <Text
             style={{
@@ -47,18 +59,19 @@ export default class NotiComponent extends Component {
               position: 'absolute',
               right: 10,
               top: 10,
+              fontSize: windowHeight / 50
             }}>
             {time}
           </Text>
-          <Text style={{fontWeight: 'bold', fontSize: 15}}>{title}</Text>
-          <Text>{des}</Text>
+          <Text style={{fontWeight: 'bold', fontSize: windowHeight / 50}}>{title}</Text>
+          <Text style={{fontSize: windowHeight / 55}}>{des}</Text>
         </View>
       </TouchableOpacity>
     );
   }
   showBody() {
     return (
-      <View style={{flex: 1, paddingHorizontal: 10,paddingTop:10}}>
+      <View style={{flex: 1, paddingHorizontal: 10, paddingTop: 10}}>
         <ScrollView>
           {this.showNoti(
             'THÔNG TIN NHÀ TRƯỜNG',

@@ -9,7 +9,6 @@ import Images from '../../res/Images';
 
 import AlertCustom from '../customs/AlertComponent';
 export default class EditProfileComponent extends Component {
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -27,25 +26,25 @@ export default class EditProfileComponent extends Component {
       motherPhoneNumber: '',
     };
   }
-  setDataEditProfile(data){
+  setDataEditProfile(data) {
     this.setState({
-      firstName: data.ten, 
-      lastName: data.ho, 
+      firstName: data.ten,
+      lastName: data.ho,
       sex: data.sex,
-      permanentAddress: data.diaChiThuongTru, 
-      temporaryAddress: data.diaChiTamTru, 
+      permanentAddress: data.diaChiThuongTru,
+      temporaryAddress: data.diaChiTamTru,
       phoneNumber: data.sdt,
       birthDay: data.ngaySinh,
-      idCode: data.cmnd, 
-      fatherName:data.hoTenCha,
+      idCode: data.cmnd,
+      fatherName: data.hoTenCha,
       motherName: data.hoTenMe,
       fatherPhoneNumber: data.sdtCha,
       motherPhoneNumber: data.sdtMe,
-    })
+    });
   }
-  componentDidMount(){
+  componentDidMount() {
     const {data} = this.props.route.params;
-    if(!objectIsNull(data)){
+    if (!objectIsNull(data)) {
       this.setDataEditProfile(data);
     }
   }
@@ -82,78 +81,38 @@ export default class EditProfileComponent extends Component {
   }
   showInput(title, value, keyboardType, onChangeText) {
     return (
-      <View
-        style={{
-          padding: 3,
-          width: '100%',
-          marginBottom: 10,
-          paddingTop: 10,
-        }}>
-        <View
-          style={{
-            position: 'absolute',
-            left: 30,
-            backgroundColor: Colors.background,
-            zIndex: 1,
-          }}>
-          <Text
-            style={
-              {
-                //color:Colors.grayStrong
-              }
-            }>
-            {' '}
-            {title}{' '}
-          </Text>
-        </View>
+      <View style={{marginTop: 15,marginLeft:15}}>
+        <Text style={{marginBottom: 5, fontSize: 15, color: Colors.buttonBlue}}>
+          {title}
+          {':'}
+        </Text>
         <TextInput
-          style={{
-            borderRadius: 10,
-            borderWidth: 1,
-            paddingLeft: 15,
-            width: '100%',
-            borderColor: Colors.grayStrong,
-            // backgroundColor:Colors.white
-          }}
-          keyboardType={keyboardType}
           value={value}
           onChangeText={(text) => {
             onChangeText(text);
           }}
+          keyboardType={keyboardType}
+          style={{
+            backgroundColor: Colors.white,
+            borderRadius: 5,
+            borderColor: Colors.grayOpacity,
+            borderWidth: 1,
+            paddingLeft: 15,
+          }}
+          clearTextOnFocus={true}
         />
       </View>
     );
   }
   showDatePicker(title, value, onDateChange) {
     return (
-      <View
-        style={{
-          padding: 3,
-          width: '100%',
-          marginBottom: 10,
-          paddingTop: 10,
-        }}>
-        <View
-          style={{
-            position: 'absolute',
-            left: 30,
-            backgroundColor: Colors.background,
-            zIndex: 1,
-          }}>
-          <Text
-            style={
-              {
-                //color:Colors.grayStrong
-              }
-            }>
-            {' '}
-            {title}{' '}
-          </Text>
-        </View>
+      <View style={{marginTop: 15,marginLeft:15}}>
+        <Text style={{marginBottom: 10, fontSize: 15, color: Colors.blue}}>
+          {title}
+          {':'}
+        </Text>
         <DatePicker
-          style={{
-            width: '100%',
-          }}
+          style={{width: '106%', }}
           date={value}
           mode="date"
           placeholder="--:--"
@@ -166,11 +125,11 @@ export default class EditProfileComponent extends Component {
               height: 0,
             },
             dateInput: {
-              height: 50,
-              borderRadius: 10,
+              backgroundColor: Colors.white,
+              borderRadius: 5,
+              borderColor: Colors.grayOpacity,
               borderWidth: 1,
-              paddingLeft: 15,
-              borderColor: Colors.grayStrong,
+              height: 50,
             },
           }}
           onDateChange={(date) => {
@@ -182,36 +141,17 @@ export default class EditProfileComponent extends Component {
   }
   showPicker(title, selectedValue, onValueChange) {
     return (
-      <View
-        style={{
-          padding: 3,
-          width: '100%',
-          marginBottom: 10,
-          paddingTop: 10,
-        }}>
+      <View style={{marginTop: 15, marginLeft:15}}>
+        <Text style={{marginBottom: 5, fontSize: 15, color: Colors.blue}}>
+          {title}
+          {':'}
+        </Text>
         <View
           style={{
-            position: 'absolute',
-            left: 30,
-            backgroundColor: Colors.background,
-            zIndex: 1,
-          }}>
-          <Text
-            style={
-              {
-                //color:Colors.grayStrong
-              }
-            }>
-            {' '}
-            {title}{' '}
-          </Text>
-        </View>
-        <View
-          style={{
-            borderRadius: 10,
+            backgroundColor: Colors.white,
+            borderRadius: 5,
+            borderColor: Colors.grayOpacity,
             borderWidth: 1,
-            paddingLeft: 15,
-            borderColor: Colors.grayStrong,
           }}>
           <Picker
             mode="dropdown"
@@ -219,7 +159,7 @@ export default class EditProfileComponent extends Component {
             onValueChange={(itemValue) => {
               onValueChange(itemValue);
             }}
-            style={{height: 50}}>
+            style={{height: 48, paddingLeft: 15}}>
             <Picker.Item label={'Nam'} value={'Nam'} />
             <Picker.Item label={'Nữ'} value={'Nữ'} />
           </Picker>
@@ -244,16 +184,20 @@ export default class EditProfileComponent extends Component {
     } = this.state;
     return (
       <ScrollView>
-        <View style={{flex: 1, padding: 10}}>
-          {this.showInput('Họ', lastName, 'default', (text) => {
-            this.setState({lastName: text});
-          })}
-          {this.showInput('Tên', firstName, 'default', (text) => {
-            this.setState({firstName: text});
-          })}
-          {this.showPicker('Giới tính', sex, (itemValue) => {
-            this.setState({sex: itemValue});
-          })}
+        <View style={{flex: 1, paddingBottom: 15, paddingRight:15}}>
+          <View style={{flexDirection: 'row'}}>
+            <View style={{flex: 1}}>
+              {this.showInput('Họ', lastName, 'default', (text) => {
+                this.setState({lastName: text});
+              })}
+            </View>
+            <View style={{flex: 1}}>
+              {this.showInput('Tên', firstName, 'default', (text) => {
+                this.setState({firstName: text});
+              })}
+            </View>
+          </View>
+
           {this.showInput(
             'Địa chỉ thường trú',
             permanentAddress,
@@ -270,12 +214,21 @@ export default class EditProfileComponent extends Component {
               this.setState({temporaryAddress: text});
             },
           )}
+          <View style={{flexDirection: 'row'}}>
+            <View style={{flex: 1}}>
+              {this.showDatePicker('Ngày sinh', birthDay, (date) => {
+                this.setState({birthDay: date});
+              })}
+            </View>
+            <View style={{flex: 1}}>
+              {this.showPicker('Giới tính', sex, (itemValue) => {
+                this.setState({sex: itemValue});
+              })}
+            </View>
+          </View>
 
           {this.showInput('Số điện thoại', phoneNumber, 'phone-pad', (text) => {
             this.setState({phoneNumber: text});
-          })}
-          {this.showDatePicker('Ngày sinh', birthDay, (date) => {
-            this.setState({birthDay: date});
           })}
           {this.showInput('CMND/CCCD', idCode, 'phone-pad', (text) => {
             this.setState({idCode: text});
@@ -321,12 +274,12 @@ export default class EditProfileComponent extends Component {
           color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
           iconLeftColor={Colors.black}
-          haveSave={true}
-          textSave={'Lưu'}
+          buttonRight={true}
+          textButtonRight={'Lưu'}
           onClickLeft={() => {
-            this.props.navigation.goBack()
+            this.props.navigation.goBack();
           }}
-          onClickSave={() => {
+          onClickButtonRight={() => {
             this.onPressSave();
           }}></HeaderNavigation>
         {this.showView()}

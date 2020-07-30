@@ -12,10 +12,13 @@ import HeaderNavigation from '../customs/HeaderNavigation';
 import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Board from '../customs/Board';
+import {objectIsNull, stringIsEmpty} from '../../res/Functions';
 
 export default class ThreadComponent extends Component {
+  
   shareBlock() {
     return (
+      <ScrollView>
       <FlatList
         data={data}
         keyExtractor={(item, index) => 'key' + index}
@@ -35,17 +38,17 @@ export default class ThreadComponent extends Component {
               </View>
             </View>
           );
-        }}></FlatList>
+        }}></FlatList></ScrollView>
     );
   }
   showBody() {
+    const {item} = this.props.route.params;
     return (
       <View style={{flex: 1, padding: 10}}>
         <Board
-          studentName={'Lê Dương Hưng Thịnh'}
           name={'CDTH17PMC'}
-          semester={'Học kỳ 2'}
-          teacherName={'Nguyễn Vũ Dzũng'}></Board>
+          numberOf={'101'}
+          teacherName={item.teacherName}></Board>
 
         <View style={styles.viewStyle}>
           <View style={{display: 'flex', flexDirection: 'row', justifyContent:'flex-start'}}>
@@ -72,14 +75,15 @@ export default class ThreadComponent extends Component {
     );
   }
   render() {
-    
-    // console.log(this.props);
-    const data = {nameSubject: 'Toán rời rạc'};
+    const {item} = this.props.route.params;
+    var titleHeader=""
+    if (!objectIsNull(item)) {
+      titleHeader=item.name
+    } 
     return (
       <View style={{flex: 1, alignItems: 'center'}}>
         <HeaderNavigation
-          data={this.data}
-          title={data.nameSubject}
+          title={titleHeader}
           titleColor={Colors.white}
           color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}

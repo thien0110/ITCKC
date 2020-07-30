@@ -5,7 +5,7 @@ import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Article from '../customs/Article';
 
-import FlatListHorizontal from '../customs/FlatListHorizontal';
+import {FlatListHorizontal} from '../customs/FlatListHorizontal';
 export default class SchoolInfoComponent extends Component {
     
     showNews(heading, data) {

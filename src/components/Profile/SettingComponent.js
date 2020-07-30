@@ -168,8 +168,8 @@ export default class SettingComponent extends Component {
             }}></Image>
           <View
             style={{
-              borderBottomWidth: 1,
-              borderBottomColor: Colors.grayStrong,
+              borderBottomWidth:0.5 ,
+              borderBottomColor: Colors.grayOpacity,
               justifyContent: 'center',
               flex: 5,
               padding: 15,

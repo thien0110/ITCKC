@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../res/Images';
 import SlideShow from './customs/SlideShow';
 import Loading from './customs/Loading';
-import FlatListHorizontal from './customs/FlatListHorizontal';
+import {FlatListHorizontal} from './customs/FlatListHorizontal';
 import Block from './customs/Block';
 
 const windowWidth = Dimensions.get('window').width;
@@ -32,7 +32,7 @@ export default class MenuComponent extends Component {
     );
   }
   showBody() {
-    const data =this.props.data;
+    const {data} = this.props;
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
         <ScrollView>
@@ -52,7 +52,7 @@ export default class MenuComponent extends Component {
               iconName={Images.iconSchool}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('TabSchool');
+                this.props.navigation.navigate('SchoolInfo');
               }}
               title={'Hoạt động ngoại khóa'}
               iconName={Images.iconExercise}
@@ -68,13 +68,13 @@ export default class MenuComponent extends Component {
               iconName={Images.iconBooks}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('TabSchool');
+                this.props.navigation.navigate('SchoolInfo');
               }}
               title={'Thông tin khoa'}
               iconName={Images.iconIt}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('TabSchool');
+                this.props.navigation.navigate('SchoolInfo');
               }}
               title={'Thông tin việc làm'}
               iconName={Images.iconProject}
@@ -82,15 +82,16 @@ export default class MenuComponent extends Component {
               marginRight={15}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('TabSchool');
+                this.props.navigation.navigate('SchoolInfo');
               }}
               title={'Cựu sinh viên'}
               iconName={Images.iconTeam}></Block>
           </View>
-          <View >
-          {this.showNews('Thông tin từ khoa', data)}
-          {this.showNews('Hôm nay ăn gì?', data)}
-          {this.showNews('Thời sự hôm nay?', data)}
+          <View>
+            {this.showNews('Thông tin từ khoa', data)}
+            {this.showNews('Thông tin từ phòng ban', data)}
+            {this.showNews('Thông tin từ lớp học phần', data)}
+            {this.showNews('Thông tin từ trung tâm tin học', data)}
           </View>
         </ScrollView>
       </View>
@@ -99,7 +100,7 @@ export default class MenuComponent extends Component {
   render() {
     // const {itemId} = this.props.route.params;
     // console.warn(itemId, 'menu');
-    const {isFetching} =this.props;
+    const {isFetching} = this.props;
     return (
       <View
         style={{
@@ -110,8 +111,13 @@ export default class MenuComponent extends Component {
         <HeaderNavigation
           iconRight={Images.iconBell}
           haveSearch={true}
+          onClickSearch={() => {
+            this.props.navigation.navigate('Search');
+          }}
           color={Colors.backgroundBlue}
-          onClickRight={()=>{this.props.navigation.navigate('Noti');}}></HeaderNavigation>
+          onClickRight={() => {
+            this.props.navigation.navigate('Noti');
+          }}></HeaderNavigation>
         {this.showBody()}
         {isFetching && <Loading></Loading>}
       </View>

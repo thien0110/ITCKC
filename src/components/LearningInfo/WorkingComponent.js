@@ -1,46 +1,62 @@
 import React, {Component} from 'react';
-import {Text, View, TextInput, FlatList, StyleSheet, Dimensions} from 'react-native';
+import {
+  Text,
+  View,
+  TextInput,
+  FlatList,
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import Images from '../../res/Images';
 
+import {objectIsNull, stringIsEmpty} from '../../res/Functions';
 
 const windowWidth = Dimensions.get('window').width;
-export default class ThreadComponent extends Component {
+export default class WorkingComponent extends Component {
   shareBlock() {
     return (
-      <FlatList
-        data={data}
-        keyExtractor={(item, index) => 'key' + index}
-        renderItem={({item}) => {
-          return (
-            <View style={styles.viewStyle}>
-              <View style={{padding: 10, marginBottom: 0}}>
-                <Text style={{fontSize: 18, marginLeft: 10}}>
-                  Tài liệu mới: {item.docName}
-                </Text>
-                <Text style={{fontSize: 15, marginLeft: 10}}>
-                  Đã đăng: {item.time}
-                </Text>
-                <Text style={{fontSize: 15, marginLeft: 10}}>{item.type}</Text>
-                <TextInput
-                  style={{color: Colors.gray2, fontSize: 15, marginLeft: 10}}
-                  placeholder="Thêm nhận xét..."></TextInput>
+      <View>
+        <FlatList
+          data={data}
+          keyExtractor={(item, index) => 'key' + index}
+          renderItem={({item}) => {
+            return (
+              <View style={styles.viewStyle}>
+                <View style={{padding: 10, marginBottom: 0}}>
+                  <Text style={{fontSize: 18, marginLeft: 10}}>
+                    Tài liệu mới: {item.docName}
+                  </Text>
+                  <Text style={{fontSize: 15, marginLeft: 10}}>
+                    Đã đăng: {item.time}
+                  </Text>
+                  <Text style={{fontSize: 15, marginLeft: 10}}>
+                    {item.type} - Chủ đề: {item.topic}
+                  </Text>
+                  <TextInput
+                    style={{color: Colors.gray2, fontSize: 15, marginLeft: 10}}
+                    placeholder="Thêm nhận xét..."></TextInput>
+                </View>
               </View>
-            </View>
-          );
-        }}></FlatList>
+            );
+          }}></FlatList>
+      </View>
     );
   }
   Showbody() {
     return <View>{this.shareBlock()}</View>;
   }
   render() {
-    const data = {nameSubject: 'Toán rời rạc'};
+    const {item} = this.props.route.params;
+    var titleHeader = '';
+    if (!objectIsNull(item)) {
+      titleHeader = item.name;
+    }
     return (
       <View style={{flex: 1, alignItems: 'center'}}>
         <HeaderNavigation
-          data={this.data}
-          title={data.nameSubject}
+          title={titleHeader}
           titleColor={Colors.white}
           color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
@@ -49,10 +65,7 @@ export default class ThreadComponent extends Component {
           onClickLeft={() => {
             this.props.navigation.goBack();
           }}></HeaderNavigation>
-        <View style={{padding: 15}}>
-          <Text style={{fontSize: 30}}> Chủ đề 1</Text>
-          {this.Showbody()}
-        </View>
+        <View style={{padding: 15, overflow: 'hidden'}}>{this.Showbody()}</View>
       </View>
     );
   }
@@ -70,8 +83,8 @@ const data = [
 
 const styles = StyleSheet.create({
   viewStyle: {
-    alignContent:'center',
-    width:windowWidth - (windowWidth*8/100),
+    alignContent: 'center',
+    width: windowWidth - (windowWidth * 8) / 100,
     marginBottom: 10,
     borderRadius: 10,
     backgroundColor: '#ddd',

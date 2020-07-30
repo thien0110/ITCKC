@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   itemTitle: {
-    fontSize: 20,
+    fontSize: width/28,
     marginBottom: 5,
     fontWeight: 'bold',
   },

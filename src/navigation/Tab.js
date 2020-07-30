@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MenuContainer from '../containers/MenuContainer';
-import MenuProfileComponent from '../components/MenuProfileComponent';
+import MenuProfileContainer from '../containers/MenuProfileContainer';
 import Images from '../res/Images';
 import {
   Image,
@@ -47,7 +47,7 @@ export default function TabNavigator({route}) {
       }}
       >
         <Tab.Screen name="Menu" component={MenuContainer} />
-        <Tab.Screen name="MenuProfile" component={MenuProfileComponent} />
+        <Tab.Screen name="MenuProfile" component={MenuProfileContainer} />
       </Tab.Navigator>
   );
 }

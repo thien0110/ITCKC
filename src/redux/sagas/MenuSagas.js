@@ -4,7 +4,7 @@ import {menuApi} from '../api/MenuApis';
 const messageError = 'Không thể kết nối tới server.';
 function* menuFlow(action) {
   try {
-    const response = yield menuApi();
+    const response = yield menuApi(action.input);
     if (response.resultCode === 1) {
       yield put({type: GET_MENU_NEWS_SUCCESS, data: response.data, message:response.message});
     } else {

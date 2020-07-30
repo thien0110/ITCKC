@@ -3,6 +3,7 @@ import {Text, View, Image, Dimensions, TouchableOpacity} from 'react-native';
 import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
 import Images from '../res/Images';
+import {forgetUser} from '../res/Functions'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const widthBlock = (windowWidth - 45) / 2;
@@ -57,12 +58,29 @@ export default class MenuProfileComponent extends Component {
         )}
         {this.showBlock(
           () => {
+            this.props.navigation.navigate('TimeTable');
+          },
+          'Thời khóa biểu',
+          Images.iconTimetable,
+        )}
+        {this.showBlock(
+          () => {
+            this.props.navigation.navigate('ScoreTable');
+          },
+          'Bảng điểm',
+          Images.iconScoretable,15,15
+        )}
+        {this.showBlock(
+          () => {
             this.props.navigation.navigate('About');
           },
           'Về ứng dụng',
           Images.iconInfo,
         )}
-        {this.showBlock(() => {}, 'Đăng xuất', Images.iconLogout, 0, 15)}
+        {this.showBlock(() => {
+          this.props.navigation.replace("Login", { isLogout: true })
+        }, 'Đăng xuất', Images.iconLogout, 0, 15)}
+        
       </View>
     );
   }

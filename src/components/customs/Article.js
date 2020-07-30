@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View ,Image, TouchableOpacity, Dimensions} from 'react-native'
 import Colors from '../../res/Colors';
+import Images from '../../res/Images';
 
 const windowWidth = Dimensions.get('window').width;
 export default class Article extends Component {
@@ -25,7 +26,15 @@ export default class Article extends Component {
                 shadowRadius: 5,
                 elevation: 5
             }}>
-                <View style={{borderRadius:10 ,backgroundColor:Colors.navigation, width:windowWidth-40, height:100}}></View>
+                <View style={{
+                    borderRadius:10 ,
+                    backgroundColor:Colors.navigation, 
+                    width:windowWidth-40, height:100}}>
+                    <Image source={"ddddddddddd"}
+                        style={{
+                            resizeMode: 'contain'}}>
+                    </Image>
+                </View>
                 <Text numberOfLines={1} style={{fontSize:20, fontWeight:'bold', marginVertical:5}}>{title}</Text>
                 <Text numberOfLines={2}>{content}</Text>
                 <Text style={{color:'#909090',textAlign:'right' }}>{time}</Text>
