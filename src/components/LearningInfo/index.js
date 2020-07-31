@@ -71,8 +71,8 @@ export default class LearningInfoComponent extends Component {
       <View
         style={{
           alignItems: 'center', 
-          height:windowHeight/12,
-          paddingHorizontal:(windowWidth *(5/100)),
+          // height:windowHeight/12,
+          paddingHorizontal:15,
           flexWrap: 'wrap', 
           flexDirection: 'row'}}>
         <Text>Sắp xếp theo: </Text>
@@ -90,7 +90,7 @@ export default class LearningInfoComponent extends Component {
     return (
       <FlatList
         data={dataList}
-        style={{padding: 15}}
+        style={{ paddingHorizontal:15,}}
         keyExtractor={(item, index) => 'key' + index}
         renderItem={({item}) => {
           return (
@@ -101,7 +101,7 @@ export default class LearningInfoComponent extends Component {
               name={item.name}
               numberOf={item.numberOf}
               teacherName={item.teacherName}
-              marginBottom={10}></SubjectsBlock>
+              marginBottom={15}></SubjectsBlock>
           );
         }}></FlatList>
     );

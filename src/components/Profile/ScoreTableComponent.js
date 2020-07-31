@@ -14,6 +14,7 @@ import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 const window = Dimensions.get('window');
+import { WebView } from 'react-native-webview';
 
 export default class SettingComponent extends Component {
   state = {
@@ -192,7 +193,7 @@ export default class SettingComponent extends Component {
           onClickLeft={() => {
             this.props.navigation.goBack();
           }}></HeaderNavigation>
-        <Text style={{alignContent:'center'}}>Hãy code dùm tôi</Text>
+        <WebView source={{ uri: 'https://10.0.3.2:4100/api/sinhvien' }} />
       </View>
     );
   }

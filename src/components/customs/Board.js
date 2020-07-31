@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, Image, TouchableOpacity, Dimensions} from 'react-native';
+import {Text, View, Image, TouchableOpacity, Dimensions, ImageBackground} from 'react-native';
 import Colors from '../../res/Colors';
 
 const windowWidth = Dimensions.get('window').width;
@@ -18,8 +18,9 @@ export default class Board extends Component {
           }}>
           {studentName}
         </Text> */}
-        <View
+        <ImageBackground
           style={{
+            
             borderRadius: 10,
             padding: 10,
             backgroundColor: Colors.backgroundBlue,
@@ -48,7 +49,7 @@ export default class Board extends Component {
           <Text style={{color: '#eeeeee', fontStyle: 'italic'}}>
             {teacherName}
           </Text>
-        </View>
+        </ImageBackground>
       </TouchableOpacity>
     );
   }
