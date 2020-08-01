@@ -26,9 +26,10 @@ export default class MenuComponent extends Component {
   showNews(heading, data) {
     return (
       <View>
-        <Text style={{fontWeight: 'bold', marginLeft: 15}}>{heading}</Text>
-        <FlatListHorizontal data={data}></FlatListHorizontal>
+        <Text style={{fontWeight: 'bold', marginLeft: 15, fontSize:20}}>{heading}</Text>
+        <FlatListHorizontal data={data} onPress={(item)=>{this.props.navigation.navigate('PostDetail', {item:item})}}></FlatListHorizontal>
       </View>
+
     );
   }
   showBody() {
@@ -36,8 +37,9 @@ export default class MenuComponent extends Component {
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
         <ScrollView>
+        <View style={{marginTop:15}}>
           <SlideShow data={data}></SlideShow>
-          <View
+          </View><View
             style={{
               flexWrap: 'wrap',
               flexDirection: 'row',
@@ -64,8 +66,8 @@ export default class MenuComponent extends Component {
               onPress={() => {
                 this.props.navigation.navigate('LearningInfo');
               }}
-              title={'Thông tin học tập'}
-              iconName={Images.iconBooks}></Block>
+              title={'E-Learning'}
+              iconName={Images.iconElearning}></Block>
             <Block
               onPress={() => {
                 this.props.navigation.navigate('SchoolInfo');

@@ -51,10 +51,10 @@ export default class SubjectsBlock extends Component {
           <Image
             source={covers[this.state.currentImageIndex]}
             style={{
-              alignContent: 'center',
-              width: '120%',
-              position: 'absolute',
               top: -10,
+              width: '120%',
+              alignContent: 'center',
+              position: 'absolute',
               resizeMode: 'cover',
             }}></Image>
           <Text

@@ -23,7 +23,7 @@ export default class NotiComponent extends Component {
             height: windowHeight / 6,
             backgroundColor: Colors.white,
             borderRadius: 10,
-            marginBottom: 5,
+            marginBottom: 10,
             padding: 10,
             overflow:'hidden'
           }}>

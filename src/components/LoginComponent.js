@@ -60,6 +60,7 @@ export default class LoginComponent extends Component {
     const {params} = this.props.route;
 
     const myLogin = await getRememberedUser();
+    console.warn(myLogin)
     if (
       !objectIsNull(myLogin) &&
       !stringIsEmpty(myLogin.username) &&
@@ -72,7 +73,8 @@ export default class LoginComponent extends Component {
       if (objectIsNull(params) || params.isLogout != true) {
         this.onLogin();
       }
-      
+    }else{
+      this.changeState(['rememberMe'], [false]);
     }
   }
   loginSuccess() {
@@ -384,7 +386,7 @@ export default class LoginComponent extends Component {
     );
   }
   render() {
-    const {messageAlert, showAlert, } = this.state;
+    const {messageAlert, showAlert} = this.state;
     const {
       data,
       message,

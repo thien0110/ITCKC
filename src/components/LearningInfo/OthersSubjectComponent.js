@@ -19,7 +19,7 @@ export default class OthersSubjectComponent extends Component {
               titleColor={Colors.white}
               color={Colors.backgroundBlue}
               iconLeft={Images.iconBack}
-              iconRight={Images.icontabmenu}
+              iconRight={Images.iconTabNenu}
               iconLeftColor={Colors.black}
               onClickLeft={() => {
                 this.props.navigation.goBack();

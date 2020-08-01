@@ -39,8 +39,7 @@ export default class Block extends Component {
             source={iconName}
             style={{
               width: '40%',
-              height: '40%',
-
+              height: '50%',
               resizeMode: 'contain',
             }}></Image>
           <Text style={{textAlign: 'center', fontWeight: 'bold'}}>{title}</Text>

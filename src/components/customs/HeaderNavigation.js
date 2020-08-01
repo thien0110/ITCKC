@@ -48,7 +48,9 @@ export default class HeaderNavigation extends React.Component {
           <TouchableOpacity
             onPress={() => {
               onClickLeft();
-            }}>
+            }}
+            style={{position:'absolute', zIndex:1}}
+            >
             <Image
               source={iconLeft}
               style={{
@@ -122,7 +124,8 @@ export default class HeaderNavigation extends React.Component {
           <TouchableOpacity
             onPress={() => {
               onClickRight();
-            }}>
+            }}
+            style={{position:'absolute', right:0}}>
             <Image
               source={iconRight}
               style={{
