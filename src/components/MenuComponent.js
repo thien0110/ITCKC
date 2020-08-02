@@ -37,14 +37,16 @@ export default class MenuComponent extends Component {
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
         <ScrollView>
-        <View style={{marginTop:15}}>
+        {/* <View style={{marginTop:15}}>
           <SlideShow data={data}></SlideShow>
-          </View><View
+          </View> */}
+          <View
             style={{
               flexWrap: 'wrap',
               flexDirection: 'row',
               paddingHorizontal: 15,
               marginBottom: 7.5,
+              marginTop:15
             }}>
             <Block
               onPress={() => {
@@ -54,7 +56,7 @@ export default class MenuComponent extends Component {
               iconName={Images.iconSchool}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('SchoolInfo');
+                this.props.navigation.navigate('ExtraActivity');
               }}
               title={'Hoạt động ngoại khóa'}
               iconName={Images.iconExercise}
@@ -70,13 +72,13 @@ export default class MenuComponent extends Component {
               iconName={Images.iconElearning}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('SchoolInfo');
+                this.props.navigation.navigate('DepartmentInfo');
               }}
               title={'Thông tin khoa'}
               iconName={Images.iconIt}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('SchoolInfo');
+                this.props.navigation.navigate('WorkInfo');
               }}
               title={'Thông tin việc làm'}
               iconName={Images.iconProject}
@@ -84,7 +86,7 @@ export default class MenuComponent extends Component {
               marginRight={15}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('SchoolInfo');
+                this.props.navigation.navigate('Alumni');
               }}
               title={'Cựu sinh viên'}
               iconName={Images.iconTeam}></Block>

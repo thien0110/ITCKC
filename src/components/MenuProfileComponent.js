@@ -57,10 +57,10 @@ export default class MenuProfileComponent extends Component {
           )}
           {this.showBlock(
             () => {
-              this.props.navigation.navigate('Profile');
+              this.props.navigation.navigate('YourClassComponent');
             },
             'Lớp của bạn',
-            Images.iconBooks,
+            Images.iconBooks  ,
             15,
             15,
           )}
