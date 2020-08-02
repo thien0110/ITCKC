@@ -26,10 +26,15 @@ export default class MenuComponent extends Component {
   showNews(heading, data) {
     return (
       <View>
-        <Text style={{fontWeight: 'bold', marginLeft: 15, fontSize:20}}>{heading}</Text>
-        <FlatListHorizontal data={data} onPress={(item)=>{this.props.navigation.navigate('PostDetail', {item:item})}}></FlatListHorizontal>
+        <Text style={{fontWeight: 'bold', marginLeft: 15, fontSize: 20}}>
+          {heading}
+        </Text>
+        <FlatListHorizontal
+          data={data}
+          onPress={(item) => {
+            this.props.navigation.navigate('PostDetail', {item: item});
+          }}></FlatListHorizontal>
       </View>
-
     );
   }
   showBody() {
@@ -37,7 +42,7 @@ export default class MenuComponent extends Component {
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
         <ScrollView>
-        {/* <View style={{marginTop:15}}>
+          {/* <View style={{marginTop:15}}>
           <SlideShow data={data}></SlideShow>
           </View> */}
           <View
@@ -46,7 +51,7 @@ export default class MenuComponent extends Component {
               flexDirection: 'row',
               paddingHorizontal: 15,
               marginBottom: 7.5,
-              marginTop:15
+              marginTop: 15,
             }}>
             <Block
               onPress={() => {
