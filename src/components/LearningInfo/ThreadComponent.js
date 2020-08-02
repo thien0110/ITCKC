@@ -18,6 +18,7 @@ export default class ThreadComponent extends Component {
   
   shareBlock() {
     return (
+      <ScrollView>
       <FlatList
         data={data}
         keyExtractor={(item, index) => 'key' + index}
@@ -37,7 +38,7 @@ export default class ThreadComponent extends Component {
               </View>
             </View>
           );
-        }}></FlatList>
+        }}></FlatList></ScrollView>
     );
   }
   showBody() {
@@ -45,9 +46,8 @@ export default class ThreadComponent extends Component {
     return (
       <View style={{flex: 1, padding: 10}}>
         <Board
-          studentName={'Lê Dương Hưng Thịnh'}
           name={'CDTH17PMC'}
-          semester={'Học kỳ 2'}
+          numberOf={'101'}
           teacherName={item.teacherName}></Board>
 
         <View style={styles.viewStyle}>
@@ -87,7 +87,7 @@ export default class ThreadComponent extends Component {
           titleColor={Colors.white}
           color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
-          iconRight={Images.icontabmenu}
+          iconRight={Images.iconTabMenu}
           iconLeftColor={Colors.black}
           onClickLeft={() => {
             this.props.navigation.goBack();

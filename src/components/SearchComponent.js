@@ -22,7 +22,7 @@ export default class SearchComponent extends Component {
     const {data} =this.props;
     if (data && data.length) {
       return (
-        <View style={{flex:1}}>
+        <View style={{flex:1, paddingTop:15}}>
           <FlatList
             data={data}
             keyExtractor={(item, index) => 'key' + index}

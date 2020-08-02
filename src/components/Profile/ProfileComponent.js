@@ -10,11 +10,20 @@ import {ScrollView} from 'react-native-gesture-handler';
 export default class ProfileComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showAlert: false,
+      messageAlert:'',
+    };
   }
   componentDidMount() {
     this.props.getProfileAction();
   }
+  onChangeStateAlert = (state, des) => {
+    this.setState({
+      showAlert: state,
+      messageAlert: des,
+    });
+  };
   showInput(title, content) {
     return (
       <View
@@ -91,8 +100,8 @@ export default class ProfileComponent extends Component {
     }
   }
   render() {
-    const {isFetching, data} = this.props;
-    // console.warn("dataa", data)
+    const {isFetching, data, message,formatData} = this.props;
+    const { showAlert,messageAlert, } = this.state;
     return (
       <View style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
@@ -105,10 +114,17 @@ export default class ProfileComponent extends Component {
             this.props.navigation.goBack();
           }}
           onClickButtonRight={() => {
-            this.props.navigation.navigate('EditProfile', {data});
-          }}></HeaderNavigation>
+            data && this.props.navigation.navigate('EditProfile', {data});
+          }}
+          ></HeaderNavigation>
         {this.showView()}
         {isFetching && <Loading></Loading>}
+        {message &&
+          AlertCustom(true, message, () => {
+            this.onChangeStateAlert(false, '');
+            formatData();
+            this.props.navigation.goBack();
+          })}
       </View>
     );
   }

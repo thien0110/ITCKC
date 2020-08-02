@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     height: height / 5,
     backgroundColor: 'white',
     marginHorizontal:15,
-    marginVertical:15,
+    marginBottom:15,
     padding: 10,
     borderRadius: 10,
     shadowColor: '#000',
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   itemTitle: {
-    fontSize: 20,
+    fontSize: width/28,
     marginBottom: 5,
     fontWeight: 'bold',
   },

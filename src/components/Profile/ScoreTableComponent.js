@@ -14,6 +14,7 @@ import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 const window = Dimensions.get('window');
+import { WebView } from 'react-native-webview';
 
 export default class SettingComponent extends Component {
   state = {
@@ -168,8 +169,8 @@ export default class SettingComponent extends Component {
             }}></Image>
           <View
             style={{
-              borderBottomWidth:0.5 ,
-              borderBottomColor: Colors.grayOpacity,
+              borderBottomWidth: 1,
+              borderBottomColor: Colors.grayStrong,
               justifyContent: 'center',
               flex: 5,
               padding: 15,
@@ -184,7 +185,7 @@ export default class SettingComponent extends Component {
     return (
       <View style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
-          title={'Cài đặt'}
+          title={'Bảng điểm'}
           titleColor={Colors.white}
           color={Colors.navigation}
           iconLeft={Images.iconBack}
@@ -192,15 +193,7 @@ export default class SettingComponent extends Component {
           onClickLeft={() => {
             this.props.navigation.goBack();
           }}></HeaderNavigation>
-        <View style={{flex: 1, padding: 15}}>
-          {this.showItem(Images.iconBell, 'Thông báo', () => {})}
-          {this.showItem(Images.moon, 'Chế độ đêm', () => {})}
-          {this.showItem(Images.translation, 'Ngôn ngữ', () => {})}
-          {this.showItem(Images.password, 'Đổi mật khẩu', () => {
-            this.setModalVisible(true);
-          })}
-        </View>
-        {this.showModel()}
+        <WebView source={{ uri: 'https://10.0.3.2:4100/api/sinhvien' }} />
       </View>
     );
   }

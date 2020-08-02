@@ -1,5 +1,5 @@
 const messageError = 'Không thể kết nối tới server.';
-const fakeApi = true;
+const fakeApi = false;
 import {API_URL} from '../../../config';
 export function editProfileApi(input) {
   // console.warn('inputapi', input);
@@ -69,14 +69,15 @@ export function getProfileApi(input) {
         },
     };
   } else {
-    return fetch(API_URL + 'get_profile', {
-      method: 'POST',
+    return fetch('http://10.0.3.2:4100/api/sinhvien', {
+      method: 'GET',
       headers: new Headers({
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
       }),
-      body: JSON.stringify({
-        maSinhVien: input.studentCode,
-      }),
+      // body: JSON.stringify({
+      //   maSinhVien: input.studentCode,
+      // }),
     })
       .then((response) => response.json())
       .then((responseJson) => {
@@ -84,6 +85,7 @@ export function getProfileApi(input) {
         return responseJson;
       })
       .catch((error) => {
+        console.warn(error)
         return {resultCode: -1, message: messageError};
       });
   }
