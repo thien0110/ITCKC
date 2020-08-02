@@ -81,11 +81,11 @@ export function getProfileApi(input) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        console.warn('responseJson', responseJson);
+        // console.warn('responseJson', responseJson);
         return responseJson;
       })
       .catch((error) => {
-        console.warn(error)
+        // console.warn(error)
         return {resultCode: -1, message: messageError};
       });
   }

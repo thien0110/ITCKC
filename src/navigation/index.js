@@ -5,6 +5,10 @@ import * as React from 'react';
 import LoginContainer from '../containers/LoginContainer';
 import TabNavigator from './Tab';
 import SearchContainer from '../containers/SearchContainer';
+import ExtraActivityComponent from '../components/ExtraActivity/ExtraActivityComponent';
+import WorkInfoComponent from '../components/WorkInfo/WorkInfoComponent';
+import AlumniComponent from '../components/Alumni/AlumniComponent';
+import DepartmentInfoComponent from '../components/DepartmentInfo/DepartmentInfoComponent';
 
 
 import SchoolInfoComponent from '../components/SchoolsInformation/SchoolInfoComponent';
@@ -15,6 +19,7 @@ import AboutComponent from '../components/Profile/AboutComponent'
 import SettingComponent from '../components/Profile/SettingComponent'
 import TimeTable from '../components/Profile/TimeTableComponent'
 import ScoreTable from '../components/Profile/ScoreTableComponent'
+import YourClassComponent from '../components/Profile/YourClassComponent'
 
 import EditProfileContainer from '../containers/MenuProfile/EditProfileContainer'
 import ProfileContainer from '../containers/MenuProfile/ProfileContainer'
@@ -32,6 +37,10 @@ function MainNavigator() {
 
         <Stack.Screen name="SchoolInfo" component={SchoolInfoComponent}/>
         <Stack.Screen name="Search" component={SearchContainer}/>
+        <Stack.Screen name="ExtraActivity" component={ExtraActivityComponent}/>
+        <Stack.Screen name="WorkInfo" component={WorkInfoComponent}/>
+        <Stack.Screen name="Alumni" component={AlumniComponent}/>
+        <Stack.Screen name="DepartmentInfo" component={DepartmentInfoComponent}/>
 
         <Stack.Screen name="LearningInfo" component={LearningInfoContainer} />
 
@@ -45,6 +54,7 @@ function MainNavigator() {
         <Stack.Screen name="PostDetail" component={PostDetail}/>
         <Stack.Screen name="TimeTable" component={TimeTable}/>
         <Stack.Screen name="ScoreTable" component={ScoreTable}/>
+        <Stack.Screen name="YourClassComponent" component={YourClassComponent}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

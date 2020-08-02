@@ -60,7 +60,7 @@ export default class LoginComponent extends Component {
     const {params} = this.props.route;
 
     const myLogin = await getRememberedUser();
-    console.warn(myLogin)
+    // console.warn(myLogin)
     if (
       !objectIsNull(myLogin) &&
       !stringIsEmpty(myLogin.username) &&
