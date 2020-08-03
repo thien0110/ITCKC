@@ -5,6 +5,7 @@ import profileReducers from './MenuProfile/ProfileReducer';
 import learningInfoReducers from './LearningInfo/LearningInfoReducer';
 import searchReducers from './SearchReducer';
 import schoolInfoReducers from './SchoolInfo/SchoolInfoReducer';
+import departmentInfoReducers from './DepartmentInfo/DepartmentInfoReducer';
 const allReducers = combineReducers({
   loginReducers,
   menuReducers,
@@ -12,6 +13,7 @@ const allReducers = combineReducers({
   learningInfoReducers,
   searchReducers,
   schoolInfoReducers,
+  departmentInfoReducers,
 });
 
 export default allReducers;

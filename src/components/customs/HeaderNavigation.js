@@ -49,7 +49,7 @@ export default class HeaderNavigation extends React.Component {
             onPress={() => {
               onClickLeft();
             }}
-            style={{position:'absolute', zIndex:1}}
+            style={{position:'absolute', zIndex:1,left:15}}
             >
             <Image
               source={iconLeft}
@@ -125,7 +125,7 @@ export default class HeaderNavigation extends React.Component {
             onPress={() => {
               onClickRight();
             }}
-            style={{position:'absolute', right:0}}>
+            style={{position:'absolute', right:15}}>
             <Image
               source={iconRight}
               style={{

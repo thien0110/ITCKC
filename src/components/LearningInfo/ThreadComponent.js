@@ -18,7 +18,6 @@ export default class ThreadComponent extends Component {
   
   shareBlock() {
     return (
-      <ScrollView>
       <FlatList
         data={data}
         keyExtractor={(item, index) => 'key' + index}
@@ -38,7 +37,7 @@ export default class ThreadComponent extends Component {
               </View>
             </View>
           );
-        }}></FlatList></ScrollView>
+        }}></FlatList>
     );
   }
   showBody() {

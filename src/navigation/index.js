@@ -5,10 +5,10 @@ import * as React from 'react';
 import LoginContainer from '../containers/LoginContainer';
 import TabNavigator from './Tab';
 import SearchContainer from '../containers/SearchContainer';
-import ExtraActivityComponent from '../components/ExtraActivity/ExtraActivityComponent';
+import ItCenterComponent from '../components/ItCenter/ItCenterComponent';
 import WorkInfoComponent from '../components/WorkInfo/WorkInfoComponent';
 import AlumniComponent from '../components/Alumni/AlumniComponent';
-import DepartmentInfoComponent from '../components/DepartmentInfo/DepartmentInfoComponent';
+import DepartmentInfoContainer from '../containers/DepartmentInfo/DepartmentInfoContainer';
 
 
 import SchoolInfoContainer from '../containers/SchoolInfo/SchoolInfoContainer';
@@ -37,10 +37,10 @@ function MainNavigator() {
 
         <Stack.Screen name="SchoolInfo" component={SchoolInfoContainer}/>
         <Stack.Screen name="Search" component={SearchContainer}/>
-        <Stack.Screen name="ExtraActivity" component={ExtraActivityComponent}/>
+        <Stack.Screen name="ItCenter" component={ItCenterComponent}/>
         <Stack.Screen name="WorkInfo" component={WorkInfoComponent}/>
         <Stack.Screen name="Alumni" component={AlumniComponent}/>
-        <Stack.Screen name="DepartmentInfo" component={DepartmentInfoComponent}/>
+        <Stack.Screen name="DepartmentInfo" component={DepartmentInfoContainer}/>
 
         <Stack.Screen name="LearningInfo" component={LearningInfoContainer} />
 
