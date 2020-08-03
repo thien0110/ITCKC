@@ -47,7 +47,7 @@ export function getSubjectApi(input) {
         },
         {
           subjectCode: '0004',
-          name: 'Đồ họa ứng dụng',
+          name: 'Anh Văn',
           nameAcronym: 'DHUD',
           subjectType: 'Lý thuyết',
           numberOf:'101',
@@ -56,7 +56,7 @@ export function getSubjectApi(input) {
         },
         {
           subjectCode: '0004',
-          name: 'Đồ họa ứng dụng',
+          name: 'Lập trình',
           nameAcronym: 'DHUD',
           subjectType: 'Lý thuyết',
           numberOf:'101',
@@ -65,7 +65,7 @@ export function getSubjectApi(input) {
         },
         {
           subjectCode: '0004',
-          name: 'Đồ họa ứng dụng',
+          name: 'React Native',
           nameAcronym: 'DHUD',
           subjectType: 'Lý thuyết',
           numberOf:'101',

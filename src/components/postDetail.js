@@ -13,26 +13,24 @@ import SplashScreen from 'react-native-splash-screen';
 import HeaderNavigation from '../components/customs/HeaderNavigation';
 import Images from '../res/Images';
 import {arrayIsEmpty, objectIsNull, stringIsEmpty} from '../res/Functions';
-import { WebView } from 'react-native-webview';
+import {WebView} from 'react-native-webview';
 import Colors from '../res/Colors';
+import Loading from './customs/Loading';
 
 // import { WebView } from 'react-native-webview';
 
 const windowWidth = Dimensions.get('window').width;
 
 export default class postDetail extends Component {
-  componentDidMount() {
-  }
+  componentDidMount() {}
   constructor(props) {
     super(props);
-    this.state = {
-      
-    };
+    this.state = {};
   }
 
   render() {
-    const {item}= this.props.route.params;
-  //  console.warn(item)
+    const {item} = this.props.route.params;
+    //  console.warn(item)
     return (
       <View style={{flex: 1}}>
         <HeaderNavigation
@@ -48,7 +46,12 @@ export default class postDetail extends Component {
         {/* {this.contentPost()}; */}
         <View style={{flex: 1}}>
           {/* {this.bodyVideo()} */}
-          <WebView source={{ uri: item.urlContent }} />
+          <WebView
+            source={{uri: item.urlContent}}
+            startInLoadingState={true}
+            renderLoading={() => <Loading />}
+            allowsFullscreenVideo={true}
+          />
         </View>
       </View>
     );
