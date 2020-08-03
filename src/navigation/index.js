@@ -11,7 +11,7 @@ import AlumniComponent from '../components/Alumni/AlumniComponent';
 import DepartmentInfoComponent from '../components/DepartmentInfo/DepartmentInfoComponent';
 
 
-import SchoolInfoComponent from '../components/SchoolsInformation/SchoolInfoComponent';
+import SchoolInfoContainer from '../containers/SchoolInfo/SchoolInfoContainer';
 import LearningInfoContainer from '../containers/LearningInfo/LearningInfoContainer';
 import TabSubjectNavigator from './subjectInfo';
 import NotiComponent from '../components/NotiComponent'
@@ -35,7 +35,7 @@ function MainNavigator() {
         <Stack.Screen name="Login" component={LoginContainer} />
         <Stack.Screen name="Tab" component={TabNavigator} />
 
-        <Stack.Screen name="SchoolInfo" component={SchoolInfoComponent}/>
+        <Stack.Screen name="SchoolInfo" component={SchoolInfoContainer}/>
         <Stack.Screen name="Search" component={SearchContainer}/>
         <Stack.Screen name="ExtraActivity" component={ExtraActivityComponent}/>
         <Stack.Screen name="WorkInfo" component={WorkInfoComponent}/>

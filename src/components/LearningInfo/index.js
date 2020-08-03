@@ -22,8 +22,8 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default class LearningInfoComponent extends Component {
   state = {
-    Semestery: '2',
-    Type: '2',
+    Semestery: '1',
+    Type: '1',
   };
   componentDidMount() {
     this.props.getSubjectAction();
