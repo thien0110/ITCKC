@@ -16,24 +16,24 @@ import HeaderNavigation from '../customs/HeaderNavigation';
 import Colors from '../../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import SubjectsBlock from '../customs/SubjectsBlock';
-import {objectIsNull, arrayIsEmpty} from '../../res/Functions';
+import {objectIsNull, arrayIsEmpty, sortArrayObject} from '../../res/Functions';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default class LearningInfoComponent extends Component {
   state = {
     Semestery: '1',
-    Type: '1',
+    Name: '1',
   };
   componentDidMount() {
     this.props.getSubjectAction();
   }
-  Semester(type) {
+  Semester(Name) {
     return (
       <View>
         <Picker
           selectedValue={this.state.Semestery}
-          style={{width: 135, fontSize:15}}
+          style={{width: 135, fontSize: 15}}
           mode={'dialog'}
           onValueChange={(itemValue, itemIndex) =>
             this.setState({Semestery: itemValue})
@@ -53,11 +53,11 @@ export default class LearningInfoComponent extends Component {
     return (
       <View>
         <Picker
-          selectedValue={this.state.Type}
+          selectedValue={this.state.Name}
           style={{width: 100}}
           mode={'dialog'}
           onValueChange={(itemValue, itemIndex) =>
-            this.setState({Type: itemValue})
+            this.setState({Name: itemValue})
           }>
           <Picker.Item label="A - Z" value="1" />
           <Picker.Item label="Z - A" value="2" />
@@ -70,11 +70,12 @@ export default class LearningInfoComponent extends Component {
     return (
       <View
         style={{
-          alignItems: 'center', 
+          alignItems: 'center',
           // height:windowHeight/12,
-          paddingHorizontal:15,
-          flexWrap: 'wrap', 
-          flexDirection: 'row'}}>
+          paddingHorizontal: 15,
+          flexWrap: 'wrap',
+          flexDirection: 'row',
+        }}>
         <Text>Sắp xếp theo: </Text>
         {this.NameSort()}
         {this.Semester()}
@@ -85,12 +86,14 @@ export default class LearningInfoComponent extends Component {
     const data = this.props.data;
     let dataList = [];
     if (!arrayIsEmpty(data)) {
-      dataList = data;
+      if (this.state.Name == 1) {
+        dataList = data.sort(sortArrayObject('name'));
+      }else dataList=data.sort(sortArrayObject('name', 'desc'));
     }
     return (
       <FlatList
         data={dataList}
-        style={{ paddingHorizontal:15,}}
+        style={{paddingHorizontal: 15}}
         keyExtractor={(item, index) => 'key' + index}
         renderItem={({item}) => {
           return (

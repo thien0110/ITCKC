@@ -61,9 +61,9 @@ export default class MenuComponent extends Component {
               iconName={Images.iconSchool}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('ExtraActivity');
+                this.props.navigation.navigate('ItCenter');
               }}
-              title={'Hoạt động ngoại khóa'}
+              title={'Trung tâm tin học'}
               iconName={Images.iconExercise}
               marginBottom={15}
               marginLeft={15}

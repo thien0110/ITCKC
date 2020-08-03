@@ -6,7 +6,7 @@ import Colors from '../../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../../res/Images';
 
-export default class ExtraActivityComponent extends Component {
+export default class ItCenterComponent extends Component {
   render() {
     return (
       <View style={{flex: 1,}}>
