@@ -8,7 +8,7 @@ const messageError = 'Không thể kết nối tới server.';
 function* editProfileFlow(action) {
   try {
     const response = yield editProfileApi(action.input);
-    if (response.resultCode === 1) {
+    if (response.resultCode === 200) {
       yield put({type: EDIT_PROFILE_SUCCESS, data: response.data, message:response.message});
     } else {
       yield put({type: EDIT_PROFILE_FAIL, error: response.message});
@@ -24,8 +24,9 @@ export function* watchEditProfile() {
 function* getProfileFlow(action) {
   try {
     const response = yield getProfileApi(action.input);
-    if (response.resultCode === 200) {
-      yield put({type: GET_PROFILE_SUCCESS, data: response.data, message:response.message});
+    // console.warn(response)
+    if (response.status === 200) {
+      yield put({type: GET_PROFILE_SUCCESS, data: response.data, });
     } else {
       yield put({type: GET_PROFILE_FAIL, error: response.message});
     }

@@ -159,7 +159,7 @@ export default class HeaderNavigation extends React.Component {
 }
 HeaderNavigation.defaultProps = {
   title: '',
-  titleColor: Colors.black,
+  titleColor: Colors.white,
   iconLeft: null,
   iconRight: null,
   color: Colors.white,

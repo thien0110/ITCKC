@@ -69,7 +69,7 @@ export function getProfileApi(input) {
         },
     };
   } else {
-    return fetch('http://10.0.3.2:4100/api/sinhvien', {
+    return fetch('http://10.0.3.2:4100/api/sinhvien/0306171085', {
       method: 'GET',
       headers: new Headers({
         'Accept': 'application/json',

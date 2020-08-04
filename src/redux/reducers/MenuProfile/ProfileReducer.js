@@ -23,7 +23,6 @@ const profileReducers = (state = initialState, action) => {
         ...state,
         isFetching: false,
         // data: action.data,
-        message: action.message,
       };
     case EDIT_PROFILE_FAIL:
       return {...state, isFetching: false, message: action.error};
