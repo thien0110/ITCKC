@@ -64,7 +64,7 @@ export default class MenuComponent extends Component {
                 this.props.navigation.navigate('ItCenter');
               }}
               title={'Trung tâm tin học'}
-              iconName={Images.iconExercise}
+              iconName={Images.iconTTTH}
               marginBottom={15}
               marginLeft={15}
               marginRight={15}></Block>

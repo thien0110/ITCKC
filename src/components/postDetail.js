@@ -44,10 +44,12 @@ export default class postDetail extends Component {
             this.props.navigation.goBack();
           }}></HeaderNavigation>
         {/* {this.contentPost()}; */}
-        <View style={{flex: 1}}>
-          {/* {this.bodyVideo()} */}
+        <View style={{flex: 1, backgroundColor:Colors.white,padding:15}}>
+          <Text style={{fontWeight:'bold', fontSize:15}}>{item.tieuDe}</Text>
+          <Image source={item.anhBia}></Image>
           <WebView
-            source={{uri: item.urlContent}}
+            source={{html: '<div style="font-size:35px";>'+item.noiDung+'</div>'}}
+            // source={{html: '<h5>Post</h5>'}}
             startInLoadingState={true}
             renderLoading={() => <Loading />}
             allowsFullscreenVideo={true}
