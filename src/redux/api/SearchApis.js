@@ -1,6 +1,6 @@
 //Gọi API đăng nhập
 const messageError = 'Không thể kết nối tới server.';
-const fakeApi = true;
+const fakeApi = false;
 import {API_URL} from '../../config';
 export function searchApi(input) {
   // console.warn(input)
@@ -52,19 +52,12 @@ export function searchApi(input) {
           ],
     };
   } else {
-    return fetch(API_URL+'search', {
+    return fetch(API_URL+'cnttTinTuc/search='+input, {
      
-      method: 'POST',
+      method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + "token",
-      }),
-      body: JSON.stringify({
-        mssv: input.mssv,
-        type:input.type,
-        status:input.status,
-        keyword: input.keyword,
-        sap_xep:input.sap_xep,
+        //Authorization: 'Bearer ' + "token",
       }),
     })
       .then((response) => response.json())
