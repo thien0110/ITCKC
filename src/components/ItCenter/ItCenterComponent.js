@@ -16,7 +16,7 @@ export default class ItCenterComponent extends Component {
           onClickLeft={() => {
             this.props.navigation.goBack();
           }}
-          title={'Hoạt động ngoại khóa'}
+          title={'Trung tâm tin học'}
           titleColor={Colors.white}></HeaderNavigation>
           <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
           <Text style={{fontWeight: 'bold', fontSize: 25, color:Colors.gray2}}>

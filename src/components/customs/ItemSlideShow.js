@@ -8,9 +8,9 @@ const SlideShowItem = ({item, onPress}) => {
     <TouchableOpacity onPress={()=>{onPress(item)}}>
     <View style={styles.cardView}>
       <View style={styles.textView}>
-        <Text style={styles.itemTitle}>{item.title}</Text>
+        <Text style={styles.itemTitle}>{item.tieuDe}</Text>
         <Text style={styles.itemDescription} numberOfLines={4}>
-          {item.description}
+          {item.moTaNgan}
         </Text>
       </View>
       <Image style={styles.image} source={{uri: item.url}} />
