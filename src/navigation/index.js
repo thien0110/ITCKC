@@ -5,7 +5,7 @@ import * as React from 'react';
 import LoginContainer from '../containers/LoginContainer';
 import TabNavigator from './Tab';
 import SearchContainer from '../containers/SearchContainer';
-import ItCenterComponent from '../components/ItCenter/ItCenterComponent';
+import ItCenterContainer from '../containers/ItCenter/ItCenterContainer';
 import WorkInfoComponent from '../components/WorkInfo/WorkInfoComponent';
 import AlumniComponent from '../components/Alumni/AlumniComponent';
 import DepartmentInfoContainer from '../containers/DepartmentInfo/DepartmentInfoContainer';
@@ -37,7 +37,7 @@ function MainNavigator() {
 
         <Stack.Screen name="SchoolInfo" component={SchoolInfoContainer}/>
         <Stack.Screen name="Search" component={SearchContainer}/>
-        <Stack.Screen name="ItCenter" component={ItCenterComponent}/>
+        <Stack.Screen name="ItCenter" component={ItCenterContainer}/>
         <Stack.Screen name="WorkInfo" component={WorkInfoComponent}/>
         <Stack.Screen name="Alumni" component={AlumniComponent}/>
         <Stack.Screen name="DepartmentInfo" component={DepartmentInfoContainer}/>
