@@ -1,5 +1,4 @@
-
-import * as Keychain from "react-native-keychain";
+import * as Keychain from 'react-native-keychain';
 
 export const objectIsNull = (object) => {
   if (object === null || object === undefined || object === '(null)') {
@@ -48,17 +47,25 @@ export const forgetUser = async () => {
     await Keychain.resetGenericPassword(); // xóa thông tin đăng nhập
   } catch (error) {}
 };
-export const sortArrayObject =(key, order = 'asc')=> {
+function change_alias(alias) {
+  var str = alias;
+  str = str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/Đ/g, 'D')
+    .toUpperCase();
+  return str;
+}
+export const sortArrayObject = (key, order = 'asc') => {
   return function innerSort(a, b) {
     if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
       // property doesn't exist on either object
       return 0;
     }
 
-    const varA = (typeof a[key] === 'string')
-      ? a[key].toUpperCase() : a[key];
-    const varB = (typeof b[key] === 'string')
-      ? b[key].toUpperCase() : b[key];
+    const varA = typeof a[key] === 'string' ? change_alias(a[key]) : a[key];
+    const varB = typeof b[key] === 'string' ?change_alias(b[key]) : b[key];
 
     let comparison = 0;
     if (varA > varB) {
@@ -66,10 +73,8 @@ export const sortArrayObject =(key, order = 'asc')=> {
     } else if (varA < varB) {
       comparison = -1;
     }
-    return (
-      (order === 'desc') ? (comparison * -1) : comparison
-    );
+    return order === 'desc' ? comparison * -1 : comparison;
   };
-}
+};
 
 // singers.sort(compare);
