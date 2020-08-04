@@ -24,7 +24,10 @@ export default class OthersSubjectComponent extends Component {
               onClickLeft={() => {
                 this.props.navigation.goBack();
               }}></HeaderNavigation>
-              
+              <Text style={{fontWeight: 'bold', fontSize: 25, color:Colors.gray2}}>
+              {' '}
+              Chức năng đang phát triển!{' '}
+            </Text>
           </View>
         );
       }

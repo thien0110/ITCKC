@@ -66,17 +66,18 @@ export default class SearchComponent extends Component {
     } else
       return (
         <View style={{flexDirection: 'row', padding: 15, flexWrap: 'wrap'}}>
-          {this.suggestItem('Cơm gà')}
-          {this.suggestItem('Cơm thịt kho mắm ruốc')}
-          {this.suggestItem('Canh chua cá lóc')}
-          {this.suggestItem('Pizza')}
-          {this.suggestItem('Bún thịt nướng')}
-          {this.suggestItem('Xem điểm Cao Thắng')}
+          {this.suggestItem('Học phí')}
+          {this.suggestItem('Lịch thi')}
+          {this.suggestItem('Tuyển dụng')}
+          {this.suggestItem('Thông báo')}
+          {this.suggestItem('Anh văn')}
+          {this.suggestItem('Cuộc thi')}
         </View>
       );
   }
   render() {
     const {data, message, isFetching, searchAction, navigation} = this.props;
+    console.warn(data);
     return (
       <View style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation

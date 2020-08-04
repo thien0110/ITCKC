@@ -16,7 +16,12 @@ import HeaderNavigation from '../customs/HeaderNavigation';
 import Colors from '../../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import SubjectsBlock from '../customs/SubjectsBlock';
-import {objectIsNull, arrayIsEmpty, sortArrayObject} from '../../res/Functions';
+import {
+  objectIsNull,
+  arrayIsEmpty,
+  sortArrayObject,
+  sortSemester,
+} from '../../res/Functions';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -24,6 +29,7 @@ export default class LearningInfoComponent extends Component {
   state = {
     Semestery: '1',
     Name: '1',
+    subjects: [{}],
   };
   componentDidMount() {
     this.props.getSubjectAction();
@@ -35,9 +41,9 @@ export default class LearningInfoComponent extends Component {
           selectedValue={this.state.Semestery}
           style={{width: 135, fontSize: 15}}
           mode={'dialog'}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({Semestery: itemValue})
-          }>
+          onValueChange={(itemValue, itemIndex) => {
+            this.setState({Semestery: itemValue});
+          }}>
           <Picker.Item label="Học kỳ 1" value="1" />
           <Picker.Item label="Học kỳ 2" value="2" />
           <Picker.Item label="Học kỳ 3" value="3" />
@@ -84,15 +90,23 @@ export default class LearningInfoComponent extends Component {
   }
   showBody() {
     const data = this.props.data;
-    let dataList = [];
+    let finalData = [];
     if (!arrayIsEmpty(data)) {
       if (this.state.Name == 1) {
-        dataList = data.sort(sortArrayObject('name'));
-      }else dataList=data.sort(sortArrayObject('name', 'desc'));
+        finalData = data.sort(sortArrayObject('name'));
+        finalData = data.filter(
+          (item) => item.semester === this.state.Semestery,
+        );
+      } else {
+        finalData = data.sort(sortArrayObject('name', 'desc'));
+        finalData = data.filter(
+          (item) => item.semester === this.state.Semestery,
+        );
+      }
     }
     return (
       <FlatList
-        data={dataList}
+        data={finalData}
         style={{paddingHorizontal: 15}}
         keyExtractor={(item, index) => 'key' + index}
         renderItem={({item}) => {
