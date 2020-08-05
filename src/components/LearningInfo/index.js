@@ -138,7 +138,7 @@ export default class LearningInfoComponent extends Component {
           onClickLeft={() => {
             this.props.navigation.goBack();
           }}
-          title={'Thông tin học tập'}
+          title={'E-learning'}
           titleColor={Colors.white}></HeaderNavigation>
         {this.ShowSort()}
         {this.showBody()}

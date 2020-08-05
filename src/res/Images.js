@@ -25,6 +25,7 @@ const images = {
   iconScoretable: require('../res/image/score.png'),
   iconElearning:require('../res/image/Elearning.png'),
   iconTTTH:require('../res/image/Flat.png'),
+  iconTimer:require('../res/image/notification.png'),
   cover1: require('../res/image/coverImg/cover(1).png'),
   cover2: require('../res/image/coverImg/cover(2).png'),
   cover3: require('../res/image/coverImg/cover(3).png'),

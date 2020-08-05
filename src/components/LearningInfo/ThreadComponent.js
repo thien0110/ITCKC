@@ -43,10 +43,10 @@ export default class ThreadComponent extends Component {
   showBody() {
     const {item} = this.props.route.params;
     return (
-      <View style={{flex: 1, padding: 10}}>
+      <ScrollView style={{flex: 1, padding: 10}}>
         <Board
-          name={'CDTH17PMC'}
-          numberOf={'101'}
+          name={item.subjectType}
+          numberOf={'Học kỳ: '+item.semester}
           teacherName={item.teacherName}></Board>
 
         <View style={styles.viewStyle}>
@@ -70,7 +70,7 @@ export default class ThreadComponent extends Component {
           </View>
         </View>
         {this.shareBlock()}
-      </View>
+      </ScrollView>
     );
   }
   render() {
