@@ -6,6 +6,7 @@ import {watchEditProfile, watchGetProfile} from './MenuProfile/ProfileSagas';
 import {watchSearch} from './SearchSagas';
 import {watchGetSchoolInfo} from './SchoolInfo/SchoolInfoSagas';
 import {watchGetDepartmentInfo} from './DepartmentInfo/DepartmentInfoSagas';
+import {watchGetItCenterInfo} from './ItCenter/ItCenterSagas';
 export default function* allSagas() {
   yield all([
     watchLogin(),
@@ -15,6 +16,6 @@ export default function* allSagas() {
     watchGetSubject(),
     watchSearch(),
     watchGetSchoolInfo(),
-    watchGetDepartmentInfo(),
+    watchGetDepartmentInfo(),watchGetItCenterInfo(),
   ]);
 }

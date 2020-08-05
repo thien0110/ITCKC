@@ -225,11 +225,11 @@ export default class SettingComponent extends Component {
           {this.showItem(Images.iconBell, 'Thông báo', () => {})}
           {this.showItem(Images.moon, 'Chế độ đêm', () => {})}
           {this.showItem(Images.translation, 'Ngôn ngữ', () => {})}
-          {this.showItem(Images.password, 'Đổi mật khẩu', () => {
+          {/* {this.showItem(Images.password, 'Đổi mật khẩu', () => {
             this.setModalVisible(true);
-          })}
+          })} */}
         </View>
-        {this.showModel()}
+        {/* {this.showModel()} */}
       </View>
     );
   }
