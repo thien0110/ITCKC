@@ -8,6 +8,7 @@ import {
   Dimensions,
   TextInput,
   StyleSheet,
+  FlatList
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import LinearGradient from 'react-native-linear-gradient';
@@ -55,9 +56,9 @@ export default class SettingComponent extends Component {
       </View>
     );
   }
-  timeItem(timeStart, timeEnd, subjectName, teacherName, roomNumber) {
+  timeItem(timeStart, timeEnd, subjectName, teacherName, roomNumber, group, type) {
     return (
-      <View style={{flexDirection: 'row', marginBottom:10}}>
+      <View style={{flexDirection: 'row', marginBottom: 10}}>
         <View style={styles.timeContentsLeft}>
           <Text style={{fontSize: 20, color: Colors.gray2}}>{timeStart}</Text>
           <Text style={{fontSize: 20, color: Colors.gray2}}>{timeEnd}</Text>
@@ -73,8 +74,12 @@ export default class SettingComponent extends Component {
               source={Images.iconTimer}
               style={{width: 30, height: 30}}></Image>
           </View>
-          <View style={{marginTop: 20}}>
+          <View style={{marginTop: -5}}>
             <Text style={styles.textContentTime}>{teacherName}</Text>
+            <Text style={styles.textContentTime}>{type}</Text>
+            <Text style={styles.textContentTime}>
+              {group === '1' ? 'Nhóm 1' : group === 'Nhóm 2' ? '2' : 'Cả lớp'}
+            </Text>
             <Text style={styles.textContentTime}>{roomNumber}</Text>
           </View>
         </LinearGradient>
@@ -82,13 +87,52 @@ export default class SettingComponent extends Component {
     );
   }
   showTime() {
-    return <View style={styles.timeContainer}>
-      {this.timeItem('9:00','11:30','Toán rời rạc','Nguyễn Vũ Dzũng','F5.13')}
-      {this.timeItem('12:30','15:00','Thiết kế web','Lữ Cao Tiến','F7.11')}
-      {this.timeItem('15:10','17:35','Cấu trúc DL và TT','Nguyễn Đức Chuẩn','F7.2')}
-    </View>;
+    let dataList = [];
+    dataList = data.filter((item) => item.day === this.state.daysWeek);
+    //console.warn(dataList);
+    for (let i = 0; i < dataList.length; i++) {
+      for (let j = 0; j < dataList[i].subjects.length; j++)
+        return (
+          <FlatList
+        data={dataList[i].subjects}
+        style={{paddingHorizontal: 15}}
+        keyExtractor={(item, index) => 'key' + index}
+        renderItem={({item, inItem}) => {
+          return (
+                this.timeItem(
+                item.timeStart,
+                item.timeEnd,
+                item.name,
+                item.teacherName,
+                item.roomNumber,
+                item.group,
+                item.type
+              // dataList[i].subjects[j].timeStart,
+              // dataList[i].subjects[j].timeEnd,
+              // dataList[i].subjects[j].name,
+              // dataList[i].subjects[j].teacherName,
+              // dataList[i].subjects[j].roomNumber,
+              // dataList[i].subjects[j].group,
+            )
+          );
+        }}></FlatList>
+        //   this.timeItem(
+        //   dataList[i].subjects[j].timeStart,
+        //   dataList[i].subjects[j].timeEnd,
+        //   dataList[i].subjects[j].name,
+        //   dataList[i].subjects[j].teacherName,
+        //   dataList[i].subjects[j].roomNumber,
+        //   dataList[i].subjects[j].group,
+        // )
+      )
+    }
   }
   render() {
+    let dataList = [];
+    dataList = data.filter((item) => item.day === this.state.daysWeek);
+    //console.warn(dataList);
+    // for (let i = 0; i < dataList.length; i++) {
+    //   for (let j = 0; j < dataList[i].subjects.length; j++)
     return (
       <View style={{flex: 1, backgroundColor: Colors.navigation}}>
         <HeaderNavigation
@@ -102,7 +146,7 @@ export default class SettingComponent extends Component {
           }}></HeaderNavigation>
         <View style={{flex: 1}}>
           {this.showDayOfWeek()}
-          {this.showTime()}
+          <View style={styles.timeContainer}>{this.showTime()}</View>
         </View>
       </View>
     );
@@ -141,19 +185,21 @@ const styles = StyleSheet.create({
     flex: 1,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    padding: 15,
+    padding: 10,
+    justifyContent:'space-between',
     backgroundColor: Colors.white,
   },
   timeContentsLeft: {
     paddingVertical: 20,
-    width: '25%',
+    width: '20%',
+    marginRight:15,
     justifyContent: 'center',
     alignItems: 'center',
   },
   timeContentsRight: {
     width: '75%',
-    height: 120,
-    padding: 15,
+    height: 140,
+    padding: 10,
     borderRadius: 20,
     alignSelf: 'flex-end',
   },
@@ -162,3 +208,148 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
+const data = [
+  {
+    day: '2',
+    subjects: [
+      {
+        name: 'Dịch vụ mạng',
+        timeStart: '9:00',
+        timeEnd: '11:30',
+        type: 'Thực hành',
+        group: '1',
+        teacherName: 'Lữ Cao Tiến',
+        roomNumber: 'F7.2',
+      },
+      {
+        name: 'Dịch vụ mạng',
+        timeStart: '9:00',
+        timeEnd: '11:30',
+        type: 'Thực hành',
+        group: '2',
+        teacherName: 'Nguyễn Vũ Dzũng',
+        roomNumber: 'F7.3',
+      },
+      {
+        name: 'Chính trị 2',
+        timeStart: '12:30',
+        timeEnd: '15:00',
+        type: 'Lý Thuyết',
+        group: '',
+        teacherName: 'Đ T Huế',
+        roomNumber: 'C7.6',
+      },
+      {
+        name: 'ĐA - Lập trình Windows',
+        timeStart: '15:10',
+        timeEnd: '17:35',
+        type: 'Đồ án',
+        group: '',
+        teacherName: 'Nguyễn Đức Chuẩn',
+        roomNumber: 'F7.3',
+      },
+    ],
+  },
+  {
+    day: '3',
+    subjects: [
+      {
+        name: 'Ngôn Ngữ LT Java',
+        timeStart: '12:30',
+        timeEnd: '15:00',
+        type: 'Lý thuyết',
+        teacherName: 'Trần Thanh Duy',
+        roomNumber: 'F7.8',
+      },
+      {
+        name: 'Anh Văn Chuyên Ngành',
+        timeStart: '15:10',
+        timeEnd: '17:35',
+        type: 'Lý thuyết',
+        teacherName: 'Dương Hữu Phước',
+        roomNumber: 'C7.6',
+      },
+    ],
+  },
+  {
+    day: '4',
+    subjects: [
+      {
+        name: 'Lập trình Windows',
+        timeStart: '12:30',
+        timeEnd: '15:00',
+        type: 'Lý thuyết',
+        group: '',
+        teacherName: 'Nguyễn Đức Chuẩn',
+        roomNumber: 'F7.3',
+      },
+      {
+        name: 'LT web PHP cơ bản',
+        timeStart: '15:10',
+        timeEnd: '17:35',
+        type: 'Lý Thuyết',
+        teacherName: 'Phù Khắc Anh',
+        roomNumber: 'F7.1',
+      },
+    ],
+  },
+  {
+    day: '5',
+    subjects: [
+      {
+        name: 'Lập trình windows',
+        timeStart: '9:00',
+        timeEnd: '11:30',
+        type: 'Thực hành',
+        group: '1',
+        teacherName: 'Nguyễn Đức Chuẩn',
+        roomNumber: 'F7.11',
+      },
+      {
+        name: 'Công nghệ phần mềm',
+        timeStart: '12:30',
+        timeEnd: '15:00',
+        type: 'Lý thuyết',
+        group: '',
+        teacherName: 'Phù Khắc Anh',
+        roomNumber: 'C7.6',
+      },
+      {
+        name: 'Dịch vụ mạng',
+        timeStart: '15:10',
+        timeEnd: '17:35',
+        type: 'Lý thuyết',
+        group: '',
+        teacherName: 'Lữ Cao Tiến',
+        roomNumber: 'C7.6',
+      },
+    ],
+  },
+  {
+    day: '6',
+    subjects: [
+      {
+        name: 'Lập trình Windows',
+        timeStart: '12:30',
+        timeEnd: '15:00',
+        type: 'Thực hành',
+        group: '2',
+        teacherName: 'Phù Khắc Anh',
+        roomNumber: 'F7.2',
+      },
+    ],
+  },
+  {
+    day: '7',
+    subjects: [
+      {
+        name: 'Giáo dục thể chất',
+        timeStart: '7:00',
+        timeEnd: '9:30',
+        type: 'Chứng chỉ',
+        teacherName: 'Không nhớ',
+        roomNumber: 'TTTH Phú Thọ',
+      },
+    ],
+  },
+];
