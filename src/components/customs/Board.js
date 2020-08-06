@@ -37,7 +37,7 @@ export default class Board extends Component {
             overflow:"hidden",
             borderRadius: 10,
             padding: 10,
-            //backgroundColor: Colors.backgroundBlue,
+            backgroundColor: Colors.backgroundBlue,
             marginBottom: 10,
             width: windowWidth - (windowWidth * 1) / 15,
             shadowColor: '#000',

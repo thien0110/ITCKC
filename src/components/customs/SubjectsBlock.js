@@ -40,7 +40,7 @@ export default class SubjectsBlock extends Component {
             width: width,
             height: height,
             borderRadius: 15,
-            backgroundColor: '#fff',
+            backgroundColor: Colors.backgroundBlue,
             overflow: 'hidden',
             justifyContent: 'space-around',
             marginBottom: marginBottom,
