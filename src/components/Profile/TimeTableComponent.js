@@ -8,7 +8,7 @@ import {
   Dimensions,
   TextInput,
   StyleSheet,
-  FlatList
+  FlatList,
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import LinearGradient from 'react-native-linear-gradient';
@@ -18,26 +18,51 @@ import Images from '../../res/Images';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 const window = Dimensions.get('window');
 
-export default class SettingComponent extends Component {
+var d = new Date();
+var weekday = new Array(7);
+weekday[0] = '8';
+weekday[1] = '2';
+weekday[2] = '3';
+weekday[3] = '4';
+weekday[4] = '5';
+weekday[5] = '6';
+weekday[6] = '7';
+
+var n = weekday[d.getDay()];
+export default class TimeTableComponent extends Component {
   state = {
     modalVisible: false,
-    daysWeek: '4',
-    newPass: '',
+    daysWeek: weekday[d.getDay()],
+    current: weekday[d.getDay()],
     confirmNewPass: '',
   };
   setModalVisible = (visible) => {
     this.setState({modalVisible: visible});
   };
   ShowItems(day, onPress) {
-    const {daysWeek} = this.state;
+    const {daysWeek, current} = this.state;
     let isDay = day[1];
     return (
       <TouchableOpacity
         onPress={() => {
           onPress();
         }}>
-        <View style={isDay == daysWeek ? styles.dayOn : styles.dayOff}>
-          <Text style={isDay == daysWeek ? styles.textOn : styles.textOff}>
+        <View
+          style={
+            isDay == daysWeek
+              ? styles.dayOn
+              : isDay == current
+              ? styles.dayCurrent
+              : styles.dayOff
+          }>
+          <Text
+            style={
+              isDay == daysWeek
+                ? styles.textOn
+                : isDay == current
+                ? styles.textCurrent
+                : styles.textOff
+            }>
             {day}
           </Text>
         </View>
@@ -56,7 +81,15 @@ export default class SettingComponent extends Component {
       </View>
     );
   }
-  timeItem(timeStart, timeEnd, subjectName, teacherName, roomNumber, group, type) {
+  timeItem(
+    timeStart,
+    timeEnd,
+    subjectName,
+    teacherName,
+    roomNumber,
+    group,
+    type,
+  ) {
     return (
       <View style={{flexDirection: 'row', marginBottom: 10}}>
         <View style={styles.timeContentsLeft}>
@@ -70,15 +103,20 @@ export default class SettingComponent extends Component {
             <Text style={{fontSize: 18, fontWeight: 'bold', color: '#fff'}}>
               {subjectName}
             </Text>
-            <Image
-              source={Images.iconTimer}
-              style={{width: 30, height: 30}}></Image>
+            <TouchableOpacity
+              onPress={() => {
+                onPress();
+              }}>
+              <Image
+                source={Images.iconTimer}
+                style={{width: 30, height: 30}}></Image>
+            </TouchableOpacity>
           </View>
           <View style={{marginTop: -5}}>
             <Text style={styles.textContentTime}>{teacherName}</Text>
             <Text style={styles.textContentTime}>{type}</Text>
             <Text style={styles.textContentTime}>
-              {group === '1' ? 'Nhóm 1' : group === 'Nhóm 2' ? '2' : 'Cả lớp'}
+              {group === '1' ? 'Nhóm 1' : group === '2' ? 'Nhóm 2' : 'Cả lớp'}
             </Text>
             <Text style={styles.textContentTime}>{roomNumber}</Text>
           </View>
@@ -89,50 +127,41 @@ export default class SettingComponent extends Component {
   showTime() {
     let dataList = [];
     dataList = data.filter((item) => item.day === this.state.daysWeek);
-    //console.warn(dataList);
     for (let i = 0; i < dataList.length; i++) {
       for (let j = 0; j < dataList[i].subjects.length; j++)
         return (
           <FlatList
-        data={dataList[i].subjects}
-        style={{paddingHorizontal: 15}}
-        keyExtractor={(item, index) => 'key' + index}
-        renderItem={({item, inItem}) => {
-          return (
-                this.timeItem(
+            data={dataList[i].subjects}
+            style={{paddingHorizontal: 15}}
+            keyExtractor={(item, index) => 'key' + index}
+            renderItem={({item}) => {
+              return this.timeItem(
                 item.timeStart,
                 item.timeEnd,
                 item.name,
                 item.teacherName,
                 item.roomNumber,
                 item.group,
-                item.type
-              // dataList[i].subjects[j].timeStart,
-              // dataList[i].subjects[j].timeEnd,
-              // dataList[i].subjects[j].name,
-              // dataList[i].subjects[j].teacherName,
-              // dataList[i].subjects[j].roomNumber,
-              // dataList[i].subjects[j].group,
-            )
-          );
-        }}></FlatList>
-        //   this.timeItem(
-        //   dataList[i].subjects[j].timeStart,
-        //   dataList[i].subjects[j].timeEnd,
-        //   dataList[i].subjects[j].name,
-        //   dataList[i].subjects[j].teacherName,
-        //   dataList[i].subjects[j].roomNumber,
-        //   dataList[i].subjects[j].group,
-        // )
-      )
+                item.type,
+              );
+            }}></FlatList>
+        );
     }
   }
+  showSunday() {
+    return (
+      <View style={{justifyContent: 'center',alignItems:'center'}}>
+        <Text style={{fontWeight: 'bold', fontSize:30}}>
+          Hôm nay là chủ nhật, 
+        </Text>
+        <Text style={{fontWeight: 'bold', fontSize:30}}>
+          Cuối tuần thư giãn! 
+        </Text>
+      </View>
+    );
+  }
   render() {
-    let dataList = [];
-    dataList = data.filter((item) => item.day === this.state.daysWeek);
-    //console.warn(dataList);
-    // for (let i = 0; i < dataList.length; i++) {
-    //   for (let j = 0; j < dataList[i].subjects.length; j++)
+    const {daysWeek, current} = this.state;
     return (
       <View style={{flex: 1, backgroundColor: Colors.navigation}}>
         <HeaderNavigation
@@ -146,7 +175,9 @@ export default class SettingComponent extends Component {
           }}></HeaderNavigation>
         <View style={{flex: 1}}>
           {this.showDayOfWeek()}
-          <View style={styles.timeContainer}>{this.showTime()}</View>
+          <View style={styles.timeContainer}>
+            {daysWeek === '8' ? this.showSunday() : this.showTime()}
+          </View>
         </View>
       </View>
     );
@@ -175,6 +206,18 @@ const styles = StyleSheet.create({
     marginTop: 50,
     padding: 5,
   },
+  dayCurrent: {
+    width: 30,
+    height: 30,
+    alignItems: 'center',
+    backgroundColor: Colors.grayStrong,
+    marginTop: 50,
+    padding: 5,
+    borderRadius: 20,
+  },
+  textCurrent: {
+    color: '#fff',
+  },
   textOn: {
     color: Colors.backgroundBlue,
   },
@@ -183,16 +226,17 @@ const styles = StyleSheet.create({
   },
   timeContainer: {
     flex: 1,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    padding: 10,
-    justifyContent:'space-between',
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    paddingVertical: 15,
+    paddingHorizontal: 0,
+    justifyContent: 'space-between',
     backgroundColor: Colors.white,
   },
   timeContentsLeft: {
     paddingVertical: 20,
     width: '20%',
-    marginRight:15,
+    marginRight: 15,
     justifyContent: 'center',
     alignItems: 'center',
   },
