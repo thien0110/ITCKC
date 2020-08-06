@@ -77,7 +77,6 @@ export default class SearchComponent extends Component {
   }
   render() {
     const {data, message, isFetching, searchAction, navigation} = this.props;
-    console.warn(data);
     return (
       <View style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation

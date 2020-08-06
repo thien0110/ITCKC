@@ -39,10 +39,10 @@ export default class HeaderNavigation extends React.Component {
           padding: 15,
           alignItems: 'center',
           backgroundColor: color,
-          shadowColor: Colors.black,
-          shadowOpacity: 0.3,
-          shadowRadius: 3,
-          elevation: 10,
+          // shadowColor: Colors.black,
+          // shadowOpacity: 0.3,
+          // shadowRadius: 3,
+          // elevation: 10,
         }}>
         {iconLeft != null && (
           <TouchableOpacity
