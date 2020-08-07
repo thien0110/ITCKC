@@ -24,7 +24,7 @@ export default class ScoreTableComponent extends Component {
         style={{
           width: window.width - 30,
           height: 50,
-          paddingHorizontal: 10,
+          paddingHorizontal: 5,
           paddingVertical: 5,
           marginBottom: 10,
           justifyContent: 'space-between',
@@ -68,19 +68,16 @@ export default class ScoreTableComponent extends Component {
   }
   showSubjectScore() {
     return (
-      <ScrollView>
-        {this.subjectScore('Cơ sở dữ liệu', '4.9')}
-        {this.subjectScore('Mạng máy tính', '6.1')}
-        {this.subjectScore('Thiết kế website', '7.2')}
-        {this.subjectScore('Cấu trúc dữ liệu và thuật toán', '7.6')}
-        {this.subjectScore('Anh văn A2', '6.1')}
-        {this.subjectScore('Toán rời rạc và lý thuyết đồ thị', '6.3')}
-        {this.subjectScore('Thực hành mạng máy tính', '7.7')}
-        {this.subjectScore('Giáo dục thể chất 2', '10.0')}
-        {this.subjectScore('TH Cấu trúc dữ liệu và thuật toán', '7')}
-        {this.subjectScore('Thực hành thiết kế website', '10.0')}
-        {this.subjectScore('Đồ họa ứng dụng (Photoshop)', '7.0')}
-      </ScrollView>
+      <FlatList
+            data={data}
+            // style={{paddingHorizontal: 15}}
+            keyExtractor={(item, index) => 'key' + index}
+            renderItem={({item}) => {
+              return this.subjectScore(
+                item.subjectName,
+                item.score
+              );
+            }}></FlatList>
     );
   }
   titleBoard(subjectName, score) {
@@ -111,7 +108,7 @@ export default class ScoreTableComponent extends Component {
           onClickLeft={() => {
             this.props.navigation.goBack();
           }}></HeaderNavigation>
-        <View style={{flex:1,padding: 15, alignItems: 'center'}}>
+        <View style={{flex:1,paddingHorizontal: 10, alignItems: 'center'}}>
           {this.titleBoard('Môn học', 'Điểm')}
           {this.showSubjectScore()}
         </View>
@@ -119,3 +116,49 @@ export default class ScoreTableComponent extends Component {
     );
   }
 }
+const data=[
+  {
+    subjectName:"Cơ sở dữ liệu",
+    score:"5.8"
+  },
+  {
+    subjectName:"Mạng máy tính",
+    score:"6.1"
+  },
+  {
+    subjectName:"Thiết kế website",
+    score:"7.2"
+  },
+  {
+    subjectName:"Cấu trúc dữ liệu và thuật toán",
+    score:"7.6"
+  },
+  {
+    subjectName:"Anh văn A2",
+    score:"4.9"
+  },
+  {
+    subjectName:"Toán rời rạc và lý thuyết đồ thị",
+    score:"6.3"
+  },
+  {
+    subjectName:"Thực hành mạng máy tính",
+    score:"7.7"
+  },
+  {
+    subjectName:"Giáo dục thể chất 2",
+    score:"10.0"
+  },
+  {
+    subjectName:"TH Cấu trúc dữ liệu và thuật toán",
+    score:"7.0"
+  },
+  {
+    subjectName:"Thực hành thiết kế website",
+    score:"10.0"
+  },
+  {
+    subjectName:"Đồ họa ứng dụng (Photoshop)",
+    score:"7.0"
+  }
+]
