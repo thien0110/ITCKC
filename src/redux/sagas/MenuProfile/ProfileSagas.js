@@ -36,7 +36,7 @@ export function* watchEditProfile() {
 }
 function* getProfileFlow(action) {
   try {
-    const response = yield getProfileApi(action);
+    const response = yield getProfileApi(action.input);
     // console.warn(response)
     if (response.status === 200) {
       yield put({type: GET_PROFILE_SUCCESS, data: response.data});

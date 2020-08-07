@@ -17,7 +17,7 @@ import TabSubjectNavigator from './subjectInfo';
 import NotiComponent from '../components/NotiComponent'
 import AboutComponent from '../components/Profile/AboutComponent'
 import SettingComponent from '../components/Profile/SettingComponent'
-import TimeTable from '../components/Profile/TimeTableComponent'
+import TimeTable from '../containers/MenuProfile/TimeTableContainer'
 import ScoreTable from '../components/Profile/ScoreTableComponent'
 import YourClassComponent from '../components/Profile/YourClassComponent'
 

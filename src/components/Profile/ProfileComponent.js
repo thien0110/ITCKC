@@ -16,6 +16,7 @@ import Loading from '../customs/Loading';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {ScrollView} from 'react-native-gesture-handler';
 import AlertCustom from '../customs/AlertComponent';
+import {userProfile} from '../../config'
 
 export default class ProfileComponent extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ export default class ProfileComponent extends Component {
     };
   }
   componentDidMount() {
-    this.props.getProfileAction();
+    this.props.getProfileAction(userProfile.mssv);
   }
   onChangeStateAlert = (state, des) => {
     this.setState({
