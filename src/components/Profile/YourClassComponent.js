@@ -1,46 +1,52 @@
 import React, {Component} from 'react';
-import {Text, View, TextInput, StyleSheet, Dimensions,FlatList} from 'react-native';
+import {
+  Text,
+  View,
+  TextInput,
+  StyleSheet,
+  Dimensions,
+  FlatList,
+} from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
-import {objectIsNull,arrayIsEmpty} from '../../res/Functions';
+import {objectIsNull, arrayIsEmpty} from '../../res/Functions';
 import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Loading from '../customs/Loading';
 import {ScrollView} from 'react-native-gesture-handler';
 import SubjectsBlock from '../customs/SubjectsBlock';
+import {userProfile} from '../../config';
+import AlertCustom from '../customs/AlertComponent';
 
 export default class YourClassComponent extends Component {
-    componentDidMount(){
-      const input={maLopHoc:"1", hocKi:'1'}
-      this.props.getYourClassAction(input)
-    }
+  componentDidMount() {
+    const input = {maLopHoc: '1', hocKi: '1'};
+    this.props.getYourClassAction(input);
+  }
   showBody() {
-      
     const data = this.props.data;
-    let dataList = [];
     if (!arrayIsEmpty(data)) {
-      dataList = data;
+      return (
+        <FlatList
+          data={data}
+          style={{paddingHorizontal: 15, marginTop: 10}}
+          keyExtractor={(item, index) => 'key' + index}
+          renderItem={({item}) => {
+            return (
+              <SubjectsBlock
+                onPress={() => {
+                  this.props.navigation.navigate('Subject', {item});
+                }}
+                name={item.tenLopHocPhan}
+                numberOf={item.soLuongSV}
+                teacherName={item.maGiaoVien}
+                marginBottom={15}></SubjectsBlock>
+            );
+          }}></FlatList>
+      );
     }
-    return (
-      <FlatList
-        data={dataList}
-        style={{paddingHorizontal: 15, marginTop:10}}
-        keyExtractor={(item, index) => 'key' + index}
-        renderItem={({item}) => {
-          return (
-            <SubjectsBlock
-              onPress={() => {
-                this.props.navigation.navigate('Subject', {item});
-              }}
-              name={item.tenLopHocPhan}
-              numberOf={item.soLuongSV}
-              teacherName={item.maGiaoVien}
-              marginBottom={15}></SubjectsBlock>
-          );
-        }}></FlatList>
-    );
   }
   render() {
-    const {isFetching, data} = this.props;
+    const {isFetching, data, message} = this.props;
     return (
       <View
         style={{
@@ -56,8 +62,13 @@ export default class YourClassComponent extends Component {
           }}
           title={'Lớp của bạn'}
           titleColor={Colors.white}></HeaderNavigation>
-        {this.showBody()}
+        {/* {this.showBody()} */}
         {isFetching && <Loading></Loading>}
+        {message &&
+          AlertCustom(true, message, () => {
+            this.props.navigation.goBack();
+            this.props.formatData();
+          })}
       </View>
     );
   }

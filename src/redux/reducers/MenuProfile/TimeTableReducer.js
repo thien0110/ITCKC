@@ -15,12 +15,14 @@ import {
       case GET_TIME_TABLE:
         return {...state, isFetching: true};
       case GET_TIME_TABLE_SUCCESS:
+        console.warn("ok1")
         return {
           ...state,
           isFetching: false,
           data: action.data,
         };
       case GET_TIME_TABLE_FAIL:
+        console.warn("ok")
         return {...state, isFetching: false, message: action.error};
       default:
         return state;

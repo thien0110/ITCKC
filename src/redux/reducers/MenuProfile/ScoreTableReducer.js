@@ -1,32 +1,31 @@
 import {
-    FORMAT_DATA,GET_YOUR_CLASS,GET_YOUR_CLASS_FAIL,GET_YOUR_CLASS_SUCCESS
-  } from '../../actions/MenuProfile/YourClassAction';
+    FORMAT_DATA,GET_SCORE_TABLE_SUCCESS,GET_SCORE_TABLE_FAIL,GET_SCORE_TABLE
+  } from '../../actions/MenuProfile/ScoreTableAction';
   
   const initialState = {
     isFetching: false,
     data: null,
     message: null,
   };
-  const yourClassReducers = (state = initialState, action) => {
+  const scoreTableReducers = (state = initialState, action) => {
     switch (action.type) {
       case FORMAT_DATA:
         return {  ...state,
           message:null,};
-      case GET_YOUR_CLASS:
+      case GET_SCORE_TABLE:
         return {...state, isFetching: true};
-      case GET_YOUR_CLASS_SUCCESS:
-        console.warn("conmcac")
+      case GET_SCORE_TABLE_SUCCESS:
         return {
           ...state,
           isFetching: false,
           data: action.data,
         };
-      case GET_YOUR_CLASS_FAIL:
+      case GET_SCORE_TABLE_FAIL:
         return {...state, isFetching: false, message: action.error};
       default:
         return state;
     }
   };
   
-  export default yourClassReducers;
+  export default scoreTableReducers;
   

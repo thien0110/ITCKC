@@ -2,9 +2,9 @@ const messageError = 'Không thể kết nối tới server.';
 const fakeApi = false;
 import {API_URL} from '../../../config';
 
-export function getYourClassApi(input) {
+export function getScoreTableApi(input) {
   return fetch(
-    `${API_URL}lophocphan/ctdt/${input.maLopHoc}/hocKi/${input.hocKi}`,
+    `${API_URL}diemsinhvien/${input}/khdt`,
     {
       method: 'GET',
       headers: new Headers({
@@ -15,9 +15,11 @@ export function getYourClassApi(input) {
   )
     .then((response) => response.json())
     .then((responseJson) => {
+      // console.warn('responseJson', responseJson);
       return responseJson;
     })
     .catch((error) => {
+      // console.warn(error)
       return {resultCode: -1, message: messageError};
     });
 }

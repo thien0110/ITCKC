@@ -16,8 +16,16 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 const window = Dimensions.get('window');
 import {WebView} from 'react-native-webview';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
-
+import {userProfile} from '../../config';
+import Loading from '../customs/Loading';
+import AlertCustom from '../customs/AlertComponent';
 export default class ScoreTableComponent extends Component {
+  componentDidMount() {
+    this.props.getScoreTableAction(
+      // userProfile.mssv
+      '0306171004',
+    );
+  }
   subjectScore(subjectName, score) {
     return (
       <View
@@ -46,19 +54,23 @@ export default class ScoreTableComponent extends Component {
           <Text style={{fontSize: 18}}>{subjectName}</Text>
         </View>
         <View
-          style={score<5?{
-            width: 40,
-            height: 40,
-            borderRadius: 50,
-            justifyContent: 'center',
-            backgroundColor: '#ef476f',
-          }:{
-            width: 40,
-            height: 40,
-            borderRadius: 50,
-            justifyContent: 'center',
-            backgroundColor: '#06d6a0',
-          }}>
+          style={
+            score < 5
+              ? {
+                  width: 40,
+                  height: 40,
+                  borderRadius: 50,
+                  justifyContent: 'center',
+                  backgroundColor: '#ef476f',
+                }
+              : {
+                  width: 40,
+                  height: 40,
+                  borderRadius: 50,
+                  justifyContent: 'center',
+                  backgroundColor: '#06d6a0',
+                }
+          }>
           <Text style={{fontSize: 18, textAlign: 'center', color: '#fff'}}>
             {score}
           </Text>
@@ -67,17 +79,15 @@ export default class ScoreTableComponent extends Component {
     );
   }
   showSubjectScore() {
+    const {data} = this.props;
     return (
       <FlatList
-            data={data}
-            // style={{paddingHorizontal: 15}}
-            keyExtractor={(item, index) => 'key' + index}
-            renderItem={({item}) => {
-              return this.subjectScore(
-                item.subjectName,
-                item.score
-              );
-            }}></FlatList>
+        data={data}
+        // style={{paddingHorizontal: 15}}
+        keyExtractor={(item, index) => 'key' + index}
+        renderItem={({item}) => {
+          return this.subjectScore(item.tenMonHoc, item.diemsinhvien);
+        }}></FlatList>
     );
   }
   titleBoard(subjectName, score) {
@@ -89,14 +99,23 @@ export default class ScoreTableComponent extends Component {
           justifyContent: 'space-between',
           flexDirection: 'row',
         }}>
-        <Text style={{fontSize: 18, fontWeight:'bold', color: '#fff'}}>{subjectName}</Text>
-        <Text style={{fontSize: 18, fontWeight:'bold', textAlign: 'center', color: '#fff'}}>
+        <Text style={{fontSize: 18, fontWeight: 'bold', color: '#fff'}}>
+          {subjectName}
+        </Text>
+        <Text
+          style={{
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            color: '#fff',
+          }}>
           {score}
         </Text>
       </View>
     );
   }
   render() {
+    const {isFetching, message} = this.props;
     return (
       <View style={{flex: 1, backgroundColor: Colors.backgroundBlue}}>
         <HeaderNavigation
@@ -108,57 +127,17 @@ export default class ScoreTableComponent extends Component {
           onClickLeft={() => {
             this.props.navigation.goBack();
           }}></HeaderNavigation>
-        <View style={{flex:1,paddingHorizontal: 10, alignItems: 'center'}}>
+        <View style={{flex: 1, paddingHorizontal: 10, alignItems: 'center'}}>
           {this.titleBoard('Môn học', 'Điểm')}
           {this.showSubjectScore()}
         </View>
+        {isFetching && <Loading></Loading>}
+        {message &&
+          AlertCustom(true, message, () => {
+            this.props.navigation.goBack();
+            this.props.formatData()
+          })}
       </View>
     );
   }
 }
-const data=[
-  {
-    subjectName:"Cơ sở dữ liệu",
-    score:"5.8"
-  },
-  {
-    subjectName:"Mạng máy tính",
-    score:"6.1"
-  },
-  {
-    subjectName:"Thiết kế website",
-    score:"7.2"
-  },
-  {
-    subjectName:"Cấu trúc dữ liệu và thuật toán",
-    score:"7.6"
-  },
-  {
-    subjectName:"Anh văn A2",
-    score:"4.9"
-  },
-  {
-    subjectName:"Toán rời rạc và lý thuyết đồ thị",
-    score:"6.3"
-  },
-  {
-    subjectName:"Thực hành mạng máy tính",
-    score:"7.7"
-  },
-  {
-    subjectName:"Giáo dục thể chất 2",
-    score:"10.0"
-  },
-  {
-    subjectName:"TH Cấu trúc dữ liệu và thuật toán",
-    score:"7.0"
-  },
-  {
-    subjectName:"Thực hành thiết kế website",
-    score:"10.0"
-  },
-  {
-    subjectName:"Đồ họa ứng dụng (Photoshop)",
-    score:"7.0"
-  }
-]
