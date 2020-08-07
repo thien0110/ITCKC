@@ -33,7 +33,7 @@ export default class LoginComponent extends Component {
     super(props);
     this.state = {
       username: '0306171301',
-      password: 'JHHIJSA',
+      password: 'qYpQE6w',
 
       rememberMe: false,
       showAlert: false,
