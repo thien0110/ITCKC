@@ -9,12 +9,14 @@ import {
   Modal,
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
-import {objectIsNull} from '../../res/Functions';
+import {objectIsNull, arrayIsEmpty} from '../../res/Functions';
 import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Loading from '../customs/Loading';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {ScrollView} from 'react-native-gesture-handler';
+import AlertCustom from '../customs/AlertComponent';
+import {userProfile} from '../../config'
 
 export default class ProfileComponent extends Component {
   constructor(props) {
@@ -31,7 +33,7 @@ export default class ProfileComponent extends Component {
     };
   }
   componentDidMount() {
-    this.props.getProfileAction();
+    this.props.getProfileAction(userProfile.mssv);
   }
   onChangeStateAlert = (state, des) => {
     this.setState({
@@ -87,16 +89,23 @@ export default class ProfileComponent extends Component {
       newPass,
       confirmNewPass,
     };
-    this.setModalVisible(!modalVisible); 
-  }
-  onPressChangePhone() {
-    const {newPhone,modalVisible} = this.state;
-    const input = {
-      newPhone,
-    };
     this.setModalVisible(!modalVisible);
   }
-  showPassInput(placeholder, value, onChangeText,keyboardType) {
+  onPressChangePhone() {
+    const {maSinhVien} = this.props.data;
+    const {newPhone, modalVisible} = this.state;
+    const input = {
+      newPhone,
+      maSinhVien,
+    };
+    // if (newPhone.length == 10) {
+    this.props.editProfileAction(input);
+    this.setModalVisible(!modalVisible);
+    // } else {
+    //   this.onChangeStateAlert(true, 'Số điện thoại không hợp lệ');
+    // }
+  }
+  showPassInput(placeholder, value, onChangeText, keyboardType) {
     return (
       <TextInput
         style={{
@@ -205,9 +214,14 @@ export default class ProfileComponent extends Component {
                   }}>
                   Đổi số điện thoại
                 </Text>
-                {this.showPassInput('Số điện thoại mới', newPhone, (text) => {
-                  this.setState({newPhone: text.trim()});
-                }, 'phone-pad')}
+                {this.showPassInput(
+                  'Số điện thoại mới',
+                  newPhone,
+                  (text) => {
+                    this.setState({newPhone: text.trim()});
+                  },
+                  'phone-pad',
+                )}
               </View>
             )}
             <View>
@@ -221,8 +235,9 @@ export default class ProfileComponent extends Component {
                   backgroundColor: Colors.buttonBlue,
                 }}
                 onPress={() => {
-                  typeChange?
-                 ( this.onPressChangePass()):(this.onPressChangePhone())
+                  typeChange
+                    ? this.onPressChangePass()
+                    : this.onPressChangePhone();
                 }}>
                 <Text
                   style={{
@@ -307,7 +322,7 @@ export default class ProfileComponent extends Component {
           color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
           iconLeftColor={Colors.black}
-          title={"Thông tin sinh viên"}
+          title={'Thông tin sinh viên'}
           titleColor={Colors.white}
           // buttonRight={true}
           // textButtonRight={'Sửa'}
@@ -326,8 +341,14 @@ export default class ProfileComponent extends Component {
           AlertCustom(true, message, () => {
             this.onChangeStateAlert(false, '');
             formatData();
-            this.props.navigation.goBack();
+            if (arrayIsEmpty(data)) {
+              this.props.navigation.goBack();
+            }
           })}
+        {/* {showAlert &&
+          AlertCustom(showAlert, messageAlert, () => {
+            this.onChangeStateAlert(false, '');
+          })} */}
       </View>
     );
   }

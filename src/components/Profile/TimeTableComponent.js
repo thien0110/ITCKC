@@ -13,6 +13,7 @@ import {
 import HeaderNavigation from '../customs/HeaderNavigation';
 import LinearGradient from 'react-native-linear-gradient';
 
+import Loading from '../customs/Loading';
 import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -36,6 +37,10 @@ export default class TimeTableComponent extends Component {
     current: weekday[d.getDay()],
     confirmNewPass: '',
   };
+  componentDidMount(){
+    const input ={maLopHoc:'30061711', hocKi:'1'}
+    this.props.getTimeTableAction(input)
+  }
   setModalVisible = (visible) => {
     this.setState({modalVisible: visible});
   };
@@ -162,6 +167,8 @@ export default class TimeTableComponent extends Component {
   }
   render() {
     const {daysWeek, current} = this.state;
+    const {isFetching, data, message} =this.props;
+    // console.warn(data, )
     return (
       <View style={{flex: 1, backgroundColor: Colors.navigation}}>
         <HeaderNavigation
@@ -179,6 +186,7 @@ export default class TimeTableComponent extends Component {
             {daysWeek === '8' ? this.showSunday() : this.showTime()}
           </View>
         </View>
+        {isFetching && <Loading></Loading>}
       </View>
     );
   }

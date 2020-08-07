@@ -15,6 +15,7 @@ import SlideShow from './customs/SlideShow';
 import Loading from './customs/Loading';
 import {FlatListHorizontal} from './customs/FlatListHorizontal';
 import Block from './customs/Block';
+import {arrayIsEmpty} from '../res/Functions';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -22,6 +23,7 @@ const windowHeight = Dimensions.get('window').height;
 export default class MenuComponent extends Component {
   componentDidMount() {
     this.props.getMenuNewsAction();
+    this.props.getHotPostItAction();
   }
   showNews(heading, data) {
     return (
@@ -42,9 +44,6 @@ export default class MenuComponent extends Component {
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
         <ScrollView>
-          {/* <View style={{marginTop:15}}>
-          <SlideShow data={data}></SlideShow>
-          </View> */}
           <View
             style={{
               flexWrap: 'wrap',
@@ -96,12 +95,14 @@ export default class MenuComponent extends Component {
               title={'Cựu sinh viên'}
               iconName={Images.iconTeam}></Block>
           </View>
-          <View>
-            {this.showNews('Thông tin từ khoa', data)}
-            {this.showNews('Thông tin từ phòng ban', data)}
-            {this.showNews('Thông tin từ lớp học phần', data)}
-            {this.showNews('Thông tin từ trung tâm tin học', data)}
-          </View>
+          {!arrayIsEmpty(data) && (
+            <View>
+              {this.showNews('Thông tin từ khoa', data)}
+              {this.showNews('Thông tin từ phòng ban', data)}
+              {this.showNews('Thông tin từ lớp học phần', data)}
+              {this.showNews('Thông tin từ trung tâm tin học', data)}
+            </View>
+          )}
         </ScrollView>
       </View>
     );
@@ -109,7 +110,7 @@ export default class MenuComponent extends Component {
   render() {
     // const {itemId} = this.props.route.params;
     // console.warn(itemId, 'menu');
-    const {isFetching} = this.props;
+    const {isFetching, data} = this.props;
     return (
       <View
         style={{

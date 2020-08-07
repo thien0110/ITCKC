@@ -22,6 +22,7 @@ import {
   sortArrayObject,
   sortSemester,
 } from '../../res/Functions';
+import {userProfile} from '../../config'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -124,6 +125,7 @@ export default class LearningInfoComponent extends Component {
     );
   }
   render() {
+    // console.warn("malh",userProfile.maLopHoc)
     const {isFetching, data} = this.props;
     return (
       <View
