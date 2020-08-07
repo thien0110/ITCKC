@@ -19,11 +19,12 @@ const profileReducers = (state = initialState, action) => {
     case EDIT_PROFILE:
       return {...state, isFetching: true};
     case EDIT_PROFILE_SUCCESS:
+      let newData={...state.data,sdt:action.data.input.newPhone}
       return {
         ...state,
         isFetching: false,
-        // data: action.data,
-        message: action.message,
+        data: newData,
+        message:action.message
       };
     case EDIT_PROFILE_FAIL:
       return {...state, isFetching: false, message: action.error};

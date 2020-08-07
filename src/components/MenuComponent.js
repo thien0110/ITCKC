@@ -15,6 +15,7 @@ import SlideShow from './customs/SlideShow';
 import Loading from './customs/Loading';
 import {FlatListHorizontal} from './customs/FlatListHorizontal';
 import Block from './customs/Block';
+import {arrayIsEmpty} from '../res/Functions';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -22,12 +23,19 @@ const windowHeight = Dimensions.get('window').height;
 export default class MenuComponent extends Component {
   componentDidMount() {
     this.props.getMenuNewsAction();
+    this.props.getHotPostItAction();
   }
   showNews(heading, data) {
     return (
       <View>
-        <Text style={{fontWeight: 'bold', marginLeft: 15}}>{heading}</Text>
-        <FlatListHorizontal data={data}></FlatListHorizontal>
+        <Text style={{fontWeight: 'bold', marginLeft: 15, fontSize: 20}}>
+          {heading}
+        </Text>
+        <FlatListHorizontal
+          data={data}
+          onPress={(item) => {
+            this.props.navigation.navigate('PostDetail', {item: item});
+          }}></FlatListHorizontal>
       </View>
     );
   }
@@ -36,13 +44,13 @@ export default class MenuComponent extends Component {
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
         <ScrollView>
-          <SlideShow data={data}></SlideShow>
           <View
             style={{
               flexWrap: 'wrap',
               flexDirection: 'row',
               paddingHorizontal: 15,
               marginBottom: 7.5,
+              marginTop: 15,
             }}>
             <Block
               onPress={() => {
@@ -52,10 +60,10 @@ export default class MenuComponent extends Component {
               iconName={Images.iconSchool}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('SchoolInfo');
+                this.props.navigation.navigate('ItCenter');
               }}
-              title={'Hoạt động ngoại khóa'}
-              iconName={Images.iconExercise}
+              title={'Trung tâm tin học'}
+              iconName={Images.iconTTTH}
               marginBottom={15}
               marginLeft={15}
               marginRight={15}></Block>
@@ -64,17 +72,17 @@ export default class MenuComponent extends Component {
               onPress={() => {
                 this.props.navigation.navigate('LearningInfo');
               }}
-              title={'Thông tin học tập'}
-              iconName={Images.iconBooks}></Block>
+              title={'E-Learning'}
+              iconName={Images.iconElearning}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('SchoolInfo');
+                this.props.navigation.navigate('DepartmentInfo');
               }}
               title={'Thông tin khoa'}
               iconName={Images.iconIt}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('SchoolInfo');
+                this.props.navigation.navigate('WorkInfo');
               }}
               title={'Thông tin việc làm'}
               iconName={Images.iconProject}
@@ -82,17 +90,19 @@ export default class MenuComponent extends Component {
               marginRight={15}></Block>
             <Block
               onPress={() => {
-                this.props.navigation.navigate('SchoolInfo');
+                this.props.navigation.navigate('Alumni');
               }}
               title={'Cựu sinh viên'}
               iconName={Images.iconTeam}></Block>
           </View>
-          <View>
-            {this.showNews('Thông tin từ khoa', data)}
-            {this.showNews('Thông tin từ phòng ban', data)}
-            {this.showNews('Thông tin từ lớp học phần', data)}
-            {this.showNews('Thông tin từ trung tâm tin học', data)}
-          </View>
+          {!arrayIsEmpty(data) && (
+            <View>
+              {this.showNews('Thông tin từ khoa', data)}
+              {this.showNews('Thông tin từ phòng ban', data)}
+              {this.showNews('Thông tin từ lớp học phần', data)}
+              {this.showNews('Thông tin từ trung tâm tin học', data)}
+            </View>
+          )}
         </ScrollView>
       </View>
     );
@@ -100,7 +110,7 @@ export default class MenuComponent extends Component {
   render() {
     // const {itemId} = this.props.route.params;
     // console.warn(itemId, 'menu');
-    const {isFetching} = this.props;
+    const {isFetching, data} = this.props;
     return (
       <View
         style={{

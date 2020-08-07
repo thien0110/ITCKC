@@ -1,15 +1,28 @@
 import {
-    EDIT_PROFILE,EDIT_PROFILE_FAIL,EDIT_PROFILE_SUCCESS,
-    FORMAT_DATA,GET_PROFILE,GET_PROFILE_FAIL,GET_PROFILE_SUCCESS
-  } from '../../actions/MenuProfile/ProfileAction';
+  EDIT_PROFILE,
+  EDIT_PROFILE_FAIL,
+  EDIT_PROFILE_SUCCESS,
+  FORMAT_DATA,
+  GET_PROFILE,
+  GET_PROFILE_FAIL,
+  GET_PROFILE_SUCCESS,
+} from '../../actions/MenuProfile/ProfileAction';
 import {call, takeEvery, put} from 'redux-saga/effects';
 import {editProfileApi, getProfileApi} from '../../api/MenuProfile/ProfileApis';
 const messageError = 'Không thể kết nối tới server.';
 function* editProfileFlow(action) {
   try {
     const response = yield editProfileApi(action.input);
-    if (response.resultCode === 1) {
-      yield put({type: EDIT_PROFILE_SUCCESS, data: response.data, message:response.message});
+    if (response.status === 200) {
+      const data = {
+        input: action.input,
+        output: response.data,
+      };
+      yield put({
+        type: EDIT_PROFILE_SUCCESS,
+        data: data,
+        message: response.message,
+      });
     } else {
       yield put({type: EDIT_PROFILE_FAIL, error: response.message});
     }
@@ -24,8 +37,9 @@ export function* watchEditProfile() {
 function* getProfileFlow(action) {
   try {
     const response = yield getProfileApi(action.input);
-    if (response.resultCode === 200) {
-      yield put({type: GET_PROFILE_SUCCESS, data: response.data, message:response.message});
+    // console.warn(response)
+    if (response.status === 200) {
+      yield put({type: GET_PROFILE_SUCCESS, data: response.data});
     } else {
       yield put({type: GET_PROFILE_FAIL, error: response.message});
     }
@@ -37,4 +51,3 @@ function* getProfileFlow(action) {
 export function* watchGetProfile() {
   yield takeEvery(GET_PROFILE, getProfileFlow);
 }
-

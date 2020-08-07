@@ -6,10 +6,11 @@
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
-      android:icon="@mipmap/ic_launcher"
-      android:roundIcon="@mipmap/ic_launcher_round"
+      android:icon="@mipmap/iconckc"
+      android:roundIcon="@mipmap/iconckc"
       android:allowBackup="false"
-      android:theme="@style/AppTheme">
+      android:theme="@style/AppTheme"
+      android:usesCleartextTraffic="true">
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme"

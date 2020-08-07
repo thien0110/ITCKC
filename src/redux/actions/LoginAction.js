@@ -1,8 +1,19 @@
-import {LOGIN, LOGIN_FAIL, LOGIN_SUCCESS, FORMAT_DATA,CHANGE_STATE_LOGIN} from './ActionTypes';
+import {
+  LOGIN,
+  FORMAT_DATA,
+  CHANGE_STATE_LOGIN,
+  FORGET_PASSWORD,
+} from './ActionTypes';
 
 export const loginAction = (input) => {
   return {
     type: LOGIN,
+    input: input,
+  };
+};
+export const forgetPasswordAction = (input) => {
+  return {
+    type: FORGET_PASSWORD,
     input: input,
   };
 };
@@ -13,11 +24,10 @@ export const formatData = (input) => {
   };
 };
 
-export const changeStateLoginAction = (key,state) => {
+export const changeStateLoginAction = (key, state) => {
   return {
     type: CHANGE_STATE_LOGIN,
-    key:key,
-    state:state,
+    key: key,
+    state: state,
   };
 };
-

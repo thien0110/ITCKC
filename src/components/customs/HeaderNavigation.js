@@ -39,16 +39,18 @@ export default class HeaderNavigation extends React.Component {
           padding: 15,
           alignItems: 'center',
           backgroundColor: color,
-          shadowColor: Colors.black,
-          shadowOpacity: 0.3,
-          shadowRadius: 3,
-          elevation: 10,
+          // shadowColor: Colors.black,
+          // shadowOpacity: 0.3,
+          // shadowRadius: 3,
+          // elevation: 10,
         }}>
         {iconLeft != null && (
           <TouchableOpacity
             onPress={() => {
               onClickLeft();
-            }}>
+            }}
+            style={{position:'absolute', zIndex:1,left:15}}
+            >
             <Image
               source={iconLeft}
               style={{
@@ -122,7 +124,8 @@ export default class HeaderNavigation extends React.Component {
           <TouchableOpacity
             onPress={() => {
               onClickRight();
-            }}>
+            }}
+            style={{position:'absolute', right:15}}>
             <Image
               source={iconRight}
               style={{
@@ -156,7 +159,7 @@ export default class HeaderNavigation extends React.Component {
 }
 HeaderNavigation.defaultProps = {
   title: '',
-  titleColor: Colors.black,
+  titleColor: Colors.white,
   iconLeft: null,
   iconRight: null,
   color: Colors.white,

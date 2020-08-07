@@ -1,18 +1,21 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image, Dimensions} from 'react-native';
+import {View, StyleSheet, Text, Image, Dimensions, TouchableOpacity} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
 
-const SlideShowItem = ({item}) => {
+const SlideShowItem = ({item, onPress}) => {
   return (
+    <TouchableOpacity onPress={()=>{onPress(item)}}>
     <View style={styles.cardView}>
       <View style={styles.textView}>
-        <Text style={styles.itemTitle}>{item.title}</Text>
-        <Text style={styles.itemDescription}
-        numberOfLines={4}>{item.description}</Text>
+        <Text style={styles.itemTitle}>{item.tieuDe}</Text>
+        <Text style={styles.itemDescription} numberOfLines={4}>
+          {item.moTaNgan}
+        </Text>
       </View>
       <Image style={styles.image} source={{uri: item.url}} />
-    </View>
+    </View></TouchableOpacity>
+    
   );
 };
 
@@ -22,8 +25,8 @@ const styles = StyleSheet.create({
     width: width - 30,
     height: height / 5,
     backgroundColor: 'white',
-    marginHorizontal:15,
-    marginVertical:15,
+    marginHorizontal: 15,
+    marginBottom: 15,
     padding: 10,
     borderRadius: 10,
     shadowColor: '#000',
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 
-  textView: {flex: 1,overflow:'hidden'},
+  textView: {flex: 1, overflow: 'hidden', marginRight: 10},
   image: {
     width: width / 2 - 20,
     flex: 1,
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   itemTitle: {
-    fontSize: width/28,
+    fontSize: width / 28,
     marginBottom: 5,
     fontWeight: 'bold',
   },

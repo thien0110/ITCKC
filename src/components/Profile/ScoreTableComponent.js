@@ -14,175 +14,91 @@ import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 const window = Dimensions.get('window');
+import {WebView} from 'react-native-webview';
+import {FlatList, ScrollView} from 'react-native-gesture-handler';
 
-export default class SettingComponent extends Component {
-  state = {
-    modalVisible: false,
-    oldPass: '',
-    newPass: '',
-    confirmNewPass: '',
-  };
-  onPressChangePass() {
-    const {modalVisible, oldPass, newPass, confirmNewPass} = this.state;
-    const input = {
-      oldPass,
-      newPass,
-      confirmNewPass,
-    };
-    this.setModalVisible(!modalVisible);
-  }
-  showPassInput(placeholder, value, onChangeText) {
+export default class ScoreTableComponent extends Component {
+  subjectScore(subjectName, score) {
     return (
-      <TextInput
+      <View
         style={{
-          marginBottom: 15,
-          alignItems: 'center',
-          width: window.width / 1.5,
-          borderRadius: 5,
-          backgroundColor: Colors.gray,
-          paddingHorizontal: 10,
+          width: window.width - 30,
+          height: 50,
+          paddingHorizontal: 5,
+          paddingVertical: 5,
+          marginBottom: 10,
+          justifyContent: 'space-between',
+          backgroundColor: '#fff',
+          borderTopRightRadius: 50,
+          borderBottomRightRadius: 50,
+          borderBottomLeftRadius: 20,
+          borderTopLeftRadius: 20,
           flexDirection: 'row',
-          // shadowColor: 'black',
-          // shadowOpacity: 0.3,
-          // shadowRadius: 5,
-          // elevation: 5,
-        }}
-        placeholder={placeholder}
-        value={value}
-        onChangeText={(text) => {
-          onChangeText(text);
-        }}></TextInput>
-    );
-  }
-  showModel() {
-    const {modalVisible, oldPass, newPass, confirmNewPass} = this.state;
-    return (
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          this.setModalVisible(!modalVisible);
         }}>
         <View
           style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
+            width: window.width - 150,
+            height: 40,
+            padding: 7,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
           }}>
-          <View
-            style={{
-              margin: 20,
-              backgroundColor: 'white',
-              borderRadius: 20,
-              padding: 35,
-              alignItems: 'center',
-              shadowColor: Colors.black,
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
-              elevation: 5,
-            }}>
-            <View style={{width: window.width / 1.5, alignItems: 'flex-end'}}>
-              <TouchableOpacity
-                onPress={() => {
-                  this.setModalVisible(!modalVisible);
-                }}>
-                <Icon name={'times'} size={18} color="gray"></Icon>
-              </TouchableOpacity>
-            </View>
-
-            <Text
-              style={{
-                marginBottom: 15,
-                textAlign: 'center',
-                fontWeight: 'bold',
-                fontSize: 20,
-                color: Colors.gray2,
-              }}>
-              Đổi mật khẩu
-            </Text>
-            {this.showPassInput('Mật Khẩu cũ', oldPass, (text) => {
-              this.setState({oldPass: text.trim()});
-            })}
-            {this.showPassInput('Mật Khẩu mới', newPass, (text) => {
-              this.setState({newPass: text.trim()});
-            })}
-            {this.showPassInput(
-              'Nhập lại Mật Khẩu mới',
-              confirmNewPass,
-              (text) => {
-                this.setState({confirmNewPass: text.trim()});
-              },
-            )}
-
-            <TouchableOpacity
-              style={{
-                borderRadius: 5,
-                width: window.width / 1.5,
-                padding: 10,
-                marginTop: 10,
-                elevation: 2,
-                backgroundColor: Colors.buttonBlue,
-              }}
-              onPress={() => {
-                this.onPressChangePass();
-              }}>
-              <Text
-                style={{
-                  color: Colors.white,
-                  fontWeight: 'bold',
-                  textAlign: 'center',
-                  fontSize: 20,
-                }}>
-                Xong
-              </Text>
-            </TouchableOpacity>
-          </View>
+          <Text style={{fontSize: 18}}>{subjectName}</Text>
         </View>
-      </Modal>
+        <View
+          style={score<5?{
+            width: 40,
+            height: 40,
+            borderRadius: 50,
+            justifyContent: 'center',
+            backgroundColor: '#ef476f',
+          }:{
+            width: 40,
+            height: 40,
+            borderRadius: 50,
+            justifyContent: 'center',
+            backgroundColor: '#06d6a0',
+          }}>
+          <Text style={{fontSize: 18, textAlign: 'center', color: '#fff'}}>
+            {score}
+          </Text>
+        </View>
+      </View>
     );
   }
-  setModalVisible = (visible) => {
-    this.setState({modalVisible: visible});
-  };
-  showItem(icon, title, onPress) {
+  showSubjectScore() {
     return (
-      <TouchableOpacity onPress={onPress}>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginBottom: 15,
-            alignItems: 'center',
-          }}>
-          <Image
-            source={icon}
-            style={{
-              flex: 1,
-              resizeMode: 'contain',
-              width: 40,
-              height: 40,
-            }}></Image>
-          <View
-            style={{
-              borderBottomWidth: 1,
-              borderBottomColor: Colors.grayStrong,
-              justifyContent: 'center',
-              flex: 5,
-              padding: 15,
-            }}>
-            <Text style={{fontSize: 20, color: Colors.gray2}}>{title}</Text>
-          </View>
-        </View>
-      </TouchableOpacity>
+      <FlatList
+            data={data}
+            // style={{paddingHorizontal: 15}}
+            keyExtractor={(item, index) => 'key' + index}
+            renderItem={({item}) => {
+              return this.subjectScore(
+                item.subjectName,
+                item.score
+              );
+            }}></FlatList>
+    );
+  }
+  titleBoard(subjectName, score) {
+    return (
+      <View
+        style={{
+          width: window.width - 50,
+          marginBottom: 10,
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+        }}>
+        <Text style={{fontSize: 18, fontWeight:'bold', color: '#fff'}}>{subjectName}</Text>
+        <Text style={{fontSize: 18, fontWeight:'bold', textAlign: 'center', color: '#fff'}}>
+          {score}
+        </Text>
+      </View>
     );
   }
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: Colors.background}}>
+      <View style={{flex: 1, backgroundColor: Colors.backgroundBlue}}>
         <HeaderNavigation
           title={'Bảng điểm'}
           titleColor={Colors.white}
@@ -192,8 +108,57 @@ export default class SettingComponent extends Component {
           onClickLeft={() => {
             this.props.navigation.goBack();
           }}></HeaderNavigation>
-        <Text style={{alignContent:'center'}}>Hãy code dùm tôi</Text>
+        <View style={{flex:1,paddingHorizontal: 10, alignItems: 'center'}}>
+          {this.titleBoard('Môn học', 'Điểm')}
+          {this.showSubjectScore()}
+        </View>
       </View>
     );
   }
 }
+const data=[
+  {
+    subjectName:"Cơ sở dữ liệu",
+    score:"5.8"
+  },
+  {
+    subjectName:"Mạng máy tính",
+    score:"6.1"
+  },
+  {
+    subjectName:"Thiết kế website",
+    score:"7.2"
+  },
+  {
+    subjectName:"Cấu trúc dữ liệu và thuật toán",
+    score:"7.6"
+  },
+  {
+    subjectName:"Anh văn A2",
+    score:"4.9"
+  },
+  {
+    subjectName:"Toán rời rạc và lý thuyết đồ thị",
+    score:"6.3"
+  },
+  {
+    subjectName:"Thực hành mạng máy tính",
+    score:"7.7"
+  },
+  {
+    subjectName:"Giáo dục thể chất 2",
+    score:"10.0"
+  },
+  {
+    subjectName:"TH Cấu trúc dữ liệu và thuật toán",
+    score:"7.0"
+  },
+  {
+    subjectName:"Thực hành thiết kế website",
+    score:"10.0"
+  },
+  {
+    subjectName:"Đồ họa ứng dụng (Photoshop)",
+    score:"7.0"
+  }
+]

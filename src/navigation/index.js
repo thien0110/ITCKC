@@ -5,16 +5,21 @@ import * as React from 'react';
 import LoginContainer from '../containers/LoginContainer';
 import TabNavigator from './Tab';
 import SearchContainer from '../containers/SearchContainer';
+import ItCenterContainer from '../containers/ItCenter/ItCenterContainer';
+import WorkInfoComponent from '../components/WorkInfo/WorkInfoComponent';
+import AlumniComponent from '../components/Alumni/AlumniComponent';
+import DepartmentInfoContainer from '../containers/DepartmentInfo/DepartmentInfoContainer';
 
 
-import SchoolInfoComponent from '../components/SchoolsInformation/SchoolInfoComponent';
+import SchoolInfoContainer from '../containers/SchoolInfo/SchoolInfoContainer';
 import LearningInfoContainer from '../containers/LearningInfo/LearningInfoContainer';
 import TabSubjectNavigator from './subjectInfo';
 import NotiComponent from '../components/NotiComponent'
 import AboutComponent from '../components/Profile/AboutComponent'
 import SettingComponent from '../components/Profile/SettingComponent'
-import TimeTable from '../components/Profile/TimeTableComponent'
+import TimeTable from '../containers/MenuProfile/TimeTableContainer'
 import ScoreTable from '../components/Profile/ScoreTableComponent'
+import YourClassContainer from '../containers/MenuProfile/YourClassContainer'
 
 import EditProfileContainer from '../containers/MenuProfile/EditProfileContainer'
 import ProfileContainer from '../containers/MenuProfile/ProfileContainer'
@@ -30,8 +35,12 @@ function MainNavigator() {
         <Stack.Screen name="Login" component={LoginContainer} />
         <Stack.Screen name="Tab" component={TabNavigator} />
 
-        <Stack.Screen name="SchoolInfo" component={SchoolInfoComponent}/>
+        <Stack.Screen name="SchoolInfo" component={SchoolInfoContainer}/>
         <Stack.Screen name="Search" component={SearchContainer}/>
+        <Stack.Screen name="ItCenter" component={ItCenterContainer}/>
+        <Stack.Screen name="WorkInfo" component={WorkInfoComponent}/>
+        <Stack.Screen name="Alumni" component={AlumniComponent}/>
+        <Stack.Screen name="DepartmentInfo" component={DepartmentInfoContainer}/>
 
         <Stack.Screen name="LearningInfo" component={LearningInfoContainer} />
 
@@ -45,6 +54,7 @@ function MainNavigator() {
         <Stack.Screen name="PostDetail" component={PostDetail}/>
         <Stack.Screen name="TimeTable" component={TimeTable}/>
         <Stack.Screen name="ScoreTable" component={ScoreTable}/>
+        <Stack.Screen name="YourClassComponent" component={YourClassContainer}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

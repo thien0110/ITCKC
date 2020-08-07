@@ -3,25 +3,26 @@ const messageError = 'Không thể kết nối tới server.';
 const fakeApi = true;
 import {API_URL} from '../../config';
 export function loginApi(input) {
+  // console.warn('input', input)
   if (fakeApi) {
     return {
-      resultCode: 1,
       message: 'Đăng nhập thành công !',
       data: {
-        username: 'Thienle',
-        password: '123',
-        token: '123456789'
+        mssv: '0306171301',
+        email: '0306171301@gmail.com',
+        role: 'SV',
+        maLopHoc: '03561',
+        token: '123456789',
       },
     };
   } else {
-    return fetch(API_URL+'login', {
-      
+    return fetch(API_URL + 'login', {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json',
       }),
       body: JSON.stringify({
-        username: input.username,
+        email: input.username,
         password: input.password,
       }),
     })
@@ -31,7 +32,26 @@ export function loginApi(input) {
         return responseJson;
       })
       .catch((error) => {
+        // console.warn(error)
         return {resultCode: -1, message: messageError};
       });
   }
+}
+export function forgetPasswordApi(input) {
+  return fetch(API_URL + 'reset-password', {
+    method: 'POST',
+    headers: new Headers({
+      'Content-Type': 'application/json',
+    }),
+    body: JSON.stringify({
+      email: input.email,
+    }),
+  })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      return responseJson;
+    })
+    .catch((error) => {
+      return {resultCode: -1, message: messageError};
+    });
 }

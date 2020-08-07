@@ -19,12 +19,15 @@ export default class OthersSubjectComponent extends Component {
               titleColor={Colors.white}
               color={Colors.backgroundBlue}
               iconLeft={Images.iconBack}
-              iconRight={Images.icontabmenu}
+              iconRight={Images.iconTabNenu}
               iconLeftColor={Colors.black}
               onClickLeft={() => {
                 this.props.navigation.goBack();
               }}></HeaderNavigation>
-              
+              <Text style={{fontWeight: 'bold', fontSize: 25, color:Colors.gray2}}>
+              {' '}
+              Chức năng đang phát triển!{' '}
+            </Text>
           </View>
         );
       }

@@ -9,6 +9,7 @@ import {
   TextInput,
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
+import {Switch} from 'react-native-switch';
 
 import Colors from '../../res/Colors';
 import Images from '../../res/Images';
@@ -21,6 +22,7 @@ export default class SettingComponent extends Component {
     oldPass: '',
     newPass: '',
     confirmNewPass: '',
+    status:false
   };
   onPressChangePass() {
     const {modalVisible, oldPass, newPass, confirmNewPass} = this.state;
@@ -168,7 +170,7 @@ export default class SettingComponent extends Component {
             }}></Image>
           <View
             style={{
-              borderBottomWidth:0.5 ,
+              borderBottomWidth: 0.5,
               borderBottomColor: Colors.grayOpacity,
               justifyContent: 'center',
               flex: 5,
@@ -176,6 +178,33 @@ export default class SettingComponent extends Component {
             }}>
             <Text style={{fontSize: 20, color: Colors.gray2}}>{title}</Text>
           </View>
+          <Switch
+              value={this.state.status}
+              onValueChange={() =>
+                this.setState({status:!this.state.status})
+              }
+              //disabled={true}
+              circleSize={25}
+              //barHeight={25}
+              circleBorderWidth={0}
+              backgroundActive={'green'}
+              backgroundInactive={'gray'}
+              // circleActiveColor={'#30a566'}
+              // circleInActiveColor={'#000000'}
+              changeValueImmediately={true}
+              changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
+              innerCircleStyle={{
+                alignItems: 'center',
+                justifyContent: 'center',
+              }} // style for inner animated circle for what you (may) be rendering inside the circle
+              // outerCircleStyle={{}} // style for outer animated circle
+              renderActiveText={false}
+              renderInActiveText={false}
+              switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
+              switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
+              switchWidthMultiplier={2} // multipled by the `circleSize` prop to calculate total width of the Switch
+              //switchBorderRadius={10} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+            />
         </View>
       </TouchableOpacity>
     );
@@ -196,11 +225,11 @@ export default class SettingComponent extends Component {
           {this.showItem(Images.iconBell, 'Thông báo', () => {})}
           {this.showItem(Images.moon, 'Chế độ đêm', () => {})}
           {this.showItem(Images.translation, 'Ngôn ngữ', () => {})}
-          {this.showItem(Images.password, 'Đổi mật khẩu', () => {
+          {/* {this.showItem(Images.password, 'Đổi mật khẩu', () => {
             this.setModalVisible(true);
-          })}
+          })} */}
         </View>
-        {this.showModel()}
+        {/* {this.showModel()} */}
       </View>
     );
   }

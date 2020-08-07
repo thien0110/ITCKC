@@ -40,7 +40,7 @@ export default class SubjectsBlock extends Component {
             width: width,
             height: height,
             borderRadius: 15,
-            backgroundColor: '#fff',
+            backgroundColor: Colors.backgroundBlue,
             overflow: 'hidden',
             justifyContent: 'space-around',
             marginBottom: marginBottom,
@@ -51,10 +51,10 @@ export default class SubjectsBlock extends Component {
           <Image
             source={covers[this.state.currentImageIndex]}
             style={{
-              alignContent: 'center',
-              width: '120%',
-              position: 'absolute',
               top: -10,
+              width: '120%',
+              alignContent: 'center',
+              position: 'absolute',
               resizeMode: 'cover',
             }}></Image>
           <Text

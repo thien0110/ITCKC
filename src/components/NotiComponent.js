@@ -23,7 +23,7 @@ export default class NotiComponent extends Component {
             height: windowHeight / 6,
             backgroundColor: Colors.white,
             borderRadius: 10,
-            marginBottom: 5,
+            marginBottom: 10,
             padding: 10,
             overflow:'hidden'
           }}>
@@ -128,6 +128,7 @@ export default class NotiComponent extends Component {
     );
   }
   render() {
+    const {isFetching} = this.props;
     return (
       <View style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
@@ -140,6 +141,7 @@ export default class NotiComponent extends Component {
             this.props.navigation.goBack();
           }}></HeaderNavigation>
         {this.showBody()}
+        {isFetching && <Loading></Loading>}
       </View>
     );
   }

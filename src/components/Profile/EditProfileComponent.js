@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
-import {Text, View, TextInput, ScrollView, Picker} from 'react-native';
+import {
+  Text,
+  View,
+  TextInput,
+  ScrollView,
+  Picker,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 // import DateTimePicker from '@react-native-community/datetimepicker';
 import {objectIsNull} from '../../res/Functions';
@@ -12,34 +20,18 @@ export default class EditProfileComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '', //Tên
-      lastName: '', //Họ
-      sex: 'Nam', //Giới tính
-      permanentAddress: '', // địa chỉ thường trú
-      temporaryAddress: '', // địa chỉ tạm trú
       phoneNumber: '',
       birthDay: new Date(),
-      idCode: '', //số chứng minh thư
-      fatherName: '',
-      motherName: '',
-      fatherPhoneNumber: '',
-      motherPhoneNumber: '',
+      showChangePass: false,
+      oldPass: '',
+      newPass: '',
+      confirmNewPass: '',
     };
   }
   setDataEditProfile(data) {
     this.setState({
-      firstName: data.ten,
-      lastName: data.ho,
-      sex: data.sex,
-      permanentAddress: data.diaChiThuongTru,
-      temporaryAddress: data.diaChiTamTru,
       phoneNumber: data.sdt,
       birthDay: data.ngaySinh,
-      idCode: data.cmnd,
-      fatherName: data.hoTenCha,
-      motherName: data.hoTenMe,
-      fatherPhoneNumber: data.sdtCha,
-      motherPhoneNumber: data.sdtMe,
     });
   }
   componentDidMount() {
@@ -49,47 +41,36 @@ export default class EditProfileComponent extends Component {
     }
   }
   onPressSave() {
-    const {
-      firstName,
-      lastName,
-      sex,
-      permanentAddress,
-      temporaryAddress,
-      phoneNumber,
-      birthDay,
-      idCode,
-      fatherName,
-      motherName,
-      fatherPhoneNumber,
-      motherPhoneNumber,
-    } = this.state;
+    const {phoneNumber, birthDay} = this.state;
     const input = {
-      firstName,
-      lastName,
-      sex,
-      permanentAddress,
-      temporaryAddress,
       phoneNumber,
       birthDay,
-      idCode,
-      fatherName,
-      motherName,
-      fatherPhoneNumber,
-      motherPhoneNumber,
     };
     this.props.editProfileAction(input);
   }
-  showInput(title, value, keyboardType, onChangeText) {
+  onPressChangePass() {
+    const { oldPass, newPass, confirmNewPass} = this.state;
+    const input = {
+      oldPass,
+      newPass,
+      confirmNewPass,
+    };
+  }
+  showInput(title, value, keyboardType, onChangeText, showPass, onFocus) {
     return (
-      <View style={{marginTop: 15,marginLeft:15}}>
+      <View style={{marginTop: 15, marginHorizontal: 15}}>
         <Text style={{marginBottom: 5, fontSize: 15, color: Colors.buttonBlue}}>
           {title}
           {':'}
         </Text>
         <TextInput
+          secureTextEntry={showPass}
           value={value}
           onChangeText={(text) => {
             onChangeText(text);
+          }}
+          onFocus={() => {
+            onFocus();
           }}
           keyboardType={keyboardType}
           style={{
@@ -98,6 +79,7 @@ export default class EditProfileComponent extends Component {
             borderColor: Colors.grayOpacity,
             borderWidth: 1,
             paddingLeft: 15,
+            textAlign: 'center',
           }}
           clearTextOnFocus={true}
         />
@@ -106,13 +88,13 @@ export default class EditProfileComponent extends Component {
   }
   showDatePicker(title, value, onDateChange) {
     return (
-      <View style={{marginTop: 15,marginLeft:15}}>
+      <View style={{marginTop: 15, marginHorizontal: 15}}>
         <Text style={{marginBottom: 10, fontSize: 15, color: Colors.blue}}>
           {title}
           {':'}
         </Text>
         <DatePicker
-          style={{width: '106%', }}
+          style={{width: '102.5%'}}
           date={value}
           mode="date"
           placeholder="--:--"
@@ -129,7 +111,7 @@ export default class EditProfileComponent extends Component {
               borderRadius: 5,
               borderColor: Colors.grayOpacity,
               borderWidth: 1,
-              height: 50,
+              height: 48,
             },
           }}
           onDateChange={(date) => {
@@ -139,122 +121,129 @@ export default class EditProfileComponent extends Component {
       </View>
     );
   }
-  showPicker(title, selectedValue, onValueChange) {
+  // showPicker(title, selectedValue, onValueChange) {
+  //   return (
+  //     <View style={{marginTop: 15, marginLeft:15}}>
+  //       <Text style={{marginBottom: 5, fontSize: 15, color: Colors.blue}}>
+  //         {title}
+  //         {':'}
+  //       </Text>
+  //       <View
+  //         style={{
+  //           backgroundColor: Colors.white,
+  //           borderRadius: 5,
+  //           borderColor: Colors.grayOpacity,
+  //           borderWidth: 1,
+  //         }}>
+  //         <Picker
+  //           mode="dropdown"
+  //           selectedValue={selectedValue}
+  //           onValueChange={(itemValue) => {
+  //             onValueChange(itemValue);
+  //           }}
+  //           style={{height: 48, paddingLeft: 15}}>
+  //           <Picker.Item label={'Nam'} value={'Nam'} />
+  //           <Picker.Item label={'Nữ'} value={'Nữ'} />
+  //         </Picker>
+  //       </View>
+  //     </View>
+  //   );
+  // }
+  showButton(text, onPress) {
     return (
-      <View style={{marginTop: 15, marginLeft:15}}>
-        <Text style={{marginBottom: 5, fontSize: 15, color: Colors.blue}}>
-          {title}
-          {':'}
-        </Text>
-        <View
+      <View style={{alignItems: 'flex-end', marginHorizontal: 15}}>
+        <TouchableOpacity
           style={{
-            backgroundColor: Colors.white,
+            marginTop: 15,
             borderRadius: 5,
-            borderColor: Colors.grayOpacity,
-            borderWidth: 1,
+            backgroundColor: Colors.buttonBlue,
+            padding: 10,
+          }}
+          onPress={() => {
+            onPress;
           }}>
-          <Picker
-            mode="dropdown"
-            selectedValue={selectedValue}
-            onValueChange={(itemValue) => {
-              onValueChange(itemValue);
-            }}
-            style={{height: 48, paddingLeft: 15}}>
-            <Picker.Item label={'Nam'} value={'Nam'} />
-            <Picker.Item label={'Nữ'} value={'Nữ'} />
-          </Picker>
-        </View>
+          <Text style={{color: Colors.white}}>{text}</Text>
+        </TouchableOpacity>
       </View>
     );
   }
   showView() {
     const {
-      firstName,
-      lastName,
-      sex,
-      permanentAddress,
-      temporaryAddress,
       phoneNumber,
       birthDay,
-      idCode,
-      fatherName,
-      motherName,
-      fatherPhoneNumber,
-      motherPhoneNumber,
+      oldPass,
+      newPass,
+      confirmNewPass,
+      showChangePass,
     } = this.state;
     return (
       <ScrollView>
-        <View style={{flex: 1, paddingBottom: 15, paddingRight:15}}>
-          <View style={{flexDirection: 'row'}}>
-            <View style={{flex: 1}}>
-              {this.showInput('Họ', lastName, 'default', (text) => {
-                this.setState({lastName: text});
-              })}
-            </View>
-            <View style={{flex: 1}}>
-              {this.showInput('Tên', firstName, 'default', (text) => {
-                this.setState({firstName: text});
-              })}
-            </View>
+        <View style={{flex: 1, paddingBottom: 15}}>
+          <View style={{flex: 1}}>
+            {this.showDatePicker('Ngày sinh', birthDay, (date) => {
+              this.setState({birthDay: date});
+            })}
           </View>
-
           {this.showInput(
-            'Địa chỉ thường trú',
-            permanentAddress,
-            'default',
-            (text) => {
-              this.setState({permanentAddress: text});
-            },
-          )}
-          {this.showInput(
-            'Địa chỉ tạm trú',
-            temporaryAddress,
-            'default',
-            (text) => {
-              this.setState({temporaryAddress: text});
-            },
-          )}
-          <View style={{flexDirection: 'row'}}>
-            <View style={{flex: 1}}>
-              {this.showDatePicker('Ngày sinh', birthDay, (date) => {
-                this.setState({birthDay: date});
-              })}
-            </View>
-            <View style={{flex: 1}}>
-              {this.showPicker('Giới tính', sex, (itemValue) => {
-                this.setState({sex: itemValue});
-              })}
-            </View>
-          </View>
-
-          {this.showInput('Số điện thoại', phoneNumber, 'phone-pad', (text) => {
-            this.setState({phoneNumber: text});
-          })}
-          {this.showInput('CMND/CCCD', idCode, 'phone-pad', (text) => {
-            this.setState({idCode: text});
-          })}
-          {this.showInput('Họ tên cha', fatherName, 'default', (text) => {
-            this.setState({fatherName: text});
-          })}
-          {this.showInput('Họ tên mẹ', motherName, 'default', (text) => {
-            this.setState({motherName: text});
-          })}
-          {this.showInput(
-            'Số điện thoại cha',
-            fatherPhoneNumber,
+            'Số điện thoại',
+            phoneNumber,
             'phone-pad',
             (text) => {
-              this.setState({fatherPhoneNumber: text});
+              this.setState({phoneNumber: text});
+            },
+            false,
+            () => {
+              this.setState({phoneNumber: ''});
             },
           )}
-
+          {this.showButton('Lưu thay đổi', () => {this.onPressSave()})}
+          <View
+            style={{
+              height: 1,
+              borderWidth: 1,
+              borderColor: Colors.grayOpacity,
+              marginTop: 15,
+              shadowColor: Colors.black,
+            shadowOpacity: 0.8,
+            shadowRadius: 1,
+            elevation:2,
+            }}></View>
           {this.showInput(
-            'Số điện thoại mẹ',
-            motherPhoneNumber,
-            'phone-pad',
+            'Mật khẩu',
+            oldPass,
+            'default',
             (text) => {
-              this.setState({motherPhoneNumber: text});
+              this.setState({oldPass: text});
             },
+            true,
+            () => {
+              this.setState({oldPass: '', showChangePass: true});
+            },
+          )}
+          {showChangePass && (
+            <View>
+              {this.showInput(
+                'Mật khẩu mới',
+                newPass,
+                'default',
+                (text) => {
+                  this.setState({newPass: text});
+                },
+                true,
+                () => {},
+              )}
+              {this.showInput(
+                'Xác nhận mật khẩu mới',
+                confirmNewPass,
+                'default',
+                (text) => {
+                  this.setState({confirmNewPass: text});
+                },
+                true,
+                () => {},
+              )}
+              {this.showButton('Đổi mật khẩu', () => {this.onPressChangePass()})}
+            </View>
           )}
         </View>
       </ScrollView>
@@ -274,13 +263,8 @@ export default class EditProfileComponent extends Component {
           color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
           iconLeftColor={Colors.black}
-          buttonRight={true}
-          textButtonRight={'Lưu'}
           onClickLeft={() => {
             this.props.navigation.goBack();
-          }}
-          onClickButtonRight={() => {
-            this.onPressSave();
           }}></HeaderNavigation>
         {this.showView()}
         {message &&
@@ -289,6 +273,7 @@ export default class EditProfileComponent extends Component {
             this.props.formatData();
             this.props.navigation.goBack();
           })}
+          
         {isFetching && <Loading></Loading>}
       </View>
     );
