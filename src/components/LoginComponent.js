@@ -389,7 +389,7 @@ export default class LoginComponent extends Component {
       changeStateAction,
       loginState,
     } = this.props;
-    console.warn(message)
+    // console.warn(message)
     return (
       <ImageBackground
         source={Images.bg}

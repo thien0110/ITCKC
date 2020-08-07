@@ -42,7 +42,7 @@ function* forgetPasswordFlow(action) {
         message: response.msg,
       });
     } else {
-      console.warn("s")
+      // console.warn("s")
       yield put({type: FORGET_PASSWORD_FAIL, error: stringIsEmpty(response.msg) ? messageError : response.msg});
     }
   } catch (error) {

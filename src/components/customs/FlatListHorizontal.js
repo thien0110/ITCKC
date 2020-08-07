@@ -44,11 +44,11 @@ export const FlatListHorizontal = ({data, onPress}) => {
           return (
             <TouchableOpacity onPress={()=>{onPress(item)}}>
               <View style={styles.cardView}>
-                <Image style={styles.image} source={{uri: item.url}} />
+                <Image style={styles.image} source={{uri: item.anhBia}} />
                 <View style={styles.textView}>
-                  <Text style={styles.itemTitle}>{item.title}</Text>
+                  <Text style={styles.itemTitle}>{item.tieuDe}</Text>
                   <Text style={styles.itemDescription} numberOfLines={3}>
-                    {item.description}
+                    {item.moTaNgan}
                   </Text>
                 </View>
               </View>

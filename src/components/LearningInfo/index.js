@@ -125,7 +125,7 @@ export default class LearningInfoComponent extends Component {
     );
   }
   render() {
-    console.warn("malh",userProfile.maLopHoc)
+    // console.warn("malh",userProfile.maLopHoc)
     const {isFetching, data} = this.props;
     return (
       <View

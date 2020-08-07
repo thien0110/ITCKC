@@ -168,7 +168,7 @@ export default class TimeTableComponent extends Component {
   render() {
     const {daysWeek, current} = this.state;
     const {isFetching, data, message} =this.props;
-    console.warn(data, )
+    // console.warn(data, )
     return (
       <View style={{flex: 1, backgroundColor: Colors.navigation}}>
         <HeaderNavigation

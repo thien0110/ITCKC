@@ -19,7 +19,7 @@ import AboutComponent from '../components/Profile/AboutComponent'
 import SettingComponent from '../components/Profile/SettingComponent'
 import TimeTable from '../containers/MenuProfile/TimeTableContainer'
 import ScoreTable from '../components/Profile/ScoreTableComponent'
-import YourClassComponent from '../components/Profile/YourClassComponent'
+import YourClassContainer from '../containers/MenuProfile/YourClassContainer'
 
 import EditProfileContainer from '../containers/MenuProfile/EditProfileContainer'
 import ProfileContainer from '../containers/MenuProfile/ProfileContainer'
@@ -54,7 +54,7 @@ function MainNavigator() {
         <Stack.Screen name="PostDetail" component={PostDetail}/>
         <Stack.Screen name="TimeTable" component={TimeTable}/>
         <Stack.Screen name="ScoreTable" component={ScoreTable}/>
-        <Stack.Screen name="YourClassComponent" component={YourClassComponent}/>
+        <Stack.Screen name="YourClassComponent" component={YourClassContainer}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
