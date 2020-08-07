@@ -17,6 +17,7 @@ import Loading from '../customs/Loading';
 import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import {userProfile} from '../../config'
 const window = Dimensions.get('window');
 
 var d = new Date();

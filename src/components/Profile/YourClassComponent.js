@@ -7,6 +7,7 @@ import Images from '../../res/Images';
 import Loading from '../customs/Loading';
 import {ScrollView} from 'react-native-gesture-handler';
 import SubjectsBlock from '../customs/SubjectsBlock';
+import {userProfile} from '../../config'
 
 export default class YourClassComponent extends Component {
     componentDidMount(){
