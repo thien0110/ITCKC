@@ -12,7 +12,7 @@ import {GET_SCORE_TABLE,GET_SCORE_TABLE_FAIL,GET_SCORE_TABLE_SUCCESS,
       if (response.code == 200) {
         yield put({type: GET_SCORE_TABLE_SUCCESS, data: response.data});
       } else {
-        yield put({type: GET_SCORE_TABLE_FAIL, error: response.message});
+        yield put({type: GET_SCORE_TABLE_FAIL, error: messageError});
       }
     } catch (error) {
       yield put({type: GET_SCORE_TABLE_FAIL, error: messageError});

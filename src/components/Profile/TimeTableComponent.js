@@ -18,6 +18,7 @@ import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {userProfile} from '../../config'
+import AlertCustom from '../customs/AlertComponent';
 const window = Dimensions.get('window');
 
 var d = new Date();
@@ -169,7 +170,7 @@ export default class TimeTableComponent extends Component {
   render() {
     const {daysWeek, current} = this.state;
     const {isFetching, data, message} =this.props;
-    // console.warn(data, )
+    console.warn(message, )
     return (
       <View style={{flex: 1, backgroundColor: Colors.navigation}}>
         <HeaderNavigation
@@ -188,6 +189,11 @@ export default class TimeTableComponent extends Component {
           </View>
         </View>
         {isFetching && <Loading></Loading>}
+        {message &&
+          AlertCustom(true, message, () => {
+            this.props.navigation.goBack();
+            this.props.formatData()
+          })}
       </View>
     );
   }
