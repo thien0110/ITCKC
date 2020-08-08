@@ -99,35 +99,43 @@ export default class TimeTableComponent extends Component {
   ) {
     return (
       <View style={{flexDirection: 'row', marginBottom: 10}}>
-        <View style={styles.timeContentsLeft}>
-          <Text style={{fontSize: 20, color: Colors.gray2}}>{timeStart}</Text>
-          <Text style={{fontSize: 20, color: Colors.gray2}}>{timeEnd}</Text>
-        </View>
         <LinearGradient
           colors={['#F68080', '#F9B16E']}
-          style={styles.timeContentsRight}>
+          style={styles.timeContentsLeft}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={{fontSize: 18, fontWeight: 'bold', color: '#fff'}}>
               {subjectName}
             </Text>
             <TouchableOpacity
               onPress={() => {
+                this.props.navigation.navigate('AlarmTest');;
+              }}
+              // style={{paddingVertical:20}}
+              >
+              <Image
+                source={Images.iconTimer}
+                style={{width: 35, height: 35}}></Image>
+            </TouchableOpacity>
+          </View>
+          <View style={{marginTop:0}}>
+            <Text style={styles.textContentTime}>{teacherName}</Text>
+            <Text style={styles.textContentTime}>{type}</Text>
+            {/* <Text style={styles.textContentTime}>
+              {group === '1' ? 'Nhóm 1' : group === '2' ? 'Nhóm 2' : 'Cả lớp'}
+            </Text> */}
+            {/* <Text style={styles.textContentTime}>{roomNumber}</Text> */}
+          </View>
+        </LinearGradient>
+        {/* <View style={styles.timeContentsRight}>
+           <TouchableOpacity
+              onPress={() => {
                 onPress();
               }}>
               <Image
                 source={Images.iconTimer}
-                style={{width: 30, height: 30}}></Image>
+                style={{width: 50, height: 50}}></Image>
             </TouchableOpacity>
-          </View>
-          <View style={{marginTop: -5}}>
-            <Text style={styles.textContentTime}>{teacherName}</Text>
-            <Text style={styles.textContentTime}>{type}</Text>
-            <Text style={styles.textContentTime}>
-              {group === '1' ? 'Nhóm 1' : group === '2' ? 'Nhóm 2' : 'Cả lớp'}
-            </Text>
-            <Text style={styles.textContentTime}>{roomNumber}</Text>
-          </View>
-        </LinearGradient>
+        </View> */}
       </View>
     );
   }
@@ -211,14 +219,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
     borderRadius: 20,
-    marginTop: 50,
+    marginTop: 20,
     padding: 5,
   },
   dayOff: {
     width: 30,
     height: 30,
     color: '#fff',
-    marginTop: 50,
+    marginTop: 20,
     padding: 5,
   },
   dayCurrent: {
@@ -226,7 +234,7 @@ const styles = StyleSheet.create({
     height: 30,
     alignItems: 'center',
     backgroundColor: Colors.grayStrong,
-    marginTop: 50,
+    marginTop: 20,
     padding: 5,
     borderRadius: 20,
   },
@@ -243,22 +251,22 @@ const styles = StyleSheet.create({
     flex: 1,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    paddingVertical: 15,
+    paddingTop: 15,
     paddingHorizontal: 0,
     justifyContent: 'space-between',
     backgroundColor: Colors.white,
   },
-  timeContentsLeft: {
+  timeContentsRight: {
     paddingVertical: 20,
     width: '20%',
-    marginRight: 15,
+    marginLeft: '3%',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  timeContentsRight: {
-    width: '75%',
-    height: 140,
-    padding: 10,
+  timeContentsLeft: {
+    width: '100%',
+    height: 120,
+    padding: 15,
     borderRadius: 20,
     alignSelf: 'flex-end',
   },
