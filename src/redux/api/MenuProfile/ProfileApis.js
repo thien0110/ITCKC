@@ -26,7 +26,6 @@ export function editProfileApi(input) {
   }
 
   export function changePasswordApi(input) {
-    // console.warn("input1",input)
     
       return fetch(API_URL + 'change-password', {
         method: 'POST',
@@ -46,6 +45,7 @@ export function editProfileApi(input) {
           return responseJson;
         })
         .catch((error) => {
+          // console.warn('error', error);
           return {resultCode: -1, message: messageError};
         });
     }

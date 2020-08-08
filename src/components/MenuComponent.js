@@ -23,8 +23,8 @@ const windowHeight = Dimensions.get('window').height;
 
 export default class MenuComponent extends Component {
   componentDidMount() {
-    // this.props.getMenuNewsAction();
-    // this.props.getHotPostItAction();
+    this.props.getMenuNewsAction();
+    this.props.getHotPostItAction();
   }
   showNews(heading, data) {
     return (

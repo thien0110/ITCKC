@@ -11,7 +11,11 @@ import {
   CHANGE_PASSWORD_SUCCESS,
 } from '../../actions/MenuProfile/ProfileAction';
 import {call, takeEvery, put} from 'redux-saga/effects';
-import {editProfileApi, getProfileApi,changePasswordApi} from '../../api/MenuProfile/ProfileApis';
+import {
+  editProfileApi,
+  getProfileApi,
+  changePasswordApi,
+} from '../../api/MenuProfile/ProfileApis';
 const messageError = 'Không thể kết nối tới server.';
 function* editProfileFlow(action) {
   try {
@@ -33,10 +37,10 @@ function* editProfileFlow(action) {
     yield put({type: EDIT_PROFILE_FAIL, error: messageError});
   }
 }
-
 export function* watchEditProfile() {
   yield takeEvery(EDIT_PROFILE, editProfileFlow);
 }
+
 function* getProfileFlow(action) {
   try {
     const response = yield getProfileApi(action.input);
@@ -54,14 +58,18 @@ function* getProfileFlow(action) {
 export function* watchGetProfile() {
   yield takeEvery(GET_PROFILE, getProfileFlow);
 }
+
+
+
+
 function* changPasswordFlow(action) {
   try {
     const response = yield changePasswordApi(action.input);
     // console.warn(response)
     if (response.status === true) {
-      yield put({type: CHANGE_PASSWORD_SUCCESS,message:response.message});
+      yield put({type: CHANGE_PASSWORD_SUCCESS, message: response.msg});
     } else {
-      yield put({type: CHANGE_PASSWORD_FAIL, error: response.message});
+      yield put({type: CHANGE_PASSWORD_FAIL, error: response.msg});
     }
   } catch (error) {
     yield put({type: CHANGE_PASSWORD_FAIL, error: messageError});
