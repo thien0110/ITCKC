@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
@@ -22,8 +23,8 @@ const windowHeight = Dimensions.get('window').height;
 
 export default class MenuComponent extends Component {
   componentDidMount() {
-    this.props.getMenuNewsAction();
-    this.props.getHotPostItAction();
+    // this.props.getMenuNewsAction();
+    // this.props.getHotPostItAction();
   }
   showNews(heading, data) {
     return (
@@ -112,25 +113,25 @@ export default class MenuComponent extends Component {
     // console.warn(itemId, 'menu');
     const {isFetching, data} = this.props;
     return (
-      <View
-        style={{
-          flexDirection: 'column',
-          backgroundColor: Colors.background,
-          flex: 1,
-        }}>
-        <HeaderNavigation
-          iconRight={Images.iconBell}
-          haveSearch={true}
-          onClickSearch={() => {
-            this.props.navigation.navigate('Search');
-          }}
-          color={Colors.backgroundBlue}
-          onClickRight={() => {
-            this.props.navigation.navigate('Noti');
-          }}></HeaderNavigation>
-        {this.showBody()}
-        {isFetching && <Loading></Loading>}
-      </View>
+        <SafeAreaView
+          style={{
+            flexDirection: 'column',
+            backgroundColor: Colors.background,
+            flex: 1,
+          }}>
+          <HeaderNavigation
+            iconRight={Images.iconBell}
+            haveSearch={true}
+            onClickSearch={() => {
+              this.props.navigation.navigate('Search');
+            }}
+            color={Colors.backgroundBlue}
+            onClickRight={() => {
+              this.props.navigation.navigate('Noti');
+            }}></HeaderNavigation>
+          {this.showBody()}
+          {isFetching && <Loading></Loading>}
+        </SafeAreaView>
     );
   }
 }
