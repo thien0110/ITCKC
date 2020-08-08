@@ -5,7 +5,7 @@ const messageError = 'Không thể kết nối tới server.';
 function* searchFlow(action) {
   try {
     const response = yield searchApi(action.input);
-    if (response.resultCode === 1) {
+    if (response.code === 200) {
       yield put({type: SEARCH_SUCCESS, data: response.data, message:response.message});
     } else {
       yield put({type: SEARCH_FAIL, error: response.message});

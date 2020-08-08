@@ -1,15 +1,29 @@
 import React, {Component} from 'react';
 import {Text, View, Image, TouchableOpacity, Dimensions} from 'react-native';
 import Colors from '../../res/Colors';
+import CoverImg from '../../res/Images';
 
 const windowWidth = Dimensions.get('window').width;
 
 export default class SubjectsBlock extends Component {
+  state = {
+    currentImageIndex: 0,
+  };
+  componentDidMount() {
+    this.changeImage();
+  }
+
+  changeImage = () => {
+    const randomNumber = Math.floor(Math.random() * covers.length);
+    this.setState({
+      currentImageIndex: randomNumber,
+    });
+  };
   render() {
     const {
       onPress,
       name,
-      semester,
+      numberOf,
       teacherName,
       width,
       height,
@@ -26,39 +40,44 @@ export default class SubjectsBlock extends Component {
             width: width,
             height: height,
             borderRadius: 15,
-            backgroundColor: '#eeeeeee',
+            backgroundColor: Colors.backgroundBlue,
+            overflow: 'hidden',
             justifyContent: 'space-around',
             marginBottom: marginBottom,
             marginLeft: marginLeft,
             marginRight: marginRight,
-            padding:padding,
-            borderWidth: 1,
-            borderColor: '#fff',
-            // shadowColor: Colors.black,
-            // shadowOpacity: 0.3,
-            // shadowRadius: 5,
-            // elevation: 5,
+            padding: padding
           }}>
-          {/* <Image
-              source={iconName}
-              style={{
-                width: '40%',
-                height: '40%',
-  
-                resizeMode: 'contain',
-              }}></Image> */}
-          <Text style={{textAlign: 'left', fontSize: 30, fontWeight: 'bold'}}>
+          <Image
+            source={covers[this.state.currentImageIndex]}
+            style={{
+              top: -10,
+              width: '120%',
+              alignContent: 'center',
+              position: 'absolute',
+              resizeMode: 'cover',
+            }}></Image>
+          <Text
+            style={{
+              textAlign: 'left',
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: '#fff',
+            }}>
             {name}
           </Text>
-          <Text style={{textAlign: 'left'}}>{semester}</Text>
+          <Text style={{textAlign: 'left', color: '#fff'}}>
+            Tên viết tắt: {numberOf}
+          </Text>
           <Text
             style={{
               textAlign: 'left',
               fontStyle: 'italic',
-              fontSize: 20,
-              marginBottom:0,
+              fontSize: 14,
+              marginBottom: 0,
+              color: '#fff',
             }}>
-            {teacherName}
+            GV: {teacherName}
           </Text>
         </View>
       </TouchableOpacity>
@@ -66,9 +85,7 @@ export default class SubjectsBlock extends Component {
   }
 }
 SubjectsBlock.defaultProps = {
-  onPress: () => {
-   
-  },
+  onPress: () => {},
   name: '',
   semester: '',
   teacherName: '',
@@ -77,5 +94,16 @@ SubjectsBlock.defaultProps = {
   marginBottom: 0,
   marginLeft: 0,
   marginRight: 0,
-  padding: 10
+  padding: 10,
 };
+const covers = [
+  CoverImg.cover1,
+  CoverImg.cover2,
+  CoverImg.cover3,
+  CoverImg.cover4,
+  CoverImg.cover5,
+  CoverImg.cover6,
+  CoverImg.cover7,
+  CoverImg.cover8,
+  CoverImg.cover9,
+];

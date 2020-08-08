@@ -2,7 +2,10 @@ import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  CHANGE_STATE_LOGIN
+  CHANGE_STATE_LOGIN,
+  FORGET_PASSWORD_SUCCESS,
+  FORGET_PASSWORD_FAIL,
+  FORGET_PASSWORD,
 } from '../actions/ActionTypes';
 
 const initialState = {
@@ -14,9 +17,9 @@ const initialState = {
 const loginReducers = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_STATE_LOGIN:
-      var stateNew = { ...state };
+      var stateNew = {...state};
       for (var i = 0; i < action.key.length; i++) {
-        stateNew = { ...stateNew, [action.key[i]]: action.state };
+        stateNew = {...stateNew, [action.key[i]]: action.state};
       }
       return stateNew;
     case LOGIN:
@@ -27,9 +30,19 @@ const loginReducers = (state = initialState, action) => {
         isFetching: false,
         data: action.data,
         message: action.message,
-        state: 1
+        state: 1,
       };
     case LOGIN_FAIL:
+      return {...state, isFetching: false, message: action.error, state: 2};
+    case FORGET_PASSWORD:
+      return {...state, isFetching: true,};
+    case FORGET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        message: action.message, state: 2
+      };
+    case FORGET_PASSWORD_FAIL:
       return {...state, isFetching: false, message: action.error, state: 2};
     default:
       return state;

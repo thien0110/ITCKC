@@ -27,12 +27,13 @@ import {
   stringIsEmpty,
 } from '../res/Functions';
 import images from '../res/Images';
+import {userProfile} from '../config';
 export default class LoginComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: '0306171301',
+      password: 'qYpQE6w',
 
       rememberMe: false,
       showAlert: false,
@@ -41,8 +42,7 @@ export default class LoginComponent extends Component {
       showPass: true,
 
       modalVisible: false,
-      idCard: '',
-      email: '',
+      email: '0306171301@caothang.edu.vn',
     };
   }
   changeState(key, value) {
@@ -60,6 +60,7 @@ export default class LoginComponent extends Component {
     const {params} = this.props.route;
 
     const myLogin = await getRememberedUser();
+    // console.warn(myLogin)
     if (
       !objectIsNull(myLogin) &&
       !stringIsEmpty(myLogin.username) &&
@@ -72,14 +73,19 @@ export default class LoginComponent extends Component {
       if (objectIsNull(params) || params.isLogout != true) {
         this.onLogin();
       }
-      
+    } else {
+      this.changeState(['rememberMe'], [false]);
     }
   }
   loginSuccess() {
     const {data, changeStateAction} = this.props;
+    userProfile.token=data.token;
+    userProfile.mssv=data.mssv;
+    userProfile.maLopHoc=data.maLopHoc;
+    userProfile.role=data.role;
     const myLogin = {
-      username: data.username,
-      password: data.password,
+      username: this.state.username,
+      password: this.state.password,
     };
     if (this.state.rememberMe === true) {
       rememberUser(myLogin);
@@ -90,11 +96,11 @@ export default class LoginComponent extends Component {
     changeStateAction(['state'], -1);
   }
   onPressForgetPass() {
-    const {modalVisible, idCard, email} = this.state;
+    const {modalVisible, email} = this.state;
     const input = {
-      idCard,
       email,
     };
+    this.props.forgetPasswordAction(input)
     this.setModalVisible(!modalVisible);
   }
   onChangeStateAlert = (state, des) => {
@@ -121,7 +127,7 @@ export default class LoginComponent extends Component {
       this.onChangeStateAlert(true, 'Vui lòng nhập đầy đủ thông tin');
     } else {
       const input = {
-        username: this.state.username,
+        username: this.state.username + '@caothang.edu.vn',
         password: this.state.password,
       };
       this.props.loginAction(input);
@@ -152,7 +158,7 @@ export default class LoginComponent extends Component {
     );
   }
   showModel() {
-    const {modalVisible, idCard, email} = this.state;
+    const {modalVisible,  email} = this.state;
     return (
       <Modal
         animationType="slide"
@@ -205,15 +211,6 @@ export default class LoginComponent extends Component {
             {this.showPassInput('Email', email, 'default', (text) => {
               this.setState({email: text.trim()});
             })}
-            {this.showPassInput(
-              'Chứng minh nhân dân',
-              idCard,
-              'phone-pad',
-              (text) => {
-                this.setState({idCard: text.trim()});
-              },
-            )}
-
             <TouchableOpacity
               style={{
                 borderRadius: 5,
@@ -275,7 +272,7 @@ export default class LoginComponent extends Component {
                 style={{
                   // justifyContent: 'center',
                   alignItems: 'center',
-                  height: '38%',
+                  height: '35%',
                   flexDirection: 'row',
                 }}>
                 <Image
@@ -384,7 +381,7 @@ export default class LoginComponent extends Component {
     );
   }
   render() {
-    const {messageAlert, showAlert, } = this.state;
+    const {messageAlert, showAlert} = this.state;
     const {
       data,
       message,
@@ -392,6 +389,7 @@ export default class LoginComponent extends Component {
       changeStateAction,
       loginState,
     } = this.props;
+    // console.warn(message)
     return (
       <ImageBackground
         source={Images.bg}

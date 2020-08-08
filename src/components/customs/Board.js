@@ -1,14 +1,27 @@
 import React, {Component} from 'react';
-import {Text, View, Image, TouchableOpacity, Dimensions} from 'react-native';
+import {Text, View, Image, TouchableOpacity, Dimensions, ImageBackground} from 'react-native';
 import Colors from '../../res/Colors';
+import CoverImg from '../../res/Images';
 
 const windowWidth = Dimensions.get('window').width;
 export default class Board extends Component {
+  state = {
+    currentImageIndex: 0,
+  };
+  componentDidMount() {
+    this.changeImage();
+  }
+  changeImage = () => {
+    const randomNumber = Math.floor(Math.random() * covers.length);
+    this.setState({
+      currentImageIndex: randomNumber,
+    });
+  };
   render() {
-    const {studentName, name, semester, teacherName, onClick} = this.props;
+    const {studentName, name, numberOf, teacherName, onClick} = this.props;
     return (
       <TouchableOpacity onPress={onClick}>
-        <Text
+        {/* <Text
           style={{
             textAlign: 'center',
             fontSize: 25,
@@ -17,9 +30,11 @@ export default class Board extends Component {
             color: Colors.navigation,
           }}>
           {studentName}
-        </Text>
-        <View
+        </Text> */}
+        <ImageBackground
+        source={covers[this.state.currentImageIndex]}
           style={{
+            overflow:"hidden",
             borderRadius: 10,
             padding: 10,
             backgroundColor: Colors.backgroundBlue,
@@ -43,12 +58,12 @@ export default class Board extends Component {
           <Text
             numberOfLines={2}
             style={{fontWeight: 'bold', marginVertical: 5, color: '#fff'}}>
-            {semester}
+            {numberOf}
           </Text>
           <Text style={{color: '#eeeeee', fontStyle: 'italic'}}>
             {teacherName}
           </Text>
-        </View>
+        </ImageBackground>
       </TouchableOpacity>
     );
   }
@@ -56,7 +71,18 @@ export default class Board extends Component {
 Board.defaultProps = {
   studentName: '',
   name: '',
-  semester: '',
+  numberOf: '',
   teacherName: '',
   onClick: () => {},
 };
+const covers = [
+  CoverImg.cover1,
+  CoverImg.cover2,
+  CoverImg.cover3,
+  CoverImg.cover4,
+  CoverImg.cover5,
+  CoverImg.cover6,
+  CoverImg.cover7,
+  CoverImg.cover8,
+  CoverImg.cover9,
+];

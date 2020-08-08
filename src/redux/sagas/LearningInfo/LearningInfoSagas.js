@@ -8,7 +8,7 @@ const messageError = 'Không thể kết nối tới server.';
 function* getSubjectFlow(action) {
   try {
     const response = yield getSubjectApi(action.input);
-    if (response.resultCode === 200) {
+    if (response.status === 200) {
       yield put({type: GET_SUBJECT_SUCCESS, data: response.data, message:response.message});
     } else {
       yield put({type: GET_SUBJECT_FAIL, error: response.message});

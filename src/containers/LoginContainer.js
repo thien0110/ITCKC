@@ -1,24 +1,31 @@
 import React from 'react';
 import LoginComponent from '../components/LoginComponent';
 import {connect} from 'react-redux';
-import {loginAction, changeStateLoginAction} from '../redux/actions/LoginAction';
+import {
+  loginAction,
+  changeStateLoginAction,
+  forgetPasswordAction,
+} from '../redux/actions/LoginAction';
 class LoginContainer extends React.Component {
   render() {
     return <LoginComponent {...this.props} />;
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    loginAction: input => {
+    loginAction: (input) => {
       dispatch(loginAction(input));
+    },
+    forgetPasswordAction: (input) => {
+      dispatch(forgetPasswordAction(input));
     },
     changeStateAction: (key, value) => {
       dispatch(changeStateLoginAction(key, value));
     },
   };
 };
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     data: state.loginReducers.data,
     isFetching: state.loginReducers.isFetching,
@@ -27,7 +34,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(LoginContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
