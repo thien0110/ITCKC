@@ -33,8 +33,8 @@ export default class LearningInfoComponent extends Component {
     subjects: [{}],
   };
   componentDidMount() {
-    const {maLopHoc, mssv} = userProfile;
-    const input = {mssv, maLopHoc};
+    const {maLopHoc} = userProfile;
+    const input = {maLopHoc};
     this.props.getSubjectAction(input);
   }
   Semester(Name) {
@@ -98,18 +98,18 @@ export default class LearningInfoComponent extends Component {
       if (this.state.Name == 1) {
         finalData = data.sort(sortArrayObject('tenMonHoc'));
         finalData = data.filter(
-          (item) => item.hocKi === this.state.Semestery,
+          (item) => item.hocKi == this.state.Semestery,
         );
       } else {
         finalData = data.sort(sortArrayObject('tenMonHoc', 'desc'));
         finalData = data.filter(
-          (item) => item.hocKi === this.state.Semestery,
+          (item) => item.hocKi == this.state.Semestery,
         );
       }
     }
     return (
       <FlatList
-        data={data}
+        data={finalData}
         style={{paddingHorizontal: 15}}
         keyExtractor={(item, index) => 'key' + index}
         renderItem={({item}) => {

@@ -3,7 +3,7 @@ const fakeApi = false;
 import {API_URL} from '../../../config';
 export function getSubjectApi(input) {
   return fetch(
-    `${API_URL}lophocphan/android/masinhvien/${input.mssv}/maLopHoc/${input.maLopHoc}`,
+    `${API_URL}lophocphan/android/maLopHoc/${input.maLopHoc}`,
     {
       method: 'GET',
       headers: new Headers({

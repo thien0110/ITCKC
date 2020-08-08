@@ -40,7 +40,7 @@ export default class TimeTableComponent extends Component {
     confirmNewPass: '',
   };
   componentDidMount(){
-    const input ={maLopHoc:'30061711', hocKi:'1'}
+    const input ={maLopHoc:userProfile.maLopHoc, hocKi:'1'}
     this.props.getTimeTableAction(input)
   }
   setModalVisible = (visible) => {
