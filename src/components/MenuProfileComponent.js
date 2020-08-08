@@ -11,6 +11,7 @@ import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
 import Images from '../res/Images';
 import {forgetUser} from '../res/Functions';
+import { SafeAreaView } from 'react-native-safe-area-context';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const widthBlock = (windowWidth - 45) / 2;
@@ -111,12 +112,12 @@ export default class MenuProfileComponent extends Component {
   }
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: Colors.background}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
           haveSearch={false}
           color={Colors.navigation}></HeaderNavigation>
         {this.showBody()}
-      </View>
+      </SafeAreaView>
     );
   }
 }

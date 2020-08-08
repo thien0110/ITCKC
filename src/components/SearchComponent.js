@@ -78,25 +78,25 @@ export default class SearchComponent extends Component {
   render() {
     const {data, message, isFetching, searchAction, navigation} = this.props;
     return (
-      <View style={{flex: 1, backgroundColor: Colors.background}}>
-        <HeaderNavigation
-          searching={true}
-          color={Colors.navigation}
-          buttonRight={true}
-          textButtonRight={'Đóng'}
-          valueSearch={this.state.value}
-          onClickButtonRight={() => {
-            navigation.goBack();
-          }}
-          onChangeTextSearch={(text) => {
-            this.setState({value: text});
-          }}
-          onSearch={() => {
-            searchAction(this.state.value);
-          }}></HeaderNavigation>
-        {this.showBody()}
-        {isFetching && <Loading></Loading>}
-      </View>
+        <SafeAreaView style={{flex: 1, backgroundColor: Colors.background}}>
+          <HeaderNavigation
+            searching={true}
+            color={Colors.navigation}
+            buttonRight={true}
+            textButtonRight={'Đóng'}
+            valueSearch={this.state.value}
+            onClickButtonRight={() => {
+              navigation.goBack();
+            }}
+            onChangeTextSearch={(text) => {
+              this.setState({value: text});
+            }}
+            onSearch={() => {
+              searchAction(this.state.value);
+            }}></HeaderNavigation>
+          {this.showBody()}
+          {isFetching && <Loading></Loading>}
+        </SafeAreaView>
     );
   }
 }
