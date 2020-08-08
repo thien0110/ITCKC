@@ -62,10 +62,11 @@ export function searchApi(input) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        // console.warn('responseJson', responseJson);
+        console.warn('responseJson', responseJson);
         return responseJson;
       })
       .catch((error) => {
+        console.warn('res', error);
         return {resultCode: -1, message: messageError};
       });
   }

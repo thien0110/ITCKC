@@ -45,9 +45,9 @@ export default class ThreadComponent extends Component {
     return (
       <ScrollView style={{flex: 1, padding: 10}}>
         <Board
-          name={item.subjectType}
-          numberOf={'Học kỳ: '+item.semester}
-          teacherName={item.teacherName}></Board>
+          name={item.loaiMonHoc}
+          numberOf={'Học kỳ: '+item.hocKi}
+          teacherName={item.tenGiaoVien}></Board>
 
         <View style={styles.viewStyle}>
           <View style={{display: 'flex', flexDirection: 'row', justifyContent:'flex-start'}}>

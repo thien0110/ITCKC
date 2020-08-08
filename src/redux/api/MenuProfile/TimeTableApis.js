@@ -4,7 +4,7 @@ import {API_URL} from '../../../config';
 
 export function getTimeTableApi(input) {
   return fetch(
-    `${API_URL}tkb/malophoc/${input.maLopHoc}/hocki/${input.hocKi}`,
+    `${API_URL}tkb/androidv2/malophoc/${input.maLopHoc}/hocki/${input.hocKi}`,
     {
       method: 'GET',
       headers: new Headers({
