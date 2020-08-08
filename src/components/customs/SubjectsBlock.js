@@ -67,7 +67,7 @@ export default class SubjectsBlock extends Component {
             {name}
           </Text>
           <Text style={{textAlign: 'left', color: '#fff'}}>
-            Sĩ số: {numberOf}
+            Tên viết tắt: {numberOf}
           </Text>
           <Text
             style={{

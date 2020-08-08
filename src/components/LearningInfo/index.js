@@ -22,7 +22,7 @@ import {
   sortArrayObject,
   sortSemester,
 } from '../../res/Functions';
-import {userProfile} from '../../config'
+import {userProfile} from '../../config';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -33,7 +33,9 @@ export default class LearningInfoComponent extends Component {
     subjects: [{}],
   };
   componentDidMount() {
-    this.props.getSubjectAction();
+    const {maLopHoc, mssv} = userProfile;
+    const input = {mssv, maLopHoc};
+    this.props.getSubjectAction(input);
   }
   Semester(Name) {
     return (
@@ -90,24 +92,24 @@ export default class LearningInfoComponent extends Component {
     );
   }
   showBody() {
-    const data = this.props.data;
+    const {data} = this.props;
     let finalData = [];
     if (!arrayIsEmpty(data)) {
       if (this.state.Name == 1) {
-        finalData = data.sort(sortArrayObject('name'));
+        finalData = data.sort(sortArrayObject('tenMonHoc'));
         finalData = data.filter(
-          (item) => item.semester === this.state.Semestery,
+          (item) => item.hocKi === this.state.Semestery,
         );
       } else {
-        finalData = data.sort(sortArrayObject('name', 'desc'));
+        finalData = data.sort(sortArrayObject('tenMonHoc', 'desc'));
         finalData = data.filter(
-          (item) => item.semester === this.state.Semestery,
+          (item) => item.hocKi === this.state.Semestery,
         );
       }
     }
     return (
       <FlatList
-        data={finalData}
+        data={data}
         style={{paddingHorizontal: 15}}
         keyExtractor={(item, index) => 'key' + index}
         renderItem={({item}) => {
@@ -116,16 +118,15 @@ export default class LearningInfoComponent extends Component {
               onPress={() => {
                 this.props.navigation.navigate('Subject', {item});
               }}
-              name={item.name}
-              numberOf={item.numberOf}
-              teacherName={item.teacherName}
+              name={item.tenMonHoc}
+              numberOf={item.tenVietTat}
+              teacherName={item.tenGiaoVien}
               marginBottom={15}></SubjectsBlock>
           );
         }}></FlatList>
     );
   }
   render() {
-    // console.warn("malh",userProfile.maLopHoc)
     const {isFetching, data} = this.props;
     return (
       <View
