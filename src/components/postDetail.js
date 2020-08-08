@@ -32,30 +32,34 @@ export default class postDetail extends Component {
     const {item} = this.props.route.params;
     //  console.warn(item)
     return (
-      <View style={{flex: 1}}>
-        <HeaderNavigation
-          title={'Bài viết'}
-          titleColor={Colors.white}
-          color={Colors.backgroundBlue}
-          iconLeft={Images.iconBack}
-          iconRight={Images.iconTabMenu}
-          iconLeftColor={Colors.black}
-          onClickLeft={() => {
-            this.props.navigation.goBack();
-          }}></HeaderNavigation>
-        {/* {this.contentPost()}; */}
-        <View style={{flex: 1, backgroundColor:Colors.white,padding:15}}>
-          <Text style={{fontWeight:'bold', fontSize:15}}>{item.tieuDe}</Text>
-          <Image source={item.anhBia}></Image>
-          <WebView
-            source={{html: '<div style="font-size:35px";>'+item.noiDung+'</div>'}}
-            // source={{html: '<h5>Post</h5>'}}
-            startInLoadingState={true}
-            renderLoading={() => <Loading />}
-            allowsFullscreenVideo={true}
-          />
-        </View>
-      </View>
+        <SafeAreaView style={{flex: 1}}>
+          <HeaderNavigation
+            title={'Bài viết'}
+            titleColor={Colors.white}
+            color={Colors.backgroundBlue}
+            iconLeft={Images.iconBack}
+            iconRight={Images.iconTabMenu}
+            iconLeftColor={Colors.black}
+            onClickLeft={() => {
+              this.props.navigation.goBack();
+            }}></HeaderNavigation>
+          {/* {this.contentPost()}; */}
+          <View style={{flex: 1, backgroundColor: Colors.white, padding: 15}}>
+            <Text style={{fontWeight: 'bold', fontSize: 15}}>
+              {item.tieuDe}
+            </Text>
+            <Image source={item.anhBia}></Image>
+            <WebView
+              source={{
+                html: '<div style="font-size:35px";>' + item.noiDung + '</div>',
+              }}
+              // source={{html: '<h5>Post</h5>'}}
+              startInLoadingState={true}
+              renderLoading={() => <Loading />}
+              allowsFullscreenVideo={true}
+            />
+          </View>
+        </SafeAreaView>
     );
   }
 }

@@ -25,7 +25,7 @@ export default class NotiComponent extends Component {
             borderRadius: 10,
             marginBottom: 10,
             padding: 10,
-            overflow:'hidden'
+            overflow: 'hidden',
           }}>
           <View
             style={{
@@ -51,7 +51,14 @@ export default class NotiComponent extends Component {
                   top: 6,
                 }}></Image>
             </View>
-            <Text style={{color: Colors.gray2, marginLeft: 5, fontSize: windowHeight / 45}}>{type}</Text>
+            <Text
+              style={{
+                color: Colors.gray2,
+                marginLeft: 5,
+                fontSize: windowHeight / 45,
+              }}>
+              {type}
+            </Text>
           </View>
           <Text
             style={{
@@ -59,11 +66,13 @@ export default class NotiComponent extends Component {
               position: 'absolute',
               right: 10,
               top: 10,
-              fontSize: windowHeight / 50
+              fontSize: windowHeight / 50,
             }}>
             {time}
           </Text>
-          <Text style={{fontWeight: 'bold', fontSize: windowHeight / 50}}>{title}</Text>
+          <Text style={{fontWeight: 'bold', fontSize: windowHeight / 50}}>
+            {title}
+          </Text>
           <Text style={{fontSize: windowHeight / 55}}>{des}</Text>
         </View>
       </TouchableOpacity>
@@ -130,19 +139,19 @@ export default class NotiComponent extends Component {
   render() {
     const {isFetching} = this.props;
     return (
-      <View style={{flex: 1, backgroundColor: Colors.background}}>
-        <HeaderNavigation
-          title={'Thông báo'}
-          titleColor={Colors.white}
-          color={Colors.backgroundBlue}
-          iconLeft={Images.iconBack}
-          iconLeftColor={Colors.black}
-          onClickLeft={() => {
-            this.props.navigation.goBack();
-          }}></HeaderNavigation>
-        {this.showBody()}
-        {isFetching && <Loading></Loading>}
-      </View>
+        <SafeAreaView style={{flex: 1, backgroundColor: Colors.background}}>
+          <HeaderNavigation
+            title={'Thông báo'}
+            titleColor={Colors.white}
+            color={Colors.backgroundBlue}
+            iconLeft={Images.iconBack}
+            iconLeftColor={Colors.black}
+            onClickLeft={() => {
+              this.props.navigation.goBack();
+            }}></HeaderNavigation>
+          {this.showBody()}
+          {isFetching && <Loading></Loading>}
+        </SafeAreaView>
     );
   }
 }

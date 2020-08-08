@@ -17,8 +17,9 @@ import Loading from '../customs/Loading';
 import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import {userProfile} from '../../config'
+import {userProfile} from '../../config';
 import AlertCustom from '../customs/AlertComponent';
+import {arrayIsEmpty, objectIsNull} from '../../res/Functions';
 const window = Dimensions.get('window');
 
 var d = new Date();
@@ -39,9 +40,9 @@ export default class TimeTableComponent extends Component {
     current: weekday[d.getDay()],
     confirmNewPass: '',
   };
-  componentDidMount(){
-    const input ={maLopHoc:userProfile.maLopHoc, hocKi:'1'}
-    this.props.getTimeTableAction(input)
+  componentDidMount() {
+    const input = {maLopHoc: userProfile.maLopHoc, hocKi: '1'};
+    this.props.getTimeTableAction(input);
   }
   setModalVisible = (visible) => {
     this.setState({modalVisible: visible});
@@ -108,16 +109,16 @@ export default class TimeTableComponent extends Component {
             </Text>
             <TouchableOpacity
               onPress={() => {
-                this.props.navigation.navigate('AlarmTest');;
+                this.props.navigation.navigate('AlarmTest');
               }}
               // style={{paddingVertical:20}}
-              >
+            >
               <Image
                 source={Images.iconTimer}
                 style={{width: 35, height: 35}}></Image>
             </TouchableOpacity>
           </View>
-          <View style={{marginTop:0}}>
+          <View style={{marginTop: 0}}>
             <Text style={styles.textContentTime}>{teacherName}</Text>
             <Text style={styles.textContentTime}>{type}</Text>
             {/* <Text style={styles.textContentTime}>
@@ -140,45 +141,99 @@ export default class TimeTableComponent extends Component {
     );
   }
   showTime() {
-    let dataList = [];
-    dataList = data.filter((item) => item.day === this.state.daysWeek);
-    for (let i = 0; i < dataList.length; i++) {
-      for (let j = 0; j < dataList[i].subjects.length; j++)
-        return (
-          <FlatList
-            data={dataList[i].subjects}
-            style={{paddingHorizontal: 15}}
-            keyExtractor={(item, index) => 'key' + index}
-            renderItem={({item}) => {
-              return this.timeItem(
-                item.timeStart,
-                item.timeEnd,
-                item.name,
-                item.teacherName,
-                item.roomNumber,
-                item.group,
-                item.type,
-              );
-            }}></FlatList>
-        );
+    const {data} = this.props;
+    let dataList = [
+      {
+        day: '2',
+        subjects: [],
+      },
+      {
+        day: '3',
+        subjects: [],
+      },
+      {
+        day: '4',
+        subjects: [],
+      },
+      {
+        day: '5',
+        subjects: [],
+      },
+      {
+        day: '6',
+        subjects: [],
+      },
+    ];
+    if (!arrayIsEmpty(data)) {
+      for (let i = 0; i < data.length; i++) {
+        for (let j = 0; j < data[i].length; j++) {
+         
+            if (j == 0) {
+              dataList[j].subjects.push(data[i][j]);
+            }
+            if (j == 1) {
+              dataList[j].subjects.push(data[i][j]);
+            }
+            if (j == 2) {
+              dataList[j].subjects.push(data[i][j]);
+            }
+            if (j == 3) {
+              dataList[j].subjects.push(data[i][j]);
+            }
+            if (j == 4) {
+              dataList[j].subjects.push(data[i][j]);
+            }
+          
+
+          // dataList[1].subjects.push(data[i][1]);
+          // dataList[2].subjects.push(data[i][2]);
+          // dataList[3].subjects.push(data[i][3]);
+          // dataList[4].subjects.push(data[i][4]);
+        }
+      }
+      console.log('asdadadasa', dataList[0].day, dataList[0].subjects);
+    }
+    let dataFill = [];
+
+    dataFill = dataList.filter((item) => item.day === this.state.daysWeek);
+    for (let i = 0; i < dataFill.length; i++) {
+      for (let j = 0; j < dataFill[i].subjects.length; j++) {
+        if (!objectIsNull(dataFill[i].subjects)) {
+          console.warn("no",dataFill[i].subjects)
+        }
+          return (
+            <FlatList
+              data={dataFill[i].subjects}
+              style={{paddingHorizontal: 15}}
+              keyExtractor={(item, index) => 'key' + index}
+              renderItem={({item}) => {
+                return this.timeItem(
+                  item.tenMonHoc,
+                  item.loaiMonHoc,
+                  item.tenGiaoVien,
+                );
+              }}></FlatList>
+          );
+        
+      }
     }
   }
   showSunday() {
     return (
-      <View style={{justifyContent: 'center',alignItems:'center'}}>
-        <Text style={{fontWeight: 'bold', fontSize:30}}>
-          Hôm nay là chủ nhật, 
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{fontWeight: 'bold', fontSize: 30}}>
+          Hôm nay là chủ nhật,
         </Text>
-        <Text style={{fontWeight: 'bold', fontSize:30}}>
-          Cuối tuần thư giãn! 
+        <Text style={{fontWeight: 'bold', fontSize: 30}}>
+          Cuối tuần thư giãn!
         </Text>
       </View>
     );
   }
   render() {
     const {daysWeek, current} = this.state;
-    const {isFetching, data, message} =this.props;
-    console.warn(message, )
+    const {isFetching, data, message} = this.props;
+    // console.warn(data, )
     return (
       <View style={{flex: 1, backgroundColor: Colors.navigation}}>
         <HeaderNavigation
@@ -200,7 +255,7 @@ export default class TimeTableComponent extends Component {
         {message &&
           AlertCustom(true, message, () => {
             this.props.navigation.goBack();
-            this.props.formatData()
+            this.props.formatData();
           })}
       </View>
     );
@@ -275,7 +330,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
-const data = [
+const datafake = [
   {
     day: '2',
     subjects: [
