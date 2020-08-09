@@ -19,7 +19,12 @@ import Images from '../../res/Images';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {userProfile} from '../../config';
 import AlertCustom from '../customs/AlertComponent';
-import {arrayIsEmpty, objectIsNull} from '../../res/Functions';
+import {
+  arrayIsEmpty,
+  objectIsNull,
+  objectIsEmpty,
+  objectIsEqual,
+} from '../../res/Functions';
 const window = Dimensions.get('window');
 
 var d = new Date();
@@ -89,30 +94,33 @@ export default class TimeTableComponent extends Component {
       </View>
     );
   }
-  timeItem(
-    timeStart,
-    timeEnd,
-    subjectName,
-    teacherName,
-    roomNumber,
-    group,
-    type,
-  ) {
+  timeItem(subjectName, teacherName, type) {
     return (
       <View style={{flexDirection: 'row', marginBottom: 10}}>
         <LinearGradient
           colors={['#F68080', '#F9B16E']}
           style={styles.timeContentsLeft}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Text style={{fontSize: 18, fontWeight: 'bold', color: '#fff'}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '100%',
+            }}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: 'bold',
+                color: '#fff',
+                width: '90%',
+              }}>
               {subjectName}
             </Text>
             <TouchableOpacity
               onPress={() => {
-                this.props.navigation.navigate('AlarmTest');
+                // this.props.navigation.navigate('AlarmTest');
+                console.warn('Hẹn giờ ');
               }}
-              // style={{paddingVertical:20}}
-            >
+              style={{width: '10%'}}>
               <Image
                 source={Images.iconTimer}
                 style={{width: 35, height: 35}}></Image>
@@ -140,6 +148,7 @@ export default class TimeTableComponent extends Component {
       </View>
     );
   }
+
   showTime() {
     const {data} = this.props;
     let dataList = [
@@ -167,56 +176,63 @@ export default class TimeTableComponent extends Component {
     if (!arrayIsEmpty(data)) {
       for (let i = 0; i < data.length; i++) {
         for (let j = 0; j < data[i].length; j++) {
-         
-            if (j == 0) {
-              dataList[j].subjects.push(data[i][j]);
-            }
-            if (j == 1) {
-              dataList[j].subjects.push(data[i][j]);
-            }
-            if (j == 2) {
-              dataList[j].subjects.push(data[i][j]);
-            }
-            if (j == 3) {
-              dataList[j].subjects.push(data[i][j]);
-            }
-            if (j == 4) {
-              dataList[j].subjects.push(data[i][j]);
-            }
-          
-
-          // dataList[1].subjects.push(data[i][1]);
-          // dataList[2].subjects.push(data[i][2]);
-          // dataList[3].subjects.push(data[i][3]);
-          // dataList[4].subjects.push(data[i][4]);
+          if (j == 0) {
+            dataList[j].subjects.push(data[i][j]);
+          }
+          if (j == 1) {
+            dataList[j].subjects.push(data[i][j]);
+          }
+          if (j == 2) {
+            dataList[j].subjects.push(data[i][j]);
+          }
+          if (j == 3) {
+            dataList[j].subjects.push(data[i][j]);
+          }
+          if (j == 4) {
+            dataList[j].subjects.push(data[i][j]);
+          }
         }
       }
-      console.log('asdadadasa', dataList[0].day, dataList[0].subjects);
     }
     let dataFill = [];
-
+    let dataDay = [];
+    let arrFinal = [];
     dataFill = dataList.filter((item) => item.day === this.state.daysWeek);
-    for (let i = 0; i < dataFill.length; i++) {
-      for (let j = 0; j < dataFill[i].subjects.length; j++) {
-        if (!objectIsNull(dataFill[i].subjects)) {
-          console.warn("no",dataFill[i].subjects)
+    if (!objectIsNull(dataFill[0])) {
+      for (let i = 0; i < dataFill[0].subjects.length; i++) {
+        if (!objectIsEmpty(dataFill[0].subjects[i])) {
+          dataDay.push(dataFill[0].subjects[i]);
         }
-          return (
-            <FlatList
-              data={dataFill[i].subjects}
-              style={{paddingHorizontal: 15}}
-              keyExtractor={(item, index) => 'key' + index}
-              renderItem={({item}) => {
-                return this.timeItem(
-                  item.tenMonHoc,
-                  item.loaiMonHoc,
-                  item.tenGiaoVien,
-                );
-              }}></FlatList>
-          );
-        
+      }
+
+      if (!objectIsNull(dataDay)) {
+        let temp = dataDay[0];
+        for (let i = 1; i < dataDay.length; i++) {
+          if (objectIsEqual(temp, dataDay[i])) {
+            delete dataDay[i];
+          } else {
+            temp = dataDay[i];
+          }
+        }
+
+        arrFinal = dataDay.filter((item) => item != null);
       }
     }
+    return (
+      <FlatList
+        data={arrFinal}
+        style={{paddingHorizontal: 15}}
+        keyExtractor={(item, index) => 'key' + index}
+        renderItem={({item}) => {
+          return this.timeItem(
+            item.tenMonHoc,
+            item.LoaiMonHoc,
+            item.tenGiaoVien,
+          );
+        }}></FlatList>
+    );
+    //   }
+    // }
   }
   showSunday() {
     return (
@@ -233,7 +249,6 @@ export default class TimeTableComponent extends Component {
   render() {
     const {daysWeek, current} = this.state;
     const {isFetching, data, message} = this.props;
-    // console.warn(data, )
     return (
       <View style={{flex: 1, backgroundColor: Colors.navigation}}>
         <HeaderNavigation
@@ -330,148 +345,3 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
-const datafake = [
-  {
-    day: '2',
-    subjects: [
-      {
-        name: 'Dịch vụ mạng',
-        timeStart: '9:00',
-        timeEnd: '11:30',
-        type: 'Thực hành',
-        group: '1',
-        teacherName: 'Lữ Cao Tiến',
-        roomNumber: 'F7.2',
-      },
-      {
-        name: 'Dịch vụ mạng',
-        timeStart: '9:00',
-        timeEnd: '11:30',
-        type: 'Thực hành',
-        group: '2',
-        teacherName: 'Nguyễn Vũ Dzũng',
-        roomNumber: 'F7.3',
-      },
-      {
-        name: 'Chính trị 2',
-        timeStart: '12:30',
-        timeEnd: '15:00',
-        type: 'Lý Thuyết',
-        group: '',
-        teacherName: 'Đ T Huế',
-        roomNumber: 'C7.6',
-      },
-      {
-        name: 'ĐA - Lập trình Windows',
-        timeStart: '15:10',
-        timeEnd: '17:35',
-        type: 'Đồ án',
-        group: '',
-        teacherName: 'Nguyễn Đức Chuẩn',
-        roomNumber: 'F7.3',
-      },
-    ],
-  },
-  {
-    day: '3',
-    subjects: [
-      {
-        name: 'Ngôn Ngữ LT Java',
-        timeStart: '12:30',
-        timeEnd: '15:00',
-        type: 'Lý thuyết',
-        teacherName: 'Trần Thanh Duy',
-        roomNumber: 'F7.8',
-      },
-      {
-        name: 'Anh Văn Chuyên Ngành',
-        timeStart: '15:10',
-        timeEnd: '17:35',
-        type: 'Lý thuyết',
-        teacherName: 'Dương Hữu Phước',
-        roomNumber: 'C7.6',
-      },
-    ],
-  },
-  {
-    day: '4',
-    subjects: [
-      {
-        name: 'Lập trình Windows',
-        timeStart: '12:30',
-        timeEnd: '15:00',
-        type: 'Lý thuyết',
-        group: '',
-        teacherName: 'Nguyễn Đức Chuẩn',
-        roomNumber: 'F7.3',
-      },
-      {
-        name: 'LT web PHP cơ bản',
-        timeStart: '15:10',
-        timeEnd: '17:35',
-        type: 'Lý Thuyết',
-        teacherName: 'Phù Khắc Anh',
-        roomNumber: 'F7.1',
-      },
-    ],
-  },
-  {
-    day: '5',
-    subjects: [
-      {
-        name: 'Lập trình windows',
-        timeStart: '9:00',
-        timeEnd: '11:30',
-        type: 'Thực hành',
-        group: '1',
-        teacherName: 'Nguyễn Đức Chuẩn',
-        roomNumber: 'F7.11',
-      },
-      {
-        name: 'Công nghệ phần mềm',
-        timeStart: '12:30',
-        timeEnd: '15:00',
-        type: 'Lý thuyết',
-        group: '',
-        teacherName: 'Phù Khắc Anh',
-        roomNumber: 'C7.6',
-      },
-      {
-        name: 'Dịch vụ mạng',
-        timeStart: '15:10',
-        timeEnd: '17:35',
-        type: 'Lý thuyết',
-        group: '',
-        teacherName: 'Lữ Cao Tiến',
-        roomNumber: 'C7.6',
-      },
-    ],
-  },
-  {
-    day: '6',
-    subjects: [
-      {
-        name: 'Lập trình Windows',
-        timeStart: '12:30',
-        timeEnd: '15:00',
-        type: 'Thực hành',
-        group: '2',
-        teacherName: 'Phù Khắc Anh',
-        roomNumber: 'F7.2',
-      },
-    ],
-  },
-  {
-    day: '7',
-    subjects: [
-      {
-        name: 'Giáo dục thể chất',
-        timeStart: '7:00',
-        timeEnd: '9:30',
-        type: 'Chứng chỉ',
-        teacherName: 'Không nhớ',
-        roomNumber: 'TTTH Phú Thọ',
-      },
-    ],
-  },
-];
