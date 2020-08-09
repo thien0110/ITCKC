@@ -6,14 +6,21 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  SafeAreaView,
+  FlatList
 } from 'react-native';
 import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
 import Images from '../res/Images';
+import {arrayIsEmpty} from '../res/Functions';
+import Loading from '../components/customs/Loading'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default class NotiComponent extends Component {
+  componentDidMount() {
+    this.props.getItCenterInfoAction();
+  }
   showNoti(type, title, des, time, icon) {
     return (
       <TouchableOpacity>
@@ -79,79 +86,102 @@ export default class NotiComponent extends Component {
     );
   }
   showBody() {
-    return (
-      <View style={{flex: 1, paddingHorizontal: 10, paddingTop: 10}}>
-        <ScrollView>
-          {this.showNoti(
-            'THÔNG TIN NHÀ TRƯỜNG',
-            'Weekly Report Available',
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-            'bây giờ',
-            Images.iconSchool,
-          )}
-          {this.showNoti(
-            'THÔNG TIN NHÀ TRƯỜNG',
-            'Weekly Report Available',
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-            'bây giờ',
-            Images.iconSchool,
-          )}
+    const {data} = this.props;
+    if (!arrayIsEmpty(data)) {
+      let dataList = data.filter((item) => item.loaiBaiViet === 'LBV00');
+      if (data && data.length) {
+        return (
+          <View style={{flex: 1, paddingHorizontal: 10, paddingTop: 10}}>
+            <FlatList
+              data={dataList}
+              keyExtractor={(item, index) => 'key' + index}
+              renderItem={({item}) => {
+                return this.showNoti(
+                  'THONG BAO',
+                  item.tieuDe,
+                  item.moTaNgan,
+                  '',
+                  Images.iconIt,
+                );
+              }}
+            />
+          </View>
+        );
+      }
+    }
+    // return (
+    //   <View style={{flex: 1, paddingHorizontal: 10, paddingTop: 10}}>
+    //     <ScrollView>
+    //       {this.showNoti(
+    //         'THÔNG TIN NHÀ TRƯỜNG',
+    //         'Weekly Report Available',
+    //         "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    //         'bây giờ',
+    //         Images.iconSchool,
+    //       )}
+    //       {this.showNoti(
+    //         'THÔNG TIN NHÀ TRƯỜNG',
+    //         'Weekly Report Available',
+    //         "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    //         'bây giờ',
+    //         Images.iconSchool,
+    //       )}
 
-          {this.showNoti(
-            'THÔNG TIN NHÀ TRƯỜNG',
-            'Weekly Report Available',
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-            'bây giờ',
-            Images.iconSchool,
-          )}
-          {this.showNoti(
-            'THÔNG TIN NHÀ TRƯỜNG',
-            'Weekly Report Available',
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-            'bây giờ',
-            Images.iconSchool,
-          )}
-          {this.showNoti(
-            'THÔNG TIN NHÀ TRƯỜNG',
-            'Weekly Report Available',
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-            'bây giờ',
-            Images.iconSchool,
-          )}
-          {this.showNoti(
-            'THÔNG TIN NHÀ TRƯỜNG',
-            'Weekly Report Available',
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-            'bây giờ',
-            Images.iconSchool,
-          )}
-          {this.showNoti(
-            'THÔNG TIN NHÀ TRƯỜNG',
-            'Weekly Report Available',
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-            'bây giờ',
-            Images.iconSchool,
-          )}
-        </ScrollView>
-      </View>
-    );
+    //       {this.showNoti(
+    //         'THÔNG TIN NHÀ TRƯỜNG',
+    //         'Weekly Report Available',
+    //         "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    //         'bây giờ',
+    //         Images.iconSchool,
+    //       )}
+    //       {this.showNoti(
+    //         'THÔNG TIN NHÀ TRƯỜNG',
+    //         'Weekly Report Available',
+    //         "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    //         'bây giờ',
+    //         Images.iconSchool,
+    //       )}
+    //       {this.showNoti(
+    //         'THÔNG TIN NHÀ TRƯỜNG',
+    //         'Weekly Report Available',
+    //         "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    //         'bây giờ',
+    //         Images.iconSchool,
+    //       )}
+    //       {this.showNoti(
+    //         'THÔNG TIN NHÀ TRƯỜNG',
+    //         'Weekly Report Available',
+    //         "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    //         'bây giờ',
+    //         Images.iconSchool,
+    //       )}
+    //       {this.showNoti(
+    //         'THÔNG TIN NHÀ TRƯỜNG',
+    //         'Weekly Report Available',
+    //         "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    //         'bây giờ',
+    //         Images.iconSchool,
+    //       )}
+    //     </ScrollView>
+    //   </View>
+    // );
   }
   render() {
     const {isFetching} = this.props;
     return (
-        <SafeAreaView style={{flex: 1, backgroundColor: Colors.background}}>
-          <HeaderNavigation
-            title={'Thông báo'}
-            titleColor={Colors.white}
-            color={Colors.backgroundBlue}
-            iconLeft={Images.iconBack}
-            iconLeftColor={Colors.black}
-            onClickLeft={() => {
-              this.props.navigation.goBack();
-            }}></HeaderNavigation>
-          {this.showBody()}
-          {isFetching && <Loading></Loading>}
-        </SafeAreaView>
+      <SafeAreaView style={{flex: 1, backgroundColor: Colors.background}}>
+        <HeaderNavigation
+          title={'Thông báo'}
+          titleColor={Colors.white}
+          color={Colors.backgroundBlue}
+          iconLeft={Images.iconBack}
+          iconLeftColor={Colors.black}
+          onClickLeft={() => {
+            this.props.navigation.goBack();
+          }}></HeaderNavigation>
+        {this.showBody()}
+        {isFetching && <Loading></Loading>}
+      </SafeAreaView>
     );
   }
 }

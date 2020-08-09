@@ -6,7 +6,7 @@ import LoginContainer from '../containers/LoginContainer';
 import TabNavigator from './Tab';
 import SearchContainer from '../containers/SearchContainer';
 import ItCenterContainer from '../containers/ItCenter/ItCenterContainer';
-import WorkInfoComponent from '../components/WorkInfo/WorkInfoComponent';
+import WorkInfoContainer from '../containers/WorkInfoContainer';
 import AlumniComponent from '../components/Alumni/AlumniComponent';
 import DepartmentInfoContainer from '../containers/DepartmentInfo/DepartmentInfoContainer';
 
@@ -14,16 +14,16 @@ import DepartmentInfoContainer from '../containers/DepartmentInfo/DepartmentInfo
 import SchoolInfoContainer from '../containers/SchoolInfo/SchoolInfoContainer';
 import LearningInfoContainer from '../containers/LearningInfo/LearningInfoContainer';
 import TabSubjectNavigator from './subjectInfo';
-import NotiComponent from '../components/NotiComponent'
-import AboutComponent from '../components/Profile/AboutComponent'
-import SettingComponent from '../components/Profile/SettingComponent'
-import TimeTable from '../containers/MenuProfile/TimeTableContainer'
-import ScoreTableContainer from '../containers/MenuProfile/ScoreTableContainer'
-import YourClassContainer from '../containers/MenuProfile/YourClassContainer'
+import NotiContainer from '../containers/NotiContainer';
+import AboutComponent from '../components/Profile/AboutComponent';
+import SettingComponent from '../components/Profile/SettingComponent';
+import TimeTable from '../containers/MenuProfile/TimeTableContainer';
+import ScoreTableContainer from '../containers/MenuProfile/ScoreTableContainer';
+import YourClassContainer from '../containers/MenuProfile/YourClassContainer';
 
-import EditProfileContainer from '../containers/MenuProfile/EditProfileContainer'
-import ProfileContainer from '../containers/MenuProfile/ProfileContainer'
-import PostDetail from '../components/postDetail'
+import EditProfileContainer from '../containers/MenuProfile/EditProfileContainer';
+import ProfileContainer from '../containers/MenuProfile/ProfileContainer';
+import PostDetail from '../components/postDetail';
 
 const Stack = createStackNavigator();
 function MainNavigator() {
@@ -38,13 +38,13 @@ function MainNavigator() {
         <Stack.Screen name="SchoolInfo" component={SchoolInfoContainer}/>
         <Stack.Screen name="Search" component={SearchContainer}/>
         <Stack.Screen name="ItCenter" component={ItCenterContainer}/>
-        <Stack.Screen name="WorkInfo" component={WorkInfoComponent}/>
+        <Stack.Screen name="WorkInfo" component={WorkInfoContainer}/>
         <Stack.Screen name="Alumni" component={AlumniComponent}/>
         <Stack.Screen name="DepartmentInfo" component={DepartmentInfoContainer}/>
 
         <Stack.Screen name="LearningInfo" component={LearningInfoContainer} />
 
-        <Stack.Screen name="Noti" component={NotiComponent} />
+        <Stack.Screen name="Noti" component={NotiContainer} />
         <Stack.Screen name="About" component={AboutComponent} />
         
         <Stack.Screen name="Setting" component={SettingComponent} />

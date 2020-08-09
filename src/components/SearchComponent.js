@@ -6,6 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
   FlatList,
+  SafeAreaView,
 } from 'react-native';
 import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
@@ -78,25 +79,25 @@ export default class SearchComponent extends Component {
   render() {
     const {data, message, isFetching, searchAction, navigation} = this.props;
     return (
-        <SafeAreaView style={{flex: 1, backgroundColor: Colors.background}}>
-          <HeaderNavigation
-            searching={true}
-            color={Colors.navigation}
-            buttonRight={true}
-            textButtonRight={'Đóng'}
-            valueSearch={this.state.value}
-            onClickButtonRight={() => {
-              navigation.goBack();
-            }}
-            onChangeTextSearch={(text) => {
-              this.setState({value: text});
-            }}
-            onSearch={() => {
-              searchAction(this.state.value);
-            }}></HeaderNavigation>
-          {this.showBody()}
-          {isFetching && <Loading></Loading>}
-        </SafeAreaView>
+      <SafeAreaView style={{flex: 1, backgroundColor: Colors.background}}>
+        <HeaderNavigation
+          searching={true}
+          color={Colors.navigation}
+          buttonRight={true}
+          textButtonRight={'Đóng'}
+          valueSearch={this.state.value}
+          onClickButtonRight={() => {
+            navigation.goBack();
+          }}
+          onChangeTextSearch={(text) => {
+            this.setState({value: text});
+          }}
+          onSearch={() => {
+            searchAction(this.state.value);
+          }}></HeaderNavigation>
+        {this.showBody()}
+        {isFetching && <Loading></Loading>}
+      </SafeAreaView>
     );
   }
 }
