@@ -5,6 +5,8 @@ import profileReducers from './MenuProfile/ProfileReducer';
 import timeTableReducers from './MenuProfile/TimeTableReducer';
 import scoreTableReducers from './MenuProfile/ScoreTableReducer';
 import yourClassReducers from './MenuProfile/YourClassReducer';
+
+import lessonReducers from './LearningInfo/LessonReducer';
 import learningInfoReducers from './LearningInfo/LearningInfoReducer';
 import searchReducers from './SearchReducer';
 import schoolInfoReducers from './SchoolInfo/SchoolInfoReducer';
@@ -21,7 +23,7 @@ const allReducers = combineReducers({
   itCenterReducers,
   timeTableReducers,
   yourClassReducers,
-  scoreTableReducers,
+  scoreTableReducers,lessonReducers
 });
 
 export default allReducers;

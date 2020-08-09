@@ -6,6 +6,9 @@ import ItemSlideShow from '../customs/ItemSlideShow';
 import Colors from '../../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../../res/Images';
+import {objectIsNull, stringIsEmpty, arrayIsEmpty,SplitDate} from '../../res/Functions';
+
+import Loading from '../customs/Loading';
 
 export default class WorkInfoComponent extends Component {
   componentDidMount() {
@@ -14,11 +17,14 @@ export default class WorkInfoComponent extends Component {
   showBody() {
     const {data} = this.props;
     let dataList =[];
-    for(let i=0;i<data.length;i++){
-      if(data[i].loaiBaiViet==='LBV02')
-      dataList.push(data[i]);
+    if(!arrayIsEmpty(data)){
+
+      for(let i=0;i<data.length;i++){
+        if(data[i].loaiBaiViet==='LBV02')
+        dataList.push(data[i]);
+      }
     }
-    console.warn(dataList)
+    // console.warn(dataList)
     if (dataList && dataList.length) {
       return (
         <View style={{flex: 1, paddingTop: 15}}>
@@ -41,6 +47,7 @@ export default class WorkInfoComponent extends Component {
     }
   }
   render() {
+    const {isFetching}=this.props
     return (
       <View style={{flex: 1}}>
         <HeaderNavigation
@@ -57,6 +64,8 @@ export default class WorkInfoComponent extends Component {
             Chức năng đang phát triển!{' '}
           </Text> */}
           {this.showBody()}
+          
+        {isFetching && <Loading></Loading>}
         </View>
       </View>
     );

@@ -21,7 +21,7 @@ export const arrayIsEmpty = (array) => {
     return false;
   }
 };
-export const objectIsEmpty = v => {
+export const objectIsEmpty = (v) => {
   return Object.keys(v).length === 0;
 };
 export const rememberUser = async (myLogin) => {
@@ -30,6 +30,10 @@ export const rememberUser = async (myLogin) => {
   } catch (error) {}
 };
 
+export const SplitDate = (date) => {
+  var newDate =date.split('T',8)
+  return newDate[0];
+};
 export function objectIsEqual(objA, objB) {
   // Tạo các mảng chứa tên các property
   var aProps = Object.getOwnPropertyNames(objA);
@@ -37,21 +41,21 @@ export function objectIsEqual(objA, objB) {
   // Nếu độ dài của mảng không bằng nhau,
   // thì 2 objects đó không bằnh nhau.
   if (aProps.length != bProps.length) {
-      return false;
+    return false;
   }
-  
+
   for (var i = 0; i < aProps.length; i++) {
-       var propName = aProps[i];          
-        // Nếu giá trị của cùng một property mà không bằng nhau,
-        // thì 2 objects không bằng nhau.
-       if (objA[propName] !== objB[propName]) {             
-           return false;         
-       }     
+    var propName = aProps[i];
+    // Nếu giá trị của cùng một property mà không bằng nhau,
+    // thì 2 objects không bằng nhau.
+    if (objA[propName] !== objB[propName]) {
+      return false;
+    }
   }
   // Nếu code chạy đến đây,
   // tức là 2 objects được tính lằ bằng nhau.
-  return true; 
-  }  
+  return true;
+}
 
 export const getRememberedUser = async () => {
   try {
@@ -90,7 +94,7 @@ export const sortArrayObject = (key, order = 'asc') => {
     }
 
     const varA = typeof a[key] === 'string' ? change_alias(a[key]) : a[key];
-    const varB = typeof b[key] === 'string' ?change_alias(b[key]) : b[key];
+    const varB = typeof b[key] === 'string' ? change_alias(b[key]) : b[key];
 
     let comparison = 0;
     if (varA > varB) {
