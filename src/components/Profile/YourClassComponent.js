@@ -19,8 +19,7 @@ import AlertCustom from '../customs/AlertComponent';
 
 export default class YourClassComponent extends Component {
   componentDidMount() {
-    const input = {maLopHoc: '1', hocKi: '1'};
-    this.props.getYourClassAction(input);
+    this.props.getSubjectAction(userProfile.maLopHoc);
   }
   showBody() {
     const data = this.props.data;
@@ -36,9 +35,9 @@ export default class YourClassComponent extends Component {
                 onPress={() => {
                   this.props.navigation.navigate('Subject', {item});
                 }}
-                name={item.tenLopHocPhan}
-                numberOf={item.soLuongSV}
-                teacherName={item.maGiaoVien}
+                name={item.tenMonHoc}
+                numberOf={item.tenVietTat}
+                teacherName={item.tenGiaoVien}
                 marginBottom={15}></SubjectsBlock>
             );
           }}></FlatList>
@@ -47,6 +46,7 @@ export default class YourClassComponent extends Component {
   }
   render() {
     const {isFetching, data, message} = this.props;
+    // console.warn(data)
     return (
       <View
         style={{
@@ -62,7 +62,7 @@ export default class YourClassComponent extends Component {
           }}
           title={'Lớp của bạn'}
           titleColor={Colors.white}></HeaderNavigation>
-        {/* {this.showBody()} */}
+        {this.showBody()}
         {isFetching && <Loading></Loading>}
         {message &&
           AlertCustom(true, message, () => {

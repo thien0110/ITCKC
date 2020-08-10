@@ -43,8 +43,8 @@ export default class MenuComponent extends Component {
   showBody() {
     const {data} = this.props;
     return (
-      <View style={{flex: 1, flexDirection: 'column'}}>
-        <ScrollView>
+      <View style={{flex: 1, flexDirection: 'column', }}>
+        <ScrollView > 
           <View
             style={{
               flexWrap: 'wrap',

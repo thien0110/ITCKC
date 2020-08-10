@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {
   formatData,getYourClassAction
 } from '../../redux/actions/MenuProfile/YourClassAction';
+import {getSubjectAction} from '../../redux/actions/LearningInfo/LearningInfoAction';
+
 class YourClassContainer extends React.Component {
   render() {
     return <YourClassComponent {...this.props} />;
@@ -15,6 +17,9 @@ const mapDispatchToProps = (dispatch) => {
     getYourClassAction: (input) => {
       dispatch(getYourClassAction(input));
     },
+    getSubjectAction: (input) => {
+      dispatch(getSubjectAction(input));
+    },
     formatData: (input) => {
       dispatch(formatData(input));
     },
@@ -22,9 +27,9 @@ const mapDispatchToProps = (dispatch) => {
 };
 const mapStateToProps = (state) => {
   return {
-    data: state.yourClassReducers.data,
-    isFetching: state.yourClassReducers.isFetching,
-    message: state.yourClassReducers.message,
+    data: state.learningInfoReducers.data,
+    isFetching: state.learningInfoReducers.isFetching,
+    message: state.learningInfoReducers.message,
   };
 };
 
