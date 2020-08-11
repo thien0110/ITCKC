@@ -3,7 +3,7 @@ const fakeApi = false;
 import {API_URL} from '../../../config';
 export function getSubjectApi(input) {
   return fetch(
-    `${API_URL}lophocphan/android/maLopHoc/${input.maLopHoc}`,
+    `${API_URL}lophocphan/android/maLopHoc/${input}`,
     {
       method: 'GET',
       headers: new Headers({
@@ -17,6 +17,7 @@ export function getSubjectApi(input) {
       return responseJson;
     })
     .catch((error) => {
+      // console.warn('er',error)
       return {resultCode: -1, message: messageError};
     });
 }

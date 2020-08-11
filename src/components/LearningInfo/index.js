@@ -34,8 +34,8 @@ export default class LearningInfoComponent extends Component {
   };
   componentDidMount() {
     const {maLopHoc} = userProfile;
-    const input = {maLopHoc};
-    this.props.getSubjectAction(input);
+    // const input = {maLopHoc};
+    this.props.getSubjectAction(maLopHoc);
   }
   Semester(Name) {
     return (
