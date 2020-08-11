@@ -48,7 +48,7 @@ export default class postDetail extends Component {
             <Text style={{fontWeight: 'bold', fontSize: 15}}>
               {item.tieuDe}
             </Text>
-            <Image source={item.anhBia}></Image>
+            <Image source={'https://api.elearningckc.com/'+item.anhBia}></Image>
             <WebView
               source={{
                 html: '<div style="font-size:35px";>' + item.noiDung + '</div>',
