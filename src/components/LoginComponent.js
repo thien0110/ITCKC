@@ -391,6 +391,7 @@ export default class LoginComponent extends Component {
     } = this.props;
     // console.warn(message)
     return (
+      <SafeAreaView>
       <ImageBackground
         source={Images.bg}
         style={{width: windowWidth, height: windowHeight}}>
@@ -408,6 +409,7 @@ export default class LoginComponent extends Component {
         {isFetching && <Loading></Loading>}
         {this.showModel()}
       </ImageBackground>
+      </SafeAreaView>
     );
   }
 }

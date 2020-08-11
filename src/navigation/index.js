@@ -24,6 +24,7 @@ import YourClassContainer from '../containers/MenuProfile/YourClassContainer';
 import EditProfileContainer from '../containers/MenuProfile/EditProfileContainer';
 import ProfileContainer from '../containers/MenuProfile/ProfileContainer';
 import PostDetail from '../components/postDetail';
+import AlarmComponent from '../components/customs/AlarmComponent';
 
 const Stack = createStackNavigator();
 function MainNavigator() {
@@ -55,6 +56,7 @@ function MainNavigator() {
         <Stack.Screen name="TimeTable" component={TimeTable}/>
         <Stack.Screen name="ScoreTable" component={ScoreTableContainer}/>
         <Stack.Screen name="YourClassComponent" component={YourClassContainer}/>
+        <Stack.Screen name="AlarmNoti" component={AlarmComponent}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
