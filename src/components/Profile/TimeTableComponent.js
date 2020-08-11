@@ -117,8 +117,7 @@ export default class TimeTableComponent extends Component {
             </Text>
             <TouchableOpacity
               onPress={() => {
-                // this.props.navigation.navigate('AlarmTest');
-                console.warn('Hẹn giờ ');
+                this.props.navigation.navigate('AlarmNoti',{subjectName});
               }}
               style={{width: '10%'}}>
               <Image
