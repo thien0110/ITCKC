@@ -80,8 +80,11 @@ export default class LoginComponent extends Component {
   loginSuccess() {
     const {data, changeStateAction} = this.props;
     userProfile.token=data.token;
-    userProfile.mssv=data.mssv;
-    userProfile.maLopHoc=data.maLopHoc;
+    // userProfile.mssv=data.mssv;
+    // userProfile.maLopHoc=data.maLopHoc;
+    
+    userProfile.mssv="0306171413";
+    userProfile.maLopHoc="30061711";
     userProfile.role=data.role;
     const myLogin = {
       username: this.state.username,

@@ -2,6 +2,7 @@ const messageError = 'Không thể kết nối tới server.';
 const fakeApi = false;
 import {API_URL} from '../../../config';
 export function getLessonApi(input) {
+  // console.warn(input)
   return fetch(
     `${API_URL}chude/${input}/lop-hoc-phan`,
     {
