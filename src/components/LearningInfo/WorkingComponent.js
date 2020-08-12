@@ -37,7 +37,7 @@ export default class WorkingComponent extends Component {
                 <View style={styles.viewStyle}>
                   <View style={{padding: 10, marginBottom: 0}}>
                     <Text style={{fontSize: 18, marginLeft: 10}}>
-                      Tài liệu mới: {item.tieuDe}
+                      Bài tập: {item.tieuDe}
                     </Text>
                     <Text style={{fontSize: 15, marginLeft: 10}}>
                       Đã đăng: {SplitDate(item.ngayTao)}
