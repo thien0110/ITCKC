@@ -10,6 +10,7 @@ import {
 const initialState = {
   isFetching: false,
   data: null,
+  dataHotKhoa: null,
   message: null,
 };
 const menuReducers = (state = initialState, action) => {
@@ -20,7 +21,7 @@ const menuReducers = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        // data: action.data,
+        data: action.data,
         message: action.message,
       };
     case GET_MENU_NEWS_FAIL:
@@ -31,7 +32,7 @@ const menuReducers = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        data: action.data,
+        dataHotKhoa: action.data,
         message: action.message,
       };
     case GET_HOT_POST_IT:

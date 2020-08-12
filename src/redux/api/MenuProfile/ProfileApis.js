@@ -25,6 +25,31 @@ export function editProfileApi(input) {
       });
   }
 
+  export function changePasswordApi(input) {
+    
+      return fetch(API_URL + 'change-password', {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify({
+          mssv: input.mssv,
+          oldPass: input.oldPass,
+          newPass: input.newPass,
+          newPassConfirm:input.confirmNewPass,
+        }),
+      })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          // console.warn('responseJson', responseJson);
+          return responseJson;
+        })
+        .catch((error) => {
+          // console.warn('error', error);
+          return {resultCode: -1, message: messageError};
+        });
+    }
+  
 
 export function getProfileApi(input) {
     return fetch(API_URL+'sinhvien/'+input, {

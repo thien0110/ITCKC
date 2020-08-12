@@ -17,8 +17,14 @@ import Loading from '../customs/Loading';
 import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import {userProfile} from '../../config'
+import {userProfile} from '../../config';
 import AlertCustom from '../customs/AlertComponent';
+import {
+  arrayIsEmpty,
+  objectIsNull,
+  objectIsEmpty,
+  objectIsEqual,
+} from '../../res/Functions';
 const window = Dimensions.get('window');
 
 var d = new Date();
@@ -39,9 +45,9 @@ export default class TimeTableComponent extends Component {
     current: weekday[d.getDay()],
     confirmNewPass: '',
   };
-  componentDidMount(){
-    const input ={maLopHoc:userProfile.maLopHoc, hocKi:'1'}
-    this.props.getTimeTableAction(input)
+  componentDidMount() {
+    const input = {maLopHoc: userProfile.maLopHoc, hocKi: '1'};
+    this.props.getTimeTableAction(input);
   }
   setModalVisible = (visible) => {
     this.setState({modalVisible: visible});
@@ -78,107 +84,170 @@ export default class TimeTableComponent extends Component {
   }
   showDayOfWeek() {
     return (
+      <View>
+      <Text style={{textAlign:'center', color:'#fff'}}>Hôm nay, ngày {d.getDate()} tháng {d.getMonth()} năm {d.getFullYear()}</Text>
       <View style={styles.container}>
         {this.ShowItems('T2', () => this.setState({daysWeek: '2'}))}
         {this.ShowItems('T3', () => this.setState({daysWeek: '3'}))}
         {this.ShowItems('T4', () => this.setState({daysWeek: '4'}))}
         {this.ShowItems('T5', () => this.setState({daysWeek: '5'}))}
         {this.ShowItems('T6', () => this.setState({daysWeek: '6'}))}
-        {this.ShowItems('T7', () => this.setState({daysWeek: '7'}))}
+      </View>
       </View>
     );
   }
-  timeItem(
-    timeStart,
-    timeEnd,
-    subjectName,
-    teacherName,
-    roomNumber,
-    group,
-    type,
-  ) {
+  timeItem(subjectName, teacherName, type) {
     return (
       <View style={{flexDirection: 'row', marginBottom: 10}}>
         <LinearGradient
           colors={['#F68080', '#F9B16E']}
           style={styles.timeContentsLeft}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Text style={{fontSize: 18, fontWeight: 'bold', color: '#fff'}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '100%',
+            }}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: 'bold',
+                color: '#fff',
+                width: '90%',
+              }}>
               {subjectName}
             </Text>
             <TouchableOpacity
               onPress={() => {
-                this.props.navigation.navigate('AlarmTest');;
+                this.props.navigation.navigate('AlarmNoti',{subjectName});
               }}
-              // style={{paddingVertical:20}}
-              >
+              style={{width: '10%'}}>
               <Image
                 source={Images.iconTimer}
                 style={{width: 35, height: 35}}></Image>
             </TouchableOpacity>
           </View>
-          <View style={{marginTop:0}}>
+          <View style={{marginTop: 0}}>
             <Text style={styles.textContentTime}>{teacherName}</Text>
             <Text style={styles.textContentTime}>{type}</Text>
-            {/* <Text style={styles.textContentTime}>
-              {group === '1' ? 'Nhóm 1' : group === '2' ? 'Nhóm 2' : 'Cả lớp'}
-            </Text> */}
-            {/* <Text style={styles.textContentTime}>{roomNumber}</Text> */}
           </View>
         </LinearGradient>
-        {/* <View style={styles.timeContentsRight}>
-           <TouchableOpacity
-              onPress={() => {
-                onPress();
-              }}>
-              <Image
-                source={Images.iconTimer}
-                style={{width: 50, height: 50}}></Image>
-            </TouchableOpacity>
-        </View> */}
       </View>
     );
   }
+
   showTime() {
-    let dataList = [];
-    dataList = data.filter((item) => item.day === this.state.daysWeek);
-    for (let i = 0; i < dataList.length; i++) {
-      for (let j = 0; j < dataList[i].subjects.length; j++)
-        return (
-          <FlatList
-            data={dataList[i].subjects}
-            style={{paddingHorizontal: 15}}
-            keyExtractor={(item, index) => 'key' + index}
-            renderItem={({item}) => {
-              return this.timeItem(
-                item.timeStart,
-                item.timeEnd,
-                item.name,
-                item.teacherName,
-                item.roomNumber,
-                item.group,
-                item.type,
-              );
-            }}></FlatList>
-        );
+    const {data} = this.props;
+    let dataList = [
+      {
+        day: '2',
+        subjects: [],
+      },
+      {
+        day: '3',
+        subjects: [],
+      },
+      {
+        day: '4',
+        subjects: [],
+      },
+      {
+        day: '5',
+        subjects: [],
+      },
+      {
+        day: '6',
+        subjects: [],
+      },
+    ];
+    if (!arrayIsEmpty(data)) {
+      for (let i = 0; i < data.length; i++) {
+        for (let j = 0; j < data[i].length; j++) {
+          if (j == 0) {
+            dataList[j].subjects.push(data[i][j]);
+          }
+          if (j == 1) {
+            dataList[j].subjects.push(data[i][j]);
+          }
+          if (j == 2) {
+            dataList[j].subjects.push(data[i][j]);
+          }
+          if (j == 3) {
+            dataList[j].subjects.push(data[i][j]);
+          }
+          if (j == 4) {
+            dataList[j].subjects.push(data[i][j]);
+          }
+        }
+      }
     }
-  }
-  showSunday() {
+    let dataFill = [];
+    let dataDay = [];
+    let arrFinal = [];
+    dataFill = dataList.filter((item) => item.day === this.state.daysWeek);
+    if (!objectIsNull(dataFill[0])) {
+      for (let i = 0; i < dataFill[0].subjects.length; i++) {
+        if (!objectIsEmpty(dataFill[0].subjects[i])) {
+          dataDay.push(dataFill[0].subjects[i]);
+        }
+      }
+
+      if (!objectIsNull(dataDay)) {
+        let temp = dataDay[0];
+        for (let i = 1; i < dataDay.length; i++) {
+          if (objectIsEqual(temp, dataDay[i])) {
+            delete dataDay[i];
+          } else {
+            temp = dataDay[i];
+          }
+        }
+
+        arrFinal = dataDay.filter((item) => item != null);
+      }
+    }
     return (
-      <View style={{justifyContent: 'center',alignItems:'center'}}>
-        <Text style={{fontWeight: 'bold', fontSize:30}}>
-          Hôm nay là chủ nhật, 
+      <FlatList
+        data={arrFinal}
+        style={{paddingHorizontal: 15}}
+        keyExtractor={(item, index) => 'key' + index}
+        renderItem={({item}) => {
+          return this.timeItem(
+            item.tenMonHoc,
+            item.LoaiMonHoc,
+            item.tenGiaoVien,
+          );
+        }}></FlatList>
+    );
+    //   }
+    // }
+  }
+  showSunday(message) {
+    return (
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{fontWeight: 'bold', fontSize: 30}}>
+          Hôm nay là chủ nhật,
         </Text>
-        <Text style={{fontWeight: 'bold', fontSize:30}}>
-          Cuối tuần thư giãn! 
+        <Text style={{fontWeight: 'bold', fontSize: 30, textAlign:'center'}}>
+          {message}
+        </Text>
+      </View>
+    );
+  }
+  showSaturday(message) {
+    return (
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{fontWeight: 'bold', fontSize: 30}}>
+          Hôm nay là Thứ 7,
+        </Text>
+        <Text style={{fontWeight: 'bold', fontSize: 30, textAlign:'center'}}>
+        {message}
         </Text>
       </View>
     );
   }
   render() {
     const {daysWeek, current} = this.state;
-    const {isFetching, data, message} =this.props;
-    console.warn(message, )
+    const {isFetching, data, message} = this.props;
     return (
       <View style={{flex: 1, backgroundColor: Colors.navigation}}>
         <HeaderNavigation
@@ -193,14 +262,14 @@ export default class TimeTableComponent extends Component {
         <View style={{flex: 1}}>
           {this.showDayOfWeek()}
           <View style={styles.timeContainer}>
-            {daysWeek === '8' ? this.showSunday() : this.showTime()}
+            {daysWeek === '8' ? this.showSunday('Ngủ thêm chút đi :))') : daysWeek==='7'?this.showSaturday('Bạn không có lịch học!'): this.showTime()}
           </View>
         </View>
         {isFetching && <Loading></Loading>}
         {message &&
           AlertCustom(true, message, () => {
             this.props.navigation.goBack();
-            this.props.formatData()
+            this.props.formatData();
           })}
       </View>
     );
@@ -275,148 +344,3 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
-const data = [
-  {
-    day: '2',
-    subjects: [
-      {
-        name: 'Dịch vụ mạng',
-        timeStart: '9:00',
-        timeEnd: '11:30',
-        type: 'Thực hành',
-        group: '1',
-        teacherName: 'Lữ Cao Tiến',
-        roomNumber: 'F7.2',
-      },
-      {
-        name: 'Dịch vụ mạng',
-        timeStart: '9:00',
-        timeEnd: '11:30',
-        type: 'Thực hành',
-        group: '2',
-        teacherName: 'Nguyễn Vũ Dzũng',
-        roomNumber: 'F7.3',
-      },
-      {
-        name: 'Chính trị 2',
-        timeStart: '12:30',
-        timeEnd: '15:00',
-        type: 'Lý Thuyết',
-        group: '',
-        teacherName: 'Đ T Huế',
-        roomNumber: 'C7.6',
-      },
-      {
-        name: 'ĐA - Lập trình Windows',
-        timeStart: '15:10',
-        timeEnd: '17:35',
-        type: 'Đồ án',
-        group: '',
-        teacherName: 'Nguyễn Đức Chuẩn',
-        roomNumber: 'F7.3',
-      },
-    ],
-  },
-  {
-    day: '3',
-    subjects: [
-      {
-        name: 'Ngôn Ngữ LT Java',
-        timeStart: '12:30',
-        timeEnd: '15:00',
-        type: 'Lý thuyết',
-        teacherName: 'Trần Thanh Duy',
-        roomNumber: 'F7.8',
-      },
-      {
-        name: 'Anh Văn Chuyên Ngành',
-        timeStart: '15:10',
-        timeEnd: '17:35',
-        type: 'Lý thuyết',
-        teacherName: 'Dương Hữu Phước',
-        roomNumber: 'C7.6',
-      },
-    ],
-  },
-  {
-    day: '4',
-    subjects: [
-      {
-        name: 'Lập trình Windows',
-        timeStart: '12:30',
-        timeEnd: '15:00',
-        type: 'Lý thuyết',
-        group: '',
-        teacherName: 'Nguyễn Đức Chuẩn',
-        roomNumber: 'F7.3',
-      },
-      {
-        name: 'LT web PHP cơ bản',
-        timeStart: '15:10',
-        timeEnd: '17:35',
-        type: 'Lý Thuyết',
-        teacherName: 'Phù Khắc Anh',
-        roomNumber: 'F7.1',
-      },
-    ],
-  },
-  {
-    day: '5',
-    subjects: [
-      {
-        name: 'Lập trình windows',
-        timeStart: '9:00',
-        timeEnd: '11:30',
-        type: 'Thực hành',
-        group: '1',
-        teacherName: 'Nguyễn Đức Chuẩn',
-        roomNumber: 'F7.11',
-      },
-      {
-        name: 'Công nghệ phần mềm',
-        timeStart: '12:30',
-        timeEnd: '15:00',
-        type: 'Lý thuyết',
-        group: '',
-        teacherName: 'Phù Khắc Anh',
-        roomNumber: 'C7.6',
-      },
-      {
-        name: 'Dịch vụ mạng',
-        timeStart: '15:10',
-        timeEnd: '17:35',
-        type: 'Lý thuyết',
-        group: '',
-        teacherName: 'Lữ Cao Tiến',
-        roomNumber: 'C7.6',
-      },
-    ],
-  },
-  {
-    day: '6',
-    subjects: [
-      {
-        name: 'Lập trình Windows',
-        timeStart: '12:30',
-        timeEnd: '15:00',
-        type: 'Thực hành',
-        group: '2',
-        teacherName: 'Phù Khắc Anh',
-        roomNumber: 'F7.2',
-      },
-    ],
-  },
-  {
-    day: '7',
-    subjects: [
-      {
-        name: 'Giáo dục thể chất',
-        timeStart: '7:00',
-        timeEnd: '9:30',
-        type: 'Chứng chỉ',
-        teacherName: 'Không nhớ',
-        roomNumber: 'TTTH Phú Thọ',
-      },
-    ],
-  },
-];

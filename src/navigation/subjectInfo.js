@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import ThreadComponent from '../components/LearningInfo/ThreadComponent';
-import WorkingComponent from '../components/LearningInfo/WorkingComponent';
+import ThreadContainer from '../containers/LearningInfo/ThreadContainer';
+import WorkingContainer from '../containers/LearningInfo/WorkingContainer';
 import OthersSubjectComponent from '../components/LearningInfo/OthersSubjectComponent';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -32,12 +32,12 @@ export default function TabSubjectNavigator({route}) {
       adaptive={false}>
       <Tab.Screen
         name="Luồng"
-        component={ThreadComponent}
+        component={ThreadContainer}
         initialParams={{item}}
       />
       <Tab.Screen
         name="Bài tập"
-        component={WorkingComponent}
+        component={WorkingContainer}
         initialParams={{item}}
       />
       <Tab.Screen

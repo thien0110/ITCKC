@@ -2,7 +2,7 @@ import React from 'react';
 import ProfileComponent from '../../components/Profile/ProfileComponent';
 import {connect} from 'react-redux';
 import {
-  formatData,getProfileAction,editProfileAction
+  formatData,getProfileAction,editProfileAction, changePasswordAction
 } from '../../redux/actions/MenuProfile/ProfileAction';
 class ProfileContainer extends React.Component {
   render() {
@@ -14,6 +14,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getProfileAction: (input) => {
       dispatch(getProfileAction(input));
+    },
+    changePasswordAction: (input) => {
+      dispatch(changePasswordAction(input));
     },
     editProfileAction: (input) => {
       dispatch(editProfileAction(input));

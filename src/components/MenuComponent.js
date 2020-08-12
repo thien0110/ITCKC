@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
@@ -22,8 +23,8 @@ const windowHeight = Dimensions.get('window').height;
 
 export default class MenuComponent extends Component {
   componentDidMount() {
-    this.props.getMenuNewsAction();
     this.props.getHotPostItAction();
+    this.props.getMenuNewsAction();
   }
   showNews(heading, data) {
     return (
@@ -40,10 +41,10 @@ export default class MenuComponent extends Component {
     );
   }
   showBody() {
-    const {data} = this.props;
+    const {dataHotKhoa, data} = this.props;
     return (
-      <View style={{flex: 1, flexDirection: 'column'}}>
-        <ScrollView>
+      <View style={{flex: 1, flexDirection: 'column', }}>
+        <ScrollView > 
           <View
             style={{
               flexWrap: 'wrap',
@@ -95,11 +96,11 @@ export default class MenuComponent extends Component {
               title={'Cựu sinh viên'}
               iconName={Images.iconTeam}></Block>
           </View>
-          {!arrayIsEmpty(data) && (
+          {!arrayIsEmpty(dataHotKhoa) && (
             <View>
-              {this.showNews('Thông tin từ khoa', data)}
+              {this.showNews('Thông tin từ khoa', dataHotKhoa)}
               {this.showNews('Thông tin từ phòng ban', data)}
-              {this.showNews('Thông tin từ lớp học phần', data)}
+              {this.showNews('Thông tin từ lớp học phần', dataHotKhoa)}
               {this.showNews('Thông tin từ trung tâm tin học', data)}
             </View>
           )}
@@ -112,25 +113,25 @@ export default class MenuComponent extends Component {
     // console.warn(itemId, 'menu');
     const {isFetching, data} = this.props;
     return (
-      <View
-        style={{
-          flexDirection: 'column',
-          backgroundColor: Colors.background,
-          flex: 1,
-        }}>
-        <HeaderNavigation
-          iconRight={Images.iconBell}
-          haveSearch={true}
-          onClickSearch={() => {
-            this.props.navigation.navigate('Search');
-          }}
-          color={Colors.backgroundBlue}
-          onClickRight={() => {
-            this.props.navigation.navigate('Noti');
-          }}></HeaderNavigation>
-        {this.showBody()}
-        {isFetching && <Loading></Loading>}
-      </View>
+        <SafeAreaView
+          style={{
+            flexDirection: 'column',
+            backgroundColor: Colors.background,
+            flex: 1,
+          }}>
+          <HeaderNavigation
+            iconRight={Images.iconBell}
+            haveSearch={true}
+            onClickSearch={() => {
+              this.props.navigation.navigate('Search');
+            }}
+            color={Colors.backgroundBlue}
+            onClickRight={() => {
+              this.props.navigation.navigate('Noti');
+            }}></HeaderNavigation>
+          {this.showBody()}
+          {isFetching && <Loading></Loading>}
+        </SafeAreaView>
     );
   }
 }

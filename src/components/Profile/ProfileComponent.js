@@ -84,11 +84,14 @@ export default class ProfileComponent extends Component {
   }
   onPressChangePass() {
     const {modalVisible, oldPass, newPass, confirmNewPass} = this.state;
+    const {mssv}=userProfile
     const input = {
+      mssv,
       oldPass,
       newPass,
       confirmNewPass,
     };
+    this.props.changePasswordAction(input)
     this.setModalVisible(!modalVisible);
   }
   onPressChangePhone() {

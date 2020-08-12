@@ -15,10 +15,9 @@ import {
         yield put({
           type: GET_IT_CENTER_INFO_SUCCESS,
           data: response.data,
-          message: response.message,
         });
       } else {
-        yield put({type: GET_IT_CENTER_INFO_FAIL, error: response.message});
+        yield put({type: GET_IT_CENTER_INFO_FAIL, error: messageError});
       }
     } catch (error) {
       yield put({type: GET_IT_CENTER_INFO_FAIL, error: messageError});

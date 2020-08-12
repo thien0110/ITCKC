@@ -6,6 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
   FlatList,
+  SafeAreaView,
 } from 'react-native';
 import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
@@ -78,7 +79,7 @@ export default class SearchComponent extends Component {
   render() {
     const {data, message, isFetching, searchAction, navigation} = this.props;
     return (
-      <View style={{flex: 1, backgroundColor: Colors.background}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
           searching={true}
           color={Colors.navigation}
@@ -96,7 +97,7 @@ export default class SearchComponent extends Component {
           }}></HeaderNavigation>
         {this.showBody()}
         {isFetching && <Loading></Loading>}
-      </View>
+      </SafeAreaView>
     );
   }
 }

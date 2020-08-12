@@ -11,7 +11,7 @@ export function loginApi(input) {
         mssv: '0306171301',
         email: '0306171301@gmail.com',
         role: 'SV',
-        maLopHoc: '03561',
+        maLopHoc: '30061711',
         token: '123456789',
       },
     };
@@ -24,6 +24,7 @@ export function loginApi(input) {
       body: JSON.stringify({
         email: input.username,
         password: input.password,
+        loaiTaiKhoan:'3'
       }),
     })
       .then((response) => response.json())

@@ -32,8 +32,8 @@ export default class LoginComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '0306171301',
-      password: 'qYpQE6w',
+      username: '0306171413',
+      password: '123456',
 
       rememberMe: false,
       showAlert: false,
@@ -82,6 +82,7 @@ export default class LoginComponent extends Component {
     userProfile.token=data.token;
     userProfile.mssv=data.mssv;
     userProfile.maLopHoc=data.maLopHoc;
+    
     userProfile.role=data.role;
     const myLogin = {
       username: this.state.username,
@@ -391,9 +392,10 @@ export default class LoginComponent extends Component {
     } = this.props;
     // console.warn(message)
     return (
+      <SafeAreaView style={{flex:1}}>
       <ImageBackground
         source={Images.bg}
-        style={{width: windowWidth, height: windowHeight}}>
+        style={{flex:1}}>
         {this.showView()}
         {showAlert &&
           AlertCustom(showAlert, messageAlert, () => {
@@ -408,6 +410,7 @@ export default class LoginComponent extends Component {
         {isFetching && <Loading></Loading>}
         {this.showModel()}
       </ImageBackground>
+      </SafeAreaView>
     );
   }
 }
