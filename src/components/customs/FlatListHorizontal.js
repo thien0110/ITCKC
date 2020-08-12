@@ -10,6 +10,7 @@ import {
   ScrollView,
 } from 'react-native';
 const {width, height} = Dimensions.get('window');
+import {stringIsEmpty} from '../../res/Functions'
 
 // const Item = ({item}) => {
 //   return (
@@ -44,7 +45,7 @@ export const FlatListHorizontal = ({data, onPress}) => {
           return (
             <TouchableOpacity onPress={()=>{onPress(item)}}>
               <View style={styles.cardView}>
-                <Image style={styles.image} source={{uri: item.anhBia}} />
+                <Image style={styles.image} source={{uri: 'http://192.168.1.19:4100/uploads/cntt/2-554x399.jpg'}} />
                 <View style={styles.textView}>
                   <Text style={styles.itemTitle}>{item.tieuDe}</Text>
                   <Text style={styles.itemDescription} numberOfLines={3}>

@@ -51,25 +51,9 @@ export default class AboutComponent extends Component {
                 CKC Application
               </Text>
             </View>
-            <Text style={styles.textTitle}>Idea</Text>
+            <Text style={styles.textTitle}>Bản quyền thuộc về</Text>
             <View style={styles.blockName}>
-              <Text style={styles.textName}>Lữ Cao Tiến</Text>
-            </View>
-
-            <Text style={styles.textTitle}>Front End</Text>
-            <View style={styles.blockName}>
-              <Text style={styles.textName}>Lê Văn Thiện</Text>
-              <Text style={styles.textName}>Lê Dương Hưng Thịnh</Text>
-            </View>
-            <Text style={styles.textTitle}>Back End</Text>
-            <View style={styles.blockName}>
-              <Text style={styles.textName}>
-                Thành Lộc | Minh Hiếu | Trung Hiếu
-              </Text>
-              <Text style={styles.textName}>Đình Huy | Khôi Hưng</Text>
-              <Text style={styles.textName}>Văn Tân | Đức Phong</Text>
-              <Text style={styles.textName}>Văn Tốt | Quang Huy</Text>
-              <Text style={styles.textName}>Hoàng Linh | Hữu Tân</Text>
+              <Text style={styles.textName}>Khoa Công Nghệ Thông Tin trường Cao Đẳng Kỹ Thuật Cao Thắng</Text>
             </View>
           </View>
         </ScrollView>
@@ -88,19 +72,20 @@ const styles = StyleSheet.create({
   textTitle: {
     marginTop: 15,
     fontSize: 20,
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
     color: Colors.grayStrong,
     textAlign: 'center',
     letterSpacing: 0,
-    width: 100,
-    borderBottomColor: Colors.gray2,
-    borderBottomWidth: 0.5,
+    //width: 300,
+    // borderBottomColor: Colors.gray2,
+    // borderBottomWidth: 0.5,
   },
   textName: {
     fontSize: 20,
     color: Colors.gray2,
     textAlign: 'center',
     letterSpacing: 0,
+    fontWeight: 'bold'
   },
   blockName: {
     width: window.width - 30,

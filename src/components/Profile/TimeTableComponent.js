@@ -84,13 +84,15 @@ export default class TimeTableComponent extends Component {
   }
   showDayOfWeek() {
     return (
+      <View>
+      <Text style={{textAlign:'center', color:'#fff'}}>Hôm nay, ngày {d.getDate()} tháng {d.getMonth()} năm {d.getFullYear()}</Text>
       <View style={styles.container}>
         {this.ShowItems('T2', () => this.setState({daysWeek: '2'}))}
         {this.ShowItems('T3', () => this.setState({daysWeek: '3'}))}
         {this.ShowItems('T4', () => this.setState({daysWeek: '4'}))}
         {this.ShowItems('T5', () => this.setState({daysWeek: '5'}))}
         {this.ShowItems('T6', () => this.setState({daysWeek: '6'}))}
-        {this.ShowItems('T7', () => this.setState({daysWeek: '7'}))}
+      </View>
       </View>
     );
   }
@@ -128,22 +130,8 @@ export default class TimeTableComponent extends Component {
           <View style={{marginTop: 0}}>
             <Text style={styles.textContentTime}>{teacherName}</Text>
             <Text style={styles.textContentTime}>{type}</Text>
-            {/* <Text style={styles.textContentTime}>
-              {group === '1' ? 'Nhóm 1' : group === '2' ? 'Nhóm 2' : 'Cả lớp'}
-            </Text> */}
-            {/* <Text style={styles.textContentTime}>{roomNumber}</Text> */}
           </View>
         </LinearGradient>
-        {/* <View style={styles.timeContentsRight}>
-           <TouchableOpacity
-              onPress={() => {
-                onPress();
-              }}>
-              <Image
-                source={Images.iconTimer}
-                style={{width: 50, height: 50}}></Image>
-            </TouchableOpacity>
-        </View> */}
       </View>
     );
   }
@@ -233,14 +221,26 @@ export default class TimeTableComponent extends Component {
     //   }
     // }
   }
-  showSunday() {
+  showSunday(message) {
     return (
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
         <Text style={{fontWeight: 'bold', fontSize: 30}}>
           Hôm nay là chủ nhật,
         </Text>
+        <Text style={{fontWeight: 'bold', fontSize: 30, textAlign:'center'}}>
+          {message}
+        </Text>
+      </View>
+    );
+  }
+  showSaturday(message) {
+    return (
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
         <Text style={{fontWeight: 'bold', fontSize: 30}}>
-          Cuối tuần thư giãn!
+          Hôm nay là Thứ 7,
+        </Text>
+        <Text style={{fontWeight: 'bold', fontSize: 30, textAlign:'center'}}>
+        {message}
         </Text>
       </View>
     );
@@ -262,7 +262,7 @@ export default class TimeTableComponent extends Component {
         <View style={{flex: 1}}>
           {this.showDayOfWeek()}
           <View style={styles.timeContainer}>
-            {daysWeek === '8' ? this.showSunday() : this.showTime()}
+            {daysWeek === '8' ? this.showSunday('Ngủ thêm chút đi :))') : daysWeek==='7'?this.showSaturday('Bạn không có lịch học!'): this.showTime()}
           </View>
         </View>
         {isFetching && <Loading></Loading>}
