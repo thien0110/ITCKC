@@ -14,7 +14,7 @@ export default class ItCenterComponent extends Component {
   }
   showBody() {
     const {data} = this.props;
-    console.warn('data',data)
+    // console.warn('data',data)
     if (data && data.length) {
       return (
         <View style={{flex: 1, paddingTop: 15}}>

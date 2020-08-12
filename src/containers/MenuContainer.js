@@ -25,6 +25,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     data: state.menuReducers.data,
+    dataHotKhoa:state.menuReducers.dataHotKhoa,
     isFetching: state.menuReducers.isFetching,
     message: state.menuReducers.message,
   };

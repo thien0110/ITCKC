@@ -24,7 +24,7 @@ export function loginApi(input) {
       body: JSON.stringify({
         email: input.username,
         password: input.password,
-        loaiTaiKhoan:'3rr'
+        loaiTaiKhoan:'3'
       }),
     })
       .then((response) => response.json())

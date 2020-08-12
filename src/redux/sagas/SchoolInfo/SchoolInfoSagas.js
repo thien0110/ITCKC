@@ -6,12 +6,13 @@ import {
 } from '../../actions/SchoolInfo/SchoolInfoAction';
 import {call, takeEvery, put} from 'redux-saga/effects';
 import {getSchoolInfoApi} from '../../api/SchoolInfo/SchoolInfoApis';
+import {arrayIsEmpty} from '../../../res/Functions'
 const messageError = 'Không thể kết nối tới server.';
 
 function* getSchoolInfoFlow(action) {
   try {
     const response = yield getSchoolInfoApi(action.input);
-    if (response.resultCode === 200) {
+    if (!arrayIsEmpty(response.data)) {
       yield put({
         type: GET_SCHOOL_INFO_SUCCESS,
         data: response.data,

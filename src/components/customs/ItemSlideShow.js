@@ -8,12 +8,12 @@ const SlideShowItem = ({item, onPress}) => {
     <TouchableOpacity onPress={()=>{onPress(item)}}>
     <View style={styles.cardView}>
       <View style={styles.textView}>
-        <Text style={styles.itemTitle}>{item.tentintuc}</Text>
-        <Text style={styles.itemDescription} numberOfLines={4}>
-          {item.description}
+        <Text style={styles.itemTitle}>{item.tieuDe}</Text>
+        <Text style={styles.itemDescription} numberOfLines={3}>
+          {item.moTaNgan}
         </Text>
       </View>
-      <Image style={styles.image} source={{uri: item.image}} />
+      <Image style={styles.image} source={{uri:'http://10.0.3.2:4100/'+item.anhBia}} />
     </View></TouchableOpacity>
     
   );

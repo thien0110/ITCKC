@@ -9,10 +9,11 @@ import {
 import {call, takeEvery, put} from 'redux-saga/effects';
 import {menuApi, hotPostsItApi} from '../api/MenuApis';
 const messageError = 'Không thể kết nối tới server.';
+import {arrayIsEmpty} from '../../res/Functions'
 function* menuFlow(action) {
   try {
     const response = yield menuApi(action.input);
-    if (response.resultCode === 1) {
+    if (!arrayIsEmpty(response.data)) {
       yield put({
         type: GET_MENU_NEWS_SUCCESS,
         data: response.data,
@@ -46,6 +47,6 @@ function* hotPostsItFlow(action) {
   }
 }
 
-export function* watchhotPostsIt() {
+export function* watchHotPostsIt() {
   yield takeEvery(GET_HOT_POST_IT, hotPostsItFlow);
 }
