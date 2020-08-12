@@ -15,7 +15,7 @@ import {
       case GET_YOUR_CLASS:
         return {...state, isFetching: true};
       case GET_YOUR_CLASS_SUCCESS:
-        console.warn("conmcac")
+        // console.warn("conmcac")
         return {
           ...state,
           isFetching: false,

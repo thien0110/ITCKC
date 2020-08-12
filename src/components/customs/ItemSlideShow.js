@@ -9,7 +9,7 @@ const SlideShowItem = ({item, onPress}) => {
     <View style={styles.cardView}>
       <View style={styles.textView}>
         <Text style={styles.itemTitle}>{item.tieuDe}</Text>
-        <Text style={styles.itemDescription} numberOfLines={4}>
+        <Text style={styles.itemDescription} numberOfLines={3}>
           {item.moTaNgan}
         </Text>
       </View>

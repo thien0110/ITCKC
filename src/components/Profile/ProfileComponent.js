@@ -319,7 +319,6 @@ export default class ProfileComponent extends Component {
   render() {
     const {isFetching, data, message, formatData} = this.props;
     const {showAlert, messageAlert} = this.state;
-    console.warn(message)
     return (
       <View style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation

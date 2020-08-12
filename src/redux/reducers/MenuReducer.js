@@ -21,7 +21,7 @@ const menuReducers = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        // data: action.data,
+        data: action.data,
         message: action.message,
       };
     case GET_MENU_NEWS_FAIL:

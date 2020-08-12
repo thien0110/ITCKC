@@ -23,8 +23,8 @@ const windowHeight = Dimensions.get('window').height;
 
 export default class MenuComponent extends Component {
   componentDidMount() {
-    this.props.getMenuNewsAction();
     this.props.getHotPostItAction();
+    this.props.getMenuNewsAction();
   }
   showNews(heading, data) {
     return (
@@ -41,7 +41,7 @@ export default class MenuComponent extends Component {
     );
   }
   showBody() {
-    const {dataHotKhoa,data} = this.props;
+    const {dataHotKhoa, data} = this.props;
     return (
       <View style={{flex: 1, flexDirection: 'column', }}>
         <ScrollView > 
@@ -96,12 +96,12 @@ export default class MenuComponent extends Component {
               title={'Cựu sinh viên'}
               iconName={Images.iconTeam}></Block>
           </View>
-          {!arrayIsEmpty(data) && (
+          {!arrayIsEmpty(dataHotKhoa) && (
             <View>
               {this.showNews('Thông tin từ khoa', dataHotKhoa)}
-              {this.showNews('Thông tin từ phòng ban', dataHotKhoa)}
+              {this.showNews('Thông tin từ phòng ban', data)}
               {this.showNews('Thông tin từ lớp học phần', dataHotKhoa)}
-              {this.showNews('Thông tin từ trung tâm tin học', dataHotKhoa)}
+              {this.showNews('Thông tin từ trung tâm tin học', data)}
             </View>
           )}
         </ScrollView>

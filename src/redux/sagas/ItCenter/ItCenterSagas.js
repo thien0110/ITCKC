@@ -11,10 +11,10 @@ import {
   function* getItCenterInfoFlow(action) {
     try {
       const response = yield getItCenterInfoApi(action.input);
-      if (!arrayIsEmpty(response)) {
+      if (!arrayIsEmpty(response.data)) {
         yield put({
           type: GET_IT_CENTER_INFO_SUCCESS,
-          data: response,
+          data: response.data,
         });
       } else {
         yield put({type: GET_IT_CENTER_INFO_FAIL, error: messageError});
