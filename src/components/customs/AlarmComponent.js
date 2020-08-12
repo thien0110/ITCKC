@@ -91,8 +91,8 @@ export default class AlarmComponent extends Component {
                 hour: stringDate.slice(11, 13),
                 minute: stringDate.split(':')[1],
                 second: stringDate.split(':')[2],
-			  },
-			  subjectName: subjectName,
+              },
+              subjectName: subjectName,
               // date: `alarm set: ${fireDate}`,
               id: alarm.id,
             },
@@ -183,18 +183,24 @@ export default class AlarmComponent extends Component {
         <View
           style={{
             paddingVertical: 15,
-            borderBottomWidth: 1,
-            borderColor: Colors.grayOpacity,
+            //borderBottomWidth: 1,
+            //borderColor: Colors.grayOpacity,
+            marginTop:10,
+            height:80,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
           }}>
-          <View  style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-			width:window.width/2
-          }}>
-            <View style={{marginRight:10}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              borderRadius:10,
+              width: '80%' ,
+              backgroundColor: '#fff',
+              padding:10
+            }}>
+            <View style={{marginRight: 5, width:'30%'}}>
               <Text style={{fontSize: 25}}>
                 {item.date.hour}:{item.date.minute}
               </Text>
@@ -202,19 +208,21 @@ export default class AlarmComponent extends Component {
                 {item.date.day}/{item.date.month}/{item.date.year}
               </Text>
             </View>
-            <Text style={{fontWeight:'bold'}}>{item.subjectName}</Text>
+            <Text style={{fontWeight: 'bold', fontSize:17, width:'70%'}}>{item.subjectName}</Text>
           </View>
 
-          <View>
+          <View style={{
+              width: '18%',
+            }}>
             <TouchableOpacity
               onPress={() => this.deleteAlarm(item.id)}
               style={{
-                borderRadius: 5,
+                borderRadius: 50,
                 justifyContent: 'center',
-                height: 30,
-                width: 30,
+                height: 50,
+                width: 50,
                 alignSelf: 'center',
-                backgroundColor: Colors.buttonBlue,
+                backgroundColor: '#F95454',
               }}>
               <Text style={{color: Colors.white, textAlign: 'center'}}>
                 Xóa
@@ -231,7 +239,7 @@ export default class AlarmComponent extends Component {
     return (
       <View style={{flex: 1}}>
         <HeaderNavigation
-          title={'Đặt báo lịch học'}
+          title={'Đặt lời nhắc'}
           titleColor={Colors.white}
           color={Colors.navigation}
           iconLeft={Images.iconBack}
@@ -240,18 +248,18 @@ export default class AlarmComponent extends Component {
             this.props.navigation.goBack();
           }}></HeaderNavigation>
         <View style={{padding: 15}}>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <TouchableOpacity
               onPress={() => {
                 this.showDatePicker();
               }}
               style={styles.dateTimePick}>
-              <Text>{fireDate}</Text>
+              <Text style={{fontSize: 20}}>{fireDate}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={this.setAlarm}
               style={styles.dateTimeButton}>
-              <Text style={{color: Colors.white}}>Đặt lịch</Text>
+              <Text style={{fontSize: 20, color: Colors.white}}>Đặt lịch</Text>
             </TouchableOpacity>
           </View>
           <View>
@@ -277,70 +285,21 @@ export default class AlarmComponent extends Component {
 const window = Dimensions.get('window');
 const styles = StyleSheet.create({
   dateTimePick: {
-    borderBottomStartRadius: 5,
-    borderTopStartRadius: 5,
-    borderColor: Colors.gray2,
-    borderWidth: 1,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 30,
-    width: (window.width * 80) / 100 - 15,
+    height: 70,
+    width: (window.width * 67) / 100 - 15,
 
     backgroundColor: Colors.white,
   },
   dateTimeButton: {
-    borderTopEndRadius: 5,
-    borderBottomEndRadius: 5,
-    borderColor: Colors.gray2,
-    borderWidth: 1,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 30,
-    width: (window.width * 20) / 100 - 15,
+    height: 70,
+    width: (window.width * 30) / 100 - 15,
     alignSelf: 'center',
-    backgroundColor: Colors.buttonBlue,
+    backgroundColor: '#4CD964',
   },
 });
-
-// <View style={{padding: 20}}>
-//           <Button
-//             style={{position: 'absolute'}}
-//             title={'Đặt giờ'}
-//             onPress={() => {
-//               this.showDatePicker();
-//             }}>
-//             <Text style={{color: '#000'}}>Show Date Picker</Text>
-//           </Button>
-//         </View>
-
-//         <View style={styles.margin}>
-//           <Button onPress={this.setAlarm} title="Đặt hẹn" color="#007fff" />
-//         </View>
-//         <View>
-//           <TextInput
-//             style={styles.date}
-//             onChangeText={(text) => this.setState({alarmId: text})}
-//             value={alarmId}
-//           />
-//         </View>
-//         <View style={styles.margin}>
-//           <Button
-//             onPress={this.deleteAlarm}
-//             title="Delete Alarm"
-//             color="#841584"
-//           />
-//         </View>
-//         <View style={styles.margin}>
-//           <Button
-//             onPress={this.viewAlarms}
-//             title="See all active alarms"
-//             color="#841584"
-//           />
-//         </View>
-//         <Text>{JSON.stringify(update, null, 2)}</Text>
-// <DateTimePickerModal
-//   isVisible={this.state.isDatePickerVisible}
-//   mode="datetime"
-//   onConfirm={this.handleConfirm}
-//   onCancel={() => this.hideDatePicker()}
-// />
