@@ -30,7 +30,7 @@ export default class postDetail extends Component {
 
   render() {
     const {item} = this.props.route.params;
-     console.warn(item.anhBia)
+    //  console.warn(item.anhBia)
     return (
         <View style={{flex: 1}}>
           <HeaderNavigation

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ThreadContainer from '../containers/LearningInfo/ThreadContainer';
-import WorkingComponent from '../components/LearningInfo/WorkingComponent';
+import WorkingContainer from '../containers/LearningInfo/WorkingContainer';
 import OthersSubjectComponent from '../components/LearningInfo/OthersSubjectComponent';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -37,7 +37,7 @@ export default function TabSubjectNavigator({route}) {
       />
       <Tab.Screen
         name="Bài tập"
-        component={WorkingComponent}
+        component={WorkingContainer}
         initialParams={{item}}
       />
       <Tab.Screen

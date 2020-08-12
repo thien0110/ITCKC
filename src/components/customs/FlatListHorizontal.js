@@ -30,7 +30,9 @@ import {stringIsEmpty} from '../../res/Functions'
 //   );
 // };
 export const FlatListHorizontal = ({data, onPress}) => {
+  console.warn(data)
   if (data && data.length) {
+    console.warn(data)
     return (
       <FlatList
         data={data}

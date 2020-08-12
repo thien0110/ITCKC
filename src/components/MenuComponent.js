@@ -41,7 +41,7 @@ export default class MenuComponent extends Component {
     );
   }
   showBody() {
-    const {data} = this.props;
+    const {dataHotKhoa,data} = this.props;
     return (
       <View style={{flex: 1, flexDirection: 'column', }}>
         <ScrollView > 
@@ -98,10 +98,10 @@ export default class MenuComponent extends Component {
           </View>
           {!arrayIsEmpty(data) && (
             <View>
-              {this.showNews('Thông tin từ khoa', data)}
-              {this.showNews('Thông tin từ phòng ban', data)}
-              {this.showNews('Thông tin từ lớp học phần', data)}
-              {this.showNews('Thông tin từ trung tâm tin học', data)}
+              {this.showNews('Thông tin từ khoa', dataHotKhoa)}
+              {this.showNews('Thông tin từ phòng ban', dataHotKhoa)}
+              {this.showNews('Thông tin từ lớp học phần', dataHotKhoa)}
+              {this.showNews('Thông tin từ trung tâm tin học', dataHotKhoa)}
             </View>
           )}
         </ScrollView>

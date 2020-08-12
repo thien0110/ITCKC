@@ -10,45 +10,59 @@ import {
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import Images from '../../res/Images';
-
-import {objectIsNull, stringIsEmpty} from '../../res/Functions';
+import {
+  objectIsNull,
+  stringIsEmpty,
+  arrayIsEmpty,
+  SplitDate,
+} from '../../res/Functions';
+import Loading from '../customs/Loading';
 
 const windowWidth = Dimensions.get('window').width;
 export default class WorkingComponent extends Component {
-  shareBlock() {
-    return (
-      <View>
-        <FlatList
-          data={data}
-          keyExtractor={(item, index) => 'key' + index}
-          renderItem={({item}) => {
-            return (
-              <View style={styles.viewStyle}>
-                <View style={{padding: 10, marginBottom: 0}}>
-                  <Text style={{fontSize: 18, marginLeft: 10}}>
-                    Tài liệu mới: {item.docName}
-                  </Text>
-                  <Text style={{fontSize: 15, marginLeft: 10}}>
-                    Đã đăng: {item.time}
-                  </Text>
-                  <Text style={{fontSize: 15, marginLeft: 10}}>
-                    {item.type} - Chủ đề: {item.topic}
-                  </Text>
-                  <TextInput
-                    style={{color: Colors.gray2, fontSize: 15, marginLeft: 10}}
-                    placeholder="Thêm nhận xét..."></TextInput>
-                </View>
-              </View>
-            );
-          }}></FlatList>
-      </View>
-    );
+  componentDidMount(){
+    const {item} = this.props.route.params;
+    this.props.getWorkingAction(item.maLopHocPhan)
   }
-  Showbody() {
+  shareBlock() {
+    const {data}=this.props
+    if(!arrayIsEmpty(data)){ 
+      return (
+        <View>
+          <FlatList
+            data={data}
+            keyExtractor={(item, index) => 'key' + index}
+            renderItem={({item}) => {
+              return (
+                <View style={styles.viewStyle}>
+                  <View style={{padding: 10, marginBottom: 0}}>
+                    <Text style={{fontSize: 18, marginLeft: 10}}>
+                      Tài liệu mới: {item.tieuDe}
+                    </Text>
+                    <Text style={{fontSize: 15, marginLeft: 10}}>
+                      Đã đăng: {SplitDate(item.ngayTao)}
+                    </Text>
+                    <Text style={{fontSize: 15, marginLeft: 10}}>
+                      {item.type}Ngày hết hạn: {item.deadLine}
+                    </Text>
+                    <TextInput
+                      style={{color: Colors.gray2, fontSize: 15, marginLeft: 10}}
+                      placeholder="Thêm nhận xét..."></TextInput>
+                  </View>
+                </View>
+              );
+            }}></FlatList>
+        </View>
+      );
+    }
+   
+  }
+  showBody() {
     return <View>{this.shareBlock()}</View>;
   }
   render() {
     const {item} = this.props.route.params;
+    const {isFetching} =this.props;
     var titleHeader = '';
     if (!objectIsNull(item)) {
       titleHeader = item.name;
@@ -65,21 +79,13 @@ export default class WorkingComponent extends Component {
           onClickLeft={() => {
             this.props.navigation.goBack();
           }}></HeaderNavigation>
-        <View style={{padding: 15, overflow: 'hidden'}}>{this.Showbody()}</View>
+        <View style={{padding: 15, overflow: 'hidden'}}>{this.showBody()}</View>
+        {isFetching && <Loading></Loading>}
       </View>
     );
   }
 }
 
-const data = [
-  {docName: 'Bài 9', time: 'Hôm qua', topic: '1', type: 'Bài tập'},
-  {docName: 'Bài 8', time: '11 thg 7', topic: '2', type: 'Bài tập'},
-  {docName: 'Bài 7', time: '2 thg 7', topic: '1', type: 'Tài liệu'},
-  {docName: 'Bài 6', time: '25 thg 6', topic: '3', type: 'Tài liệu'},
-  {docName: 'Bài 5', time: '25 thg 6', topic: '3', type: 'Tài liệu'},
-  {docName: 'Bài 4', time: '25 thg 6', topic: '3', type: 'Tài liệu'},
-  {docName: 'Bài 3', time: '25 thg 6', topic: '3', type: 'Tài liệu'},
-];
 
 const styles = StyleSheet.create({
   viewStyle: {
