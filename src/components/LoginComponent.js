@@ -32,8 +32,8 @@ export default class LoginComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '0306171301',
-      password: '',
+      username: '0306171413',
+      password: '123456',
 
       rememberMe: false,
       showAlert: false,
@@ -80,11 +80,9 @@ export default class LoginComponent extends Component {
   loginSuccess() {
     const {data, changeStateAction} = this.props;
     userProfile.token=data.token;
-    // userProfile.mssv=data.mssv;
-    // userProfile.maLopHoc=data.maLopHoc;
+    userProfile.mssv=data.mssv;
+    userProfile.maLopHoc=data.maLopHoc;
     
-    userProfile.mssv="0306171413";
-    userProfile.maLopHoc="30061711";
     userProfile.role=data.role;
     const myLogin = {
       username: this.state.username,
@@ -394,10 +392,10 @@ export default class LoginComponent extends Component {
     } = this.props;
     // console.warn(message)
     return (
-      <SafeAreaView>
+      <SafeAreaView style={{flex:1}}>
       <ImageBackground
         source={Images.bg}
-        style={{width: windowWidth, height: windowHeight}}>
+        style={{flex:1}}>
         {this.showView()}
         {showAlert &&
           AlertCustom(showAlert, messageAlert, () => {

@@ -7,12 +7,14 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../../res/Images';
 
 
+import Loading from '../customs/Loading';
 export default class ItCenterComponent extends Component {
   componentDidMount(){
     this.props.getItCenterInfoAction();
   }
   showBody() {
     const {data} = this.props;
+    console.warn('data',data)
     if (data && data.length) {
       return (
         <View style={{flex: 1, paddingTop: 15}}>
@@ -34,6 +36,7 @@ export default class ItCenterComponent extends Component {
       );
     }}
   render() {
+    const {isFetching} = this.props;
     return (
       <View style={{flex: 1,}}>
         <HeaderNavigation
@@ -47,7 +50,7 @@ export default class ItCenterComponent extends Component {
           <View style={{flex:1, }}>
           {this.showBody()}
           </View>
-       
+          {isFetching && <Loading></Loading>}
       </View>
     );
   }

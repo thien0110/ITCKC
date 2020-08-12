@@ -7,7 +7,7 @@ import {
   FlatList,
   StyleSheet,
   Dimensions,
-  ScrollView,
+  ScrollView,SafeAreaView
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import HeaderNavigation from '../components/customs/HeaderNavigation';
@@ -30,9 +30,9 @@ export default class postDetail extends Component {
 
   render() {
     const {item} = this.props.route.params;
-    //  console.warn(item)
+     console.warn(item.anhBia)
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <View style={{flex: 1}}>
           <HeaderNavigation
             title={'Bài viết'}
             titleColor={Colors.white}
@@ -46,12 +46,12 @@ export default class postDetail extends Component {
           {/* {this.contentPost()}; */}
           <View style={{flex: 1, backgroundColor: Colors.white, padding: 15}}>
             <Text style={{fontWeight: 'bold', fontSize: 15}}>
-              {item.tieuDe}
+            {stringIsEmpty(item.tieuDe)?item.tentintuc:item.tieuDe }
             </Text>
-            <Image source={'https://api.elearningckc.com/'+item.anhBia}></Image>
+            <Image source={"http://192.168.1.19:4100/"+item.anhBia}></Image>
             <WebView
               source={{
-                html: '<div style="font-size:35px";>' + item.noiDung + '</div>',
+                html: '<div style="font-size:35px";>' +item.noiDung+ '</div>',
               }}
               // source={{html: '<h5>Post</h5>'}}
               startInLoadingState={true}
@@ -59,7 +59,7 @@ export default class postDetail extends Component {
               allowsFullscreenVideo={true}
             />
           </View>
-        </SafeAreaView>
+        </View>
     );
   }
 }

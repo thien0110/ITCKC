@@ -2,7 +2,7 @@
 const messageError = 'Không thể kết nối tới server.';
 import {API_URL} from '../../../config';
 export function getItCenterInfoApi(input) {
-  return fetch(API_URL + 'cnttTinTuc/danhsachtintuc', {
+  return fetch(API_URL + 'ttthTinTuc/ttthdanhsachtintuc', {
     method: 'GET',
     headers: new Headers({
       'Content-Type': 'application/json',

@@ -224,9 +224,12 @@ export default class AlarmComponent extends Component {
                 alignSelf: 'center',
                 backgroundColor: '#F95454',
               }}>
-              <Text style={{color: Colors.white, textAlign: 'center'}}>
-                Xóa
-              </Text>
+              <Icon name='trash-alt'
+              size={20}
+              color={Colors.white}
+              style={{alignSelf:'center'}}>
+
+              </Icon>
             </TouchableOpacity>
           </View>
         </View>
