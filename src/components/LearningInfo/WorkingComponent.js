@@ -74,7 +74,6 @@ export default class WorkingComponent extends Component {
           titleColor={Colors.white}
           color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
-          iconRight={Images.iconTabMenu}
           iconLeftColor={Colors.black}
           onClickLeft={() => {
             this.props.navigation.goBack();

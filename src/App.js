@@ -9,7 +9,7 @@ import SplashScreen from 'react-native-splash-screen'
 const sagaMiddleware = createSagaMiddleware();
 let store = createStore(allReducers, applyMiddleware(sagaMiddleware));
 
-
+console.disableYellowBox =true;
 export default class App extends React.Component {
   componentDidMount(){
     SplashScreen.hide();

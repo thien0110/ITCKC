@@ -4,7 +4,7 @@ import {API_URL} from '../../../config';
 export function getLessonApi(input) {
   // console.warn(input)
   return fetch(
-    `${API_URL}chude/${input}/lop-hoc-phan`,
+    `${API_URL}baigiang/${input}/lop-hoc-phan`,
     {
       method: 'GET',
       headers: new Headers({

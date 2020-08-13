@@ -22,8 +22,8 @@ import AlertCustom from '../customs/AlertComponent';
 export default class ScoreTableComponent extends Component {
   componentDidMount() {
     this.props.getScoreTableAction(
-      // userProfile.mssv
-      '0306171004',
+      userProfile.mssv
+      // '0306171004',
     );
   }
   subjectScore(subjectName, score) {
