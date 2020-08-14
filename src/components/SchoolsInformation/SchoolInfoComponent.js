@@ -26,13 +26,15 @@ export default class SchoolInfoComponent extends Component {
   //   );
   // }
   showBody() {
-    const {data} = this.props;
+    const {data,getSchoolInfoAction, isFetching} = this.props;
     if (!objectIsNull(data)) {
       return (
             <View style={{flex: 1, paddingTop: 15}}>
               <FlatList
                 data={data}
                 keyExtractor={(item, index) => 'key' + index}
+                onRefresh={()=>getSchoolInfoAction()}
+                refreshing={isFetching}
                 renderItem={({item}) => {
                   return (
                     <ItemSlideShow

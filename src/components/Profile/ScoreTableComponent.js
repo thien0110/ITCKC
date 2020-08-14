@@ -22,7 +22,7 @@ import AlertCustom from '../customs/AlertComponent';
 export default class ScoreTableComponent extends Component {
   componentDidMount() {
     this.props.getScoreTableAction(
-      userProfile.mssv
+      userProfile.mssv,
       // '0306171004',
     );
   }
@@ -79,12 +79,14 @@ export default class ScoreTableComponent extends Component {
     );
   }
   showSubjectScore() {
-    const {data} = this.props;
+    const {data, isFetching, getScoreTableAction} = this.props;
     return (
       <FlatList
         data={data}
         // style={{paddingHorizontal: 15}}
         keyExtractor={(item, index) => 'key' + index}
+        onRefresh={() => getScoreTableAction( userProfile.mssv)}
+        refreshing={isFetching}
         renderItem={({item}) => {
           return this.subjectScore(item.tenMonHoc, item.diemsinhvien);
         }}></FlatList>
@@ -135,7 +137,7 @@ export default class ScoreTableComponent extends Component {
         {message &&
           AlertCustom(true, message, () => {
             this.props.navigation.goBack();
-            this.props.formatData()
+            this.props.formatData();
           })}
       </View>
     );

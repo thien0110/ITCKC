@@ -13,13 +13,15 @@ export default class DepartmentInfoComponent extends Component {
     this.props.getDepartmentInfoAction();
   }
   showBody() {
-    const {data} = this.props;
+    const {data,getDepartmentInfoAction, isFetching} = this.props;
     if (data && data.length) {
       return (
         <View style={{flex: 1, paddingTop: 15}}>
           <FlatList
             data={data}
             keyExtractor={(item, index) => 'key' + index}
+            onRefresh={()=>getDepartmentInfoAction()}
+                refreshing={isFetching}
             renderItem={({item}) => {
               return (
                 <ItemSlideShow
