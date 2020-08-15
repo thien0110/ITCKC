@@ -10,7 +10,7 @@ export function getYourClassApi(input) {
       headers: new Headers({
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + 'token',
+        Authorization: 'Bearer ' + userProfile.token,
       }),
     },
   )
