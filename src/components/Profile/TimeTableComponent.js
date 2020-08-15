@@ -85,7 +85,7 @@ export default class TimeTableComponent extends Component {
   showDayOfWeek() {
     return (
       <View>
-      <Text style={{textAlign:'center', color:'#fff'}}>Hôm nay, ngày {d.getDate()} tháng {d.getMonth()} năm {d.getFullYear()}</Text>
+      <Text style={{textAlign:'center', color:'#fff'}}>Hôm nay, ngày {d.getDate()} tháng {d.getMonth()+1} năm {d.getFullYear()}</Text>
       <View style={styles.container}>
         {this.ShowItems('T2', () => this.setState({daysWeek: '2'}))}
         {this.ShowItems('T3', () => this.setState({daysWeek: '3'}))}

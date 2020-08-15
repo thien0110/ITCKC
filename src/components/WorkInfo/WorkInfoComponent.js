@@ -61,12 +61,7 @@ export default class WorkInfoComponent extends Component {
           title={'Thông tin việc làm'}
           titleColor={Colors.white}></HeaderNavigation>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          {/* <Text style={{fontWeight: 'bold', fontSize: 25, color: Colors.gray2}}>
-            {' '}
-            Chức năng đang phát triển!{' '}
-          </Text> */}
           {this.showBody()}
-          
         {isFetching && <Loading></Loading>}
         </View>
       </View>
