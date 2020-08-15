@@ -48,7 +48,7 @@ export default class SchoolInfoComponent extends Component {
               />
             </View>
       );
-    } else return <Text>Không kết nối được tới Server</Text>;
+    } 
   }
   render() {
     const {isFetching} = this.props;

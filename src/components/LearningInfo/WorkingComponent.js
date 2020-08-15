@@ -54,7 +54,14 @@ export default class WorkingComponent extends Component {
             }}></FlatList>
         </View>
       );
-    }
+    }else
+    return (
+      <View>
+        <Text style={{fontWeight: 'bold', fontSize: 15, color: Colors.gray2}}>
+          Chưa có bài tập mới....
+        </Text>
+      </View>
+    );
    
   }
   showBody() {

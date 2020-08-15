@@ -12,7 +12,12 @@ import HeaderNavigation from '../customs/HeaderNavigation';
 import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Board from '../customs/Board';
-import {objectIsNull, stringIsEmpty, arrayIsEmpty,SplitDate} from '../../res/Functions';
+import {
+  objectIsNull,
+  stringIsEmpty,
+  arrayIsEmpty,
+  SplitDate,
+} from '../../res/Functions';
 
 import Loading from '../customs/Loading';
 
@@ -32,14 +37,14 @@ export default class ThreadComponent extends Component {
             return (
               <View style={styles.viewStyle}>
                 <View style={{padding: 10, marginBottom: 0}}>
-                  <Text style={{fontSize: 18, marginLeft: 10}}>
+                  <Text style={{fontSize: 18, marginLeft: 10, fontWeight:'bold', color:Colors.gray2}}>
                     Tài liệu mới: {item.tieuDe}
                   </Text>
-                  <Text style={{fontSize: 15, marginLeft: 10}}>
-                    Đã đăng: {SplitDate(item.ngayTao) }
+                  <Text style={{fontSize: 15, marginLeft: 10, color:Colors.gray2}}>
+                    Đã đăng: {SplitDate(item.ngayTao)}
                   </Text>
-                  <Text style={{fontSize: 15, marginLeft: 10}}>
-                    Mô tả: {item.moTa }
+                  <Text style={{fontSize: 15, marginLeft: 10, color:Colors.gray2}}>
+                    Mô tả: {item.moTa}
                   </Text>
                   {/* <TextInput
                     style={{color: Colors.gray2, fontSize: 15, marginLeft: 10}}
@@ -49,7 +54,14 @@ export default class ThreadComponent extends Component {
             );
           }}></FlatList>
       );
-    }
+    } else
+      return (
+        <View>
+          <Text style={{fontWeight: 'bold', fontSize: 15, color: Colors.gray2}}>
+            Chưa có bài giảng mới....
+          </Text>
+        </View>
+      );
   }
   showBody() {
     const {item} = this.props.route.params;

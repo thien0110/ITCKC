@@ -31,7 +31,7 @@ export default class postDetail extends Component {
 
   render() {
     const {item} = this.props.route.params;
-     console.log(item)
+    //  console.log(item)
     return (
         <View style={{flex: 1}}>
           <HeaderNavigation
