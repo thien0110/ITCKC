@@ -1,12 +1,12 @@
 //Gọi API đăng nhập
 const messageError = 'Không thể kết nối tới server.';
-import {API_URL} from '../../../config';
+import {API_URL,userProfile} from '../../../config';
 export function getItCenterInfoApi(input) {
   return fetch(API_URL + 'cnttTinTuc/danhsachtintuc', {
     method: 'GET',
     headers: new Headers({
       'Content-Type': 'application/json',
-      // Authorization: 'Bearer ' + "token",
+        Authorization: 'Bearer ' + userProfile.token,
     }),
     // body: JSON.stringify({
     //   mssv: input.mssv,

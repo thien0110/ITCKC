@@ -1,6 +1,6 @@
 const messageError = 'Không thể kết nối tới server.';
 const fakeApi = false;
-import {API_URL} from '../../../config';
+import {API_URL,userProfile} from '../../../config';
 export function getLessonApi(input) {
   // console.warn(input)
   return fetch(
@@ -9,6 +9,7 @@ export function getLessonApi(input) {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userProfile.token,
       }),
     },
   )

@@ -1,7 +1,7 @@
 //Gọi API đăng nhập
 const messageError = 'Không thể kết nối tới server.';
 const fakeApi = false;
-import {API_URL} from '../../config';
+import {API_URL,userProfile} from '../../config';
 export function loginApi(input) {
   // console.warn('input', input)
   if (fakeApi) {

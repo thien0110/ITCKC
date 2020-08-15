@@ -1,11 +1,11 @@
 const messageError = 'Không thể kết nối tới server.';
-import {API_URL} from '../../config';
+import {API_URL,userProfile} from '../../config';
 export function menuApi(input) {
   return fetch(API_URL + 'cntt/baivietquantrong', {
     method: 'GET',
     headers: new Headers({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + 'token',
+      Authorization: 'Bearer ' + userProfile.token,
     }),
    
   })
@@ -24,6 +24,7 @@ export function hotPostsItApi(input) {
     method: 'GET',
     headers: new Headers({
       'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + userProfile.token,
     }),
   })
     .then((response) => response.json())
