@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View,FlatList} from 'react-native';
+import {Text, View,FlatList, SafeAreaView} from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 
 import Colors from '../../res/Colors';
@@ -47,7 +47,7 @@ export default class AlumniComponent extends Component {
   render() {
     const {isFetching} =this.props;
     return (
-      <View style={{flex: 1}}>
+      <SafeAreaView style={{flex: 1}}>
         <HeaderNavigation
           iconLeft={Images.iconBack}
           color={Colors.backgroundBlue}
@@ -60,7 +60,7 @@ export default class AlumniComponent extends Component {
           {this.showBody()}
           {isFetching && <Loading></Loading>}
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }

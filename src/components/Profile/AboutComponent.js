@@ -5,7 +5,7 @@ import {
   Image,
   ScrollView,
   StyleSheet,
-  Dimensions,
+  Dimensions,SafeAreaView
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 
@@ -16,7 +16,7 @@ const window = Dimensions.get('window');
 export default class AboutComponent extends Component {
   render() {
     return (
-      <View style={styles.aboutContainer}>
+      <SafeAreaView style={styles.aboutContainer}>
         <HeaderNavigation
           title={'Thông tin ứng dụng'}
           titleColor={Colors.blue}
@@ -57,7 +57,7 @@ export default class AboutComponent extends Component {
             </View>
           </View>
         </ScrollView>
-      </View>
+      </SafeAreaView>
     );
   }
 }

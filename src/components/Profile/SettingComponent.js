@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Modal,
   Dimensions,
-  TextInput,
+  TextInput,SafeAreaView
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import {Switch} from 'react-native-switch';
@@ -214,7 +214,7 @@ export default class SettingComponent extends Component {
   render() {
     const {noti,mode,eng}=this.state
     return (
-      <View style={{flex: 1, backgroundColor: Colors.background}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
           title={'Cài đặt'}
           titleColor={Colors.white}
@@ -233,7 +233,7 @@ export default class SettingComponent extends Component {
           })} */}
         </View>
         {/* {this.showModel()} */}
-      </View>
+      </SafeAreaView>
     );
   }
 }

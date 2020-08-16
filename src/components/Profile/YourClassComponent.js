@@ -5,7 +5,7 @@ import {
   TextInput,
   StyleSheet,
   Dimensions,
-  FlatList,
+  FlatList,SafeAreaView
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import {objectIsNull, arrayIsEmpty} from '../../res/Functions';
@@ -48,7 +48,7 @@ export default class YourClassComponent extends Component {
     const {isFetching, data, message} = this.props;
     // console.warn(data)
     return (
-      <View
+      <SafeAreaView
         style={{
           flexDirection: 'column',
           backgroundColor: Colors.background,
@@ -69,7 +69,7 @@ export default class YourClassComponent extends Component {
             this.props.navigation.goBack();
             this.props.formatData();
           })}
-      </View>
+      </SafeAreaView>
     );
   }
 }
