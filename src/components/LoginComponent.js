@@ -149,6 +149,7 @@ export default class LoginComponent extends Component {
           backgroundColor: Colors.gray,
           paddingHorizontal: 10,
           flexDirection: 'row',
+          paddingVertical:6,
         }}
         keyboardType={keyboardType}
         placeholder={placeholder}
@@ -349,7 +350,7 @@ export default class LoginComponent extends Component {
                     this.setState({rememberMe: !rememberMe});
                   }}
                 />
-                <Text style={{alignSelf: 'center', color: Colors.grayStrong}}>
+                <Text style={{alignSelf: 'center', color: Colors.grayStrong,marginLeft:5}}>
                   Ghi nhớ tài khoản
                 </Text>
               </View>
@@ -392,7 +393,7 @@ export default class LoginComponent extends Component {
     } = this.props;
     // console.warn(message)
     return (
-      <SafeAreaView style={{flex:1}}>
+      <View style={{flex:1}}>
       <ImageBackground
         source={Images.bg}
         style={{flex:1}}>
@@ -410,7 +411,7 @@ export default class LoginComponent extends Component {
         {isFetching && <Loading></Loading>}
         {this.showModel()}
       </ImageBackground>
-      </SafeAreaView>
+      </View>
     );
   }
 }
