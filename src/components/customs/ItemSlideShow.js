@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image, Dimensions, TouchableOpacity} from 'react-native';
-
+import {URL} from '../../config'
 const {width, height} = Dimensions.get('window');
 
 const SlideShowItem = ({item, onPress}) => {
@@ -13,7 +13,7 @@ const SlideShowItem = ({item, onPress}) => {
           {item.moTaNgan}
         </Text>
       </View>
-      <Image style={styles.image} source={{uri:'http://10.0.3.2:4100/'+item.anhBia}} />
+      <Image style={styles.image} source={{uri:URL+item.anhBia}} />
     </View></TouchableOpacity>
     
   );

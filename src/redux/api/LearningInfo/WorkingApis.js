@@ -1,6 +1,6 @@
 const messageError = 'Không thể kết nối tới server.';
 const fakeApi = false;
-import {API_URL} from '../../../config';
+import {API_URL,userProfile} from '../../../config';
 export function getWorkingApi(input) {
   return fetch(
     `${API_URL}baitap/${input}/lop-hoc-phan`,
@@ -8,6 +8,7 @@ export function getWorkingApi(input) {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userProfile.token,
       }),
     },
   )

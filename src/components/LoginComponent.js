@@ -32,7 +32,7 @@ export default class LoginComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '0306171413',
+      username: '0306171311',
       password: '123456',
 
       rememberMe: false,

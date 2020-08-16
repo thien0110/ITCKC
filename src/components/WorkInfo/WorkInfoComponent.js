@@ -15,7 +15,7 @@ export default class WorkInfoComponent extends Component {
     this.props.getItCenterInfoAction();
   }
   showBody() {
-    const {data} = this.props;
+    const {data,getItCenterInfoAction, isFetching} = this.props;
     let dataList =[];
     if(!arrayIsEmpty(data)){
 
@@ -31,6 +31,8 @@ export default class WorkInfoComponent extends Component {
           <FlatList
             data={dataList}
             keyExtractor={(item, index) => 'key' + index}
+            onRefresh={()=>getItCenterInfoAction()}
+                refreshing={isFetching}
             renderItem={({item}) => {
               return (
                 <ItemSlideShow

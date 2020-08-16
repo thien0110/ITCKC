@@ -16,13 +16,16 @@ import Images from '../../res/Images';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 const window = Dimensions.get('window');
 
+
 export default class SettingComponent extends Component {
   state = {
     modalVisible: false,
     oldPass: '',
     newPass: '',
     confirmNewPass: '',
-    status:false
+    noti:  false,
+    mode:false,
+    eng:false,
   };
   onPressChangePass() {
     const {modalVisible, oldPass, newPass, confirmNewPass} = this.state;
@@ -33,6 +36,7 @@ export default class SettingComponent extends Component {
     };
     this.setModalVisible(!modalVisible);
   }
+  
   showPassInput(placeholder, value, onChangeText) {
     return (
       <TextInput
@@ -151,9 +155,9 @@ export default class SettingComponent extends Component {
   setModalVisible = (visible) => {
     this.setState({modalVisible: visible});
   };
-  showItem(icon, title, onPress) {
+  showItem(icon, title, switchStatus,onChangeSwitch) {
     return (
-      <TouchableOpacity onPress={onPress}>
+      <TouchableOpacity >
         <View
           style={{
             flexDirection: 'row',
@@ -179,37 +183,36 @@ export default class SettingComponent extends Component {
             <Text style={{fontSize: 20, color: Colors.gray2}}>{title}</Text>
           </View>
           <Switch
-              value={this.state.status}
-              onValueChange={() =>
-                this.setState({status:!this.state.status})
-              }
-              //disabled={true}
-              circleSize={25}
-              //barHeight={25}
-              circleBorderWidth={0}
-              backgroundActive={'green'}
-              backgroundInactive={'gray'}
-              // circleActiveColor={'#30a566'}
-              // circleInActiveColor={'#000000'}
-              changeValueImmediately={true}
-              changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
-              innerCircleStyle={{
-                alignItems: 'center',
-                justifyContent: 'center',
-              }} // style for inner animated circle for what you (may) be rendering inside the circle
-              // outerCircleStyle={{}} // style for outer animated circle
-              renderActiveText={false}
-              renderInActiveText={false}
-              switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
-              switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
-              switchWidthMultiplier={2} // multipled by the `circleSize` prop to calculate total width of the Switch
-              //switchBorderRadius={10} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
-            />
+            value={switchStatus}
+            onValueChange={onChangeSwitch}
+            //disabled={true}
+            circleSize={25}
+            //barHeight={25}
+            circleBorderWidth={0}
+            backgroundActive={'green'}
+            backgroundInactive={'gray'}
+            // circleActiveColor={'#30a566'}
+            // circleInActiveColor={'#000000'}
+            changeValueImmediately={true}
+            changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
+            innerCircleStyle={{
+              alignItems: 'center',
+              justifyContent: 'center',
+            }} // style for inner animated circle for what you (may) be rendering inside the circle
+            // outerCircleStyle={{}} // style for outer animated circle
+            renderActiveText={false}
+            renderInActiveText={false}
+            switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
+            switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
+            switchWidthMultiplier={2} // multipled by the `circleSize` prop to calculate total width of the Switch
+            //switchBorderRadius={10} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+          />
         </View>
       </TouchableOpacity>
     );
   }
   render() {
+    const {noti,mode,eng}=this.state
     return (
       <View style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
@@ -222,9 +225,9 @@ export default class SettingComponent extends Component {
             this.props.navigation.goBack();
           }}></HeaderNavigation>
         <View style={{flex: 1, padding: 15}}>
-          {this.showItem(Images.iconBell, 'Thông báo', () => {})}
-          {this.showItem(Images.moon, 'Chế độ đêm', () => {})}
-          {this.showItem(Images.translation, 'Ngôn ngữ', () => {})}
+          {this.showItem(Images.iconBell, 'Thông báo', noti,()=>{this.setState({noti:!noti})})}
+          {this.showItem(Images.moon, 'Chế độ đêm',mode,()=>{this.setState({mode:!mode})})}
+          {this.showItem(Images.translation, 'Tiếng Anh',eng,()=>{this.setState({eng:!eng})})}
           {/* {this.showItem(Images.password, 'Đổi mật khẩu', () => {
             this.setModalVisible(true);
           })} */}

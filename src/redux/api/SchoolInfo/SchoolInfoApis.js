@@ -1,6 +1,6 @@
 //Gọi API đăng nhập
 const messageError = 'Không thể kết nối tới server.';
-import {API_URL} from '../../../config';
+import {API_URL,userProfile} from '../../../config';
 export function getSchoolInfoApi(input) {
  
     return fetch(API_URL+'cnttTinTuc/danhsachtintuckhac', {

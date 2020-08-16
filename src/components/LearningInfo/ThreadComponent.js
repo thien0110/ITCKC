@@ -12,7 +12,12 @@ import HeaderNavigation from '../customs/HeaderNavigation';
 import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Board from '../customs/Board';
-import {objectIsNull, stringIsEmpty, arrayIsEmpty,SplitDate} from '../../res/Functions';
+import {
+  objectIsNull,
+  stringIsEmpty,
+  arrayIsEmpty,
+  SplitDate,
+} from '../../res/Functions';
 
 import Loading from '../customs/Loading';
 
@@ -32,24 +37,35 @@ export default class ThreadComponent extends Component {
             return (
               <View style={styles.viewStyle}>
                 <View style={{padding: 10, marginBottom: 0}}>
-                  <Text style={{fontSize: 18, marginLeft: 10}}>
-                    Tài liệu mới: {item.tenChuDe}
+                  <Text style={{fontSize: 18, marginLeft: 10, fontWeight:'bold', color:Colors.gray2}}>
+                    Tài liệu mới: {item.tieuDe}
                   </Text>
-                  <Text style={{fontSize: 15, marginLeft: 10}}>
-                    Đã đăng: {SplitDate(item.ngayTao) }
+                  <Text style={{fontSize: 15, marginLeft: 10, color:Colors.gray2}}>
+                    Đã đăng: {SplitDate(item.ngayTao)}
                   </Text>
-                  <TextInput
+                  <Text style={{fontSize: 15, marginLeft: 10, color:Colors.gray2}}>
+                    Mô tả: {item.moTa}
+                  </Text>
+                  {/* <TextInput
                     style={{color: Colors.gray2, fontSize: 15, marginLeft: 10}}
-                    placeholder="Thêm nhận xét..."></TextInput>
+                    placeholder="Thêm nhận xét..."></TextInput> */}
                 </View>
               </View>
             );
           }}></FlatList>
       );
-    }
+    } else
+      return (
+        <View>
+          <Text style={{fontWeight: 'bold', fontSize: 15, color: Colors.gray2}}>
+            Chưa có bài giảng mới....
+          </Text>
+        </View>
+      );
   }
   showBody() {
     const {item} = this.props.route.params;
+    // console.log(item)
     return (
       <ScrollView style={{flex: 1, padding: 10}}>
         <Board
@@ -64,7 +80,7 @@ export default class ThreadComponent extends Component {
               flexDirection: 'row',
               justifyContent: 'flex-start',
             }}>
-            <Image
+            {/* <Image
               source={Images.iconPersonProfile}
               style={{
                 margin: 10,
@@ -79,7 +95,7 @@ export default class ThreadComponent extends Component {
                 marginLeft: 10,
                 width: '60%',
               }}
-              placeholder="Chia sẻ với lớp học..."></TextInput>
+              placeholder="Chia sẻ với lớp học..."></TextInput> */}
           </View>
         </View>
         {this.shareBlock()}
@@ -100,7 +116,6 @@ export default class ThreadComponent extends Component {
           titleColor={Colors.white}
           color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
-          iconRight={Images.iconTabMenu}
           iconLeftColor={Colors.black}
           onClickLeft={() => {
             this.props.navigation.goBack();
@@ -121,7 +136,7 @@ const styles = StyleSheet.create({
   viewStyle: {
     marginBottom: 10,
     borderRadius: 10,
-    backgroundColor: '#eee',
+    backgroundColor: '#fff',
     // shadowColor: '#000',
     // shadowOpacity: 0.3,
     // shadowRadius: 5,

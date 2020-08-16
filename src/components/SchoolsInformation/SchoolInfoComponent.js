@@ -26,13 +26,15 @@ export default class SchoolInfoComponent extends Component {
   //   );
   // }
   showBody() {
-    const {data} = this.props;
+    const {data,getSchoolInfoAction, isFetching} = this.props;
     if (!objectIsNull(data)) {
       return (
             <View style={{flex: 1, paddingTop: 15}}>
               <FlatList
                 data={data}
                 keyExtractor={(item, index) => 'key' + index}
+                onRefresh={()=>getSchoolInfoAction()}
+                refreshing={isFetching}
                 renderItem={({item}) => {
                   return (
                     <ItemSlideShow
@@ -46,7 +48,7 @@ export default class SchoolInfoComponent extends Component {
               />
             </View>
       );
-    } else return <Text>Không kết nối được tới Server</Text>;
+    } 
   }
   render() {
     const {isFetching} = this.props;

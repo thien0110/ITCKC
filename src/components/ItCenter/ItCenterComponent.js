@@ -13,7 +13,7 @@ export default class ItCenterComponent extends Component {
     this.props.getItCenterInfoAction();
   }
   showBody() {
-    const {data} = this.props;
+    const {data,getItCenterInfoAction, isFetching} = this.props;
     // console.warn('data',data)
     if (data && data.length) {
       return (
@@ -21,6 +21,8 @@ export default class ItCenterComponent extends Component {
           <FlatList
             data={data}
             keyExtractor={(item, index) => 'key' + index}
+            onRefresh={()=>getItCenterInfoAction()}
+                refreshing={isFetching}
             renderItem={({item}) => {
               return (
                 <ItemSlideShow
