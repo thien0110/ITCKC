@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, Image, ScrollView,FlatList} from 'react-native';
+import {Text, View, Image, ScrollView,FlatList,SafeAreaView} from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import Colors from '../../res/Colors';
 import Images from '../../res/Images';
@@ -53,7 +53,7 @@ export default class SchoolInfoComponent extends Component {
   render() {
     const {isFetching} = this.props;
     return (
-      <View style={{flex: 1, alignItems: 'center'}}>
+      <SafeAreaView style={{flex: 1, alignItems: 'center'}}>
         <HeaderNavigation
           title={'Thông tin nhà trường'}
           titleColor={Colors.white}
@@ -65,7 +65,7 @@ export default class SchoolInfoComponent extends Component {
           }}></HeaderNavigation>
         {this.showBody()}
         {isFetching && <Loading></Loading>}
-      </View>
+      </SafeAreaView>
     );
   }
 }

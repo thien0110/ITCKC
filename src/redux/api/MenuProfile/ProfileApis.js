@@ -11,7 +11,7 @@ export function editProfileApi(input) {
       }),
       body: JSON.stringify({
         tokens: '12341234',
-        role: 'sv',
+        role: 'SV',
         sdt: input.newPhone,
         maSinhVien:input.maSinhVien,
       }),

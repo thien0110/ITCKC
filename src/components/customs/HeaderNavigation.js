@@ -87,7 +87,7 @@ export default class HeaderNavigation extends React.Component {
               style={{
                 backgroundColor: Colors.gray,
                 paddingHorizontal: 10,
-                paddingVertical: 0,
+                paddingVertical: 6,
                 borderRadius: 8,
                 width: (windowWidth * 2) / 3,
                 alignItems: 'center',

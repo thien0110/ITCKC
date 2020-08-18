@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, TextInput, FlatList, StyleSheet, Dimensions} from 'react-native';
+import {Text, View, TextInput, FlatList, StyleSheet, Dimensions,SafeAreaView} from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import Images from '../../res/Images';
 
@@ -13,7 +13,7 @@ export default class OthersSubjectComponent extends Component {
           titleHeader=item.name
         } 
         return (
-          <View style={{flex: 1, alignItems: 'center'}}>
+          <SafeAreaView style={{flex: 1, alignItems: 'center'}}>
             <HeaderNavigation
               title={titleHeader}
               titleColor={Colors.white}
@@ -28,7 +28,7 @@ export default class OthersSubjectComponent extends Component {
               {' '}
               Chức năng đang phát triển!{' '}
             </Text>
-          </View>
+          </SafeAreaView>
         );
       }
 }

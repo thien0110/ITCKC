@@ -33,7 +33,7 @@ export default class postDetail extends Component {
     const {item} = this.props.route.params;
     //  console.log(item)
     return (
-        <View style={{flex: 1}}>
+        <SafeAreaView style={{flex: 1}}>
           <HeaderNavigation
             title={'Bài viết'}
             titleColor={Colors.white}
@@ -65,7 +65,7 @@ export default class postDetail extends Component {
               allowsFullscreenVideo={true}
             />
           </View>
-        </View>
+        </SafeAreaView>
     );
   }
 }

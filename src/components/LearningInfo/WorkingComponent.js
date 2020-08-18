@@ -6,7 +6,7 @@ import {
   FlatList,
   StyleSheet,
   Dimensions,
-  ScrollView,
+  ScrollView,SafeAreaView
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import Images from '../../res/Images';
@@ -75,7 +75,7 @@ export default class WorkingComponent extends Component {
       titleHeader = item.name;
     }
     return (
-      <View style={{flex: 1, alignItems: 'center'}}>
+      <SafeAreaView style={{flex: 1, alignItems: 'center'}}>
         <HeaderNavigation
           title={titleHeader}
           titleColor={Colors.white}
@@ -87,7 +87,7 @@ export default class WorkingComponent extends Component {
           }}></HeaderNavigation>
         <View style={{padding: 15, overflow: 'hidden'}}>{this.showBody()}</View>
         {isFetching && <Loading></Loading>}
-      </View>
+      </SafeAreaView>
     );
   }
 }

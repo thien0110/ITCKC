@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Modal,
   Dimensions,
-  TextInput,
+  TextInput,SafeAreaView
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 
@@ -119,7 +119,7 @@ export default class ScoreTableComponent extends Component {
   render() {
     const {isFetching, message} = this.props;
     return (
-      <View style={{flex: 1, backgroundColor: Colors.backgroundBlue}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: Colors.backgroundBlue}}>
         <HeaderNavigation
           title={'Bảng điểm'}
           titleColor={Colors.white}
@@ -139,7 +139,7 @@ export default class ScoreTableComponent extends Component {
             this.props.navigation.goBack();
             this.props.formatData();
           })}
-      </View>
+      </SafeAreaView>
     );
   }
 }

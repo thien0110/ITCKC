@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
-  Modal,
+  Modal,SafeAreaView
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import {objectIsNull, arrayIsEmpty} from '../../res/Functions';
@@ -320,7 +320,7 @@ export default class ProfileComponent extends Component {
     const {isFetching, data, message, formatData} = this.props;
     const {showAlert, messageAlert} = this.state;
     return (
-      <View style={{flex: 1, backgroundColor: Colors.background}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: Colors.background}}>
         <HeaderNavigation
           color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
@@ -352,7 +352,7 @@ export default class ProfileComponent extends Component {
           AlertCustom(showAlert, messageAlert, () => {
             this.onChangeStateAlert(false, '');
           })} */}
-      </View>
+      </SafeAreaView>
     );
   }
 }
