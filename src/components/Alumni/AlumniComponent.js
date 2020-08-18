@@ -14,7 +14,7 @@ export default class AlumniComponent extends Component {
     this.props.getItCenterInfoAction();
   }
   showBody() {
-    const {data} = this.props;
+    const {data,isFetching,getItCenterInfoAction} = this.props;
     let dataList = [];
     if (!arrayIsEmpty(data)) {
       for (let i = 0; i < data.length; i++) {
@@ -28,6 +28,8 @@ export default class AlumniComponent extends Component {
           <FlatList
             data={dataList}
             keyExtractor={(item, index) => 'key' + index}
+            onRefresh={()=>getItCenterInfoAction()}
+                refreshing={isFetching}
             renderItem={({item}) => {
               return (
                 <ItemSlideShow
