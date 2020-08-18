@@ -34,6 +34,10 @@ export const SplitDate = (date) => { //Change ngày giờ datetime sang ngày th
   var newDate =date.split('T',8)
   return newDate[0];
 };
+export const SplitTime = (date) => { //Change ngày giờ datetime sang ngày tháng năm bt
+  var newDate =date.substr(-13, 8);
+  return newDate;
+};
 export function objectIsEqual(objA, objB) { //So sánh 2 obj
   // Tạo các mảng chứa tên các property
   var aProps = Object.getOwnPropertyNames(objA);

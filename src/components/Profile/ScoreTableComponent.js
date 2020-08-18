@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   Modal,
   Dimensions,
-  TextInput,SafeAreaView
+  TextInput,
+  SafeAreaView,
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 
@@ -27,16 +28,15 @@ import {
 } from '../../res/Functions';
 export default class ScoreTableComponent extends Component {
   constructor(props) {
-    super(props)
-  
+    super(props);
+
     this.state = {
-       
-    Semestery: '1',
-    Name: '1',
-    subjects: [{}],
-    }
+      Semestery: '1',
+      Name: '1',
+      subjects: [{}],
+    };
   }
-  
+
   componentDidMount() {
     this.props.getScoreTableAction(
       userProfile.mssv,
@@ -97,26 +97,23 @@ export default class ScoreTableComponent extends Component {
   }
   showSubjectScore() {
     const {data, isFetching, getScoreTableAction} = this.props;
+    // console.warn(this.state.Name)
     let finalData = [];
     if (!arrayIsEmpty(data)) {
-      if (this.state.Name == 1) {
-        finalData = data.sort(sortArrayObject('diemsinhvien'));
-        finalData = data.filter(
-          (item) => item.hocKi == this.state.Semestery,
-        );
-      } else {
-        finalData = data.sort(sortArrayObject('diemsinhvien', 'desc'));
-        finalData = data.filter(
-          (item) => item.hocKi == this.state.Semestery,
-        );
-      }
+      // if (this.state.Name == 1) {
+      //   finalData = data.sort(sortArrayObject('diemsinhvien'));
+        finalData = data.filter((item) => item.hocKi == this.state.Semestery);
+      // } else {
+      //   finalData = data.sort(sortArrayObject('diemsinhvien', 'desc'));
+      //   finalData = data.filter((item) => item.hocKi == this.state.Semestery);
+      // }
     }
     return (
       <FlatList
         data={finalData}
         // style={{paddingHorizontal: 15}}
         keyExtractor={(item, index) => 'key' + index}
-        onRefresh={() => getScoreTableAction( userProfile.mssv)}
+        onRefresh={() => getScoreTableAction(userProfile.mssv)}
         refreshing={isFetching}
         renderItem={({item}) => {
           return this.subjectScore(item.tenMonHoc, item.diemsinhvien);
@@ -132,7 +129,8 @@ export default class ScoreTableComponent extends Component {
           justifyContent: 'space-between',
           flexDirection: 'row',
         }}>
-        <Text style={{fontSize: 18, fontWeight: 'bold', color: Colors.grayStrong}}>
+        <Text
+          style={{fontSize: 18, fontWeight: 'bold', color: Colors.grayStrong}}>
           {subjectName}
         </Text>
         <Text
@@ -152,7 +150,7 @@ export default class ScoreTableComponent extends Component {
       <View>
         <Picker
           selectedValue={this.state.Semestery}
-          style={{width: 150, fontSize: 15, }}
+          style={{width: 150, fontSize: 15}}
           mode={'dialog'}
           onValueChange={(itemValue, itemIndex) => {
             this.setState({Semestery: itemValue});
@@ -191,15 +189,15 @@ export default class ScoreTableComponent extends Component {
         style={{
           alignItems: 'center',
           // height:windowHeight/12,
-          paddingHorizontal: 15,
-          width:'100%',
+          // paddingHorizontal: 15,
+          width: '100%',
           // flexWrap: 'wrap',
           flexDirection: 'row',
-          justifyContent:'space-between',
+          justifyContent: 'flex-end',
           // backgroundColor:Colors.white,
         }}>
         {/* <Text>Sắp xếp theo: </Text> */}
-        {this.NameSort()}
+        {/* {this.NameSort()} */}
         {this.Semester()}
       </View>
     );
@@ -218,7 +216,7 @@ export default class ScoreTableComponent extends Component {
             this.props.navigation.goBack();
           }}></HeaderNavigation>
         <View style={{flex: 1, paddingHorizontal: 10, alignItems: 'center'}}>
-        {this.ShowSort()}
+          {this.ShowSort()}
           {this.titleBoard('Môn học', 'Điểm')}
           {this.showSubjectScore()}
         </View>

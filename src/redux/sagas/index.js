@@ -1,6 +1,6 @@
 import {all} from 'redux-saga/effects';
 import {watchLogin, watchForgetPassword} from './LoginSagas';
-import {watchMenu, watchHotPostsIt} from './MenuSagas';
+import {watchMenu, watchHotPostsIt, watchNoti} from './MenuSagas';
 import {watchGetSubject,} from './LearningInfo/LearningInfoSagas';
 import {watchGetLesson,} from './LearningInfo/LessonSagas';
 import {watchGetWorking} from './LearningInfo/WorkingSagas';
@@ -33,6 +33,6 @@ export default function* allSagas() {
     watchGetYourClass(),
     watchGetScoreTable(),
     watchChangePassword(),
-    watchGetLesson(),watchGetWorking(),
+    watchGetLesson(),watchGetWorking(),watchNoti()
   ]);
 }

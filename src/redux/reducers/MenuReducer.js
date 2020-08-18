@@ -5,12 +5,16 @@ import {
   GET_HOT_POST_IT_SUCCESS,
   GET_HOT_POST_IT_FAIL,
   GET_HOT_POST_IT,
+  GET_NOTI_SUCCESS,
+  GET_NOTI_FAIL,
+  GET_NOTI,
 } from '../actions/ActionTypes';
 
 const initialState = {
   isFetching: false,
   data: null,
   dataHotKhoa: null,
+  dataNoti: null,
   message: null,
 };
 const menuReducers = (state = initialState, action) => {
@@ -35,7 +39,18 @@ const menuReducers = (state = initialState, action) => {
         dataHotKhoa: action.data,
         message: action.message,
       };
-    case GET_HOT_POST_IT:
+    case GET_HOT_POST_IT_FAIL:
+      return {...state, isFetching: false, message: action.error};
+    case GET_NOTI:
+      return {...state, isFetching: true};
+    case GET_NOTI_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        dataNoti: action.data,
+        message: action.message,
+      };
+    case GET_NOTI_FAIL:
       return {...state, isFetching: false, message: action.error};
     default:
       return state;

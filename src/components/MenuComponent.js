@@ -17,6 +17,7 @@ import Loading from './customs/Loading';
 import {FlatListHorizontal} from './customs/FlatListHorizontal';
 import Block from './customs/Block';
 import {arrayIsEmpty} from '../res/Functions';
+import {Avatar, Badge, withBadge} from 'react-native-elements';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -25,6 +26,7 @@ export default class MenuComponent extends Component {
   componentDidMount() {
     this.props.getHotPostItAction();
     this.props.getMenuNewsAction();
+    this.props.getNotiAction();
   }
   showNews(heading, data) {
     return (
@@ -43,8 +45,8 @@ export default class MenuComponent extends Component {
   showBody() {
     const {dataHotKhoa, data} = this.props;
     return (
-      <View style={{flex: 1, flexDirection: 'column', }}>
-        <ScrollView > 
+      <View style={{flex: 1, flexDirection: 'column'}}>
+        <ScrollView>
           <View
             style={{
               flexWrap: 'wrap',
@@ -111,27 +113,29 @@ export default class MenuComponent extends Component {
   render() {
     // const {itemId} = this.props.route.params;
     // console.warn(itemId, 'menu');
-    const {isFetching, data} = this.props;
+    const {isFetching, data, dataNoti} = this.props;
     return (
-        <SafeAreaView
-          style={{
-            flexDirection: 'column',
-            backgroundColor: Colors.background,
-            flex: 1,
-          }}>
-          <HeaderNavigation
-            iconRight={Images.iconBell}
-            haveSearch={true}
-            onClickSearch={() => {
-              this.props.navigation.navigate('Search');
-            }}
-            color={Colors.backgroundBlue}
-            onClickRight={() => {
-              this.props.navigation.navigate('Noti');
-            }}></HeaderNavigation>
-          {this.showBody()}
-          {isFetching && <Loading></Loading>}
-        </SafeAreaView>
+      <SafeAreaView
+        style={{
+          flexDirection: 'column',
+          backgroundColor: Colors.background,
+          flex: 1,
+        }}>
+        <HeaderNavigation
+          iconRight={Images.iconBell}
+          isNoti={true}
+          haveSearch={true}
+          onClickSearch={() => {
+            this.props.navigation.navigate('Search');
+          }}
+          color={Colors.backgroundBlue}
+          badgeValue={!arrayIsEmpty(dataNoti) && dataNoti.length}
+          onClickRight={() => {
+            this.props.navigation.navigate('Noti', {dataNoti});
+          }}></HeaderNavigation>
+        {this.showBody()}
+        {isFetching && <Loading></Loading>}
+      </SafeAreaView>
     );
   }
 }

@@ -7,19 +7,18 @@ import {
   Image,
   TouchableOpacity,
   SafeAreaView,
-  FlatList
+  FlatList,
 } from 'react-native';
 import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
 import Images from '../res/Images';
-import {arrayIsEmpty} from '../res/Functions';
-import Loading from '../components/customs/Loading'
+import {arrayIsEmpty, SplitDate, SplitTime} from '../res/Functions';
+import Loading from '../components/customs/Loading';
+import { AsyncStorage } from 'react-native';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const window = Dimensions.get('window');
 export default class NotiComponent extends Component {
   componentDidMount() {
-    this.props.getItCenterInfoAction();
   }
   showNoti(type, title, des, time, icon) {
     return (
@@ -27,7 +26,7 @@ export default class NotiComponent extends Component {
         <View
           style={{
             width: '100%',
-            height: windowHeight / 6,
+            height: window.height / 6,
             backgroundColor: Colors.white,
             borderRadius: 10,
             marginBottom: 10,
@@ -62,7 +61,7 @@ export default class NotiComponent extends Component {
               style={{
                 color: Colors.gray2,
                 marginLeft: 5,
-                fontSize: windowHeight / 45,
+                fontSize: window.height / 45,
               }}>
               {type}
             </Text>
@@ -73,41 +72,40 @@ export default class NotiComponent extends Component {
               position: 'absolute',
               right: 10,
               top: 10,
-              fontSize: windowHeight / 50,
-            }}>
-            {time}
+              fontSize: window.height / 50,
+            }}> 
+            {SplitDate(time)+"  "+SplitTime(time)}
           </Text>
-          <Text style={{fontWeight: 'bold', fontSize: windowHeight / 50}}>
+          <Text style={{fontWeight: 'bold', fontSize: window.height / 50}}>
             {title}
           </Text>
-          <Text style={{fontSize: windowHeight / 55}}>{des}</Text>
+          <Text style={{fontSize: window.height / 55}} numberOfLines={2}>{des}</Text>
         </View>
       </TouchableOpacity>
     );
   }
   showBody() {
-    const {data} = this.props;
-    if (!arrayIsEmpty(data)) {
-      let dataList = data.filter((item) => item.loaiBaiViet === 'LBV00');
-      if (data && data.length) {
+    const {dataNoti} = this.props.route.params;
+    // console.warn(dataNoti)
+    if (!arrayIsEmpty(dataNoti)) {
         return (
           <View style={{flex: 1, paddingHorizontal: 10, paddingTop: 10}}>
             <FlatList
-              data={dataList}
+              data={dataNoti}
               keyExtractor={(item, index) => 'key' + index}
               renderItem={({item}) => {
                 return this.showNoti(
-                  'THONG BAO',
+                  'THÔNG BÁO',
                   item.tieuDe,
                   item.moTaNgan,
-                  '',
+                  item.thoiGianDangBai,
                   Images.iconIt,
                 );
               }}
             />
           </View>
         );
-      }
+      
     }
     // return (
     //   <View style={{flex: 1, paddingHorizontal: 10, paddingTop: 10}}>
@@ -178,6 +176,9 @@ export default class NotiComponent extends Component {
           iconLeftColor={Colors.black}
           onClickLeft={() => {
             this.props.navigation.goBack();
+          }}
+          iconRight={Images.iconSeen}
+          onClickRight={() => {
           }}></HeaderNavigation>
         {this.showBody()}
         {isFetching && <Loading></Loading>}
