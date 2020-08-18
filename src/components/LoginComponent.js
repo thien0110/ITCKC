@@ -32,8 +32,8 @@ export default class LoginComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '0306171311',
-      password: '123456',
+      username: '',
+      password: '',
 
       rememberMe: false,
       showAlert: false,
@@ -42,7 +42,7 @@ export default class LoginComponent extends Component {
       showPass: true,
 
       modalVisible: false,
-      email: '0306171301@caothang.edu.vn',
+      email: '',
     };
   }
   changeState(key, value) {
