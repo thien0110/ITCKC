@@ -16,7 +16,7 @@ import Images from '../res/Images';
 import {arrayIsEmpty, SplitDate, SplitTime} from '../res/Functions';
 import Loading from '../components/customs/Loading';
 import AsyncStorage from '@react-native-community/async-storage';
-import {URL} from '../config'
+import {URL} from '../config';
 
 import socketIO from 'socket.io-client';
 
@@ -27,12 +27,11 @@ export default class NotiComponent extends Component {
 
     this.state = {
       notiState: [],
-      refresh:false
+      refresh: false,
     };
   }
 
   componentDidMount() {
-    
     this.props.getNotiAction();
     AsyncStorage.getItem('@seenKey').then((value) => {
       const seen = JSON.parse(value);
@@ -48,8 +47,8 @@ export default class NotiComponent extends Component {
     socket.connect();
     socket.on('ThongBaoKhanCap', () => {
       console.log('get to socket server');
-      
-    this.props.getNotiAction();
+
+      this.props.getNotiAction();
     });
   }
   async storeData(value) {
@@ -92,12 +91,11 @@ export default class NotiComponent extends Component {
         this.storeData(backToArray);
       } else {
         this.storeData([item.maBaiViet]);
-        
       }
-      if(arr === null){
+      if (arr === null) {
         const jsonValue = await AsyncStorage.getItem('@seenKey');
-        this.setState({notiState:JSON.parse(jsonValue)});
-      }else this.setState({notiState: arr});
+        this.setState({notiState: JSON.parse(jsonValue)});
+      } else this.setState({notiState: arr});
     } catch (e) {}
     this.props.navigation.navigate('PostDetail', {item: item});
   }
@@ -168,7 +166,9 @@ export default class NotiComponent extends Component {
             }}>
             {SplitDate(time) + '  ' + SplitTime(time)}
           </Text>
-          <Text style={{fontWeight: 'bold', fontSize: window.height / 50}} numberOfLines={1}>
+          <Text
+            style={{fontWeight: 'bold', fontSize: window.height / 50}}
+            numberOfLines={1}>
             {title}
           </Text>
           <Text style={{fontSize: window.height / 55}} numberOfLines={2}>
@@ -180,20 +180,19 @@ export default class NotiComponent extends Component {
   }
   showBody() {
     // const {dataNoti} = this.props.route.params;
-    const {dataNoti, isFetching, getNotiAction}= this.props;
-    
+    const {dataNoti, isFetching, getNotiAction} = this.props;
+
     // console.warn(dataNoti)
     if (!arrayIsEmpty(dataNoti)) {
-      const dataReverse= dataNoti.reverse()
+      const dataReverse = dataNoti.reverse();
 
       return (
         <View style={{flex: 1, paddingHorizontal: 10, paddingTop: 10}}>
           <FlatList
             data={dataReverse}
             keyExtractor={(item, index) => 'key' + index}
-            
-            onRefresh={()=>getNotiAction()}
-                refreshing={isFetching}
+            onRefresh={() => getNotiAction()}
+            refreshing={isFetching}
             renderItem={({item}) => {
               return this.showNoti(
                 'THÔNG BÁO',
@@ -223,13 +222,13 @@ export default class NotiComponent extends Component {
           iconLeft={Images.iconBack}
           iconLeftColor={Colors.black}
           onClickLeft={() => {
-            this.props.navigation.navigate("Menu");
+            this.props.navigation.navigate('Menu');
           }}
           iconRight={Images.iconSeen}
           onClickRight={() => {
             this.seenAll();
           }}></HeaderNavigation>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{
             height: 15,
             width: '100%',
@@ -241,7 +240,7 @@ export default class NotiComponent extends Component {
             this.removeValue();
           }}>
           <Text style={{color: '#fff'}}>Reset</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         {this.showBody()}
         {isFetching && <Loading></Loading>}
       </SafeAreaView>
