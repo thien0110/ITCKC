@@ -40,7 +40,16 @@ export default class MenuComponent extends Component {
         notiState: seen,
       });
     });
-    () => this.props.navigation.addListener('focus', () => console.warn("nè"))
+    const { navigation } = this.props;
+    this.focusListener = navigation.addListener("focus", () => {    
+      AsyncStorage.getItem('@seenKey').then((value) => {
+        const seen = JSON.parse(value);
+        // console.warn(seen)
+        this.setState({
+          notiState: seen,
+        });
+      });
+    });
   }
   showNews(heading, data) {
     return (
@@ -146,12 +155,13 @@ export default class MenuComponent extends Component {
           }}
           color={Colors.backgroundBlue}
           badgeValue={
-            !arrayIsEmpty(data) && !arrayIsEmpty(notiState)
-              ? data.length - notiState.length
-              : data.length
+            !arrayIsEmpty(dataNoti) &&
+            (!arrayIsEmpty(notiState)
+              ? dataNoti.length - notiState.length
+              : dataNoti.length)
           }
           onClickRight={() => {
-            this.props.navigation.navigate('Noti', {data});
+            this.props.navigation.navigate('Noti', {dataNoti});
           }}></HeaderNavigation>
         {this.showBody()}
         {isFetching && <Loading></Loading>}
@@ -159,54 +169,54 @@ export default class MenuComponent extends Component {
     );
   }
 }
-const data = [
-  {
-    tieuDe: 'Weekly Report Available',
-    moTaNgan:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    thoiGianDangBai: 'bây giờ',
-    maBaiViet: 'b1',
-  },
-  {
-    tieuDe: 'Weekly Report Available',
-    moTaNgan:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    thoiGianDangBai: 'bây giờ',
-    maBaiViet: 'b2',
-  },
-  {
-    tieuDe: 'Weekly Report Available',
-    moTaNgan:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    thoiGianDangBai: 'bây giờ',
-    maBaiViet: 'b3',
-  },
-  {
-    tieuDe: 'Weekly Report Available',
-    moTaNgan:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    thoiGianDangBai: 'bây giờ',
-    maBaiViet: 'b4',
-  },
-  {
-    tieuDe: 'Weekly Report Available',
-    moTaNgan:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    thoiGianDangBai: 'bây giờ',
-    maBaiViet: 'b5',
-  },
-  {
-    tieuDe: 'Weekly Report Available',
-    moTaNgan:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    thoiGianDangBai: 'bây giờ',
-    maBaiViet: 'b6',
-  },
-  {
-    tieuDe: 'Weekly Report Available',
-    moTaNgan:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    thoiGianDangBai: 'bây giờ',
-    maBaiViet: 'b7',
-  },
-];
+// const data = [
+//   {
+//     tieuDe: 'Weekly Report Available',
+//     moTaNgan:
+//       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+//     thoiGianDangBai: 'bây giờ',
+//     maBaiViet: 'b1',
+//   },
+//   {
+//     tieuDe: 'Weekly Report Available',
+//     moTaNgan:
+//       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+//     thoiGianDangBai: 'bây giờ',
+//     maBaiViet: 'b2',
+//   },
+//   {
+//     tieuDe: 'Weekly Report Available',
+//     moTaNgan:
+//       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+//     thoiGianDangBai: 'bây giờ',
+//     maBaiViet: 'b3',
+//   },
+//   {
+//     tieuDe: 'Weekly Report Available',
+//     moTaNgan:
+//       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+//     thoiGianDangBai: 'bây giờ',
+//     maBaiViet: 'b4',
+//   },
+//   {
+//     tieuDe: 'Weekly Report Available',
+//     moTaNgan:
+//       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+//     thoiGianDangBai: 'bây giờ',
+//     maBaiViet: 'b5',
+//   },
+//   {
+//     tieuDe: 'Weekly Report Available',
+//     moTaNgan:
+//       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+//     thoiGianDangBai: 'bây giờ',
+//     maBaiViet: 'b6',
+//   },
+//   {
+//     tieuDe: 'Weekly Report Available',
+//     moTaNgan:
+//       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+//     thoiGianDangBai: 'bây giờ',
+//     maBaiViet: 'b7',
+//   },
+// ];

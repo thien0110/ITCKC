@@ -31,7 +31,7 @@ export default class ScoreTableComponent extends Component {
     super(props);
 
     this.state = {
-      Semestery: '1',
+      Semestery: '0',
       Name: '1',
       subjects: [{}],
     };
@@ -100,9 +100,14 @@ export default class ScoreTableComponent extends Component {
     // console.warn(this.state.Name)
     let finalData = [];
     if (!arrayIsEmpty(data)) {
+      if(this.state.Semestery=="0"){
+        finalData=data
+      }else{
+        finalData = data.filter((item) => item.hocKi == this.state.Semestery);
+      }
       // if (this.state.Name == 1) {
       //   finalData = data.sort(sortArrayObject('diemsinhvien'));
-        finalData = data.filter((item) => item.hocKi == this.state.Semestery);
+     
       // } else {
       //   finalData = data.sort(sortArrayObject('diemsinhvien', 'desc'));
       //   finalData = data.filter((item) => item.hocKi == this.state.Semestery);
@@ -155,6 +160,7 @@ export default class ScoreTableComponent extends Component {
           onValueChange={(itemValue, itemIndex) => {
             this.setState({Semestery: itemValue});
           }}>
+          <Picker.Item label="Tất cả" value="0" />
           <Picker.Item label="Học kỳ 1" value="1" />
           <Picker.Item label="Học kỳ 2" value="2" />
           <Picker.Item label="Học kỳ 3" value="3" />

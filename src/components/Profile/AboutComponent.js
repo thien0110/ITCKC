@@ -5,7 +5,8 @@ import {
   Image,
   ScrollView,
   StyleSheet,
-  Dimensions,SafeAreaView
+  Dimensions,
+  SafeAreaView,
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 
@@ -51,9 +52,22 @@ export default class AboutComponent extends Component {
                 CKC Application
               </Text>
             </View>
-            <Text style={styles.textTitle}>Bản quyền thuộc về</Text>
+            <Text
+              style={{
+                marginTop: 5,
+                fontSize: 12,
+                //fontWeight: 'bold',
+                color: Colors.grayStrong,
+                textAlign: 'center',
+                letterSpacing: 0,
+              }}>
+              Phiên bản: 0.0.1
+            </Text>
+            <Text style={styles.textTitle}>Phát triển bởi</Text>
             <View style={styles.blockName}>
-              <Text style={styles.textName}>Khoa Công Nghệ Thông Tin trường Cao Đẳng Kỹ Thuật Cao Thắng</Text>
+              <Text style={styles.textName}>
+                Khoa Công Nghệ Thông Tin trường Cao Đẳng Kỹ Thuật Cao Thắng
+              </Text>
             </View>
           </View>
         </ScrollView>
@@ -85,7 +99,7 @@ const styles = StyleSheet.create({
     color: Colors.gray2,
     textAlign: 'center',
     letterSpacing: 0,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   blockName: {
     width: window.width - 30,

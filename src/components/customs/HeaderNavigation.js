@@ -144,6 +144,8 @@ export default class HeaderNavigation extends React.Component {
               ) : (
                 <View
                   style={{
+                    borderWidth:1,
+                    borderColor:Colors.navigation,
                     borderRadius: 20,
                     padding: 1,
                     minWidth: 20,

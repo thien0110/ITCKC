@@ -4,6 +4,17 @@ import {connect} from 'react-redux';
 import {getMenuNewsAction, getHotPostItAction,getNotiAction} from '../redux/actions/MenuAction';
 import {changeStateLoginAction} from '../redux/actions/LoginAction';
 class MenuContainer extends React.Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       reset:''
+    }
+  }
+  
+  componentDidMount(){
+   
+  }
   render() {
     return <MenuComponent {...this.props} />;
   }

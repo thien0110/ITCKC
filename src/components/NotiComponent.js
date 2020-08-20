@@ -65,7 +65,6 @@ export default class NotiComponent extends Component {
     } catch (e) {}
   }
   async onSave(item) {
-    // console.warn(item.maBaiViet);
     try {
       const jsonValue = await AsyncStorage.getItem('@seenKey');
       let arr = await JSON.parse(jsonValue);
@@ -77,15 +76,19 @@ export default class NotiComponent extends Component {
         this.storeData(backToArray);
       } else {
         this.storeData([item.maBaiViet]);
-        this.setState({notiState: [...this.state.notiState,item.maBaiViet]});
+        
       }
-      this.setState({notiState: arr});
+      if(arr === null){
+        const jsonValue = await AsyncStorage.getItem('@seenKey');
+        this.setState({notiState:JSON.parse(jsonValue)});
+      }else this.setState({notiState: arr});
     } catch (e) {}
+    this.props.navigation.navigate('PostDetail', {item: item});
   }
   seenAll() {
-    const {data} = this.props.route.params;
+    const {dataNoti} = this.props.route.params;
     let arr = [];
-    data.forEach(function (item) {
+    dataNoti.forEach(function (item) {
       arr.push(item.maBaiViet);
     });
     this.setState({notiState: arr});
@@ -160,13 +163,13 @@ export default class NotiComponent extends Component {
     );
   }
   showBody() {
-    const {data} = this.props.route.params;
+    const {dataNoti} = this.props.route.params;
     // console.warn(dataNoti)
-    if (!arrayIsEmpty(data)) {
+    if (!arrayIsEmpty(dataNoti)) {
       return (
         <View style={{flex: 1, paddingHorizontal: 10, paddingTop: 10}}>
           <FlatList
-            data={data}
+            data={dataNoti}
             keyExtractor={(item, index) => 'key' + index}
             renderItem={({item}) => {
               return this.showNoti(
@@ -197,13 +200,13 @@ export default class NotiComponent extends Component {
           iconLeft={Images.iconBack}
           iconLeftColor={Colors.black}
           onClickLeft={() => {
-            this.props.navigation.goBack();
+            this.props.navigation.navigate("Menu");
           }}
           iconRight={Images.iconSeen}
           onClickRight={() => {
             this.seenAll();
           }}></HeaderNavigation>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{
             height: 15,
             width: '100%',
@@ -215,7 +218,7 @@ export default class NotiComponent extends Component {
             this.removeValue();
           }}>
           <Text style={{color: '#fff'}}>Reset</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         {this.showBody()}
         {isFetching && <Loading></Loading>}
       </SafeAreaView>

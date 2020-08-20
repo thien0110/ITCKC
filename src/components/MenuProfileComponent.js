@@ -11,7 +11,7 @@ import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
 import Images from '../res/Images';
 import {forgetUser} from '../res/Functions';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {SafeAreaView} from 'react-native-safe-area-context';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const widthBlock = (windowWidth - 45) / 2;
@@ -61,7 +61,7 @@ export default class MenuProfileComponent extends Component {
               this.props.navigation.navigate('YourClassComponent');
             },
             'Lớp của bạn',
-            Images.iconBooks  ,
+            Images.iconBooks,
             15,
             15,
           )}
@@ -82,21 +82,19 @@ export default class MenuProfileComponent extends Component {
             15,
             15,
           )}
-          {this.showBlock(
+          {/* {this.showBlock(
             () => {
               this.props.navigation.navigate('Setting');
             },
             'Cài đặt',
             Images.iconSetting,
-          )}
+          )} */}
           {this.showBlock(
             () => {
               this.props.navigation.navigate('About');
             },
             'Về ứng dụng',
             Images.iconInfo,
-            15,
-            15,
           )}
           {this.showBlock(
             () => {
@@ -105,6 +103,8 @@ export default class MenuProfileComponent extends Component {
             },
             'Đăng xuất',
             Images.iconLogout,
+            15,
+            15,
           )}
         </View>
       </ScrollView>
