@@ -45,9 +45,9 @@ export default class WorkingComponent extends Component {
                     <Text style={{fontSize: 15, marginLeft: 10}}>
                       {item.type}Ngày hết hạn: {item.deadLine}
                     </Text>
-                    <TextInput
+                    {/* <TextInput
                       style={{color: Colors.gray2, fontSize: 15, marginLeft: 10}}
-                      placeholder="Thêm nhận xét..."></TextInput>
+                      placeholder="Thêm nhận xét..."></TextInput> */}
                   </View>
                 </View>
               );

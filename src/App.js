@@ -6,6 +6,7 @@ import allReducers from './redux/reducers';
 import allSagas from './redux/sagas';
 import MainNavigator from './navigation';
 import SplashScreen from 'react-native-splash-screen'
+import {startSocketIO} from './socketIo'
 const sagaMiddleware = createSagaMiddleware();
 let store = createStore(allReducers, applyMiddleware(sagaMiddleware));
 
@@ -13,6 +14,7 @@ console.disableYellowBox =true;
 export default class App extends React.Component {
   componentDidMount(){
     SplashScreen.hide();
+    startSocketIO(store);
   }
   render() {
     return (

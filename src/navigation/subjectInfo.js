@@ -40,11 +40,11 @@ export default function TabSubjectNavigator({route}) {
         component={WorkingContainer}
         initialParams={{item}}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Khác"
         component={OthersSubjectComponent}
         initialParams={{item}}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }

@@ -139,7 +139,7 @@ export default class HeaderNavigation extends React.Component {
                 resizeMode: 'contain',
               }}></Image>
             {isNoti === true ? (
-              badgeValue == 0 ? (
+              badgeValue <= 0 ? (
                 <View></View>
               ) : (
                 <View

@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => {
 };
 const mapStateToProps = state => {
   return {
-    data: state.menuReducers.dataNoti,
+    dataNoti: state.menuReducers.dataNoti,
     isFetching: state.menuReducers.isFetching,
     message: state.menuReducers.message,
     

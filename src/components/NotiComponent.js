@@ -16,6 +16,9 @@ import Images from '../res/Images';
 import {arrayIsEmpty, SplitDate, SplitTime} from '../res/Functions';
 import Loading from '../components/customs/Loading';
 import AsyncStorage from '@react-native-community/async-storage';
+import {URL} from '../config'
+
+import socketIO from 'socket.io-client';
 
 const window = Dimensions.get('window');
 export default class NotiComponent extends Component {
@@ -24,16 +27,29 @@ export default class NotiComponent extends Component {
 
     this.state = {
       notiState: [],
+      refresh:false
     };
   }
 
   componentDidMount() {
+    
+    this.props.getNotiAction();
     AsyncStorage.getItem('@seenKey').then((value) => {
       const seen = JSON.parse(value);
       // console.warn(seen)
       this.setState({
         notiState: seen,
       });
+    });
+    const socket = socketIO(URL, {
+      transports: ['websocket'],
+      jsonp: false,
+    });
+    socket.connect();
+    socket.on('ThongBaoKhanCap', () => {
+      console.log('get to socket server');
+      
+    this.props.getNotiAction();
     });
   }
   async storeData(value) {
@@ -152,7 +168,7 @@ export default class NotiComponent extends Component {
             }}>
             {SplitDate(time) + '  ' + SplitTime(time)}
           </Text>
-          <Text style={{fontWeight: 'bold', fontSize: window.height / 50}}>
+          <Text style={{fontWeight: 'bold', fontSize: window.height / 50}} numberOfLines={1}>
             {title}
           </Text>
           <Text style={{fontSize: window.height / 55}} numberOfLines={2}>
@@ -163,14 +179,21 @@ export default class NotiComponent extends Component {
     );
   }
   showBody() {
-    const {dataNoti} = this.props.route.params;
+    // const {dataNoti} = this.props.route.params;
+    const {dataNoti, isFetching, getNotiAction}= this.props;
+    
     // console.warn(dataNoti)
     if (!arrayIsEmpty(dataNoti)) {
+      const dataReverse= dataNoti.reverse()
+
       return (
         <View style={{flex: 1, paddingHorizontal: 10, paddingTop: 10}}>
           <FlatList
-            data={dataNoti}
+            data={dataReverse}
             keyExtractor={(item, index) => 'key' + index}
+            
+            onRefresh={()=>getNotiAction()}
+                refreshing={isFetching}
             renderItem={({item}) => {
               return this.showNoti(
                 'THÔNG BÁO',
@@ -206,7 +229,7 @@ export default class NotiComponent extends Component {
           onClickRight={() => {
             this.seenAll();
           }}></HeaderNavigation>
-        {/* <TouchableOpacity
+        <TouchableOpacity
           style={{
             height: 15,
             width: '100%',
@@ -218,7 +241,7 @@ export default class NotiComponent extends Component {
             this.removeValue();
           }}>
           <Text style={{color: '#fff'}}>Reset</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
         {this.showBody()}
         {isFetching && <Loading></Loading>}
       </SafeAreaView>

@@ -15,7 +15,10 @@ import Loading from './customs/Loading';
 import {FlatListHorizontal} from './customs/FlatListHorizontal';
 import Block from './customs/Block';
 import {arrayIsEmpty} from '../res/Functions';
+import {URL} from '../config'
 import AsyncStorage from '@react-native-community/async-storage';
+import PushNotification from 'react-native-push-notification';
+import socketIO from 'socket.io-client';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -40,8 +43,8 @@ export default class MenuComponent extends Component {
         notiState: seen,
       });
     });
-    const { navigation } = this.props;
-    this.focusListener = navigation.addListener("focus", () => {    
+    const {navigation} = this.props;
+    this.focusListener = navigation.addListener('focus', () => {
       AsyncStorage.getItem('@seenKey').then((value) => {
         const seen = JSON.parse(value);
         // console.warn(seen)
@@ -49,6 +52,15 @@ export default class MenuComponent extends Component {
           notiState: seen,
         });
       });
+    });
+    const socket = socketIO(URL, {
+      transports: ['websocket'],
+      jsonp: false,
+    });
+    socket.connect();
+    socket.on('ThongBaoKhanCap', () => {
+      console.log('connected to socket server');
+      this.props.getNotiAction()
     });
   }
   showNews(heading, data) {
