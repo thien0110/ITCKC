@@ -10,21 +10,46 @@ import {
 } from 'react-native';
 import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../res/Images';
-import SlideShow from './customs/SlideShow';
 import Loading from './customs/Loading';
 import {FlatListHorizontal} from './customs/FlatListHorizontal';
 import Block from './customs/Block';
 import {arrayIsEmpty} from '../res/Functions';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default class MenuComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      notiState: [],
+    };
+  }
+
   componentDidMount() {
     this.props.getHotPostItAction();
     this.props.getMenuNewsAction();
+    this.props.getNotiAction();
+    AsyncStorage.getItem('@seenKey').then((value) => {
+      const seen = JSON.parse(value);
+      // console.warn(seen)
+      this.setState({
+        notiState: seen,
+      });
+    });
+    const { navigation } = this.props;
+    this.focusListener = navigation.addListener("focus", () => {    
+      AsyncStorage.getItem('@seenKey').then((value) => {
+        const seen = JSON.parse(value);
+        // console.warn(seen)
+        this.setState({
+          notiState: seen,
+        });
+      });
+    });
   }
   showNews(heading, data) {
     return (
@@ -43,8 +68,8 @@ export default class MenuComponent extends Component {
   showBody() {
     const {dataHotKhoa, data} = this.props;
     return (
-      <View style={{flex: 1, flexDirection: 'column', }}>
-        <ScrollView > 
+      <View style={{flex: 1, flexDirection: 'column'}}>
+        <ScrollView>
           <View
             style={{
               flexWrap: 'wrap',
@@ -111,27 +136,87 @@ export default class MenuComponent extends Component {
   render() {
     // const {itemId} = this.props.route.params;
     // console.warn(itemId, 'menu');
-    const {isFetching, data} = this.props;
+    // console.warn('menu');
+    const {isFetching, dataNoti} = this.props;
+    const {notiState} = this.state;
     return (
-        <SafeAreaView
-          style={{
-            flexDirection: 'column',
-            backgroundColor: Colors.background,
-            flex: 1,
-          }}>
-          <HeaderNavigation
-            iconRight={Images.iconBell}
-            haveSearch={true}
-            onClickSearch={() => {
-              this.props.navigation.navigate('Search');
-            }}
-            color={Colors.backgroundBlue}
-            onClickRight={() => {
-              this.props.navigation.navigate('Noti');
-            }}></HeaderNavigation>
-          {this.showBody()}
-          {isFetching && <Loading></Loading>}
-        </SafeAreaView>
+      <SafeAreaView
+        style={{
+          flexDirection: 'column',
+          backgroundColor: Colors.background,
+          flex: 1,
+        }}>
+        <HeaderNavigation
+          iconRight={Images.iconBell}
+          isNoti={true}
+          haveSearch={true}
+          onClickSearch={() => {
+            this.props.navigation.navigate('Search');
+          }}
+          color={Colors.backgroundBlue}
+          badgeValue={
+            !arrayIsEmpty(dataNoti) &&
+            (!arrayIsEmpty(notiState)
+              ? dataNoti.length - notiState.length
+              : dataNoti.length)
+          }
+          onClickRight={() => {
+            this.props.navigation.navigate('Noti', {dataNoti});
+          }}></HeaderNavigation>
+        {this.showBody()}
+        {isFetching && <Loading></Loading>}
+      </SafeAreaView>
     );
   }
 }
+// const data = [
+//   {
+//     tieuDe: 'Weekly Report Available',
+//     moTaNgan:
+//       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+//     thoiGianDangBai: 'bây giờ',
+//     maBaiViet: 'b1',
+//   },
+//   {
+//     tieuDe: 'Weekly Report Available',
+//     moTaNgan:
+//       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+//     thoiGianDangBai: 'bây giờ',
+//     maBaiViet: 'b2',
+//   },
+//   {
+//     tieuDe: 'Weekly Report Available',
+//     moTaNgan:
+//       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+//     thoiGianDangBai: 'bây giờ',
+//     maBaiViet: 'b3',
+//   },
+//   {
+//     tieuDe: 'Weekly Report Available',
+//     moTaNgan:
+//       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+//     thoiGianDangBai: 'bây giờ',
+//     maBaiViet: 'b4',
+//   },
+//   {
+//     tieuDe: 'Weekly Report Available',
+//     moTaNgan:
+//       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+//     thoiGianDangBai: 'bây giờ',
+//     maBaiViet: 'b5',
+//   },
+//   {
+//     tieuDe: 'Weekly Report Available',
+//     moTaNgan:
+//       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+//     thoiGianDangBai: 'bây giờ',
+//     maBaiViet: 'b6',
+//   },
+//   {
+//     tieuDe: 'Weekly Report Available',
+//     moTaNgan:
+//       "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+//     thoiGianDangBai: 'bây giờ',
+//     maBaiViet: 'b7',
+//   },
+// ];

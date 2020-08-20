@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import Colors from '../../res/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+
+import {Avatar, Badge, withBadge} from 'react-native-elements';
 const windowWidth = Dimensions.get('window').width;
 export default class HeaderNavigation extends React.Component {
   render() {
@@ -30,8 +32,11 @@ export default class HeaderNavigation extends React.Component {
       searching,
       onChangeTextSearch,
       valueSearch,
-      onSearch
+      onSearch,
+      badgeValue,
+      isNoti,
     } = this.props;
+    const BadgedIcon = withBadge(1)(Icon);
     return (
       <View
         style={{
@@ -49,8 +54,7 @@ export default class HeaderNavigation extends React.Component {
             onPress={() => {
               onClickLeft();
             }}
-            style={{position:'absolute', zIndex:1,left:15}}
-            >
+            style={{position: 'absolute', zIndex: 1, left: 15}}>
             <Image
               source={iconLeft}
               style={{
@@ -98,10 +102,11 @@ export default class HeaderNavigation extends React.Component {
                 onChangeTextSearch(text);
               }}
               value={valueSearch}
-              clearButtonMode='while-editing'
-              onSubmitEditing={()=>{onSearch()}}
-              returnKeyType='search'
-              ></TextInput>
+              clearButtonMode="while-editing"
+              onSubmitEditing={() => {
+                onSearch();
+              }}
+              returnKeyType="search"></TextInput>
             {/* <Icon
               name="search"
               size={15}
@@ -125,7 +130,7 @@ export default class HeaderNavigation extends React.Component {
             onPress={() => {
               onClickRight();
             }}
-            style={{position:'absolute', right:15}}>
+            style={{position: 'absolute', right: 15}}>
             <Image
               source={iconRight}
               style={{
@@ -133,6 +138,32 @@ export default class HeaderNavigation extends React.Component {
                 height: 35,
                 resizeMode: 'contain',
               }}></Image>
+            {isNoti === true ? (
+              badgeValue == 0 ? (
+                <View></View>
+              ) : (
+                <View
+                  style={{
+                    borderWidth:1,
+                    borderColor:Colors.navigation,
+                    borderRadius: 20,
+                    padding: 1,
+                    minWidth: 20,
+                    backgroundColor: 'red',
+                    position: 'absolute',
+                    right: -4,
+                    top: -4,
+                    justifyContent: 'center',
+                  }}>
+                  <Text
+                    style={{color: '#fff', fontSize: 12, textAlign: 'center'}}>
+                    {badgeValue}
+                  </Text>
+                </View>
+              )
+            ) : (
+              <View></View>
+            )}
           </TouchableOpacity>
         )}
         {buttonRight === true && (
@@ -167,12 +198,13 @@ HeaderNavigation.defaultProps = {
   buttonRight: false,
   textButtonRight: '',
   searching: false,
-  valueSearch:'',
+  valueSearch: '',
+  badgeValue: 1,
+  isNoti: false,
   onClickLeft: () => {},
   onClickRight: () => {},
   onClickButtonRight: () => {},
   onClickSearch: () => {},
-  onChangeTextSearch: ()=>{},
-  onSearch:()=>{},
-  
+  onChangeTextSearch: () => {},
+  onSearch: () => {},
 };
