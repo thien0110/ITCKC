@@ -6,7 +6,7 @@ import {
   FlatList,
   StyleSheet,
   Dimensions,
-  ScrollView,
+  ScrollView,SafeAreaView
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import Images from '../../res/Images';
@@ -45,16 +45,23 @@ export default class WorkingComponent extends Component {
                     <Text style={{fontSize: 15, marginLeft: 10}}>
                       {item.type}Ngày hết hạn: {item.deadLine}
                     </Text>
-                    <TextInput
+                    {/* <TextInput
                       style={{color: Colors.gray2, fontSize: 15, marginLeft: 10}}
-                      placeholder="Thêm nhận xét..."></TextInput>
+                      placeholder="Thêm nhận xét..."></TextInput> */}
                   </View>
                 </View>
               );
             }}></FlatList>
         </View>
       );
-    }
+    }else
+    return (
+      <View>
+        <Text style={{fontWeight: 'bold', fontSize: 15, color: Colors.gray2}}>
+          Chưa có bài tập mới....
+        </Text>
+      </View>
+    );
    
   }
   showBody() {
@@ -68,20 +75,19 @@ export default class WorkingComponent extends Component {
       titleHeader = item.name;
     }
     return (
-      <View style={{flex: 1, alignItems: 'center'}}>
+      <SafeAreaView style={{flex: 1, alignItems: 'center'}}>
         <HeaderNavigation
           title={titleHeader}
           titleColor={Colors.white}
           color={Colors.backgroundBlue}
           iconLeft={Images.iconBack}
-          iconRight={Images.iconTabMenu}
           iconLeftColor={Colors.black}
           onClickLeft={() => {
             this.props.navigation.goBack();
           }}></HeaderNavigation>
         <View style={{padding: 15, overflow: 'hidden'}}>{this.showBody()}</View>
         {isFetching && <Loading></Loading>}
-      </View>
+      </SafeAreaView>
     );
   }
 }

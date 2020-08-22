@@ -74,7 +74,7 @@ export default class AlarmComponent extends Component {
       message: 'Chuẩn bị học ' + subjectName + ' lúc ' + fireDate,
       tag: subjectName,
     };
-    console.log(`alarm set: ${fireDate}`);
+    // console.log(`alarm set: ${fireDate}`);
 
     try {
       const alarm = await ReactNativeAN.scheduleAlarm(details);
@@ -138,7 +138,7 @@ export default class AlarmComponent extends Component {
 
   showPermissions = () => {
     ReactNativeAN.checkPermissions((permissions) => {
-      console.log(permissions);
+      // console.log(permissions);
     });
   };
 
@@ -163,7 +163,7 @@ export default class AlarmComponent extends Component {
   }
   async deleteAlarm(id) {
     if (id !== '') {
-      console.log(`delete alarm: ${id}`);
+      // console.log(`delete alarm: ${id}`);
 
       const idNew = parseInt(id, 10);
       ReactNativeAN.deleteAlarm(idNew);

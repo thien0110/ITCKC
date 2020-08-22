@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View,FlatList } from 'react-native'
+import { Text, View,FlatList,SafeAreaView } from 'react-native'
 import HeaderNavigation from '../customs/HeaderNavigation';
 import ItemSlideShow from '../customs/ItemSlideShow';
 import Colors from '../../res/Colors';
@@ -13,7 +13,7 @@ export default class ItCenterComponent extends Component {
     this.props.getItCenterInfoAction();
   }
   showBody() {
-    const {data} = this.props;
+    const {data,getItCenterInfoAction, isFetching} = this.props;
     // console.warn('data',data)
     if (data && data.length) {
       return (
@@ -21,6 +21,8 @@ export default class ItCenterComponent extends Component {
           <FlatList
             data={data}
             keyExtractor={(item, index) => 'key' + index}
+            onRefresh={()=>getItCenterInfoAction()}
+                refreshing={isFetching}
             renderItem={({item}) => {
               return (
                 <ItemSlideShow
@@ -38,7 +40,7 @@ export default class ItCenterComponent extends Component {
   render() {
     const {isFetching} = this.props;
     return (
-      <View style={{flex: 1,}}>
+      <SafeAreaView style={{flex: 1,}}>
         <HeaderNavigation
           iconLeft={Images.iconBack}
           color={Colors.backgroundBlue}
@@ -51,7 +53,7 @@ export default class ItCenterComponent extends Component {
           {this.showBody()}
           </View>
           {isFetching && <Loading></Loading>}
-      </View>
+      </SafeAreaView>
     );
   }
 }

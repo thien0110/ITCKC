@@ -1,7 +1,7 @@
 import React from 'react';
 import NotiComponent from '../components/NotiComponent';
 import {connect} from 'react-redux';
-import {getItCenterInfoAction} from '../redux/actions/ItCenter/ItCenterAction';
+import {getNotiAction} from '../redux/actions/MenuAction';
 class NotiContainer extends React.Component {
   render() {
     return <NotiComponent {...this.props} />;
@@ -10,16 +10,16 @@ class NotiContainer extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getItCenterInfoAction: input => {
-      dispatch(getItCenterInfoAction(input));
+    getNotiAction: input => {
+      dispatch(getNotiAction(input));
     },
   };
 };
 const mapStateToProps = state => {
   return {
-    data: state.itCenterReducers.data,
-    isFetching: state.itCenterReducers.isFetching,
-    message: state.itCenterReducers.message,
+    dataNoti: state.menuReducers.dataNoti,
+    isFetching: state.menuReducers.isFetching,
+    message: state.menuReducers.message,
     
   };
 };

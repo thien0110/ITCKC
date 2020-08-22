@@ -30,11 +30,15 @@ export const rememberUser = async (myLogin) => {
   } catch (error) {}
 };
 
-export const SplitDate = (date) => {
+export const SplitDate = (date) => { //Change ngày giờ datetime sang ngày tháng năm bt
   var newDate =date.split('T',8)
   return newDate[0];
 };
-export function objectIsEqual(objA, objB) {
+export const SplitTime = (date) => { //Change ngày giờ datetime sang ngày tháng năm bt
+  var newDate =date.substr(-13, 8);
+  return newDate;
+};
+export function objectIsEqual(objA, objB) { //So sánh 2 obj
   // Tạo các mảng chứa tên các property
   var aProps = Object.getOwnPropertyNames(objA);
   var bProps = Object.getOwnPropertyNames(objB);
@@ -76,7 +80,7 @@ export const forgetUser = async () => {
     await Keychain.resetGenericPassword(); // xóa thông tin đăng nhập
   } catch (error) {}
 };
-function change_alias(alias) {
+function change_alias(alias) { // change VI-->EN
   var str = alias;
   str = str
     .normalize('NFD')
@@ -86,10 +90,9 @@ function change_alias(alias) {
     .toUpperCase();
   return str;
 }
-export const sortArrayObject = (key, order = 'asc') => {
+export const sortArrayObject = (key, order = 'asc') => { // sắp xếp theo chữ cái a-z, Z-A
   return function innerSort(a, b) {
     if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-      // property doesn't exist on either object
       return 0;
     }
 
@@ -105,5 +108,3 @@ export const sortArrayObject = (key, order = 'asc') => {
     return order === 'desc' ? comparison * -1 : comparison;
   };
 };
-
-// singers.sort(compare);

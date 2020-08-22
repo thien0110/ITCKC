@@ -67,12 +67,12 @@ export default class SearchComponent extends Component {
     } else
       return (
         <View style={{flexDirection: 'row', padding: 15, flexWrap: 'wrap'}}>
-          {this.suggestItem('Học phí')}
-          {this.suggestItem('Lịch thi')}
-          {this.suggestItem('Tuyển dụng')}
+          {this.suggestItem('Lịch công tác')}
+          {this.suggestItem('Kế hoạch')}
+          {this.suggestItem('Lịch học')}
           {this.suggestItem('Thông báo')}
           {this.suggestItem('Anh văn')}
-          {this.suggestItem('Cuộc thi')}
+          {this.suggestItem('Covid-19')}
         </View>
       );
   }

@@ -1,6 +1,6 @@
 const messageError = 'Không thể kết nối tới server.';
 const fakeApi = false;
-import {API_URL} from '../../../config';
+import {API_URL,userProfile} from '../../../config';
 export function getSubjectApi(input) {
   return fetch(
     `${API_URL}lophocphan/android/maLopHoc/${input}`,
@@ -8,6 +8,7 @@ export function getSubjectApi(input) {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userProfile.token,
       }),
     },
   )

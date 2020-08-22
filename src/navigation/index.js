@@ -7,7 +7,7 @@ import TabNavigator from './Tab';
 import SearchContainer from '../containers/SearchContainer';
 import ItCenterContainer from '../containers/ItCenter/ItCenterContainer';
 import WorkInfoContainer from '../containers/WorkInfoContainer';
-import AlumniComponent from '../components/Alumni/AlumniComponent';
+import AlumniContainer from '../containers/AlumniContainer';
 import DepartmentInfoContainer from '../containers/DepartmentInfo/DepartmentInfoContainer';
 
 
@@ -40,7 +40,7 @@ function MainNavigator() {
         <Stack.Screen name="Search" component={SearchContainer}/>
         <Stack.Screen name="ItCenter" component={ItCenterContainer}/>
         <Stack.Screen name="WorkInfo" component={WorkInfoContainer}/>
-        <Stack.Screen name="Alumni" component={AlumniComponent}/>
+        <Stack.Screen name="Alumni" component={AlumniContainer}/>
         <Stack.Screen name="DepartmentInfo" component={DepartmentInfoContainer}/>
 
         <Stack.Screen name="LearningInfo" component={LearningInfoContainer} />

@@ -7,33 +7,121 @@ import {
   Image,
   TouchableOpacity,
   SafeAreaView,
-  FlatList
+  FlatList,
+  StyleSheet,
 } from 'react-native';
 import HeaderNavigation from './customs/HeaderNavigation';
 import Colors from '../res/Colors';
 import Images from '../res/Images';
-import {arrayIsEmpty} from '../res/Functions';
-import Loading from '../components/customs/Loading'
+import {arrayIsEmpty, SplitDate, SplitTime} from '../res/Functions';
+import Loading from '../components/customs/Loading';
+import AsyncStorage from '@react-native-community/async-storage';
+import {URL} from '../config';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+import socketIO from 'socket.io-client';
+
+const window = Dimensions.get('window');
 export default class NotiComponent extends Component {
-  componentDidMount() {
-    this.props.getItCenterInfoAction();
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      notiState: [],
+      refresh: false,
+    };
   }
-  showNoti(type, title, des, time, icon) {
+
+  componentDidMount() {
+    this.props.getNotiAction();
+    AsyncStorage.getItem('@seenKey').then((value) => {
+      const seen = JSON.parse(value);
+      // console.warn(seen)
+      this.setState({
+        notiState: seen,
+      });
+    });
+    const socket = socketIO(URL, {
+      transports: ['websocket'],
+      jsonp: false,
+    });
+    socket.connect();
+    socket.on('ThongBaoKhanCap', () => {
+      console.log('get to socket server');
+
+      this.props.getNotiAction();
+    });
+  }
+  async storeData(value) {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('@seenKey', jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getData() {
+    try {
+      const value = await AsyncStorage.getItem('@seenKey');
+      // return jsonValue != null ? JSON.parse(jsonValue) : null;
+      const jsonValue = JSON.parse(value);
+      console.warn(jsonValue);
+      if (jsonValue !== null) {
+        return jsonValue;
+      }
+    } catch (e) {
+      // error reading value
+    }
+  }
+  async removeValue() {
+    try {
+      await AsyncStorage.removeItem('@seenKey');
+      this.setState({notiState: []});
+    } catch (e) {}
+  }
+  async onSave(item) {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@seenKey');
+      let arr = await JSON.parse(jsonValue);
+      // console.warn('arr',arr)
+      if (jsonValue !== null) {
+        arr.push(item.maBaiViet);
+        const uniqueSet = new Set(arr);
+        const backToArray = [...uniqueSet];
+        this.storeData(backToArray);
+      } else {
+        this.storeData([item.maBaiViet]);
+      }
+      if (arr === null) {
+        const jsonValue = await AsyncStorage.getItem('@seenKey');
+        this.setState({notiState: JSON.parse(jsonValue)});
+      } else this.setState({notiState: arr});
+    } catch (e) {}
+    this.props.navigation.navigate('PostDetail', {item: item});
+  }
+  seenAll() {
+    const {dataNoti} = this.props.route.params;
+    let arr = [];
+    dataNoti.forEach(function (item) {
+      arr.push(item.maBaiViet);
+    });
+    this.setState({notiState: arr});
+    this.storeData(arr);
+  }
+  showNoti(type, title, des, time, icon, id, onPress) {
+    const {notiState} = this.state;
+    let result = [];
+    if (!arrayIsEmpty(notiState)) {
+      result = notiState.filter((word) => word == id);
+    }
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
         <View
-          style={{
-            width: '100%',
-            height: windowHeight / 6,
-            backgroundColor: Colors.white,
-            borderRadius: 10,
-            marginBottom: 10,
-            padding: 10,
-            overflow: 'hidden',
-          }}>
+          style={
+            arrayIsEmpty(result)
+              ? {...styles.block, backgroundColor: '#deeaff'}
+              : {...styles.block, backgroundColor: '#fff'}
+          }>
           <View
             style={{
               flexDirection: 'row',
@@ -62,109 +150,66 @@ export default class NotiComponent extends Component {
               style={{
                 color: Colors.gray2,
                 marginLeft: 5,
-                fontSize: windowHeight / 45,
+                fontSize: window.height / 45,
               }}>
               {type}
             </Text>
+            {/* <View style={{width:8, height:8, borderRadius:20, backgroundColor:Colors.lightBlue, marginLeft:5}}></View> */}
           </View>
           <Text
             style={{
-              color: Colors.grayOpacity,
+              color: Colors.grayStrong,
               position: 'absolute',
               right: 10,
               top: 10,
-              fontSize: windowHeight / 50,
+              fontSize: window.height / 50,
             }}>
-            {time}
+            {SplitDate(time) + '  ' + SplitTime(time)}
           </Text>
-          <Text style={{fontWeight: 'bold', fontSize: windowHeight / 50}}>
+          <Text
+            style={{fontWeight: 'bold', fontSize: window.height / 50}}
+            numberOfLines={1}>
             {title}
           </Text>
-          <Text style={{fontSize: windowHeight / 55}}>{des}</Text>
+          <Text style={{fontSize: window.height / 55}} numberOfLines={2}>
+            {des}
+          </Text>
         </View>
       </TouchableOpacity>
     );
   }
   showBody() {
-    const {data} = this.props;
-    if (!arrayIsEmpty(data)) {
-      let dataList = data.filter((item) => item.loaiBaiViet === 'LBV00');
-      if (data && data.length) {
-        return (
-          <View style={{flex: 1, paddingHorizontal: 10, paddingTop: 10}}>
-            <FlatList
-              data={dataList}
-              keyExtractor={(item, index) => 'key' + index}
-              renderItem={({item}) => {
-                return this.showNoti(
-                  'THONG BAO',
-                  item.tieuDe,
-                  item.moTaNgan,
-                  '',
-                  Images.iconIt,
-                );
-              }}
-            />
-          </View>
-        );
-      }
-    }
-    // return (
-    //   <View style={{flex: 1, paddingHorizontal: 10, paddingTop: 10}}>
-    //     <ScrollView>
-    //       {this.showNoti(
-    //         'THÔNG TIN NHÀ TRƯỜNG',
-    //         'Weekly Report Available',
-    //         "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    //         'bây giờ',
-    //         Images.iconSchool,
-    //       )}
-    //       {this.showNoti(
-    //         'THÔNG TIN NHÀ TRƯỜNG',
-    //         'Weekly Report Available',
-    //         "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    //         'bây giờ',
-    //         Images.iconSchool,
-    //       )}
+    // const {dataNoti} = this.props.route.params;
+    const {dataNoti, isFetching, getNotiAction} = this.props;
 
-    //       {this.showNoti(
-    //         'THÔNG TIN NHÀ TRƯỜNG',
-    //         'Weekly Report Available',
-    //         "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    //         'bây giờ',
-    //         Images.iconSchool,
-    //       )}
-    //       {this.showNoti(
-    //         'THÔNG TIN NHÀ TRƯỜNG',
-    //         'Weekly Report Available',
-    //         "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    //         'bây giờ',
-    //         Images.iconSchool,
-    //       )}
-    //       {this.showNoti(
-    //         'THÔNG TIN NHÀ TRƯỜNG',
-    //         'Weekly Report Available',
-    //         "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    //         'bây giờ',
-    //         Images.iconSchool,
-    //       )}
-    //       {this.showNoti(
-    //         'THÔNG TIN NHÀ TRƯỜNG',
-    //         'Weekly Report Available',
-    //         "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    //         'bây giờ',
-    //         Images.iconSchool,
-    //       )}
-    //       {this.showNoti(
-    //         'THÔNG TIN NHÀ TRƯỜNG',
-    //         'Weekly Report Available',
-    //         "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    //         'bây giờ',
-    //         Images.iconSchool,
-    //       )}
-    //     </ScrollView>
-    //   </View>
-    // );
+    // console.warn(dataNoti)
+    if (!arrayIsEmpty(dataNoti)) {
+      const dataReverse = dataNoti.reverse();
+
+      return (
+        <View style={{flex: 1, paddingHorizontal: 10, paddingTop: 10}}>
+          <FlatList
+            data={dataReverse}
+            keyExtractor={(item, index) => 'key' + index}
+            onRefresh={() => getNotiAction()}
+            refreshing={isFetching}
+            renderItem={({item}) => {
+              return this.showNoti(
+                'THÔNG BÁO',
+                item.tieuDe,
+                item.moTaNgan,
+                item.thoiGianDangBai,
+                Images.iconIt,
+                item.maBaiViet,
+                () => {
+                  this.onSave(item);
+                },
+              );
+            }}
+          />
+        </View>
+      );
+    }
   }
   render() {
     const {isFetching} = this.props;
@@ -177,11 +222,39 @@ export default class NotiComponent extends Component {
           iconLeft={Images.iconBack}
           iconLeftColor={Colors.black}
           onClickLeft={() => {
-            this.props.navigation.goBack();
+            this.props.navigation.navigate('Menu');
+          }}
+          iconRight={Images.iconSeen}
+          onClickRight={() => {
+            this.seenAll();
           }}></HeaderNavigation>
+        {/* <TouchableOpacity
+          style={{
+            height: 15,
+            width: '100%',
+            backgroundColor: Colors.lightBlue,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          onPress={() => {
+            this.removeValue();
+          }}>
+          <Text style={{color: '#fff'}}>Reset</Text>
+        </TouchableOpacity> */}
         {this.showBody()}
         {isFetching && <Loading></Loading>}
       </SafeAreaView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  block: {
+    width: '100%',
+    height: window.height / 6,
+    borderRadius: 10,
+    marginBottom: 10,
+    padding: 10,
+    overflow: 'hidden',
+  },
+});

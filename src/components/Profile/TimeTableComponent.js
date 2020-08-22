@@ -8,7 +8,7 @@ import {
   Dimensions,
   TextInput,
   StyleSheet,
-  FlatList,
+  FlatList,SafeAreaView
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 import LinearGradient from 'react-native-linear-gradient';
@@ -85,7 +85,7 @@ export default class TimeTableComponent extends Component {
   showDayOfWeek() {
     return (
       <View>
-      <Text style={{textAlign:'center', color:'#fff'}}>Hôm nay, ngày {d.getDate()} tháng {d.getMonth()} năm {d.getFullYear()}</Text>
+      <Text style={{textAlign:'center', color:'#fff'}}>Hôm nay, ngày {d.getDate()} tháng {d.getMonth()+1} năm {d.getFullYear()}</Text>
       <View style={styles.container}>
         {this.ShowItems('T2', () => this.setState({daysWeek: '2'}))}
         {this.ShowItems('T3', () => this.setState({daysWeek: '3'}))}
@@ -249,7 +249,7 @@ export default class TimeTableComponent extends Component {
     const {daysWeek, current} = this.state;
     const {isFetching, data, message} = this.props;
     return (
-      <View style={{flex: 1, backgroundColor: Colors.navigation}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: Colors.navigation}}>
         <HeaderNavigation
           title={'Thời khóa biểu'}
           titleColor={Colors.white}
@@ -271,7 +271,7 @@ export default class TimeTableComponent extends Component {
             this.props.navigation.goBack();
             this.props.formatData();
           })}
-      </View>
+      </SafeAreaView>
     );
   }
 }

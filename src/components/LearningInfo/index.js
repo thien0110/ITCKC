@@ -7,7 +7,7 @@ import {
   Dimensions,
   ScrollView,
   FlatList,
-  StyleSheet,
+  StyleSheet,SafeAreaView
 } from 'react-native';
 import {Picker} from '@react-native-community/picker';
 import Loading from '../customs/Loading';
@@ -129,7 +129,7 @@ export default class LearningInfoComponent extends Component {
   render() {
     const {isFetching, data} = this.props;
     return (
-      <View
+      <SafeAreaView
         style={{
           flexDirection: 'column',
           backgroundColor: Colors.background,
@@ -146,7 +146,7 @@ export default class LearningInfoComponent extends Component {
         {this.ShowSort()}
         {this.showBody()}
         {isFetching && <Loading></Loading>}
-      </View>
+      </SafeAreaView>
     );
   }
 }

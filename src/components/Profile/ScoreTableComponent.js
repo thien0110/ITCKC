@@ -7,6 +7,7 @@ import {
   Modal,
   Dimensions,
   TextInput,
+  SafeAreaView,
 } from 'react-native';
 import HeaderNavigation from '../customs/HeaderNavigation';
 
@@ -14,16 +15,32 @@ import Colors from '../../res/Colors';
 import Images from '../../res/Images';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 const window = Dimensions.get('window');
-import {WebView} from 'react-native-webview';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import {userProfile} from '../../config';
 import Loading from '../customs/Loading';
 import AlertCustom from '../customs/AlertComponent';
+import {Picker} from '@react-native-community/picker';
+import {
+  objectIsNull,
+  arrayIsEmpty,
+  sortArrayObject,
+  sortSemester,
+} from '../../res/Functions';
 export default class ScoreTableComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      Semestery: '0',
+      Name: '1',
+      subjects: [{}],
+    };
+  }
+
   componentDidMount() {
     this.props.getScoreTableAction(
-      // userProfile.mssv
-      '0306171004',
+      userProfile.mssv,
+      // '0306171004',
     );
   }
   subjectScore(subjectName, score) {
@@ -79,12 +96,30 @@ export default class ScoreTableComponent extends Component {
     );
   }
   showSubjectScore() {
-    const {data} = this.props;
+    const {data, isFetching, getScoreTableAction} = this.props;
+    // console.warn(this.state.Name)
+    let finalData = [];
+    if (!arrayIsEmpty(data)) {
+      if(this.state.Semestery=="0"){
+        finalData=data
+      }else{
+        finalData = data.filter((item) => item.hocKi == this.state.Semestery);
+      }
+      // if (this.state.Name == 1) {
+      //   finalData = data.sort(sortArrayObject('diemsinhvien'));
+     
+      // } else {
+      //   finalData = data.sort(sortArrayObject('diemsinhvien', 'desc'));
+      //   finalData = data.filter((item) => item.hocKi == this.state.Semestery);
+      // }
+    }
     return (
       <FlatList
-        data={data}
+        data={finalData}
         // style={{paddingHorizontal: 15}}
         keyExtractor={(item, index) => 'key' + index}
+        onRefresh={() => getScoreTableAction(userProfile.mssv)}
+        refreshing={isFetching}
         renderItem={({item}) => {
           return this.subjectScore(item.tenMonHoc, item.diemsinhvien);
         }}></FlatList>
@@ -99,7 +134,8 @@ export default class ScoreTableComponent extends Component {
           justifyContent: 'space-between',
           flexDirection: 'row',
         }}>
-        <Text style={{fontSize: 18, fontWeight: 'bold', color: '#fff'}}>
+        <Text
+          style={{fontSize: 18, fontWeight: 'bold', color: Colors.grayStrong}}>
           {subjectName}
         </Text>
         <Text
@@ -107,17 +143,75 @@ export default class ScoreTableComponent extends Component {
             fontSize: 18,
             fontWeight: 'bold',
             textAlign: 'center',
-            color: '#fff',
+            color: Colors.grayStrong,
           }}>
           {score}
         </Text>
       </View>
     );
   }
+  Semester(Name) {
+    return (
+      <View>
+        <Picker
+          selectedValue={this.state.Semestery}
+          style={{width: 150, fontSize: 15}}
+          mode={'dialog'}
+          onValueChange={(itemValue, itemIndex) => {
+            this.setState({Semestery: itemValue});
+          }}>
+          <Picker.Item label="Tất cả" value="0" />
+          <Picker.Item label="Học kỳ 1" value="1" />
+          <Picker.Item label="Học kỳ 2" value="2" />
+          <Picker.Item label="Học kỳ 3" value="3" />
+          <Picker.Item label="Học kỳ 4" value="4" />
+          <Picker.Item label="Học kỳ 5" value="5" />
+          <Picker.Item label="Học kỳ 6" value="6" />
+        </Picker>
+      </View>
+    );
+  }
+
+  NameSort() {
+    return (
+      <View>
+        <Picker
+          selectedValue={this.state.Name}
+          style={{width: 150}}
+          mode={'dialog'}
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({Name: itemValue})
+          }>
+          <Picker.Item label="0 - 10" value="1" />
+          <Picker.Item label="10 - 0" value="2" />
+        </Picker>
+      </View>
+    );
+  }
+
+  ShowSort() {
+    return (
+      <View
+        style={{
+          alignItems: 'center',
+          // height:windowHeight/12,
+          // paddingHorizontal: 15,
+          width: '100%',
+          // flexWrap: 'wrap',
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          // backgroundColor:Colors.white,
+        }}>
+        {/* <Text>Sắp xếp theo: </Text> */}
+        {/* {this.NameSort()} */}
+        {this.Semester()}
+      </View>
+    );
+  }
   render() {
     const {isFetching, message} = this.props;
     return (
-      <View style={{flex: 1, backgroundColor: Colors.backgroundBlue}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: Colors.backgroundWhite}}>
         <HeaderNavigation
           title={'Bảng điểm'}
           titleColor={Colors.white}
@@ -128,6 +222,7 @@ export default class ScoreTableComponent extends Component {
             this.props.navigation.goBack();
           }}></HeaderNavigation>
         <View style={{flex: 1, paddingHorizontal: 10, alignItems: 'center'}}>
+          {this.ShowSort()}
           {this.titleBoard('Môn học', 'Điểm')}
           {this.showSubjectScore()}
         </View>
@@ -135,9 +230,9 @@ export default class ScoreTableComponent extends Component {
         {message &&
           AlertCustom(true, message, () => {
             this.props.navigation.goBack();
-            this.props.formatData()
+            this.props.formatData();
           })}
-      </View>
+      </SafeAreaView>
     );
   }
 }

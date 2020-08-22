@@ -12,14 +12,15 @@ import {
 import SplashScreen from 'react-native-splash-screen';
 import HeaderNavigation from '../components/customs/HeaderNavigation';
 import Images from '../res/Images';
-import {arrayIsEmpty, objectIsNull, stringIsEmpty} from '../res/Functions';
+import {arrayIsEmpty, objectIsNull, stringIsEmpty,SplitDate} from '../res/Functions';
 import {WebView} from 'react-native-webview';
 import Colors from '../res/Colors';
 import Loading from './customs/Loading';
+import {URL} from '../config'
 
 // import { WebView } from 'react-native-webview';
 
-const windowWidth = Dimensions.get('window').width;
+const window = Dimensions.get('window');
 
 export default class postDetail extends Component {
   componentDidMount() {}
@@ -30,15 +31,14 @@ export default class postDetail extends Component {
 
   render() {
     const {item} = this.props.route.params;
-    //  console.warn(item.anhBia)
+    //  console.log(item)
     return (
-        <View style={{flex: 1}}>
+        <SafeAreaView style={{flex: 1}}>
           <HeaderNavigation
             title={'Bài viết'}
             titleColor={Colors.white}
             color={Colors.backgroundBlue}
             iconLeft={Images.iconBack}
-            iconRight={Images.iconTabMenu}
             iconLeftColor={Colors.black}
             onClickLeft={() => {
               this.props.navigation.goBack();
@@ -46,9 +46,15 @@ export default class postDetail extends Component {
           {/* {this.contentPost()}; */}
           <View style={{flex: 1, backgroundColor: Colors.white, padding: 15}}>
             <Text style={{fontWeight: 'bold', fontSize: 15}}>
-            {stringIsEmpty(item.tieuDe)?item.tentintuc:item.tieuDe }
+            {item.tieuDe }
             </Text>
-            <Image source={"http://192.168.1.19:4100/"+item.anhBia}></Image>
+            <Text style={{ fontSize: 13}}>
+            Tác giả: {SplitDate(item.nguoiViet)  }
+            </Text>
+            <Text style={{ fontSize: 13}}>
+            Đã đăng: {SplitDate(item.thoiGianDangBai)  }
+            </Text>
+            <Image style={{width:'100%', height:window.height/7, marginVertical:10, borderRadius:5}} source={{uri: URL+item.anhBia}}></Image>
             <WebView
               source={{
                 html: '<div style="font-size:35px";>' +item.noiDung+ '</div>',
@@ -59,7 +65,7 @@ export default class postDetail extends Component {
               allowsFullscreenVideo={true}
             />
           </View>
-        </View>
+        </SafeAreaView>
     );
   }
 }

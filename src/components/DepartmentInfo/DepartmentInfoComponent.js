@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View,FlatList } from 'react-native'
+import { Text, View,FlatList,SafeAreaView } from 'react-native'
 import HeaderNavigation from '../customs/HeaderNavigation';
 import ItemSlideShow from '../customs/ItemSlideShow';
 import Colors from '../../res/Colors';
@@ -13,13 +13,15 @@ export default class DepartmentInfoComponent extends Component {
     this.props.getDepartmentInfoAction();
   }
   showBody() {
-    const {data} = this.props;
+    const {data,getDepartmentInfoAction, isFetching} = this.props;
     if (data && data.length) {
       return (
         <View style={{flex: 1, paddingTop: 15}}>
           <FlatList
             data={data}
             keyExtractor={(item, index) => 'key' + index}
+            onRefresh={()=>getDepartmentInfoAction()}
+                refreshing={isFetching}
             renderItem={({item}) => {
               return (
                 <ItemSlideShow
@@ -37,7 +39,7 @@ export default class DepartmentInfoComponent extends Component {
     render() {
       const {isFetching, data} = this.props;
         return (
-            <View style={{flex: 1,}}>
+            <SafeAreaView style={{flex: 1,}}>
             <HeaderNavigation
               iconLeft={Images.iconBack}
               color={Colors.backgroundBlue}
@@ -48,7 +50,7 @@ export default class DepartmentInfoComponent extends Component {
               titleColor={Colors.white}></HeaderNavigation>
               {this.showBody()}
               {isFetching && <Loading></Loading>}
-          </View>
+          </SafeAreaView>
         )
     }
 }

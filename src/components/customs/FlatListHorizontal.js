@@ -9,8 +9,10 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+
 const {width, height} = Dimensions.get('window');
 import {stringIsEmpty} from '../../res/Functions'
+import {URL } from '../../config'
 
 // const Item = ({item}) => {
 //   return (
@@ -47,7 +49,7 @@ export const FlatListHorizontal = ({data, onPress}) => {
           return (
             <TouchableOpacity onPress={()=>{onPress(item)}}>
               <View style={styles.cardView}>
-                <Image style={styles.image} source={{uri: 'http://10.0.3.2:4100/'+item.anhBia}} />
+                <Image style={styles.image} source={{uri: URL+item.anhBia}} />
                 <View style={styles.textView}>
                   <Text style={styles.itemTitle}>{item.tieuDe}</Text>
                   <Text style={styles.itemDescription} numberOfLines={3}>

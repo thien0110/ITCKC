@@ -1,5 +1,5 @@
 const messageError = 'Không thể kết nối tới server.';
-import {API_URL} from '../../../config';
+import {API_URL,userProfile} from '../../../config';
 export function editProfileApi(input) {
   // console.warn("input1",input)
   
@@ -7,10 +7,11 @@ export function editProfileApi(input) {
       method: 'PUT',
       headers: new Headers({
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userProfile.token,
       }),
       body: JSON.stringify({
         tokens: '12341234',
-        role: 'sv',
+        role: 'SV',
         sdt: input.newPhone,
         maSinhVien:input.maSinhVien,
       }),
@@ -31,6 +32,7 @@ export function editProfileApi(input) {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + userProfile.token,
         }),
         body: JSON.stringify({
           mssv: input.mssv,
@@ -57,6 +59,7 @@ export function getProfileApi(input) {
       headers: new Headers({
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userProfile.token,
       }),
       // body: JSON.stringify({
       //   maSinhVien: input.studentCode,
